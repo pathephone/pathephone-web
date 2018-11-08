@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/pathephone-web
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run prettier:check
+      - run: npm run flow
+      - run: npm run build
+      - run: npm test
+      - run: npm run commitlint from=HEAD
+      - run: npx semantic-release
+
+workflows:
+  version: 2
+  release:
+    jobs:
+      - build

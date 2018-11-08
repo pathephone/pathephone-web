@@ -1,0 +1,52 @@
+{
+  "name": "pathephone-web",
+  "version": "0.0.0-development",
+  "private": true,
+  "homepage": "https://pathephone.github.io/pathephone-web",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pathephone/pathephone-web.git"
+  },
+  "dependencies": {
+    "music-metadata-browser": "^0.7.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-angular": "^7.5.0",
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/exec": "^3.3.2",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "flow-bin": "^0.87.0",
+    "gh-pages": "^2.0.1",
+    "prettier": "1.16.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "flow": "flow",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prettier:write": "prettier \"src/**/*.{js,jsx,css}\" --write",
+    "prettier:check": "prettier \"src/**/*.{js,jsx,css}\" --check",
+    "commitlint": "commitlint from=HEAD",
+    "predeploy": "npm run build",
+    "deploy": "node ./publish.js"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "eslintConfig": {
+    "extends": "react-app"
+  }
+}

@@ -1,0 +1,22 @@
+.SearchBar__Wrapper {
+  height: 100%;
+  padding: 0.5em 0;
+  width: 100%;
+  display: flex;
+}
+
+.SearchBar__Form {
+  height: 100%;
+  flex-basis: 100%;
+}
+
+.SearchBar__Input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.SearchBar__Cancel {
+}
