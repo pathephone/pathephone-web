@@ -1,7 +1,9 @@
 // @flow strict
 
-import { albumMock } from "mocks/albums";
+import type { TMetabinAlbumRecord } from "types/api"
 
-export const getLatestAlbums = async () => {
-  return [albumMock]
+import { metabinAlbumRecordMock } from "mocks/albums";
+
+export const getLatestAlbums = async (): Promise<TMetabinAlbumRecord[]> => {
+  return [metabinAlbumRecordMock]
 }

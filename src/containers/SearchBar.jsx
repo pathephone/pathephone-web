@@ -2,10 +2,7 @@
 
 import * as React from 'react'
 
-import styles from 'components/AlbumsPage.module.css'
-import { SearchBarWrapper } from 'components/SearchBar/SearchBarWrapper';
-import { SearchBarInput } from 'components/SearchBar/SearchBarInput';
-import { SearchBarCancelButton } from 'components/SearchBar/SearchBarCancelButton';
+import styles from 'styles/SearchBar.module.css'
 
 type TProps = {
   onSearchValueChange(nextValue: string): void; 
@@ -19,14 +16,14 @@ export class SearchBar extends React.Component<TProps, TState> {
   state = {
     value: ''
   }
-  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+  handleInputChange = (e: SyntheticEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     this.props.onSearchValueChange(value)
     this.setState({
       value
     })
   }
-  handleClearClick = () => {
+  handleClearButtonClick = () => {
     this.setState({
       value: ''
     })
@@ -34,13 +31,17 @@ export class SearchBar extends React.Component<TProps, TState> {
   render() {
     const { value } = this.state;
     return(
-      <SearchBarWrapper>
-        <SearchBarInput
-          value={value}
-          onChange={this.handleChange}
+      <div className={styles.SearchBar__Wrapper}>
+        <input 
+          type="text"
+          className={styles.SearchBar__Input} 
+          value={value} 
+          onChange={this.handleInputChange}
         />
-        <SearchBarCancelButton onClick={this.handleClearClick} />
-      </SearchBarWrapper>
+        <button className={styles.SearchBar__ClearButton} onClick={this.handleClearButtonClick}>
+          x 
+        </button>
+      </div>
     )
   }
 }

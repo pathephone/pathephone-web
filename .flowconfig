@@ -7,5 +7,20 @@
 [lints]
 
 [options]
+module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^containers\/\(.*\)$' -> '<PROJECT_ROOT>/src/containers/\1'
+module.name_mapper='^contexts\/\(.*\)$' -> '<PROJECT_ROOT>/src/contexts/\1'
+module.name_mapper='^methods\/\(.*\)$' -> '<PROJECT_ROOT>/src/methods/\1'
+module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
+module.name_mapper='^data\/\(.*\)$' -> '<PROJECT_ROOT>/src/data/\1'
+module.name_mapper='^mocks\/\(.*\)$' -> '<PROJECT_ROOT>/src/mocks/\1'
+module.name_mapper='^types\/\(.*\)$' -> '<PROJECT_ROOT>/src/types/\1'
+module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/src/styles/\1'
+module.name_mapper.extension='module.css' -> '<PROJECT_ROOT>/flow/css-module-stub.js'
+module.name_mapper.extension='svg' -> '<PROJECT_ROOT>/flow/svg-module-stub.js'
+module.system=haste
 
 [strict]
+unclear-type
+nonstrict-import
+sketchy-null

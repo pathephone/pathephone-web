@@ -1,19 +1,22 @@
 // @flow strict
 
-import type { TAlbum } from 'types/albums'
+import type { TFeedAlbum } from 'types/state'
 
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { AlbumsPageWrapper } from 'components/AlbumsPageWrapper';
+import styles from 'components/AlbumsPage.module.css'
+
+import { SearchBar } from 'containers/SearchBar';
+import { AlbumsFeed } from 'containers/AlbumsFeed';
 import { getAlbumsBySearch } from 'methods/getAlbumsBySearch';
 import { getLatestAlbums } from 'methods/getLatestAlbums';
-import { SearchBar } from 'containers/SearchBar';
+import { toFeedAlbums } from 'utils/toFeedAlbums';
 
 type TProps = {||}
 
 type TState = {|
-  albums: null | TAlbum[];
+  albums: null | TFeedAlbum[];
   errorMessage: null | string;
   hasLoader: boolean;
 |}
@@ -32,7 +35,7 @@ export class AlbumsPage extends React.Component<TProps, TState> {
       albums: null
     })
   }
-  handleAlbumsResponse = (albums: TAlbum[]) => {
+  handleAlbumsResponse = (albums: TFeedAlbum[]) => {
     this.setState({
       albums,
       hasLoader: false,
@@ -49,21 +52,23 @@ export class AlbumsPage extends React.Component<TProps, TState> {
 
   handleSearchValueChange = (nextValue: string) => {
     if (nextValue) {
-      this.getAlbumsBySearch(nextValue)
+      this.geTFeedAlbumsBySearch(nextValue)
     } else {
-      this.getLatestAlbums()
+      this.getLatesTFeedAlbums()
     }
   }
 
-  getAlbumsBySearch = (searchValue: string) => {
+  geTFeedAlbumsBySearch = (searchValue: string) => {
     this.handleAlbumsRequest()
     getAlbumsBySearch(searchValue)
+      .then(toFeedAlbums)
       .then(this.handleAlbumsResponse)
       .catch(this.handleAlbumsError)
   }
-  getLatestAlbums = () => {
+  getLatesTFeedAlbums = () => {
     this.handleAlbumsRequest()
     getLatestAlbums()
+      .then(toFeedAlbums)
       .then(this.handleAlbumsResponse)
       .catch(this.handleAlbumsError)
   }
@@ -71,7 +76,7 @@ export class AlbumsPage extends React.Component<TProps, TState> {
   render() {
     const { albums, hasLoader } = this.state
     return(
-      <AlbumsPageWrapper>
+      <div className={styles.AlbumsPage__Wrapper}>
         <SearchBar
           onSearchValueChange={this.handleSearchValueChange}
         />
@@ -82,10 +87,10 @@ export class AlbumsPage extends React.Component<TProps, TState> {
         }
         {
           hasLoader && (
-            <PageLoader />
+            <div className={styles.AlbumsPage__Loader} />
           )
         }
-      </AlbumsPageWrapper>
+      </div>
     )
   }
 }

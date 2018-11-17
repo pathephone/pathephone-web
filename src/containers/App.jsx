@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 
+import styles from 'styles/App.module.css'
+
 import { startApp } from 'methods/startApp';
-import { PlayerScreen } from 'components/PlayerScreen';
-import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
-import { AppErrorScreen } from 'components/App/AppErrorScreen';
+import { PlayerScreen } from 'containers/PlayerScreen';
 
 type TProps = {||}
 
@@ -44,17 +44,19 @@ export class App extends Component<TProps, TState> {
     const { hasLoadingScreen, hasPlayerScreen, errorMessage } = this.state;
     if (hasLoadingScreen) {
       return (
-        <AppLoadingScreen />
+        <div className={styles.App__LoadingScreen} />
+      )
+    }
+    if (errorMessage !== null) {
+      return (
+        <div className={styles.App__ErrorScreen}>
+          {errorMessage} 
+        </div>
       )
     }
     if (hasPlayerScreen) {
       return (
         <PlayerScreen />
-      )
-    }
-    if (errorMessage !== null) {
-      return (
-        <AppErrorScreen message={errorMessage} />
       )
     }
     return null
