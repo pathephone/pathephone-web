@@ -5,7 +5,7 @@ import type { TFeedAlbum } from 'types/state'
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import styles from 'components/AlbumsPage.module.css'
+import styles from 'styles/AlbumsPage.module.css'
 
 import { SearchBar } from 'containers/SearchBar';
 import { AlbumsFeed } from 'containers/AlbumsFeed';
