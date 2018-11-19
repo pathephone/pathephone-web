@@ -1,6 +1,5 @@
 // @flow strict
 
-import type { TFeedAlbum } from 'types/state'
 import type { TPlaylistTrack } from 'types/state'
 
 import * as React from 'react';
@@ -15,56 +14,67 @@ type TProps = {|
   onAddToPlaylist(tracks: TPlaylistTrack[]): void;
 |}
 
-type TState = {|
-  errorMessage: null | string;
-|}
+export const AlbumContextMenu = (props: TProps) => {
+  const { onAddToPlaylist, onPlay, id } = props;
 
-export class AlbumContextMenu extends React.Component<TProps, TState> {
+  const [errorMessage, setErrorMessage] = React.useState(null)
+  const [hasLoader, setHasLoader] = React.useState(false)
 
-  state = {
-    errorMessage: null
+  const handleError = (e: Error) => {
+    setErrorMessage(e.message)
   }
 
-  handleError = (e: Error) => {
-    this.setState({
-      errorMessage: e.message
-    })
+  const toggleLoader = () => {
+    setHasLoader(!hasLoader)
   }
 
-  handlePlayAlbumClick = () => {
-    const { id } = this.props
+  const handlePlayAlbumClick = () => {
+    toggleLoader()
     getAlbumTracklist(id)
       .then(toPlaylistTracks)
-      .then(this.props.onPlay)
-      .catch(this.handleError)
+      .then(onPlay)
+      .catch(handleError)
+      .then(toggleLoader)
   }
 
-  handleAddAlbumToPlaylistClick = () => {
-    const { id } = this.props
+  const handleAddAlbumToPlaylistClick = () => {
     getAlbumTracklist(id)
       .then(toPlaylistTracks)
-      .then(this.props.onAddToPlaylist)
-      .catch(this.handleError)
+      .then(onAddToPlaylist)
+      .catch(handleError)
+      .then(toggleLoader)
   }
 
-  render = () => (
+  return(
     <div className={styles.Album__ContextMenuWrapper}>
-      <button 
-        type='button'
-        className={styles.Album__ContextMenuButton}
-        onClick={this.handlePlayAlbumClick}
-      >
-        play album
-      </button>
-      <button 
-        className={styles.Album__ContextMenuButton}
-        onClick={this.handleAddAlbumToPlaylistClick}
-      >
-        add album to playlist
-      </button>
+      {
+        hasLoader ? (
+          <div className={styles.Album__ContextMenuLoader} />
+        ) : (
+          <>
+            <button 
+              type='button'
+              className={styles.Album__ContextMenuButton}
+              onClick={handlePlayAlbumClick}
+            >
+              play album
+            </button>
+            <button 
+              className={styles.Album__ContextMenuButton}
+              onClick={handleAddAlbumToPlaylistClick}
+            >
+              add album to playlist
+            </button>
+          </>
+        )
+      }
+      {
+        errorMessage && (
+          <h1>{errorMessage}</h1>
+        )
+      }
     </div>
   )
-
 }
 
 export type TFeedAlbumContextMenuComponent = typeof AlbumContextMenu

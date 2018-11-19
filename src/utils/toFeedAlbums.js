@@ -7,7 +7,7 @@ import { getUniqueString } from "utils/getUniqueString";
 
 const toPlaylistTrack = (metabinAlbum: TMetabinAlbumRecord): TFeedAlbum => {
   return {
-    id: metabinAlbum.cid,
+    id: getUniqueString(),
     title: metabinAlbum.data.title,
     artistName: metabinAlbum
       .data
