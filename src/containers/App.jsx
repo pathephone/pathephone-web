@@ -6,59 +6,47 @@ import styles from 'styles/App.module.css'
 
 import { startApp } from 'methods/startApp';
 import { PlayerScreen } from 'containers/PlayerScreen';
+import { useToggler } from 'hooks/useToggler';
+import { useState } from 'hooks/useState';
+import { useEffect } from 'hooks/useEffect';
 
 type TProps = {||}
 
-type TState = {|
-  hasLoadingScreen: boolean;
-  hasPlayerScreen: boolean;
-  errorMessage: null | string;
-|}
+export const App = (props: TProps) => {
+  const [ hasLoadingScreen, toggleLoadingScreen ] = useToggler(true)
+  const [ hasPlayerScreen, togglePlayerScreen ] = useToggler(false)
+  const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
 
-export class App extends Component<TProps, TState> {
-  state = {
-    hasLoadingScreen: true,
-    hasPlayerScreen: false,
-    errorMessage: null
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const handleSuccess = () => {
-      this.setState({
-        hasLoadingScreen: false,
-        hasPlayerScreen: true
-      })
+      toggleLoadingScreen()
+      togglePlayerScreen()
     }
     const handleFailure = (e) => {
-      this.setState({
-        hasLoadingScreen: false,
-        errorMessage: e.message 
-      })
+      toggleLoadingScreen()
+      setErrorMessage(e.message)
     }
     startApp()
       .then(handleSuccess)
       .catch(handleFailure)
-  }
+  },[])
 
-  render() {
-    const { hasLoadingScreen, hasPlayerScreen, errorMessage } = this.state;
-    if (hasLoadingScreen) {
-      return (
-        <div className={styles.App__LoadingScreen} />
-      )
-    }
-    if (errorMessage !== null) {
-      return (
-        <div className={styles.App__ErrorScreen}>
-          {errorMessage} 
-        </div>
-      )
-    }
-    if (hasPlayerScreen) {
-      return (
-        <PlayerScreen />
-      )
-    }
-    return null
+  if (hasLoadingScreen) {
+    return (
+      <div className={styles.App__LoadingScreen} />
+    )
   }
+  if (errorMessage !== null) {
+    return (
+      <div className={styles.App__ErrorScreen}>
+        {errorMessage} 
+      </div>
+    )
+  }
+  if (hasPlayerScreen) {
+    return (
+      <PlayerScreen />
+    )
+  }
+  return null
 }

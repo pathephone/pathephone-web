@@ -23,5 +23,4 @@ module.system=haste
 
 [strict]
 unclear-type
-nonstrict-import
 sketchy-null

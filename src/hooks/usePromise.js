@@ -1,19 +1,21 @@
-// @flow strict
-
-import * as React from 'react'
+// @flow
 
 import { useToggler } from 'hooks/useToggler';
+import { useState } from 'hooks/useState';
+import { useEffect } from 'hooks/useEffect';
 
-type TUsePromiseHook = <TData>(asyncFucntion: (...params: mixed[]) => Promise<TData>) =>
-  (...params: mixed[]) => [ null | TData, boolean, null | string ]
-
-export const usePromise: TUsePromiseHook = (asyncFunction) => {
+export function usePromise <TData> (
+  asyncFunction: (...params: any[]) => Promise<TData>
+) : (
+  ...params: any[]
+) => [ null | TData, boolean, null | string ] {
   return (...params) => {
-    const [ isPending, toggleIsPending ] = useToggler()
-    const [ data, setData ] = React.useState(null)
-    const [ errorMessage, setErrorMessage ] = React.useState<string | null>(null)
 
-    React.useEffect(() => {
+    const [ isPending, toggleIsPending ] = useToggler()
+    const [ data, setData ] = useState<null | any>(null)
+    const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
+
+    useEffect(() => {
       setData(null)
       toggleIsPending()
 

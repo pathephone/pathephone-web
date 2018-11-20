@@ -1,15 +1,15 @@
 // @flow strict
 
 import * as React from 'react'
+import { BrowserRouter } from 'react-router-dom';
 
-import { GlobalProviders } from 'containers/GlobalProviders';
 import { App } from 'containers/App';
-import { PlaylistProvider } from 'contexts/Playlist/PlaylistProvider';
+import { GlobalContextProvider } from 'containers/GlobalContextProvider';
 
 export const Root = () => (
-  <GlobalProviders>
-    <PlaylistProvider>
+  <BrowserRouter>
+    <GlobalContextProvider>
       <App />
-    </PlaylistProvider>
-  </GlobalProviders>
+    </GlobalContextProvider>
+  </BrowserRouter>
 )

@@ -3,6 +3,7 @@
 import * as React from 'react'
 
 import styles from 'styles/SearchBar.module.css'
+import { useCallback } from 'hooks/useCallback';
 
 type TProps = {
   searchValue: string;
@@ -11,12 +12,12 @@ type TProps = {
 
 export const SearchBar = ({ searchValue, onSearchValueChange }: TProps) => {
 
-  const handleInputChange = React.useCallback((e: SyntheticEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: SyntheticEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     onSearchValueChange(value)
   })
 
-  const handleClearButtonClick = React.useCallback(() => {
+  const handleClearButtonClick = useCallback(() => {
     onSearchValueChange('')
   })
 

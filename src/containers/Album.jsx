@@ -6,15 +6,17 @@ import type { TFeedAlbumContextMenuComponent } from 'containers/AlbumContextMenu
 import * as React from 'react';
 
 import styles from 'styles/Album.module.css'
+import { useState } from 'hooks/useState';
 
 type TProps = {|
   album: TFeedAlbum;
   children: React.Element<TFeedAlbumContextMenuComponent>;
 |}
 
-export const Album = (props: TProps) => {
-  const { album, children } = props;
-  const [hasContextMenu, toggleContextMenu] = React.useState(false)
+export const Album = ({ album, children }: TProps) => {
+
+  const [hasContextMenu, toggleContextMenu] = useState(false)
+
   return (
     <div className={styles.Album__Wrapper}>
       <button 

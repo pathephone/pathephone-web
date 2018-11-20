@@ -7,6 +7,7 @@ import * as React from 'react';
 import styles from 'styles/Album.module.css'
 import { getAlbumTracklist } from 'methods/getAlbumTracklist';
 import { toPlaylistTracks } from 'utils/toPlaylistTracks';
+import { useState } from 'hooks/useState';
 
 type TProps = {|
   id: string;
@@ -14,11 +15,10 @@ type TProps = {|
   onAddToPlaylist(tracks: TPlaylistTrack[]): void;
 |}
 
-export const AlbumContextMenu = (props: TProps) => {
-  const { onAddToPlaylist, onPlay, id } = props;
+export const AlbumContextMenu = ({ onAddToPlaylist, onPlay, id }: TProps) => {
 
-  const [errorMessage, setErrorMessage] = React.useState(null)
-  const [hasLoader, setHasLoader] = React.useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [hasLoader, setHasLoader] = useState(false)
 
   const handleError = (e: Error) => {
     setErrorMessage(e.message)
@@ -69,7 +69,7 @@ export const AlbumContextMenu = (props: TProps) => {
         )
       }
       {
-        errorMessage && (
+        errorMessage !== null && (
           <h1>{errorMessage}</h1>
         )
       }

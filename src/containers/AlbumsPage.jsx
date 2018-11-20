@@ -1,4 +1,5 @@
 // @flow strict
+import type { TFeedAlbum } from 'types/state'
 
 import * as React from 'react';
 
@@ -8,9 +9,10 @@ import { SearchBar } from 'containers/SearchBar';
 import { AlbumsFeed } from 'containers/AlbumsFeed';
 import { usePromise } from 'hooks/usePromise';
 import { getAlbums } from 'methods/getAlbums';
+import { useState } from 'hooks/useState';
 
 export const AlbumsPage = () => {
-  const [ searchValue, changeSearchValue ] = React.useState('')
+  const [ searchValue, changeSearchValue ] = useState('')
   const [ albums, hasLoader, errorMessage ] = usePromise(getAlbums)(searchValue)
 
   return(
@@ -20,7 +22,7 @@ export const AlbumsPage = () => {
         onSearchValueChange={changeSearchValue}
       />
       {
-        albums && (
+        albums !== null && (
           <AlbumsFeed albums={albums} />
         )
       }

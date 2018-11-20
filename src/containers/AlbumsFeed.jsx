@@ -8,16 +8,26 @@ import styles from 'styles/AlbumsFeed.module.css'
 
 import { Album } from 'containers/Album';
 import { AlbumContextMenu } from 'containers/AlbumContextMenu';
-import { PlaylistContext } from 'contexts/Playlist/PlaylistContext';
+import { useGlobalContext } from 'hooks/useGlobalContext';
+import { useCallback } from 'hooks/useCallback';
 
 type TProps = {|
   albums: TFeedAlbum[];  
 |}
 
-export const AlbumsFeed = (props: TProps) => {
-  const { albums } = props;
-  const { replaceTracks, addTracks } = React.useContext(PlaylistContext)
-  return (
+export const AlbumsFeed = ({ albums }: TProps) => {
+
+  const { playlist, setPlaylistTracks } = useGlobalContext()
+
+  const handlePlayAlbumTracks = useCallback((tracks) => {
+    setPlaylistTracks(tracks)
+  })
+
+  const handleQueueAlbumTracks = useCallback((tracks) => {
+    setPlaylistTracks([ ...playlist, ...tracks ])
+  })
+
+  return(
     <div className={styles.AlbumsFeed__Wrapper}>
       {
         albums.map((album) => (
@@ -27,8 +37,8 @@ export const AlbumsFeed = (props: TProps) => {
           >
             <AlbumContextMenu
               id={album.id} 
-              onPlay={replaceTracks}
-              onAddToPlaylist={addTracks}
+              onPlay={handlePlayAlbumTracks}
+              onAddToPlaylist={handleQueueAlbumTracks}
             />
           </Album>
         ))

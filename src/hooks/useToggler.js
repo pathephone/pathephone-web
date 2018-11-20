@@ -1,9 +1,9 @@
 // @flow strict
 
-import * as React from 'react'
+import { useState } from 'hooks/useState';
 
-export const useToggler = (initialValue: boolean = false) => {
-  const [value, changeValue] = React.useState(initialValue);
+export const useToggler = (initialValue: boolean = false): [ boolean, () => void ] => {
+  const [value, changeValue] = useState(initialValue);
   const toggleValue = () => {
     changeValue(!value)
   }

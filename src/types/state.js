@@ -13,3 +13,13 @@ export type TFeedAlbum = {
   artistName: string;
   coverSrc: string;
 }
+
+export type TGlobalContext = {
+
+  playlist: TPlaylistTrack[];
+  setPlaylistTracks(tracks: TPlaylistTrack[]): void;
+
+  currentTrackId: number | null;
+  setCurrentTrackId(id: number | null): void;
+
+}
