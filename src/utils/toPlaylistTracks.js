@@ -10,7 +10,9 @@ const toPlaylistTrack = (albumTrack: TMetabinAlbumTrack): TPlaylistTrack => {
     id: getUniqueString(),
     title: albumTrack.title,
     artistName: albumTrack.artists.join(', '),
-    audioSrc: albumTrack.audio
+    audioSrc: albumTrack.audio,
+    isCurrent: false,
+    isRemoved: false
   }
 }
 

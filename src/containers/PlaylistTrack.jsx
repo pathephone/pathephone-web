@@ -1,38 +1,58 @@
 // @flow strict
 
-import type { TPlaylistTrack } from 'types/state'
-
 import * as React from 'react';
-
-import { useContext } from 'hooks/useContext';
-import { useCallback } from 'hooks/useCallback';
-import { useGlobalContext } from 'hooks/useGlobalContext';
 
 import styles from 'styles/playlistTrack.module.css';
 
-type TProps = TPlaylistTrack
+import { useContext } from 'hooks/useContext';
+import { useCallback } from 'hooks/useCallback';
+import { PlaylistState, PlaylistDispatch } from 'contexts/PlaylistContext';
+
+type TProps = {
+  id: string;
+  title: string;
+  artistName: string;
+  isCurrent: boolean;
+}
 
 export const PlaylistTrack = (
-  { id, artistName, title }: TProps
+  { id, artistName, title, isCurrent }: TProps
 ) => {
 
-  const { currentTrackId, setCurrentTrackId } = useGlobalContext()
-
-  const isCurrent = currentTrackId === id
+  const playlistState = useContext(PlaylistState)
+  const playlistDispatch = useContext(PlaylistDispatch)
 
   const handlePlayButtonClick = useCallback(() => {
-    setCurrentTrackId(id)
-  })
+    playlistDispatch({
+      type: 'PLAY_TRACK',
+      payload: id 
+    })
+  },[id])
+
+  const handleDeleteButtonClick = useCallback(() => {
+    playlistDispatch({
+      type: 'DELETE_TRACK',
+      payload: id 
+    })
+  },[id])
 
   return(
     <div className={styles.PlaylistTrack__Wrapper}>
       <button 
+        type='button'
         className={styles.PlaylistTrack__PlayButton}
         onClick={handlePlayButtonClick}
       >
-        <span className={PlaylistTrack__Title}>{title}</span>
+        <span className={styles.PlaylistTrack__Title}>{title}</span>
         <br />
-        <span className={PlaylistTrack__ArtistName}>{artistName}</span>
+        <span className={styles.PlaylistTrack__ArtistName}>{artistName}</span>
+      </button>
+      <button
+        type='button'
+        className={styles.PlaylistTrack__DeleteButton}
+        onClick={handleDeleteButtonClick}
+      >
+        x
       </button>
     </div>
   )

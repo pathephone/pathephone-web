@@ -4,12 +4,12 @@ import * as React from 'react'
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from 'containers/App';
-import { GlobalContextProvider } from 'containers/GlobalContextProvider';
+import { PlaylistProvider } from 'containers/PlaylistProvider';
 
 export const Root = () => (
   <BrowserRouter>
-    <GlobalContextProvider>
+    <PlaylistProvider>
       <App />
-    </GlobalContextProvider>
+    </PlaylistProvider>
   </BrowserRouter>
 )

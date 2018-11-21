@@ -2,24 +2,24 @@
 
 import * as React from 'react';
 
+import styles from 'styles/playlist.module.css';
+
 import { useContext } from 'hooks/useContext';
 import { useCallback } from 'hooks/useCallback';
-import { useGlobalContext } from 'hooks/useGlobalContext';
-
-import styles from 'styles/playlist.module.css';
+import { PlaylistTrack } from 'containers/PlaylistTrack';
+import { PlaylistState, PlaylistDispatch } from 'contexts/PlaylistContext';
 
 type TProps = {||}
 
 export const Playlist = () => {
 
-  const { playlist, setCurrentTrackId, setPlaylistTracks } = useGlobalContext()
-
-  const onPlaylistTrackClick = useCallback((id: number) => {
-    setCurrentTrackId(id)
-  })
+  const playlistState = useContext(PlaylistState)
+  const playlistDispatch = useContext(PlaylistDispatch)
 
   const onClearClick = useCallback(() => {
-    setPlaylistTracks([])
+    playlistDispatch({
+      type: 'CLEAR_PLAYLIST'
+    })
   })
 
   return(
@@ -34,12 +34,10 @@ export const Playlist = () => {
       </div>
       <div className={styles.Playlist__Body}>
         {
-          playlist.map((track) => (
+          playlistState.map((track) => (
             <PlaylistTrack 
+              {...track}
               key={track.id}
-              title={track.title}
-              artist={track.artistName}
-              onClick={onPlaylistTrackClick}
             />
           ))
         }
