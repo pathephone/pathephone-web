@@ -1,6 +1,6 @@
 // @flow strict
 
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import styles from 'styles/App.module.css'
 
@@ -9,44 +9,42 @@ import { PlayerScreen } from 'containers/PlayerScreen';
 import { useToggler } from 'hooks/useToggler';
 import { useState } from 'hooks/useState';
 import { useEffect } from 'hooks/useEffect';
+import { useContextStrict, useContext } from 'hooks/useContext';
+import { ApiContext } from 'contexts/ApiContext';
+import { Localization } from 'containers/Localization';
+import { LocalizationContext } from 'contexts/LocalizationContext';
+import { usePromise } from 'hooks/usePromise';
 
-type TProps = {||}
+type TProps = {|
+|}
 
 export const App = (props: TProps) => {
-  const [ hasLoadingScreen, toggleLoadingScreen ] = useToggler(true)
-  const [ hasPlayerScreen, togglePlayerScreen ] = useToggler(false)
-  const [ errorMessage, setErrorMessage ] = useState<string | null>(null)
+
+  const { getConfig } = useContextStrict(ApiContext)
 
   useEffect(() => {
-    const handleSuccess = () => {
-      toggleLoadingScreen()
-      togglePlayerScreen()
-    }
-    const handleFailure = (e) => {
-      toggleLoadingScreen()
-      setErrorMessage(e.message)
-    }
-    startApp()
-      .then(handleSuccess)
-      .catch(handleFailure)
+    const { data, isPending, errorMessage } = usePromise<TPlayerConfig>(getPlayerConfig())
   },[])
 
-  if (hasLoadingScreen) {
-    return (
-      <div className={styles.App__LoadingScreen} />
-    )
-  }
-  if (errorMessage !== null) {
-    return (
-      <div className={styles.App__ErrorScreen}>
-        {errorMessage} 
-      </div>
-    )
-  }
-  if (hasPlayerScreen) {
-    return (
-      <PlayerScreen />
-    )
-  }
-  return null
+  return (
+    <div className={styles.App__Wrapper}>
+      {
+        isPending && (
+          <div className={styles.App__LoadingScreen} />
+        )
+      }
+      {
+        (errorMessage !== null) && (
+          <div className={styles.App__ErrorScreen}>
+            {errorMessage} 
+          </div>
+        )
+      }
+      {
+        data && (
+          <Player />
+        )
+      }
+    </div>
+  )
 }

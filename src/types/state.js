@@ -17,3 +17,5 @@ export type TFeedAlbum = {|
   artistName: string;
   coverSrc: string;
 |}
+
+export type TLocaleName = 'ru' | 'en'
