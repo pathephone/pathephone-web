@@ -1,13 +1,11 @@
 // @flow strict
 
-import { getLocaleStrings } from "api/getLocaleStrings";
-import { getBrowserLocale } from "api/getBrowserLocale";
 import { startApp } from "api/startApp";
+import { getAlbums } from "api/getAlbums";
 
 export const apiMethods = {
-  getLocaleStrings,
-  getBrowserLocale,
-  startApp
+  startApp,
+  getAlbums
 };
 
 export type TApiMethods = typeof apiMethods;

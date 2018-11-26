@@ -4,12 +4,12 @@ import type { TFeedAlbum } from 'types/state'
 
 import * as React from 'react';
 
-import styles from 'styles/AlbumsFeed.module.css'
-
 import { Album } from 'containers/Album';
-import { AlbumContextMenu } from 'containers/AlbumContextMenu';
 import { useCallback } from 'hooks/useCallback';
-import { usePlaylistContext } from 'contexts/playlistContext';
+import { useContextStrict } from 'hooks/useContext';
+import { PlaylistContext } from 'contexts/playlistContext';
+import { AlbumActions } from 'containers/AlbumActions';
+import { AlbumsFeedWrapper } from 'components/AlbumsFeed/AlbumsFeedWrapper';
 
 type TProps = {|
   albums: TFeedAlbum[];  
@@ -17,25 +17,25 @@ type TProps = {|
 
 export const AlbumsFeed = ({ albums }: TProps) => {
 
-  const { playlist, setPlaylist } = usePlaylistContext()
+  const { replaceTracks, queueTracks } = useContextStrict(PlaylistContext)
 
   const handlePlayAlbumTracks = useCallback((tracks) => {
-    setPlaylist(tracks)
-  })
+    replaceTracks(tracks)
+  }, [])
 
   const handleQueueAlbumTracks = useCallback((tracks) => {
-    setPlaylist([ ...playlist, ...tracks ])
-  },[playlist])
+    queueTracks(tracks)
+  }, [])
 
   return(
-    <div className={styles.AlbumsFeed__Wrapper}>
+    <AlbumsFeedWrapper>
       {
         albums.map((album) => (
           <Album 
             key={album.id} 
             album={album} 
           >
-            <AlbumContextMenu
+            <AlbumActions
               id={album.id} 
               onPlay={handlePlayAlbumTracks}
               onAddToPlaylist={handleQueueAlbumTracks}
@@ -43,6 +43,6 @@ export const AlbumsFeed = ({ albums }: TProps) => {
           </Album>
         ))
       }
-    </div>
+    </AlbumsFeedWrapper>
   )
 }

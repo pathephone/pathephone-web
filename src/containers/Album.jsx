@@ -1,16 +1,20 @@
 // @flow strict
 
 import type { TFeedAlbum } from 'types/state'
-import type { TFeedAlbumContextMenuComponent } from 'containers/AlbumContextMenu'
+import type { TFeedAlbumActionsComponent } from 'containers/AlbumActions'
 
 import * as React from 'react';
 
-import styles from 'styles/Album.module.css'
 import { useState } from 'hooks/useState';
+import { AlbumWrapper } from 'components/Album/AlbumWrapper';
+import { AlbumCoverButton } from 'components/Album/AlbumCoverButton';
+import { AlbumCoverImage } from 'components/Album/AlbumCoverImage';
+import { AlbumTitle } from 'components/Album/AlbumTitle';
+import { AlbumArtistName } from 'components/Album/AlbumArtistName';
 
 type TProps = {|
   album: TFeedAlbum;
-  children: React.Element<TFeedAlbumContextMenuComponent>;
+  children: React.Element<TFeedAlbumActionsComponent>;
 |}
 
 export const Album = ({ album, children }: TProps) => {
@@ -18,27 +22,24 @@ export const Album = ({ album, children }: TProps) => {
   const [hasContextMenu, toggleContextMenu] = useState(false)
 
   return (
-    <div className={styles.Album__Wrapper}>
-      <button 
-        className={styles.Album__CoverButton}
-        type='button' 
+    <AlbumWrapper>
+      <AlbumCoverButton 
         onClick={toggleContextMenu}
       >
-        <img 
-          className={styles.Album__CoverImage}
+        <AlbumCoverImage 
           src={album.coverSrc} 
           alt={album.title} 
         />
-      </button>
-      <h2 className={styles.Album__Title}>
+      </AlbumCoverButton>
+      <AlbumTitle>
         {album.title}
-      </h2>
-      <h3 className={styles.Album__ArtistName}>
+      </AlbumTitle>
+      <AlbumArtistName>
         {album.artistName}
-      </h3>
+      </AlbumArtistName>
       {
         hasContextMenu && children
       }
-    </div>
+    </AlbumWrapper>
   )
 }

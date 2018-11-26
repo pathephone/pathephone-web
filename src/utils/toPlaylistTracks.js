@@ -11,7 +11,7 @@ const toPlaylistTrack = (albumTrack: TMetabinAlbumTrack): TPlaylistTrack => {
     title: albumTrack.title,
     artistName: albumTrack.artists.join(', '),
     audioSrc: albumTrack.audio,
-    isCurrent: false,
+    isPlaying: false,
     isRemoved: false
   }
 }

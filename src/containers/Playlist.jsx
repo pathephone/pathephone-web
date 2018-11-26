@@ -4,23 +4,20 @@ import * as React from 'react';
 
 import styles from 'styles/playlist.module.css';
 
-import { useContext } from 'hooks/useContext';
+import { useContext, useContextStrict } from 'hooks/useContext';
 import { useCallback } from 'hooks/useCallback';
 import { PlaylistTrack } from 'containers/PlaylistTrack';
-import { PlaylistState, PlaylistDispatch } from 'contexts/PlaylistContext';
+import { PlaylistContext } from 'contexts/playlistContext';
 
 type TProps = {||}
 
 export const Playlist = () => {
 
-  const playlistState = useContext(PlaylistState)
-  const playlistDispatch = useContext(PlaylistDispatch)
+  const { tracks, replaceTracks } = useContextStrict(PlaylistContext)
 
   const onClearClick = useCallback(() => {
-    playlistDispatch({
-      type: 'CLEAR_PLAYLIST'
-    })
-  })
+    replaceTracks([])
+  }, [])
 
   return(
     <div className={styles.Playlist__Wrapper}>
@@ -34,7 +31,7 @@ export const Playlist = () => {
       </div>
       <div className={styles.Playlist__Body}>
         {
-          playlistState.map((track) => (
+          tracks.map((track) => (
             <PlaylistTrack 
               {...track}
               key={track.id}

@@ -3,39 +3,50 @@ import type { TFeedAlbum } from 'types/state'
 
 import * as React from 'react';
 
-import styles from 'styles/AlbumsPage.module.css'
-
 import { SearchBar } from 'containers/SearchBar';
 import { AlbumsFeed } from 'containers/AlbumsFeed';
 import { usePromise } from 'hooks/usePromise';
-import { getAlbums } from 'methods/getAlbums';
 import { useState } from 'hooks/useState';
+import { useContextStrict } from 'hooks/useContext';
+import { ApiContext } from 'contexts/ApiContext';
+import { usePromiseEffect } from 'hooks/usePromiseEffect';
+import { AlbumsPageWrapper } from 'components/AlbumsPage/AlbumsPageWrapper';
+import { AlbumsPageLoader } from 'components/AlbumsPage/AlbumsPageLoader';
+import { AlbumsPageError } from 'components/AlbumsPage/AlbumsPageError';
 
 export const AlbumsPage = () => {
+
   const [ searchValue, changeSearchValue ] = useState('')
-  const [ albums, hasLoader, errorMessage ] = usePromise(getAlbums)(searchValue)
+
+  const { getAlbums } = useContextStrict(ApiContext)
+
+  const { data, isPending, errorMessage } = usePromiseEffect(
+    () => getAlbums(searchValue), [ searchValue ]
+  )
 
   return(
-    <div className={styles.AlbumsPage__Wrapper}>
+    <AlbumsPageWrapper>
       <SearchBar
         searchValue={searchValue}
         onSearchValueChange={changeSearchValue}
       />
       {
-        albums !== null && (
-          <AlbumsFeed albums={albums} />
+        data !== null && (
+          <AlbumsFeed albums={data} />
         )
       }
       {
-        hasLoader && (
-          <div className={styles.AlbumsPage__Loader} />
+        isPending && (
+          <AlbumsPageLoader />
         )
       }
       {
         errorMessage !== null && (
-          <h1>{errorMessage}</h1>
+          <AlbumsPageError>
+            {errorMessage}
+          </AlbumsPageError>
         )
       }
-    </div>
+    </AlbumsPageWrapper>
   )
 }

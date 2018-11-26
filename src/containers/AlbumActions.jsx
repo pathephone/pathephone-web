@@ -5,9 +5,14 @@ import type { TPlaylistTrack } from 'types/state'
 import * as React from 'react';
 
 import styles from 'styles/Album.module.css'
-import { getAlbumTracklist } from 'methods/getAlbumTracklist';
+
+import { getAlbumTracklist } from 'api/getAlbumTracklist';
 import { toPlaylistTracks } from 'utils/toPlaylistTracks';
 import { useState } from 'hooks/useState';
+import { AlbumActionsWrapper } from 'components/AlbumActions/AlbumActionsWrapper';
+import { AlbumActionsLoader } from 'components/AlbumActions/AlbumActionsLoader';
+import { AlbumActionsButton } from 'components/AlbumActions/AlbumActionsButton';
+import { AlbumActionsError } from 'components/AlbumActions/AlbumActionsError';
 
 type TProps = {|
   id: string;
@@ -15,7 +20,7 @@ type TProps = {|
   onAddToPlaylist(tracks: TPlaylistTrack[]): void;
 |}
 
-export const AlbumContextMenu = ({ onAddToPlaylist, onPlay, id }: TProps) => {
+export const AlbumActions = ({ onAddToPlaylist, onPlay, id }: TProps) => {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [hasLoader, setHasLoader] = useState(false)
@@ -46,35 +51,34 @@ export const AlbumContextMenu = ({ onAddToPlaylist, onPlay, id }: TProps) => {
   }
 
   return(
-    <div className={styles.Album__ContextMenuWrapper}>
+    <AlbumActionsWrapper>
       {
         hasLoader ? (
-          <div className={styles.Album__ContextMenuLoader} />
+          <AlbumActionsLoader />
         ) : (
           <>
-            <button 
-              type='button'
-              className={styles.Album__ContextMenuButton}
+            <AlbumActionsButton
               onClick={handlePlayAlbumClick}
             >
               play album
-            </button>
-            <button 
-              className={styles.Album__ContextMenuButton}
+            </AlbumActionsButton>
+            <AlbumActionsButton
               onClick={handleAddAlbumToPlaylistClick}
             >
               add album to playlist
-            </button>
+            </AlbumActionsButton>
           </>
         )
       }
       {
         errorMessage !== null && (
-          <h1>{errorMessage}</h1>
+          <AlbumActionsError>
+            {errorMessage}
+          </AlbumActionsError>
         )
       }
-    </div>
+    </AlbumActionsWrapper>
   )
 }
 
-export type TFeedAlbumContextMenuComponent = typeof AlbumContextMenu
+export type TFeedAlbumActionsComponent = typeof AlbumActions

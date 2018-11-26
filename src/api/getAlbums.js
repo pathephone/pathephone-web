@@ -1,7 +1,7 @@
 // @flow strict
 
-import { getAlbumsBySearch } from "methods/getAlbumsBySearch";
-import { getLatestAlbums } from "methods/getLatestAlbums";
+import { getAlbumsBySearch } from "api/getAlbumsBySearch";
+import { getLatestAlbums } from "api/getLatestAlbums";
 import { toFeedAlbums } from "utils/toFeedAlbums";
 
 export const getAlbums = async (matcher: string) => {

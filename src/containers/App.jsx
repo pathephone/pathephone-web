@@ -2,49 +2,56 @@
 
 import * as React from 'react';
 
-import styles from 'styles/App.module.css'
-
-import { startApp } from 'methods/startApp';
+import { startApp } from 'api/startApp';
 import { PlayerScreen } from 'containers/PlayerScreen';
 import { useToggler } from 'hooks/useToggler';
 import { useState } from 'hooks/useState';
 import { useEffect } from 'hooks/useEffect';
 import { useContextStrict, useContext } from 'hooks/useContext';
 import { ApiContext } from 'contexts/ApiContext';
-import { Localization } from 'containers/Localization';
-import { LocalizationContext } from 'contexts/LocalizationContext';
 import { usePromise } from 'hooks/usePromise';
+import { useError } from 'hooks/useError';
+import { AppWrapper } from 'components/App/AppWrapper';
+import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
+import { AppErrorScreen } from 'components/App/AppErrorScreen';
 
 type TProps = {|
 |}
 
 export const App = (props: TProps) => {
 
-  const { getConfig } = useContextStrict(ApiContext)
+  const [ hasLoadingScreen, toggleHasLoadingScreen ] = useToggler(true)
+  const [ hasPlayerScreen, toggleHasPlayerScreen ] = useToggler(true)
+  const { errorMessage, setError } = useError(null)
+
+  const { startApp } = useContextStrict(ApiContext)
 
   useEffect(() => {
-    const { data, isPending, errorMessage } = usePromise<TPlayerConfig>(getPlayerConfig())
+    startApp()
+      .then(toggleHasPlayerScreen)
+      .catch(setError)
+      .then(toggleHasLoadingScreen)
   },[])
 
   return (
-    <div className={styles.App__Wrapper}>
+    <AppWrapper>
       {
-        isPending && (
-          <div className={styles.App__LoadingScreen} />
+        hasLoadingScreen && (
+          <AppLoadingScreen />
         )
       }
       {
         (errorMessage !== null) && (
-          <div className={styles.App__ErrorScreen}>
+          <AppErrorScreen>
             {errorMessage} 
-          </div>
+          </AppErrorScreen>
         )
       }
       {
-        data && (
-          <Player />
+        hasPlayerScreen && (
+          <PlayerScreen />
         )
       }
-    </div>
+    </AppWrapper>
   )
 }

@@ -1,5 +1,5 @@
 // @flow strict
 
-export const startApp = () => {
-  return Promise.resolve()
+export const startApp = async () => {
+
 }

@@ -4,36 +4,32 @@ import * as React from 'react';
 
 import styles from 'styles/playlistTrack.module.css';
 
-import { useContext } from 'hooks/useContext';
+import { useContext, useContextStrict } from 'hooks/useContext';
 import { useCallback } from 'hooks/useCallback';
-import { PlaylistState, PlaylistDispatch } from 'contexts/PlaylistContext';
+import { PlaylistContext } from 'contexts/playlistContext';
 
 type TProps = {
   id: string;
   title: string;
   artistName: string;
-  isCurrent: boolean;
+  isPlaying: boolean;
 }
 
 export const PlaylistTrack = (
-  { id, artistName, title, isCurrent }: TProps
+  { id, artistName, title, isPlaying }: TProps
 ) => {
 
-  const playlistState = useContext(PlaylistState)
-  const playlistDispatch = useContext(PlaylistDispatch)
+  const { 
+    playTrackById,
+    removeTrackById 
+  } = useContextStrict(PlaylistContext) 
 
   const handlePlayButtonClick = useCallback(() => {
-    playlistDispatch({
-      type: 'PLAY_TRACK',
-      payload: id 
-    })
+    playTrackById(id)
   },[id])
 
   const handleDeleteButtonClick = useCallback(() => {
-    playlistDispatch({
-      type: 'DELETE_TRACK',
-      payload: id 
-    })
+    removeTrackById(id)
   },[id])
 
   return(

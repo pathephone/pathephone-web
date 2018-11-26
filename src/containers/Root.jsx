@@ -1,25 +1,26 @@
 // @flow strict
 
 import type { TApiMethods } from 'data/apiMethods'
+import type { TLocaleStrings } from 'data/localization/en.module'
 
 import * as React from 'react'
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from 'containers/App';
-import { PlaylistProvider } from 'containers/PlaylistProvider';
-import { Localization } from 'containers/Localization';
 import { ApiContext } from 'contexts/ApiContext';
+import { LocaleStringsContext } from 'contexts/LocaleStringsContext';
 
 type TProps = {|
   apiMethods: TApiMethods;
+  defaultLocaleStrings: TLocaleStrings;
 |}
 
-export const Root = ({ apiMethods }: TProps) => (
+export const Root = ({ apiMethods, defaultLocaleStrings }: TProps) => (
   <BrowserRouter>
     <ApiContext.Provider value={apiMethods}>
-      <Localization>
+      <LocaleStringsContext.Provider value={defaultLocaleStrings}>
         <App />
-      </Localization>
+      </LocaleStringsContext.Provider>
     </ApiContext.Provider>
   </BrowserRouter>
 )

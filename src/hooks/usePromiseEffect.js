@@ -11,18 +11,23 @@ type TReturnValue<TData> = {|
   errorMessage: null | string 
 |}
 
-export function usePromise <TData> (
-  promise: Promise<TData>
+export function usePromiseEffect <TData> (
+  getPromise: () => Promise<TData>,
+  params?: any[]
 ) : TReturnValue<TData> {
 
-  const [ isPending, toggleIsPending ] = useToggler(true)
+  const [ isPending, toggleIsPending ] = useToggler()
   const [ data, setData ] = useState<null | TData>(null)
   const { errorMessage, setError } = useError(null)
 
-  promise
-    .then(setData)
-    .catch(setError)
-    .then(toggleIsPending)
+  useEffect(() => {
+    setData(null)
+    toggleIsPending()
+    getPromise()
+      .then(setData)
+      .catch(setError)
+      .then(toggleIsPending)
+  }, params)
 
   return { data, isPending, errorMessage }
 }
