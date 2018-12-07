@@ -4,13 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Root } from 'containers/Root';
-import { globalContext } from 'data/globalContext';
+import { appContextMock } from 'data/appContextMock';
 
 const mountPoint = document.getElementById('root');
 
 if (mountPoint) {
   ReactDOM.render(
-    <Root {...globalContext} />,
+    <Root {...appContextMock} />,
     mountPoint
   );
 }

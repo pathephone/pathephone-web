@@ -1,7 +1,7 @@
 // @flow strict
 
-import type { TApiMethods } from 'data/apiMethods'
-import type { TLocaleStrings } from 'data/localization/en.module'
+import type { TApiMethods } from 'data/contexts'
+import type { TLocaleStrings } from 'data/types/data.module'
 
 import * as React from 'react'
 import { BrowserRouter } from 'react-router-dom';

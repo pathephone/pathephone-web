@@ -1,9 +1,6 @@
 // @flow
 
-import { useToggler } from 'hooks/useToggler';
-import { useState } from 'hooks/useState';
-import { useEffect } from 'hooks/useEffect';
-import { useError } from 'hooks/useError';
+import React from 'react';
 
 type TReturnValue<TData> = {| 
   data: null | TData, 
@@ -16,17 +13,17 @@ export function usePromiseEffect <TData> (
   params?: any[]
 ) : TReturnValue<TData> {
 
-  const [ isPending, toggleIsPending ] = useToggler()
-  const [ data, setData ] = useState<null | TData>(null)
-  const { errorMessage, setError } = useError(null)
+  const [ isPending, setIsPending ] = React.useState<boolean>(true)
+  const [ data, setData ] = React.useState<null | TData>(null)
+  const [ errorMessage, setErrorMessage ] = React.useState<null | string>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     setData(null)
-    toggleIsPending()
+    setIsPending(true)
     getPromise()
       .then(setData)
-      .catch(setError)
-      .then(toggleIsPending)
+      .catch((e: Error) => setErrorMessage(e.message))
+      .then(() => setIsPending(false))
   }, params)
 
   return { data, isPending, errorMessage }

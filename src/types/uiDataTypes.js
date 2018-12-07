@@ -1,5 +1,9 @@
 // @flow strict
 
+import { defaultLocaleStrings } from "data/defaultLocaleStrings";
+
+export type TLocaleStrings = typeof defaultLocaleStrings;
+
 export type TPlaylistTrack = {|
   id: string;
   title: string;
@@ -15,5 +19,3 @@ export type TFeedAlbum = {|
   artistName: string;
   coverSrc: string;
 |}
-
-export type TLocaleName = 'ru' | 'en'
