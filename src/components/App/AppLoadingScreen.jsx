@@ -4,9 +4,6 @@ import * as React from 'react';
 
 import styles from './App.module.css'
 
-type TProps = {|
-|}
-
-export const AppLoadingScreen = (props: TProps) => (
+export const AppLoadingScreen = () => (
   <div className={styles.App__LoadingScreen} />
 )

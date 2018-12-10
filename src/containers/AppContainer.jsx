@@ -1,28 +1,30 @@
 // @flow strict
 
+import type { TServices } from 'types/contextTypes'
+
 import * as React from 'react';
 
-import { PlayerScreen } from 'containers/PlayerScreen';
-import { useContextStrict } from 'hooks/useContext';
-import { ApiContext } from 'contexts/ApiContext';
 import { usePromise } from 'hooks/usePromise';
-import { useError } from 'hooks/useError';
 import { AppWrapper } from 'components/App/AppWrapper';
 import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
 import { AppErrorScreen } from 'components/App/AppErrorScreen';
+import { ServicesContext } from 'contexts/ServicesContext';
+import { useContextStrict } from 'hooks/useContextStrict';
+import { PlayerScreen } from 'components/PlayerScreen';
 
 type TProps = {|
 |}
 
 export const App = (props: TProps) => {
 
-  const [ hasLoadingScreen, setHasLoadingScreen ] = React.useState<boolean>(true)
-  const [ hasPlayerScreen, setHasPlayerScreen ] = React.useState<boolean>(true)
+  const [ hasLoadingScreen, setHasLoadingScreen ] = React.useState<boolean>(false)
+  const [ hasPlayerScreen, setHasPlayerScreen ] = React.useState<boolean>(false)
   const [ error, setError ] = React.useState<null | Error>(null)
 
-  const { startApp } = useContextStrict(ApiContext)
+  const { startApp } = useContextStrict<TServices>(ServicesContext)
 
   React.useEffect(() => {
+    setHasLoadingScreen(true)
     startApp()
       .then(() => setHasPlayerScreen(true))
       .catch(setError)

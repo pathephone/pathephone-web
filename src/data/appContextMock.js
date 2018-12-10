@@ -1,9 +1,9 @@
 // @flow strict
 
-import { mockApi } from "api/mockApi";
 import { enLocaleStrings } from "data/localization/en.module";
+import { mockServices } from "services/mockServices";
 
 export const appContextMock = {
-  api: mockApi,
+  services: mockServices,
   defaultLocaleStrings: enLocaleStrings
 };

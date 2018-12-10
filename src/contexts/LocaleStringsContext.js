@@ -1,7 +1,6 @@
 // @flow strict
 
-import type { TApiMethods } from 'data/apiMethods'
-import type { TLocaleStrings } from 'data/localization/en.module'
+import type { TLocaleStrings } from 'types/contextTypes'
 
 import * as React from 'react';
 
