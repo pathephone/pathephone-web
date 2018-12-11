@@ -2,19 +2,23 @@
   "name": "pathephone-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pathephone.github.io/pathephone-web",
   "dependencies": {
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-scripts": "^2.1.1"
   },
   "devDependencies": {
-    "flow-bin": "^0.86.0"
+    "flow-bin": "^0.86.0",
+    "gh-pages": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "flow": "flow",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
