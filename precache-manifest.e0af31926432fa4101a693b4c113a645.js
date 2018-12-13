@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/js/runtime~main.83e9ffe3.js"
   },
   {
-    "revision": "a6f926ab0f89138a0087",
-    "url": "/pathephone-web/static/js/main.a6f926ab.chunk.js"
+    "revision": "49d92f1c10a081446bf3",
+    "url": "/pathephone-web/static/js/main.49d92f1c.chunk.js"
   },
   {
     "revision": "1a2fe23bbee4e72efb16",
     "url": "/pathephone-web/static/js/1.1a2fe23b.chunk.js"
   },
   {
-    "revision": "a6f926ab0f89138a0087",
-    "url": "/pathephone-web/static/css/main.bb9ee306.chunk.css"
+    "revision": "49d92f1c10a081446bf3",
+    "url": "/pathephone-web/static/css/main.07838d05.chunk.css"
   },
   {
-    "revision": "739bc89e2ae048b0d7c10b2ff9099c19",
+    "revision": "bb4132373a949940c5e0c267a88cc8fb",
     "url": "/pathephone-web/index.html"
   }
 ];
