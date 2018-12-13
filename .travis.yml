@@ -1,7 +1,6 @@
 language: node_js
 node_js:
-  - 4
-  - 6
+  - 10
 cache:
   directories:
     - node_modules
@@ -9,3 +8,10 @@ script:
   - npm run flow
   - npm test
   - npm run build
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - npx semantic-release
+  on:
+    branch: master
