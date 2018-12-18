@@ -12,6 +12,11 @@
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "@semantic-release/changelog": "^3.0.1",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/exec": "^3.3.0",
+    "@semantic-release/git": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^7.1.4",
     "flow-bin": "^0.87.0",
     "gh-pages": "^2.0.1"
   },
@@ -22,7 +27,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "node ./publish.js"
   },
   "browserslist": [
     ">0.2%",
