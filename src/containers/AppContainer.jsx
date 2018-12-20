@@ -11,30 +11,23 @@ import { AppErrorScreen } from 'components/App/AppErrorScreen';
 import { ServicesContext } from 'contexts/ServicesContext';
 import { useContextStrict } from 'hooks/useContextStrict';
 import { PlayerScreen } from 'components/PlayerScreen';
+import { usePromiseEffect } from 'hooks/usePromiseEffect';
 
 type TProps = {|
 |}
 
 export const App = (props: TProps) => {
 
-  const [ hasLoadingScreen, setHasLoadingScreen ] = React.useState<boolean>(false)
-  const [ hasPlayerScreen, setHasPlayerScreen ] = React.useState<boolean>(false)
-  const [ error, setError ] = React.useState<null | Error>(null)
-
   const { startApp } = useContextStrict<TServices>(ServicesContext)
 
-  React.useEffect(() => {
-    setHasLoadingScreen(true)
-    startApp()
-      .then(() => setHasPlayerScreen(true))
-      .catch(setError)
-      .then(() => setHasLoadingScreen(false))
-  },[])
+  const [ hasLoadingScreen, setHasLoadingScreen ] = React.useState<boolean>(false)
+
+  const { isPending, data, error } = usePromiseEffect<void, void>(startApp);
 
   return (
     <AppWrapper>
       {
-        hasLoadingScreen && (
+        isPending && (
           <AppLoadingScreen />
         )
       }
@@ -46,8 +39,8 @@ export const App = (props: TProps) => {
         )
       }
       {
-        hasPlayerScreen && (
-          <PlayerScreen />
+        data !== null && (
+          <button onClick={() => setHasLoadingScreen(!hasLoadingScreen)}>aa</button>
         )
       }
     </AppWrapper>

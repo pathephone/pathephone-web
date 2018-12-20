@@ -1,30 +1,34 @@
-// @flow
+// @flow strict
 
 import React from 'react';
 
 type TReturnValue<TData> = {| 
-  data: null | TData, 
   isPending: boolean, 
-  errorMessage: null | string 
+  data: null | TData, 
+  error: null | Error 
 |}
 
-export function usePromiseEffect <TData> (
-  getPromise: () => Promise<TData>,
-  params?: any[]
-) : TReturnValue<TData> {
+export function usePromiseEffect <TData, TParams> (
+  getPromise: (params?: TParams) => Promise<TData>,
+  params?: TParams
+): TReturnValue<TData> {
 
-  const [ isPending, setIsPending ] = React.useState<boolean>(true)
+  if (params !== undefined && !Array.isArray(params)) {
+    throw new TypeError('Parameters should be an array.')
+  }
+
+  const [ isPending, setIsPending ] = React.useState<boolean>(false)
   const [ data, setData ] = React.useState<null | TData>(null)
-  const [ errorMessage, setErrorMessage ] = React.useState<null | string>(null)
+  const [ error, setError ] = React.useState<null | Error>(null)
 
   React.useEffect(() => {
     setData(null)
     setIsPending(true)
-    getPromise()
+    getPromise(params)
       .then(setData)
-      .catch((e: Error) => setErrorMessage(e.message))
+      .catch(setError)
       .then(() => setIsPending(false))
   }, params)
 
-  return { data, isPending, errorMessage }
+  return { data, isPending, error }
 }
