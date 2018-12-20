@@ -2,6 +2,6 @@
 
 import { asyncTimeout } from "utils/asyncTimeout";
 
-export const startApp = (): Promise<void> => (
+export const getLatestAlbums = (): Promise<void> => (
   asyncTimeout(500)
 )
