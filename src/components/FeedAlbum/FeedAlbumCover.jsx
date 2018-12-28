@@ -2,16 +2,16 @@
 
 import * as React from 'react';
 
-import styles from './Album.module.css'
+import styles from './FeedAlbum.module.css'
 
 type TProps = {|
   src: string;
   alt: string;
 |}
 
-export const AlbumCoverImage = ({ src, alt }: TProps) => (
+export const FeedAlbumCover = ({ src, alt }: TProps) => (
   <img
-    className={styles.Album__CoverImage}
+    className={styles.FeedAlbum__Cover}
     src={src}
     alt={alt}
   />

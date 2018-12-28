@@ -2,16 +2,19 @@
 
 import * as React from 'react';
 
+import { PlayerScreenWrapper } from 'components/PlayerScreen/PlayerScreenWrapper';
+import { HeaderContainer } from 'containers/HeaderContainer';
+import { PageContainer } from 'containers/PageContainer';
+
 type TProps = {|
-  children: React.Node;
 |}
 
-export const PlayerScreenContainer = ({ children }: TProps) => {
+export const PlayerScreenContainer = (props: TProps) => {
 
   return (
-    <div>
-      <header>header</header>
-      {children}
-    </div>
+    <PlayerScreenWrapper>
+      <HeaderContainer />
+      <PageContainer />
+    </PlayerScreenWrapper>
   )
 }

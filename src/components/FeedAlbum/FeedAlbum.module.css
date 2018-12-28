@@ -1,0 +1,19 @@
+.FeedAlbum__Wrapper {
+}
+
+.FeedAlbum__Cover {
+  display: block;
+  width: 250px;
+  height: 250px;
+  padding: 2.5px;
+  border: 1px solid lightgray;
+  object-fit: contain;
+}
+
+.FeedAlbum__Info {
+  text-align: center;
+}
+
+.FeedAlbum__Artist {
+  color: grey;
+}

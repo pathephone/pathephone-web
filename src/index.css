@@ -8,3 +8,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+svg {
+  display: inline;
+  vertical-align: middle;
+}

@@ -9,7 +9,6 @@ import { AppErrorScreen } from 'components/App/AppErrorScreen';
 import { ServicesContext } from 'contexts/ServicesContext';
 import { useContextStrict } from 'hooks/useContextStrict';
 import { usePromiseEffect } from 'hooks/usePromiseEffect';
-import { PageContainer } from 'containers/PageContainer';
 import { PlayerScreenContainer } from 'containers/PlayerScreenContainer';
 
 type TProps = {|
@@ -37,9 +36,7 @@ export const AppContainer = (props: TProps) => {
       }
       {
         data === undefined && (
-          <PlayerScreenContainer>
-            <PageContainer />
-          </PlayerScreenContainer>
+          <PlayerScreenContainer />
         )
       }
     </>

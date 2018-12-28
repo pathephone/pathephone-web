@@ -1,7 +1,11 @@
 // @flow strict
 
-import { asyncTimeout } from "utils/asyncTimeout";
+import type { TFeedAlbum } from "types/uiDataTypes";
 
-export const getLatestAlbums = (): Promise<void> => (
-  asyncTimeout(500)
-)
+import { asyncTimeout } from "utils/asyncTimeout";
+import { feedAlbumMock } from "mocks/uiDataMocks";
+
+export const getLatestAlbums = async (): Promise<TFeedAlbum[]> => {
+  await asyncTimeout(500)
+  return [ feedAlbumMock ]
+}
