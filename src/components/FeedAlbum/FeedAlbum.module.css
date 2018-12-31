@@ -1,4 +1,5 @@
 .FeedAlbum__Wrapper {
+
 }
 
 .FeedAlbum__Cover {
@@ -8,6 +9,7 @@
   padding: 2.5px;
   border: 1px solid lightgray;
   object-fit: contain;
+  background-color: white;
 }
 
 .FeedAlbum__Info {

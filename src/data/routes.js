@@ -1,7 +1,15 @@
 // @flow strict
 
-export const latestAlbums = '/albums'
+export const latestAlbumsPattern = '/latest'
+export const latestAlbumsRoute = () => '/latest'
 
-export const searchAlbums = '/albums/:query'
+export const searchAlbumsPattern = '/search/:query'
+export const searchAlbumsRoute = (query?: string) => {
+  if (query !== undefined) {
+    return `/search${query}`;
+  }
+  return '/search'
+}
 
-export const shareAlbum = '/share'
+export const shareAlbumPattern = '/share'
+export const shareAlbumRoute = () => '/share'

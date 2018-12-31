@@ -11,6 +11,7 @@ import { usePromiseEffect } from 'hooks/usePromiseEffect';
 import { AlbumsFeedWrapper } from 'components/AlbumsFeed/AlbumsFeedWrapper';
 import { FeedAlbumContainer } from 'containers/FeedAlbumContainer';
 import { PageWrapper } from 'components/Page/PageWrapper';
+import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
 
 type TProps = {|
 |}
@@ -25,7 +26,7 @@ export const LatestAlbumsPageContainer = (props: TProps) => {
     <PageWrapper>
       {
         isPending && (
-          <h1>loading...</h1>
+          <AppLoadingScreen />
         )
       }
       {

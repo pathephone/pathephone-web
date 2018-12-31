@@ -11,14 +11,14 @@ export const PageContainer = () => {
     <Switch>
       <Route
         exact
-        path={routes.latestAlbums}
+        path={routes.latestAlbumsPattern}
         component={LatestAlbumsPageContainer} 
       />
       <Route
         exact
         path="/" 
         render={() => (
-          <Redirect to={routes.latestAlbums} />
+          <Redirect to={routes.latestAlbumsPattern} />
         )}
       />
     </Switch>

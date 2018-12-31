@@ -5,6 +5,9 @@ import * as React from 'react';
 import { HeaderWrapper } from 'components/Header/HeaderWrapper';
 import { MenuIcon } from 'icons/round-menu';
 import { SearchIcon } from 'icons/round-search';
+import { HeaderButton } from 'components/Header/HeaderButton';
+import { MainMenuContainer } from 'containers/header/MainMenuContainer';
+import { SearchBarContainer } from 'containers/SearchBarContainer';
 
 type TProps = {|
 |}
@@ -24,12 +27,30 @@ export const HeaderContainer = (props: TProps) => {
 
   return (
     <HeaderWrapper>
-      <button onClick={toggleMainMenu}>
-        <MenuIcon />
-      </button>
-      <button onClick={toggleSearchBar}>
-        <SearchIcon />
-      </button>
+      {
+        hasMainMenu && (
+          <MainMenuContainer onClose={toggleMainMenu} />
+        )
+      }
+      {
+        !hasSearchBar && (
+          <>
+            <HeaderButton isDisabled={hasMainMenu} onClick={toggleMainMenu}>
+              <MenuIcon />
+            </HeaderButton>
+            <HeaderButton isDisabled={hasSearchBar} onClick={toggleSearchBar}>
+              <SearchIcon />
+            </HeaderButton>
+          </>
+        )
+      }
+      {
+        hasSearchBar && (
+          <SearchBarContainer
+            onCancel={toggleSearchBar}
+          />
+        )
+      }
     </HeaderWrapper>
   )
 }
