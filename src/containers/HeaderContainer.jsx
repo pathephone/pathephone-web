@@ -8,6 +8,7 @@ import { SearchIcon } from 'icons/round-search';
 import { HeaderButton } from 'components/Header/HeaderButton';
 import { MainMenuContainer } from 'containers/header/MainMenuContainer';
 import { SearchBarContainer } from 'containers/SearchBarContainer';
+import { OutsideClickDetector } from 'components/OutsideClickDetector';
 
 type TProps = {|
 |}

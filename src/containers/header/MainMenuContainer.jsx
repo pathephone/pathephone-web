@@ -3,10 +3,10 @@
 import * as React from 'react';
 
 import { routes } from 'data/routes.module';
-import { MainMenuWrapper } from 'components/MainMenu/MainMenuComponents';
 import { MainMenuNavigation } from 'components/MainMenu/MainMenuComponents';
 import { MainMenuLink } from 'components/MainMenu/MainMenuComponents';
 import { MainMenuCloseButton } from 'components/MainMenu/MainMenuComponents';
+import { MainMenuWrapper } from 'components/MainMenu/MainMenuComponents';
 
 type TProps = {|
   onClose(): void;
@@ -14,9 +14,11 @@ type TProps = {|
 
 export const MainMenuContainer = (props: TProps) => {
 
+  const { onClose } = props;
+
   return (
-    <MainMenuWrapper>
-      <MainMenuCloseButton onClick={props.onClose}>
+    <MainMenuWrapper onOutsideClick={onClose}>
+      <MainMenuCloseButton onClick={onClose}>
         close
       </MainMenuCloseButton>
       <MainMenuNavigation>

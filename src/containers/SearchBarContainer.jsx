@@ -1,13 +1,14 @@
 // @flow strict
 
 import * as React from 'react';
+
 import { SearchBarWrapper } from 'components/SearchBar/SearchBarWrapper';
 import { SearchBarInput } from 'components/SearchBar/SearchBarInput';
 import { SearchBarCancel } from 'components/SearchBar/SearchBarCancel';
 import { ClearIcon } from 'icons/round-clear';
 
 type TProps = {|
-  onCancel(e: SyntheticEvent<HTMLButtonElement>): void;
+  onCancel(): void;
 |}
 
 export const SearchBarContainer = (props: TProps) => {
@@ -22,7 +23,7 @@ export const SearchBarContainer = (props: TProps) => {
   }
 
   return (
-    <SearchBarWrapper>
+    <SearchBarWrapper onOutsideClick={onCancel}>
       <SearchBarInput onChange={handleInputChange} value={searchValue} />
       <SearchBarCancel onClick={onCancel}>
         <ClearIcon />
