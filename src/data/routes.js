@@ -6,7 +6,7 @@ export const latestAlbumsRoute = () => '/latest'
 export const searchAlbumsPattern = '/search/:query'
 export const searchAlbumsRoute = (query?: string) => {
   if (query !== undefined) {
-    return `/search${query}`;
+    return `/search/${query}`;
   }
   return '/search'
 }

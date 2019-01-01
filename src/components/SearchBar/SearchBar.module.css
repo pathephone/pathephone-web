@@ -5,13 +5,18 @@
   display: flex;
 }
 
-.SearchBar__Input {
+.SearchBar__Form {
   height: 100%;
   flex-basis: 100%;
+}
+
+.SearchBar__Input {
+  height: 100%;
+  width: 100%;
   border: none;
   outline: none;
   background: transparent;
 }
 
-.SearcBar__Cancel {
+.SearchBar__Cancel {
 }
