@@ -7,6 +7,7 @@ import { SearchBarInput } from 'components/SearchBar/SearchBarInput';
 import { SearchBarCancel } from 'components/SearchBar/SearchBarCancel';
 import { ClearIcon } from 'icons/round-clear';
 import { SearchBarForm } from 'components/SearchBar/SearchBarForm';
+import { useKeyUp } from 'hooks/useKeyUp';
 
 type TProps = {|
   onCancel(): void;
@@ -29,6 +30,10 @@ export const SearchBarContainer = (props: TProps) => {
     onSubmit(searchValue);
     onCancel();
   }
+
+  useKeyUp({
+    Escape: onCancel
+  })
 
   return (
     <SearchBarWrapper onOutsideClick={onCancel}>

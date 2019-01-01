@@ -15,6 +15,12 @@ type TProps = {|
 export const MainMenuContainer = (props: TProps) => {
 
   const { onClose } = props;
+  
+  const DecoratedLink = ({ children, to }) => (
+    <MainMenuLink onClick={onClose} to={to}>
+      {children}
+    </MainMenuLink>
+  )
 
   return (
     <MainMenuWrapper onOutsideClick={onClose}>
@@ -22,15 +28,15 @@ export const MainMenuContainer = (props: TProps) => {
         close
       </MainMenuCloseButton>
       <MainMenuNavigation>
-        <MainMenuLink to={routes.latestAlbumsRoute()}>
+        <DecoratedLink to={routes.latestAlbumsRoute()}>
           latest albums
-        </MainMenuLink>
-        <MainMenuLink to={routes.searchAlbumsRoute()}>
+        </DecoratedLink>
+        <DecoratedLink to={routes.searchAlbumsRoute()}>
           search albums
-        </MainMenuLink>
-        <MainMenuLink to={routes.shareAlbumRoute()}>
+        </DecoratedLink>
+        <DecoratedLink to={routes.shareAlbumRoute()}>
           share album
-        </MainMenuLink>
+        </DecoratedLink>
       </MainMenuNavigation>
     </MainMenuWrapper>
   )

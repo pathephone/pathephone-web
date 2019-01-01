@@ -1,6 +1,7 @@
 // @flow strict
 
 import * as React from 'react';
+import { useOutsideClick } from 'hooks/useOutsideClick';
 
 type TProps = {
   children: React.Node;
@@ -13,23 +14,7 @@ export const OutsideClickDetector = (props: TProps) => {
 
   const { onOutsideClick, ...wrapperProps } = props;
 
-  React.useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      const wrapperNode = wrapperRef.current;
-      const targetNode = e.target;
-      if (
-        targetNode instanceof HTMLElement 
-        && wrapperNode
-        && !wrapperNode.contains(targetNode)
-      ) {
-        onOutsideClick()
-      }
-    }
-    window.addEventListener('click', handleClick)
-    return () => {
-      window.removeEventListener('click', handleClick)
-    }
-  })
+  useOutsideClick<HTMLDivElement>(wrapperRef, onOutsideClick)
 
   return (
     <div {...wrapperProps} ref={wrapperRef} />

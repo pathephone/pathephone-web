@@ -27,6 +27,7 @@ export const MainMenuNavigation = (props: TNavigationProps) => (
 type TLinkProps = {|
   children: React.Node;
   to: string;
+  onClick(): void;
 |}
 
 export const MainMenuLink = (props: TLinkProps) => (
