@@ -61,7 +61,7 @@ export const HeaderContainer = (props: TProps) => {
       }
       {
         searchValue && (
-          <Redirect to={routes.searchAlbumsRoute(searchValue)} />
+          <Redirect to={routes.searchAlbumsRoute(searchValue)} push />
         )
       }
     </HeaderWrapper>
