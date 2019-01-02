@@ -11,25 +11,27 @@ export function useOutsideClick <TNode> (
 ) {
   React.useEffect(() => {
 
-      const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: MouseEvent) => {
 
-        const wrapperNode = wrapperRef.current;
+      const wrapperNode = wrapperRef.current;
 
-        const targetNode = e.target;
-        if (
-          targetNode instanceof HTMLElement
-          && wrapperNode instanceof HTMLElement
-          && !wrapperNode.contains(targetNode)
-        ) {
-          onOutsideClick()
-        }
+      const targetNode = e.target;
 
+      if (
+        targetNode instanceof HTMLElement
+        && wrapperNode instanceof HTMLElement
+        && !wrapperNode.contains(targetNode)
+      ) {
+        onOutsideClick()
       }
 
-      window.addEventListener('click', handleClick)
+    }
 
-      return () => {
-        window.removeEventListener('click', handleClick)
-      }
+    window.addEventListener('click', handleClick)
+
+    return () => {
+      window.removeEventListener('click', handleClick)
+    }
+
   },[wrapperRef, onOutsideClick])
 }

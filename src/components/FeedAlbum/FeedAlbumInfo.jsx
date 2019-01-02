@@ -9,7 +9,7 @@ type TProps = {|
 |}
 
 export const FeedAlbumInfo = (props: TProps) => (
-  <h3 className={styles.FeedAlbum__Info}>
+  <div className={styles.FeedAlbum__Info}>
     {props.children}
-  </h3>
+  </div>
 )

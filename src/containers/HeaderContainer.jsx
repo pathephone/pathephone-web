@@ -9,6 +9,8 @@ import { SearchIcon } from 'icons/round-search';
 import { HeaderButton } from 'components/Header/HeaderButton';
 import { MainMenuContainer } from 'containers/header/MainMenuContainer';
 import { SearchBarContainer } from 'containers/SearchBarContainer';
+import { Left } from 'components/Flex/FlexComponents';
+import { Right } from 'components/Flex/FlexComponents';
 import { routes } from 'data/routes.module';
 
 type TProps = {|
@@ -42,12 +44,20 @@ export const HeaderContainer = (props: TProps) => {
       {
         !hasSearchBar && (
           <>
-            <HeaderButton isDisabled={hasMainMenu} onClick={toggleMainMenu}>
-              <MenuIcon />
-            </HeaderButton>
-            <HeaderButton isDisabled={hasSearchBar} onClick={toggleSearchBar}>
-              <SearchIcon />
-            </HeaderButton>
+            <Left>
+              <HeaderButton
+                onClick={toggleMainMenu}
+              >
+                <MenuIcon />
+              </HeaderButton>
+            </Left>
+            <Right>
+              <HeaderButton 
+                onClick={toggleSearchBar}
+              >
+                <SearchIcon />
+              </HeaderButton>
+            </Right>
           </>
         )
       }

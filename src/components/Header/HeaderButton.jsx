@@ -7,7 +7,6 @@ import styles from './Header.module.css'
 type TProps = {|
   children: React.Node;
   onClick(e: SyntheticEvent<HTMLButtonElement>): void; 
-  isDisabled?: boolean;
 |}
 
 export const HeaderButton = (props: TProps) => (
