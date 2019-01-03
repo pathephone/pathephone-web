@@ -1,0 +1,16 @@
+.ShareAlbumPage__Wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.ShareAlbumPage__Content {
+  width: 100%;
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+
+.ShareAlbumPage__Footer {
+
+}

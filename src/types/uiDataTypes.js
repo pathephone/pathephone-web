@@ -16,14 +16,20 @@ export type TFeedAlbum = {|
   coverSrc: string;
 |}
 
+export type TFormArtist = {|
+  key: string;
+  name: string;  
+|}
+
 export type TFormTrack = {
+  key: string;
   title: string;
-  artists: string[];
-  audio: File;
+  artists: TFormArtist[];
+  audio: File | null;
 }
 
 export type TFormAlbum = {|
   title: string;
-  cover: File;
+  cover: File | null;
   tracklist: TFormTrack[];
 |}

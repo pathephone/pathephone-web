@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { routes } from 'data/routes.module';
 import { LatestAlbumsPageContainer } from 'containers/pages/LatestAlbumsPageContainer';
 import { SearchAlbumsPageContainer } from 'containers/pages/SearchAlbumsPageContainer';
+import { ShareAlbumPageContainer } from 'containers/pages/ShareAlbumPageContainer';
 
 export const PageContainer = () => {
   return (
@@ -19,6 +20,11 @@ export const PageContainer = () => {
         exact
         path={routes.searchAlbumsPattern}
         component={SearchAlbumsPageContainer} 
+      />
+      <Route
+        exact
+        path={routes.shareAlbumPattern}
+        component={ShareAlbumPageContainer} 
       />
       <Route
         exact
