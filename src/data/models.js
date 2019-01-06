@@ -21,7 +21,5 @@ export const getRawAlbumFormTrackData = (): TFormTrack => ({
 export const getRawAlbumFormData = (): TFormAlbum => ({
   title: '',
   cover: null,
-  tracklist: [
-    getRawAlbumFormTrackData()
-  ]
+  tracklist: []
 })

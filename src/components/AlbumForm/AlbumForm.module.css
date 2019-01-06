@@ -1,0 +1,11 @@
+.AlbumForm__Wrapper {
+
+}
+
+.AlbumForm__Fieldset {
+  background-color: white;
+}
+
+.AlbumForm__Fieldset:not(:first-child) {
+  margin-top: 1em;
+}

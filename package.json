@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://pathephone.github.io/pathephone-web",
   "dependencies": {
+    "music-metadata-browser": "^0.7.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-router-dom": "^4.3.1",

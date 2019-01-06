@@ -6,15 +6,18 @@ import * as React from 'react';
 
 import { getRawAlbumFormTrackData } from 'data/models';
 import { renderTrackInputs } from 'containers/AlbumFormContainer/renderTrackInputs';
+import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
+import { AlbumFormFieldset } from 'components/AlbumForm/AlbumFormComponents';
 
 type TProps = {|
   data: TFormAlbum;
   onDataChange(data: TFormAlbum): void;
+  onSubmit(): void;
 |}
 
 export const AlbumFormContainer = (props: TProps) => {
 
-  const { data, onDataChange } = props;
+  const { data, onDataChange, onSubmit } = props;
 
   // Render form
 
@@ -44,9 +47,8 @@ export const AlbumFormContainer = (props: TProps) => {
   }
 
   return (
-    <form>
-      <fieldset>
-        <legend>about</legend>
+    <AlbumFormWrapper onSubmit={onSubmit}>
+      <AlbumFormFieldset title="about">
         <label>
           Album title<br />
           <input 
@@ -66,9 +68,8 @@ export const AlbumFormContainer = (props: TProps) => {
             onChange={handleChange}
           />
         </label>
-      </fieldset>
-      <fieldset>
-        <legend>tracklist</legend>
+      </AlbumFormFieldset>
+      <AlbumFormFieldset title="tracklist">
         {
           data.tracklist.map(renderTrackInputs(handleTracklistChange))
         }
@@ -79,7 +80,10 @@ export const AlbumFormContainer = (props: TProps) => {
         >
           add track
         </button>
-      </fieldset>
-    </form>
+      </AlbumFormFieldset>
+      <button onClick={onSubmit}>
+        share
+      </button>
+    </AlbumFormWrapper>
   )
 }
