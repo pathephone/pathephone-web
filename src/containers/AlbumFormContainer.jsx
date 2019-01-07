@@ -8,6 +8,7 @@ import { renderTrackInputs } from 'containers/AlbumFormContainer/renderTrackInpu
 import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
 import { AlbumFormFieldset } from 'components/AlbumForm/AlbumFormComponents';
 import { getTrackFormDataFromFile } from 'utils/getAlbumFormDataFromFiles';
+import { CustomTextInput } from 'components/CustomTextInput';
 
 type TProps = {|
   data: TFormAlbum;
@@ -24,6 +25,15 @@ export const AlbumFormContainer = (props: TProps) => {
     onDataChange({
       ...data,
       [name]: value
+    })
+  }
+
+  const handleCoverChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    e.currentTarget.value = '';
+    onDataChange({
+      ...data,
+      cover: files[0]
     })
   }
 
@@ -55,23 +65,19 @@ export const AlbumFormContainer = (props: TProps) => {
   return (
     <AlbumFormWrapper onSubmit={onSubmit}>
       <AlbumFormFieldset title="about">
-        <label>
-          Album title<br />
-          <input 
-            type="text"
-            name="title"
-            placeholder="Album title"
-            value={data.title} 
-            onChange={handleChange}
-          />
-        </label>
+        <CustomTextInput 
+          label="Album title"
+          name="title"
+          value={data.title}
+          onChange={handleChange}
+        />
         <br />
         <label>
           Album cover<br />
           <input 
             type="file" 
             name="cover"
-            onChange={handleChange}
+            onChange={handleCoverChange}
           />
         </label>
       </AlbumFormFieldset>
@@ -81,6 +87,7 @@ export const AlbumFormContainer = (props: TProps) => {
         }
         <input
           type="file"
+          multiple
           name="tracklist"
           onChange={handleAddTrack}
         />

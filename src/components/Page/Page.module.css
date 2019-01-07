@@ -1,3 +1,9 @@
-.Page__Wrapper {
+.Wrapper {
   padding: 75px 0;
+}
+
+.Wrapper_centered {
+  padding: 50px 0 0 0;
+  width: 100vw;
+  height: 100vh;
 }

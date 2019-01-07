@@ -6,6 +6,7 @@ import * as React from 'react';
 
 import { renderArtistInputs } from 'containers/AlbumFormContainer/renderArtistInputs';
 import { getRawAlbumFormArtistData } from 'data/models';
+import { CustomTextInput } from 'components/CustomTextInput';
 
 export const renderTrackInputs = (
   onChange: (tracklist: TFormTrack[]) => void
@@ -51,16 +52,12 @@ export const renderTrackInputs = (
 
   return(
     <div key={track.key}>
-      <label>
-        Track title<br />
-        <input 
-          type="text"
-          name="title"
-          placeholder="Track title"
-          value={track.title} 
-          onChange={handleTrackInputChange}
-        />
-      </label>
+      <CustomTextInput
+        label="Track title"
+        name="title"
+        value={track.title}
+        onChange={handleTrackInputChange}
+      />
       <br />
       {
         track.artists.map(renderArtistInputs(handleArtistsChange))

@@ -10,8 +10,8 @@ import { useContextStrict } from 'hooks/useContextStrict';
 import { PageWrapper } from 'components/Page/PageWrapper';
 import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
 import { AlbumFormContainer } from 'containers/AlbumFormContainer';
-import { AlbumDropZoneContainer } from 'containers/AlbumDropZoneContainer';
 import { getAlbumFormDataFromFiles } from 'utils/getAlbumFormDataFromFiles';
+import { ShareAlbumPageDropZone } from 'components/ShareAlbumPage/ShareAlbumPageDropZone';
 
 type TProps = {|
 |}
@@ -35,39 +35,36 @@ export const ShareAlbumPageContainer = (props: TProps) => {
     }
   }
 
-  const handleDropZoneChange = (files: FileList) => {
+  const handleDropZoneChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    setHasPreloader(true);
     getAlbumFormDataFromFiles(files)
       .then(setAlbumFormData)
+      .catch(setError)
+      .then(() => {
+        setHasPreloader(false)
+      })
   }
 
   return (
-    <PageWrapper>
+    <PageWrapper centered>
       {
-        hasPreloader && (
+        hasPreloader ? (
           <AppLoadingScreen />
-        )
-      }
-      {
-        hasSuccessScreeen && (
+        ) : hasSuccessScreeen ? (
           <h1>succeed</h1>
-        )
-      }
-      {
-        error !== null && (
+        ) : error !== null ? (
           <h1>
             {error.message} 
           </h1>
-        )
-      }
-      { 
-        albumFormData !== null ? (
+        ) : albumFormData !== null ? (
           <AlbumFormContainer
             data={albumFormData}
             onDataChange={setAlbumFormData}
             onSubmit={handleSubmit}
           />
         ) : (
-          <AlbumDropZoneContainer
+          <ShareAlbumPageDropZone
             onChange={handleDropZoneChange}
           />
         )

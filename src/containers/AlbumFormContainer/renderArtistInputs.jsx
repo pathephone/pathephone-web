@@ -3,7 +3,8 @@
 import type { TFormArtist } from "types/uiDataTypes";
 
 import * as React from 'react';
-import { getRawAlbumFormArtistData } from 'data/models';
+
+import { CustomTextInput } from 'components/CustomTextInput';
 
 export const renderArtistInputs = (
   onChange: (artists: TFormArtist[]) => void
@@ -24,15 +25,12 @@ export const renderArtistInputs = (
   }
 
   return(
-    <label key={artist.key}>
-      Track artist #{artistIndex}<br />
-      <input
-        type='text'
-        name="name"
-        value={artist.name}
-        placeholder="Track artist"
-        onChange={handleChange}
-      />
-    </label>
+    <CustomTextInput
+      key={artist.key}
+      label={`Track artist #${artistIndex}`}
+      name="name"
+      value={artist.name}
+      onChange={handleChange}
+    />
   )
 }

@@ -14,3 +14,30 @@
 .ShareAlbumPage__Footer {
 
 }
+
+.DropZone__Wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+}
+
+.DropZone__Label {
+  position: relative;
+  display: flex;
+  border: 1px solid lightgrey;
+  background: white;
+  width: 100%;
+  height: 100%;
+}
+
+.DropZone__Input {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.DropZone__Message {
+  margin: auto;
+}
