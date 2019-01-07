@@ -7,7 +7,7 @@ import * as mm from 'music-metadata-browser';
 import { getRawAlbumFormData } from "data/models";
 import { getUniqueString } from "utils/getUniqueString";
 
-const getTrackFormDataFromFile = (file: File): Promise<TFormTrack> => {
+export const getTrackFormDataFromFile = (file: File): Promise<TFormTrack> => {
   return mm
     .parseBlob(file)
     .then(metadata => {

@@ -3,6 +3,7 @@
 import type { TFormArtist } from "types/uiDataTypes";
 
 import * as React from 'react';
+import { getRawAlbumFormArtistData } from 'data/models';
 
 export const renderArtistInputs = (
   onChange: (artists: TFormArtist[]) => void

@@ -1,13 +1,13 @@
 // @flow strict
 
-import type { TFormAlbum } from "types/uiDataTypes";
+import type { TFormAlbum, TFormTrack } from "types/uiDataTypes";
 
 import * as React from 'react';
 
-import { getRawAlbumFormTrackData } from 'data/models';
 import { renderTrackInputs } from 'containers/AlbumFormContainer/renderTrackInputs';
 import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
 import { AlbumFormFieldset } from 'components/AlbumForm/AlbumFormComponents';
+import { getTrackFormDataFromFile } from 'utils/getAlbumFormDataFromFiles';
 
 type TProps = {|
   data: TFormAlbum;
@@ -19,8 +19,6 @@ export const AlbumFormContainer = (props: TProps) => {
 
   const { data, onDataChange, onSubmit } = props;
 
-  // Render form
-
   const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     onDataChange({
@@ -29,14 +27,22 @@ export const AlbumFormContainer = (props: TProps) => {
     })
   }
 
-  const handleAddTrack = () => {
-    onDataChange({
-      ...data,
-      tracklist: [
-        ...data.tracklist,
-        getRawAlbumFormTrackData()
-      ]
-    })
+  const handleAddTrack = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    Promise.all(
+      [...files].map(
+        getTrackFormDataFromFile
+      )
+    )
+      .then((tracks: TFormTrack[]) => {
+        onDataChange({
+          ...data,
+          tracklist: [
+            ...data.tracklist,
+            ...tracks
+          ]
+        })
+      })
   }
 
   const handleTracklistChange = (tracklist) => {
@@ -73,13 +79,11 @@ export const AlbumFormContainer = (props: TProps) => {
         {
           data.tracklist.map(renderTrackInputs(handleTracklistChange))
         }
-        <br />
-        <button
-          type="button"
-          onClick={handleAddTrack}
-        >
-          add track
-        </button>
+        <input
+          type="file"
+          name="tracklist"
+          onChange={handleAddTrack}
+        />
       </AlbumFormFieldset>
       <button onClick={onSubmit}>
         share

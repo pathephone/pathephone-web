@@ -1,5 +1,7 @@
 .AlbumForm__Wrapper {
-
+  width: 100%;
+  max-width: 40em;
+  margin: auto;
 }
 
 .AlbumForm__Fieldset {

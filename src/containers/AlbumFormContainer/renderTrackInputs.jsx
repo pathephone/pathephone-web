@@ -5,6 +5,7 @@ import type { TFormTrack, TFormArtist } from "types/uiDataTypes";
 import * as React from 'react';
 
 import { renderArtistInputs } from 'containers/AlbumFormContainer/renderArtistInputs';
+import { getRawAlbumFormArtistData } from 'data/models';
 
 export const renderTrackInputs = (
   onChange: (tracklist: TFormTrack[]) => void
@@ -34,8 +35,22 @@ export const renderTrackInputs = (
     onChange(nextTracklist)
   }
 
+  const handleAddArtist = () => {
+    const nextTracklist = [
+      ...tracklist
+    ]
+    const nextArtists = [
+      ...track.artists
+    ];
+    nextArtists.push(getRawAlbumFormArtistData());
+    nextTracklist[trackIndex] = {
+      ...track, artists: nextArtists
+    }
+    onChange(nextTracklist)
+  }
+
   return(
-    <span key={track.key}>
+    <div key={track.key}>
       <label>
         Track title<br />
         <input 
@@ -50,15 +65,10 @@ export const renderTrackInputs = (
       {
         track.artists.map(renderArtistInputs(handleArtistsChange))
       }
-      <br />
-      <label>
-        Track audio<br />
-        <input 
-          type="file"
-          name="audio"
-          onChange={handleTrackInputChange}
-        />
-      </label>
-    </span>
+      <button type="button" onClick={handleAddArtist}>
+        add artist name
+      </button>
+      <hr />
+    </div>
   )
 }
