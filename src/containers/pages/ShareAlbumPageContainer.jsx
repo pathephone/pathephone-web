@@ -10,7 +10,6 @@ import { useContextStrict } from 'hooks/useContextStrict';
 import { PageWrapper } from 'components/Page/PageWrapper';
 import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
 import { AlbumFormContainer } from 'containers/AlbumFormContainer';
-import { getAlbumFormDataFromFiles } from 'utils/getAlbumFormDataFromFiles';
 import { ShareAlbumPageDropZone } from 'components/ShareAlbumPage/ShareAlbumPageDropZone';
 
 type TProps = {|
@@ -35,15 +34,8 @@ export const ShareAlbumPageContainer = (props: TProps) => {
     }
   }
 
-  const handleDropZoneChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
-    setHasPreloader(true);
-    getAlbumFormDataFromFiles(files)
-      .then(setAlbumFormData)
-      .catch(setError)
-      .then(() => {
-        setHasPreloader(false)
-      })
+  const handleCancel = () => {
+    setAlbumFormData(null)
   }
 
   return (
@@ -62,10 +54,11 @@ export const ShareAlbumPageContainer = (props: TProps) => {
             data={albumFormData}
             onDataChange={setAlbumFormData}
             onSubmit={handleSubmit}
+            onCancel={handleCancel}
           />
         ) : (
           <ShareAlbumPageDropZone
-            onChange={handleDropZoneChange}
+            onDataChange={setAlbumFormData}
           />
         )
       }

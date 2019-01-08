@@ -38,6 +38,7 @@
   height: 100%;
 }
 
-.DropZone__Message {
+.DropZone__Messages {
   margin: auto;
+  text-align: center;
 }

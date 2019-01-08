@@ -1,24 +1,26 @@
 // @flow strict
 
-import type { TFormAlbum, TFormTrack } from "types/uiDataTypes";
+import type { TFormAlbum } from "types/uiDataTypes";
 
 import * as React from 'react';
 
 import { renderTrackInputs } from 'containers/AlbumFormContainer/renderTrackInputs';
 import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
 import { AlbumFormFieldset } from 'components/AlbumForm/AlbumFormComponents';
-import { getTrackFormDataFromFile } from 'utils/getAlbumFormDataFromFiles';
 import { CustomTextInput } from 'components/CustomTextInput';
+import { AlbumCoverInputContainer } from 'containers/AlbumFormContainer/AlbumCoverInputContainer';
+import { AlbumTracklistInputContainer } from 'containers/AlbumFormContainer/AlbumTracklistInputContainer';
 
 type TProps = {|
   data: TFormAlbum;
   onDataChange(data: TFormAlbum): void;
   onSubmit(): void;
+  onCancel(): void;
 |}
 
 export const AlbumFormContainer = (props: TProps) => {
 
-  const { data, onDataChange, onSubmit } = props;
+  const { data, onDataChange, onSubmit, onCancel } = props;
 
   const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -26,33 +28,6 @@ export const AlbumFormContainer = (props: TProps) => {
       ...data,
       [name]: value
     })
-  }
-
-  const handleCoverChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
-    e.currentTarget.value = '';
-    onDataChange({
-      ...data,
-      cover: files[0]
-    })
-  }
-
-  const handleAddTrack = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
-    Promise.all(
-      [...files].map(
-        getTrackFormDataFromFile
-      )
-    )
-      .then((tracks: TFormTrack[]) => {
-        onDataChange({
-          ...data,
-          tracklist: [
-            ...data.tracklist,
-            ...tracks
-          ]
-        })
-      })
   }
 
   const handleTracklistChange = (tracklist) => {
@@ -71,30 +46,28 @@ export const AlbumFormContainer = (props: TProps) => {
           value={data.title}
           onChange={handleChange}
         />
-        <br />
-        <label>
-          Album cover<br />
-          <input 
-            type="file" 
-            name="cover"
-            onChange={handleCoverChange}
-          />
-        </label>
+        <AlbumCoverInputContainer
+          data={data}
+          onDataChange={onDataChange}
+        />
       </AlbumFormFieldset>
       <AlbumFormFieldset title="tracklist">
         {
           data.tracklist.map(renderTrackInputs(handleTracklistChange))
         }
-        <input
-          type="file"
-          multiple
-          name="tracklist"
-          onChange={handleAddTrack}
+        <AlbumTracklistInputContainer
+          data={data}
+          onDataChange={onDataChange}
         />
       </AlbumFormFieldset>
-      <button onClick={onSubmit}>
-        share
-      </button>
+      <span>
+        <button onClick={onSubmit}>
+          share
+        </button>
+        <button onClick={onCancel}>
+          cancel
+        </button>
+      </span>
     </AlbumFormWrapper>
   )
 }
