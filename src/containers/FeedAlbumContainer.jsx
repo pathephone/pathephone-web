@@ -3,6 +3,7 @@
 import type { TFeedAlbum } from "types/uiDataTypes";
 
 import * as React from 'react';
+
 import { FeedAlbumWrapper } from 'components/FeedAlbum/FeedAlbumWrapper';
 import { FeedAlbumCover } from 'components/FeedAlbum/FeedAlbumCover';
 import { FeedAlbumTitle } from 'components/FeedAlbum/FeedAlbumTitle';

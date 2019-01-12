@@ -20,20 +20,13 @@ export const LatestAlbumsPageContainer = (props: TProps) => {
 
   const { getLatestAlbums } = useContextStrict<TServices>(ServicesContext)
 
-  const { isPending, data, error } = usePromiseEffect<TFeedAlbum[], []>(getLatestAlbums, []);
+  const { isPending, data } = usePromiseEffect<TFeedAlbum[]>(getLatestAlbums, []);
 
   return (
     <PageWrapper>
       {
         isPending && (
           <AppLoadingScreen />
-        )
-      }
-      {
-        (error !== null) && (
-          <h1>
-            {error.message} 
-          </h1>
         )
       }
       {

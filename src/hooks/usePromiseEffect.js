@@ -5,30 +5,45 @@ import React from 'react';
 type TReturnValue<TData> = {| 
   isPending: boolean, 
   data: null | TData, 
-  error: null | Error 
+  error: null | Error
 |}
 
-export function usePromiseEffect <TData, TParams> (
-  getPromise: (params?: TParams) => Promise<TData>,
-  params?: TParams
+type TOptions = {|
+  throwError?: boolean;  
+|}
+
+const defaultOptions: TOptions = {
+  throwError: true
+}
+
+export function usePromiseEffect <TData> (
+  getPromise: () => Promise<TData>,
+  effectParams?: mixed[],
+  options?: TOptions = defaultOptions
 ): TReturnValue<TData> {
 
-  if (params !== undefined && !Array.isArray(params)) {
-    throw new TypeError('Parameters should be an array.')
+  if (effectParams !== undefined && !Array.isArray(effectParams)) {
+    throw new TypeError('Effect parameters should be an array.')
   }
 
   const [ isPending, setIsPending ] = React.useState<boolean>(false)
   const [ data, setData ] = React.useState<null | TData>(null)
   const [ error, setError ] = React.useState<null | Error>(null)
+ 
+  if (options && options.throwError === true) {
+    if (error) {
+      throw error
+    }
+  }
 
   React.useEffect(() => {
     setData(null)
     setIsPending(true)
-    getPromise(params)
+    getPromise()
       .then(setData)
-      .catch(setError)
       .then(() => setIsPending(false))
-  }, params)
+      .catch(setError)
+  }, effectParams)
 
   return { data, isPending, error }
 }

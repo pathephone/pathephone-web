@@ -4,14 +4,12 @@ import * as React from 'react';
 
 import styles from './App.module.css'
 
-type TProps = {|
-  children: string;
-|}
+type TProps = Error
 
-export const AppErrorScreen = ({ children }: TProps) => (
+export const AppErrorScreen = ({ message }: TProps) => (
   <div className={styles.App__ErrorScreen}>
     <p className={styles.App__ErrorMessage}>
-      {children}
+      {message}
     </p>
   </div>
 )
