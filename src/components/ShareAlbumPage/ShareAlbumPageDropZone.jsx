@@ -28,8 +28,8 @@ export const ShareAlbumPageDropZone = (props: TProps) => {
       getAlbumFormDataFromFiles(files), 500
     )
       .then(onDataChange)
-      .catch(setError)
-      .then(() => {
+      .catch((error: Error) => {
+        setError(error)
         setHasPreloader(false)
       })
   }

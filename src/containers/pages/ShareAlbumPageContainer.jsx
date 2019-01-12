@@ -25,8 +25,8 @@ export const ShareAlbumPageContainer = (props: TProps) => {
   const { submitAlbum } = useContextStrict<TServices>(ServicesContext)
 
   const handleSubmit = () => {
-    setHasPreloader(true)
     if (albumFormData) {
+      setHasPreloader(true)
       submitAlbum(albumFormData)
         .then(() => setHasSuccessScreen(true))
         .catch(setError)

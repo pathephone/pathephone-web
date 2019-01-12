@@ -1,0 +1,29 @@
+.AlbumCoverInput__Wrapper {
+  position: relative;
+  display: block;
+}
+
+.AlbumCoverInput__Input {
+  position: absolute;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.AlbumCoverInput__Preview {
+  position: relative;
+  z-index: 2;
+  width: 15em;
+  height: 15em;
+  padding: 0.25em;
+  border: 1px solid lightgrey;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.AlbumCoverInput__Input:invalid + .AlbumCoverInput__Preview {
+  border-color: red;
+}
