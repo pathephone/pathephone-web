@@ -13,6 +13,8 @@ import { TrackInputsButton } from 'components/TrackInputs/TrackInputsComponents'
 
 import { renderArtistInput } from './renderArtistInput';
 import { ClearIcon } from 'icons/round-clear';
+import { ArrowUpIcon } from 'icons/round-keyboard_arrow_up';
+import { ArrowDownIcon } from 'icons/round-keyboard_arrow_down';
 
 export const renderTrackInputs = (
   onChange: (tracklist: TFormTrack[]) => void
@@ -49,6 +51,30 @@ export const renderTrackInputs = (
     onChange(nextTracklist)
   }
 
+  const handleMoveUp = () => {
+    const nextTracklist = [...tracklist]
+    const swapTargetIndex = trackIndex - 1;
+    [
+      // $FlowFixMe
+      nextTracklist[trackIndex], nextTracklist[swapTargetIndex] 
+    ] = [ 
+      nextTracklist[swapTargetIndex], nextTracklist[trackIndex] 
+    ]
+    onChange(nextTracklist)
+  }
+
+  const handleMoveDown = () => {
+    const nextTracklist = [...tracklist]
+    const swapTargetIndex = trackIndex + 1;
+    [ 
+      // $FlowFixMe
+      nextTracklist[trackIndex], nextTracklist[swapTargetIndex] 
+    ] = [ 
+      nextTracklist[swapTargetIndex], nextTracklist[trackIndex] 
+    ]
+    onChange(nextTracklist)
+  }
+
   return(
     <TrackInputsWrapper key={track.key}>
       <TrackInputsCommon>
@@ -65,6 +91,18 @@ export const renderTrackInputs = (
         }
       </TrackInputsArtists>
       <TrackInputsControls>
+        <TrackInputsButton 
+          isDisabled={trackIndex === 0} 
+          onClick={handleMoveUp}
+        >
+          <ArrowUpIcon />
+        </TrackInputsButton>
+        <TrackInputsButton 
+          isDisabled={trackIndex === tracklist.length - 1} 
+          onClick={handleMoveDown}
+        >
+          <ArrowDownIcon />
+        </TrackInputsButton>
         <TrackInputsButton onClick={handleRemove}>
           <ClearIcon />
         </TrackInputsButton>

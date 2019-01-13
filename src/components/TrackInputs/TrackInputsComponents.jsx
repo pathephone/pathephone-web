@@ -26,9 +26,15 @@ export const TrackInputsControls = (props: TProps) => (
 
 type TButtonProps = {|
   ...TProps,
-  onClick(): void;  
+  onClick(): void;
+  isDisabled?: boolean;
 |}
 
-export const TrackInputsButton = (props: TButtonProps) => (
-  <button {...props} type="button" className={styles.TrackInputs__Button} />
+export const TrackInputsButton = ({ isDisabled, ...buttonProps}: TButtonProps) => (
+  <button
+    type="button" 
+    disabled={isDisabled}
+    className={styles.TrackInputs__Button}
+    {...buttonProps}
+  />
 )

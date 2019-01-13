@@ -6,3 +6,16 @@
   margin-bottom: 1em;
   padding-bottom: 1em;
 }
+
+.TrackInputs__Controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.TrackInputs__Button:not(:first-child) {
+  margin-top: 1em;
+}
+
+.TrackInputs__Button:last-child {
+  margin-top: 2em;
+}
