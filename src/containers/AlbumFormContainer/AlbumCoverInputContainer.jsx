@@ -7,6 +7,8 @@ import * as React from 'react';
 import { AlbumCoverInputWrapper } from 'components/AlbumCoverInput/AlbumCoverInputComponents';
 import { AlbumCoverInputPreview } from 'components/AlbumCoverInput/AlbumCoverInputComponents';
 import { AlbumCoverInput } from 'components/AlbumCoverInput/AlbumCoverInputComponents';
+import { AlbumCoverInputImage } from 'components/AlbumCoverInput/AlbumCoverInputComponents';
+import { AlbumIcon } from 'icons/round-album';
 
 type TProps = {|
   data: TFormAlbum;
@@ -34,13 +36,17 @@ export const AlbumCoverInputContainer = (props: TProps) => {
 
   return (
     <AlbumCoverInputWrapper>
-      {
-        coverPreviewUrl !== null && (
-          <AlbumCoverInputPreview
-            src={coverPreviewUrl}
-          />
-        )
-      }
+      <AlbumCoverInputPreview>
+        {
+          coverPreviewUrl !== null ? (
+            <AlbumCoverInputImage
+              src={coverPreviewUrl}
+            />
+          ) : (
+            <AlbumIcon />
+          )
+        }
+      </AlbumCoverInputPreview>
       <AlbumCoverInput
         onChange={handleCoverChange}
       />

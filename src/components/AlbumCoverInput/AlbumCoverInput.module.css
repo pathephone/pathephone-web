@@ -21,6 +21,19 @@
   padding: 0.25em;
   border: 1px solid lightgrey;
   cursor: pointer;
+}
+
+.AlbumCoverInput__Preview svg {
+  margin: auto;
+  padding: 2em;
+  height: 100%;
+  width: 100%;
+  fill: lightgrey;
+}
+
+.AlbumCoverInput__Image {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 

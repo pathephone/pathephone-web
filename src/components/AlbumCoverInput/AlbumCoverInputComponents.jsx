@@ -15,11 +15,19 @@ export const AlbumCoverInputWrapper = ({ children }: TWrapperProps) => (
 )
 
 type TPreviewProps = {|
+  children: React.Node;  
+|}
+
+export const AlbumCoverInputPreview = (props: TPreviewProps) => (
+  <div className={styles.AlbumCoverInput__Preview} {...props} />
+)
+
+type TImageProps = {|
   src: string;  
 |}
 
-export const AlbumCoverInputPreview = ({ src }: TPreviewProps) => (
-  <img src={src} className={styles.AlbumCoverInput__Preview} />
+export const AlbumCoverInputImage = ({ src }: TImageProps) => (
+  <img src={src} className={styles.AlbumCoverInput__Image} />
 )
 
 type TInputProps = {|
