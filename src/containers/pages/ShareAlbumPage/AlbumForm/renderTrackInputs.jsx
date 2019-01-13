@@ -8,8 +8,11 @@ import { TrackInputsWrapper } from 'components/TrackInputs/TrackInputsComponents
 import { TrackInputsCommon } from 'components/TrackInputs/TrackInputsComponents';
 import { TrackInputsArtists } from 'components/TrackInputs/TrackInputsComponents';
 import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
+import { TrackInputsControls } from 'components/TrackInputs/TrackInputsComponents';
+import { TrackInputsButton } from 'components/TrackInputs/TrackInputsComponents';
 
 import { renderArtistInput } from './renderArtistInput';
+import { ClearIcon } from 'icons/round-clear';
 
 export const renderTrackInputs = (
   onChange: (tracklist: TFormTrack[]) => void
@@ -39,26 +42,33 @@ export const renderTrackInputs = (
     onChange(nextTracklist)
   }
 
+  const handleRemove = () => {
+    const nextTracklist = tracklist.filter(
+      ({ key }) => key !== track.key
+    )
+    onChange(nextTracklist)
+  }
+
   return(
-    <React.Fragment key={track.key}>
-      <TrackInputsWrapper>
-        <TrackInputsCommon>
-          <CustomTextInput
-            label="Track title"
-            name="title"
-            value={track.title}
-            onChange={handleTrackInputChange}
-          />
-        </TrackInputsCommon>
-        <TrackInputsArtists>
-          {
-            track.artists.map(renderArtistInput(handleArtistsChange))
-          }
-        </TrackInputsArtists>
-      </TrackInputsWrapper>
-      <br />
-      <hr />
-      <br />
-    </React.Fragment>
+    <TrackInputsWrapper key={track.key}>
+      <TrackInputsCommon>
+        <CustomTextInput
+          label="Track title"
+          name="title"
+          value={track.title}
+          onChange={handleTrackInputChange}
+        />
+      </TrackInputsCommon>
+      <TrackInputsArtists>
+        {
+          track.artists.map(renderArtistInput(handleArtistsChange))
+        }
+      </TrackInputsArtists>
+      <TrackInputsControls>
+        <TrackInputsButton onClick={handleRemove}>
+          <ClearIcon />
+        </TrackInputsButton>
+      </TrackInputsControls>
+    </TrackInputsWrapper>
   )
 }

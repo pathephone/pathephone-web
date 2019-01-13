@@ -19,3 +19,16 @@ export const TrackInputsCommon = (props: TProps) => (
 export const TrackInputsArtists = (props: TProps) => (
   <div {...props} className={styles.TrackInputs__Artists} />
 )
+
+export const TrackInputsControls = (props: TProps) => (
+  <div {...props} className={styles.TrackInputs__Controls} />
+)
+
+type TButtonProps = {|
+  ...TProps,
+  onClick(): void;  
+|}
+
+export const TrackInputsButton = (props: TButtonProps) => (
+  <button {...props} type="button" className={styles.TrackInputs__Button} />
+)

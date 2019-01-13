@@ -12,9 +12,9 @@ import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputCompo
 import { AlbumFormFooter } from 'components/AlbumForm/AlbumFormComponents';
 import { AlbumFormButton } from 'components/AlbumForm/AlbumFormComponents';
 
-import { CoverInputContainer } from './AlbumFormContainer/CoverInputContainer';
-import { renderTrackInputs } from './AlbumFormContainer/renderTrackInputs';
-import { AddTracksInputContainer } from './AlbumFormContainer/AddTracksInputContainer';
+import { CoverInputContainer } from './AlbumForm/CoverInputContainer';
+import { renderTrackInputs } from './AlbumForm/renderTrackInputs';
+import { AddTracksInputContainer } from './AlbumForm/AddTracksInputContainer';
 
 type TProps = {|
   data: TFormAlbum;

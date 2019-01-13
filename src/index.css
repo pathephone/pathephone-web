@@ -18,4 +18,5 @@ body {
 svg {
   display: inline;
   vertical-align: middle;
+  height: 1em;
 }
