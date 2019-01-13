@@ -4,7 +4,7 @@ import type { TFormTrack, TFormArtist } from "types/uiDataTypes";
 
 import * as React from 'react';
 
-import { renderArtistInputs } from 'containers/AlbumFormContainer/renderArtistInputs';
+import { renderArtistInput } from 'containers/AlbumFormContainer/renderArtistInput';
 import { TrackInputsWrapper } from 'components/TrackInputs/TrackInputsComponents';
 import { TrackInputsCommon } from 'components/TrackInputs/TrackInputsComponents';
 import { TrackInputsArtists } from 'components/TrackInputs/TrackInputsComponents';
@@ -51,7 +51,7 @@ export const renderTrackInputs = (
         </TrackInputsCommon>
         <TrackInputsArtists>
           {
-            track.artists.map(renderArtistInputs(handleArtistsChange))
+            track.artists.map(renderArtistInput(handleArtistsChange))
           }
         </TrackInputsArtists>
       </TrackInputsWrapper>

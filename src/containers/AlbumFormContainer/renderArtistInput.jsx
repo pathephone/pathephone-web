@@ -8,7 +8,7 @@ import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputCompo
 import { getRawAlbumFormArtistData } from 'data/models';
 
 
-export const renderArtistInputs = (
+export const renderArtistInput = (
   onChange: (artists: TFormArtist[]) => void
 ) => (
   artist: TFormArtist, artistIndex: number, artists: TFormArtist[]
