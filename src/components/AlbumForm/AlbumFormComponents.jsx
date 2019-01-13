@@ -36,3 +36,24 @@ export const AlbumFormAboutInputs = ({ children }: TAboutInputsProps) => (
     </div>
   </Card>
 )
+
+type TFooterProps = {|
+  children: React.Node;
+|}
+
+export const AlbumFormFooter = ({ children }: TFooterProps) => (
+  <div className={styles.AlbumForm__Footer}>
+    {children}
+  </div>
+)
+
+type TButtonProps = {|
+  children: string;
+  onClick(): void;
+|}
+
+export const AlbumFormButton = ({ children, onClick }: TButtonProps) => (
+  <button onClick={onClick} className={styles.AlbumForm__Button}>
+    {children}
+  </button>
+)

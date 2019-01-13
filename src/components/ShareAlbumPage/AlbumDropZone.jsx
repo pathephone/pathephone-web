@@ -13,25 +13,32 @@ type TProps = {|
   onDataChange(data: TFormAlbum): void;
 |}
 
-export const ShareAlbumPageDropZone = (props: TProps) => {
+export const AlbumDropZone = (props: TProps) => {
 
   const { onDataChange } = props;
 
   const [ error, setError ] = React.useState<Error | null>(null);
   const [ hasPreloader, setHasPreloader ] = React.useState<boolean>(false);
 
-  const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
+  const handleServiceStart = () => {
     setHasPreloader(true);
     setError(null);
+  }
+
+  const handleServiceError = (serviceError: Error) => {
+    setError(serviceError)
+    setHasPreloader(false)
+  }
+
+  const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    handleServiceStart()
     delayPromise(
       getAlbumFormDataFromFiles(files), 500
     )
       .then(onDataChange)
-      .catch((error: Error) => {
-        setError(error)
-        setHasPreloader(false)
-      })
+      .catch(handleServiceError)
+    e.currentTarget.value = ''
   }
 
   return (

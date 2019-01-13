@@ -4,5 +4,5 @@
   "editor.detectIndentation": false,
   "flow.useNPMPackagedFlow": true,
   "javascript.validate.enable": false,
-  "javascript.preferences.importModuleSpecifier": "non-relative"
+  "javascript.preferences.importModuleSpecifier": "auto"
 }

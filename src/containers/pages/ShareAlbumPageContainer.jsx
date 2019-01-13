@@ -8,8 +8,9 @@ import * as React from 'react';
 import { ServicesContext } from 'contexts/ServicesContext';
 import { useContextStrict } from 'hooks/useContextStrict';
 import { PageWrapper } from 'components/Page/PageWrapper';
-import { AlbumFormContainer } from 'containers/AlbumFormContainer';
-import { ShareAlbumPageDropZone } from 'components/ShareAlbumPage/ShareAlbumPageDropZone';
+import { AlbumDropZone } from 'components/ShareAlbumPage/AlbumDropZone';
+
+import { AlbumFormContainer } from './ShareAlbumPage/AlbumFormContainer';
 
 type TProps = {|
 |}
@@ -65,7 +66,7 @@ export const ShareAlbumPageContainer = (props: TProps) => {
           </PageWrapper>
         ) : (
           <PageWrapper centered>
-            <ShareAlbumPageDropZone
+            <AlbumDropZone
               onDataChange={setAlbumFormData}
             />
           </PageWrapper>

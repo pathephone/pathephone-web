@@ -4,14 +4,17 @@ import type { TFormAlbum } from "types/uiDataTypes";
 
 import * as React from 'react';
 
-import { renderTrackInputs } from 'containers/AlbumFormContainer/renderTrackInputs';
 import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
-import { AlbumCoverInputContainer } from 'containers/AlbumFormContainer/AlbumCoverInputContainer';
-import { AlbumTracklistInputContainer } from 'containers/AlbumFormContainer/AlbumTracklistInputContainer';
 import { Card } from 'components/Card/CardComponents';
 import { AlbumFormAboutBlock } from 'components/AlbumForm/AlbumFormComponents';
 import { AlbumFormAboutInputs } from 'components/AlbumForm/AlbumFormComponents';
 import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
+import { AlbumFormFooter } from 'components/AlbumForm/AlbumFormComponents';
+import { AlbumFormButton } from 'components/AlbumForm/AlbumFormComponents';
+
+import { CoverInputContainer } from './AlbumFormContainer/CoverInputContainer';
+import { renderTrackInputs } from './AlbumFormContainer/renderTrackInputs';
+import { AddTracksInputContainer } from './AlbumFormContainer/AddTracksInputContainer';
 
 type TProps = {|
   data: TFormAlbum;
@@ -42,7 +45,7 @@ export const AlbumFormContainer = (props: TProps) => {
   return (
     <AlbumFormWrapper onSubmit={onSubmit}>
       <AlbumFormAboutBlock>
-        <AlbumCoverInputContainer
+        <CoverInputContainer
           data={data}
           onDataChange={onDataChange}
         />
@@ -59,19 +62,19 @@ export const AlbumFormContainer = (props: TProps) => {
         {
           data.tracklist.map(renderTrackInputs(handleTracklistChange))
         }
-        <AlbumTracklistInputContainer
+        <AddTracksInputContainer
           data={data}
           onDataChange={onDataChange}
         />
       </Card>
-      <span>
-        <button onClick={onSubmit}>
+      <AlbumFormFooter>
+        <AlbumFormButton onClick={onSubmit}>
           share
-        </button>
-        <button onClick={onCancel}>
+        </AlbumFormButton>
+        <AlbumFormButton onClick={onCancel}>
           cancel
-        </button>
-      </span>
+        </AlbumFormButton>
+      </AlbumFormFooter>
     </AlbumFormWrapper>
   )
 }

@@ -15,7 +15,7 @@ type TProps = {|
   onDataChange(data: TFormAlbum): void;
 |}
 
-export const AlbumCoverInputContainer = (props: TProps) => {
+export const CoverInputContainer = (props: TProps) => {
 
   const { data, onDataChange } = props;
 

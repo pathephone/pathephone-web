@@ -12,5 +12,9 @@
   grid-gap: 1em;
 }
 
-.AlbumForm__AboutInputs {
+.AlbumForm__Footer {
+}
+
+.AlbumForm__Button:not(:first-child) {
+  margin-left: 1em;
 }

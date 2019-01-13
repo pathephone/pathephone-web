@@ -4,11 +4,12 @@ import type { TFormTrack, TFormArtist } from "types/uiDataTypes";
 
 import * as React from 'react';
 
-import { renderArtistInput } from 'containers/AlbumFormContainer/renderArtistInput';
 import { TrackInputsWrapper } from 'components/TrackInputs/TrackInputsComponents';
 import { TrackInputsCommon } from 'components/TrackInputs/TrackInputsComponents';
 import { TrackInputsArtists } from 'components/TrackInputs/TrackInputsComponents';
 import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
+
+import { renderArtistInput } from './renderArtistInput';
 
 export const renderTrackInputs = (
   onChange: (tracklist: TFormTrack[]) => void
