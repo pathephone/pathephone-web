@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import styles from './CustomTextInput.module.css'
+
 type TProps = {
   label: string;
   name: string;
@@ -21,6 +23,7 @@ export const CustomTextInput = (
     {label}<br />
     <input 
       type="text"
+      className={styles.CustomTextInput__Input}
       name={name}
       placeholder={label}
       value={value} 

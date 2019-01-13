@@ -4,7 +4,7 @@ import type { TFormAlbum, TFormTrack } from "types/uiDataTypes";
 
 import * as mm from 'music-metadata-browser';
 
-import { getRawAlbumFormData } from "data/models";
+import { getRawAlbumFormData, getRawAlbumFormArtistData } from "data/models";
 import { getUniqueString } from "utils/getUniqueString";
 import { supportedAudioFileTypes, supportedImageFileTypes } from 'data/fileTypes';
 
@@ -19,6 +19,8 @@ export const getTrackFormDataFromFile = (file: File): Promise<TFormTrack> => {
           name, key: getUniqueString()
         })
       )
+      
+      artists.push(getRawAlbumFormArtistData())
 
       return {
         key: getUniqueString(),

@@ -1,13 +1,16 @@
 .AlbumForm__Wrapper {
+  display: grid;
+  grid-gap: 1em;
   width: 100%;
   max-width: 40em;
   margin: auto;
 }
 
-.AlbumForm__Fieldset {
-  background-color: white;
+.AlbumForm__AboutBlock {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1em;
 }
 
-.AlbumForm__Fieldset:not(:first-child) {
-  margin-top: 1em;
+.AlbumForm__AboutInputs {
 }

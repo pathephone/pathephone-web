@@ -5,8 +5,10 @@ import type { TFormTrack, TFormArtist } from "types/uiDataTypes";
 import * as React from 'react';
 
 import { renderArtistInputs } from 'containers/AlbumFormContainer/renderArtistInputs';
-import { getRawAlbumFormArtistData } from 'data/models';
-import { CustomTextInput } from 'components/CustomTextInput';
+import { TrackInputsWrapper } from 'components/TrackInputs/TrackInputsComponents';
+import { TrackInputsCommon } from 'components/TrackInputs/TrackInputsComponents';
+import { TrackInputsArtists } from 'components/TrackInputs/TrackInputsComponents';
+import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
 
 export const renderTrackInputs = (
   onChange: (tracklist: TFormTrack[]) => void
@@ -36,36 +38,26 @@ export const renderTrackInputs = (
     onChange(nextTracklist)
   }
 
-  const handleAddArtist = () => {
-    const nextTracklist = [
-      ...tracklist
-    ]
-    const nextArtists = [
-      ...track.artists
-    ];
-    nextArtists.push(getRawAlbumFormArtistData());
-    nextTracklist[trackIndex] = {
-      ...track, artists: nextArtists
-    }
-    onChange(nextTracklist)
-  }
-
   return(
-    <div key={track.key}>
-      <CustomTextInput
-        label="Track title"
-        name="title"
-        value={track.title}
-        onChange={handleTrackInputChange}
-      />
+    <React.Fragment key={track.key}>
+      <TrackInputsWrapper>
+        <TrackInputsCommon>
+          <CustomTextInput
+            label="Track title"
+            name="title"
+            value={track.title}
+            onChange={handleTrackInputChange}
+          />
+        </TrackInputsCommon>
+        <TrackInputsArtists>
+          {
+            track.artists.map(renderArtistInputs(handleArtistsChange))
+          }
+        </TrackInputsArtists>
+      </TrackInputsWrapper>
       <br />
-      {
-        track.artists.map(renderArtistInputs(handleArtistsChange))
-      }
-      <button type="button" onClick={handleAddArtist}>
-        add artist name
-      </button>
       <hr />
-    </div>
+      <br />
+    </React.Fragment>
   )
 }

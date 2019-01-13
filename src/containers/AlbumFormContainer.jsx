@@ -6,10 +6,12 @@ import * as React from 'react';
 
 import { renderTrackInputs } from 'containers/AlbumFormContainer/renderTrackInputs';
 import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
-import { AlbumFormFieldset } from 'components/AlbumForm/AlbumFormComponents';
-import { CustomTextInput } from 'components/CustomTextInput';
 import { AlbumCoverInputContainer } from 'containers/AlbumFormContainer/AlbumCoverInputContainer';
 import { AlbumTracklistInputContainer } from 'containers/AlbumFormContainer/AlbumTracklistInputContainer';
+import { Card } from 'components/Card/CardComponents';
+import { AlbumFormAboutBlock } from 'components/AlbumForm/AlbumFormComponents';
+import { AlbumFormAboutInputs } from 'components/AlbumForm/AlbumFormComponents';
+import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
 
 type TProps = {|
   data: TFormAlbum;
@@ -39,19 +41,21 @@ export const AlbumFormContainer = (props: TProps) => {
 
   return (
     <AlbumFormWrapper onSubmit={onSubmit}>
-      <AlbumFormFieldset title="about">
-        <CustomTextInput 
-          label="Album title"
-          name="title"
-          value={data.title}
-          onChange={handleChange}
-        />
+      <AlbumFormAboutBlock>
         <AlbumCoverInputContainer
           data={data}
           onDataChange={onDataChange}
         />
-      </AlbumFormFieldset>
-      <AlbumFormFieldset title="tracklist">
+        <AlbumFormAboutInputs>
+          <CustomTextInput
+            label="Album title"
+            name="title"
+            value={data.title}
+            onChange={handleChange}
+          />
+        </AlbumFormAboutInputs>
+      </AlbumFormAboutBlock>
+      <Card withPadding>
         {
           data.tracklist.map(renderTrackInputs(handleTracklistChange))
         }
@@ -59,7 +63,7 @@ export const AlbumFormContainer = (props: TProps) => {
           data={data}
           onDataChange={onDataChange}
         />
-      </AlbumFormFieldset>
+      </Card>
       <span>
         <button onClick={onSubmit}>
           share

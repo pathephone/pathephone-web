@@ -1,6 +1,5 @@
 .AlbumCoverInput__Wrapper {
   position: relative;
-  display: block;
 }
 
 .AlbumCoverInput__Input {
@@ -20,6 +19,7 @@
   height: 15em;
   padding: 0.25em;
   border: 1px solid lightgrey;
+  background-color: white;
   cursor: pointer;
 }
 

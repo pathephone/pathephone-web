@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import { Card } from 'components/Card/CardComponents';
+
 import styles from './AlbumForm.module.css';
 
 type TWrapperProps = {|
@@ -13,14 +15,24 @@ export const AlbumFormWrapper = (props: TWrapperProps) => (
   <form {...props} className={styles.AlbumForm__Wrapper} />
 )
 
-type TFieldsetProps = {|
+type TAboutBlockProps = {|
   children: React.Node;
-  title: string;
 |}
 
-export const AlbumFormFieldset = ({ title, children }: TFieldsetProps) => (
-  <fieldset className={styles.AlbumForm__Fieldset}>
-    <legend>{title}</legend>
+export const AlbumFormAboutBlock = ({ children }: TAboutBlockProps) => (
+  <div className={styles.AlbumForm__AboutBlock}>
     {children}
-  </fieldset>
+  </div>
+)
+
+type TAboutInputsProps = {|
+  children: React.Node;
+|}
+
+export const AlbumFormAboutInputs = ({ children }: TAboutInputsProps) => (
+  <Card withPadding>
+    <div className={styles.AlbumForm__AboutInputs}>
+      {children}
+    </div>
+  </Card>
 )

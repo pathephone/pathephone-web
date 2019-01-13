@@ -8,7 +8,6 @@ import * as React from 'react';
 import { ServicesContext } from 'contexts/ServicesContext';
 import { useContextStrict } from 'hooks/useContextStrict';
 import { PageWrapper } from 'components/Page/PageWrapper';
-import { AppLoadingScreen } from 'components/App/AppLoadingScreen';
 import { AlbumFormContainer } from 'containers/AlbumFormContainer';
 import { ShareAlbumPageDropZone } from 'components/ShareAlbumPage/ShareAlbumPageDropZone';
 
@@ -39,29 +38,39 @@ export const ShareAlbumPageContainer = (props: TProps) => {
   }
 
   return (
-    <PageWrapper centered>
+    <>
       {
         hasPreloader ? (
-          <AppLoadingScreen />
+          <PageWrapper centered>
+            <h1>succeed</h1>
+          </PageWrapper>
         ) : hasSuccessScreeen ? (
-          <h1>succeed</h1>
+          <PageWrapper centered>
+            <h1>succeed</h1>
+          </PageWrapper>
         ) : error !== null ? (
-          <h1>
-            {error.message} 
-          </h1>
+          <PageWrapper centered>
+            <h1>
+              {error.message} 
+            </h1>
+          </PageWrapper>
         ) : albumFormData !== null ? (
-          <AlbumFormContainer
-            data={albumFormData}
-            onDataChange={setAlbumFormData}
-            onSubmit={handleSubmit}
-            onCancel={handleCancel}
-          />
+          <PageWrapper>
+            <AlbumFormContainer
+              data={albumFormData}
+              onDataChange={setAlbumFormData}
+              onSubmit={handleSubmit}
+              onCancel={handleCancel}
+            />
+          </PageWrapper>
         ) : (
-          <ShareAlbumPageDropZone
-            onDataChange={setAlbumFormData}
-          />
+          <PageWrapper centered>
+            <ShareAlbumPageDropZone
+              onDataChange={setAlbumFormData}
+            />
+          </PageWrapper>
         )
       }
-    </PageWrapper>
+    </>
   )
 }
