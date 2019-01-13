@@ -1,7 +1,7 @@
 .MainMenu__Wrapper {
   top: 10px;
   left: 10px;
-  position: fixed;
+  position: absolute;
   width: 15em;
   background-color: white;
   border: 1px solid lightgrey;

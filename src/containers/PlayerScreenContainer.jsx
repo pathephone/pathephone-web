@@ -13,8 +13,8 @@ export const PlayerScreenContainer = (props: TProps) => {
 
   return (
     <PlayerScreenWrapper>
-      <HeaderContainer />
       <PageContainer />
+      <HeaderContainer />
     </PlayerScreenWrapper>
   )
 }
