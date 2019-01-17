@@ -9,15 +9,6 @@ export const getRawAlbumFormArtistData = ():TFormArtist => ({
   name: ''
 })
 
-export const getRawAlbumFormTrackData = (): TFormTrack => ({
-  key: getUniqueString(),
-  title: '',
-  artists: [
-    getRawAlbumFormArtistData()
-  ],
-  audio: null
-})
-
 export const getRawAlbumFormData = (): TFormAlbum => ({
   title: '',
   cover: null,

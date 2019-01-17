@@ -25,7 +25,7 @@ export type TFormTrack = {|
   key: string;
   title: string;
   artists: TFormArtist[];
-  audio: File | null;
+  audio: File;
 |}
 
 export type TFormAlbum = {|
