@@ -21,12 +21,12 @@ export type TFormArtist = {|
   name: string;  
 |}
 
-export type TFormTrack = {
+export type TFormTrack = {|
   key: string;
   title: string;
   artists: TFormArtist[];
   audio: File | null;
-}
+|}
 
 export type TFormAlbum = {|
   title: string;

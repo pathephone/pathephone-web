@@ -10,3 +10,5 @@ export const supportedAudioFileTypes = [
 export const supportedImageFileTypes = [
   'image/jpeg', 'image/png', 'image/webp'
 ]
+
+export const coverRegExp = /(front|cover)/g;

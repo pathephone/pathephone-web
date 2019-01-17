@@ -6,11 +6,11 @@ import * as mm from 'music-metadata-browser';
 
 import { getRawAlbumFormData, getRawAlbumFormArtistData } from "data/models";
 import { getUniqueString } from "utils/getUniqueString";
-import { supportedAudioFileTypes, supportedImageFileTypes } from 'data/fileTypes';
+import { supportedAudioFileTypes, supportedImageFileTypes, coverRegExp } from 'data/fileTypes';
 
 export const getTrackFormDataFromFile = (file: File): Promise<TFormTrack> => {
   return mm
-    .parseBlob(file)
+    .parseBlob(file, { skipCovers: true })
     .then(metadata => {
       const { title, artists: artistsOriginal } = metadata.common;
 
@@ -35,19 +35,20 @@ export const getAlbumFormDataFromFiles = async (files: FileList): Promise<TFormA
   const filesArray = [...files];
 
   const audioFiles = filesArray.filter(({ type }) => supportedAudioFileTypes.includes(type))
-  const coverFiles = filesArray.filter(({ type }) => supportedImageFileTypes.includes(type))
+  const imageFiles = filesArray.filter(({ type }) => supportedImageFileTypes.includes(type))
 
   if (audioFiles.length > 0) {
+
     const tracklist = await Promise.all(
       audioFiles.map(getTrackFormDataFromFile)
     )
 
-    const cover = coverFiles[0]
+    const cover = imageFiles.find(file => coverRegExp.test(file.name))
 
     return {
       ...getRawAlbumFormData(),
-      cover,
-      tracklist
+      tracklist,
+      cover: cover
     }
   }
 
