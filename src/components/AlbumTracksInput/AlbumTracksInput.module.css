@@ -1,0 +1,25 @@
+.AlbumTracksInput__Wrapper {
+  position: relative;
+}
+
+.AlbumTracksInput__Input {
+  position: absolute;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.AlbumTracksInput__CustomButton {
+  width: 100%;
+  height: 4em;
+  line-height: 4em;
+  border: 1px solid grey;
+  text-align: center;
+}
+
+.AlbumTracksInput__Input:invalid + .AlbumTracksInput__CustomButton {
+  border-color: red;
+}

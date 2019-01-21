@@ -14,7 +14,7 @@ import { AlbumFormButton } from 'components/AlbumForm/AlbumFormComponents';
 
 import { CoverInputContainer } from './AlbumForm/CoverInputContainer';
 import { renderTrackInputs } from './AlbumForm/renderTrackInputs';
-import { AddTracksInputContainer } from './AlbumForm/AddTracksInputContainer';
+import { AlbumTracksInputContainer } from './AlbumForm/AlbumTracksInputContainer';
 
 type TProps = {|
   data: TFormAlbum;
@@ -62,7 +62,7 @@ export const AlbumFormContainer = (props: TProps) => {
         {
           data.tracklist.map(renderTrackInputs(handleTracklistChange))
         }
-        <AddTracksInputContainer
+        <AlbumTracksInputContainer
           data={data}
           onDataChange={onDataChange}
         />
