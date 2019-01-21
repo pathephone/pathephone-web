@@ -1,11 +1,11 @@
 .FeedAlbum__Wrapper {
-
+  width: 15em;
 }
 
 .FeedAlbum__Cover {
   display: block;
-  width: 250px;
-  height: 250px;
+  width: 15em;
+  height: 15em;
   padding: 2.5px;
   border: 1px solid lightgray;
   object-fit: contain;
