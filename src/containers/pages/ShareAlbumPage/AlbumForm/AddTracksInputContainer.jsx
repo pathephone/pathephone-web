@@ -4,7 +4,7 @@ import type { TFormAlbum, TFormTrack } from "types/uiDataTypes";
 
 import * as React from 'react';
 
-import { getTrackFormDataFromFile } from 'utils/getAlbumFormDataFromFiles';
+import { getTrackFormDataFromFile } from 'utils/getTrackFormDataFromFile';
 
 type TProps = {|
   data: TFormAlbum;

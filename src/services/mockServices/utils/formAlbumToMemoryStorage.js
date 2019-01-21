@@ -13,7 +13,7 @@ export const formAlumToMemoryStorage = ({
   title, cover, tracklist
 }: TFormAlbum): TMemoryStorageAlbum => {
   if (cover === null) {
-    throw new Error('COver is required');
+    throw new Error('Cover is required');
   }
   return {
     title,

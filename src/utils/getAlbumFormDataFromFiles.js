@@ -4,31 +4,55 @@ import type { TFormAlbum, TFormTrack } from "types/uiDataTypes";
 
 import * as mm from 'music-metadata-browser';
 
-import { getRawAlbumFormData, getRawAlbumFormArtistData } from "data/models";
 import { getUniqueString } from "utils/getUniqueString";
 import { supportedAudioFileTypes, supportedImageFileTypes, coverRegExp } from 'data/fileTypes';
+import { getRawAlbumFormArtistData } from 'data/models';
 
-export const getTrackFormDataFromFile = (file: File): Promise<TFormTrack> => {
-  return mm
-    .parseBlob(file, { skipCovers: true })
-    .then(metadata => {
-      const { title, artists: artistsOriginal } = metadata.common;
+// TODO: extract picture from audio metadata
 
-      const artists = artistsOriginal.map(
+type TPicture = {|
+  format: string;
+  data: Buffer;
+  description?: string;
+  type?: string;
+|}
+
+type TAudioMetadata = {|
+  tracklist: TFormTrack[];
+  title: string;
+|}
+
+const getAlbumMetadataFromAudioFiles = async (files: File[]): Promise<TAudioMetadata> => {
+ 
+  const audiosMetadata = await Promise.all(
+    files.map(mm.parseBlob)
+  );
+
+  const titles = audiosMetadata.map(
+    ({ common }) => common.album
+  )
+
+  const tracklist: TFormTrack[] = audiosMetadata.map(
+    ({ common }, index) => {
+      const artists = common.artists.map(
         (name: string) => ({
           name, key: getUniqueString()
         })
       )
-      
       artists.push(getRawAlbumFormArtistData())
-
       return {
         key: getUniqueString(),
-        audio: file,
-        title,
-        artists
+        title: common.title,
+        artists,
+        audio: files[index]
       }
-    });
+    }
+  )
+
+  return {
+    title: titles.find(title => !!title) || '',
+    tracklist
+  }
 }
 
 export const getAlbumFormDataFromFiles = async (files: FileList): Promise<TFormAlbum> => {
@@ -39,16 +63,14 @@ export const getAlbumFormDataFromFiles = async (files: FileList): Promise<TFormA
 
   if (audioFiles.length > 0) {
 
-    const tracklist = await Promise.all(
-      audioFiles.map(getTrackFormDataFromFile)
-    )
+    const { tracklist, title } = await getAlbumMetadataFromAudioFiles(audioFiles)
 
     const cover = imageFiles.find(file => coverRegExp.test(file.name))
 
     return {
-      ...getRawAlbumFormData(),
       tracklist,
-      cover: cover
+      title,
+      cover: cover || null
     }
   }
 
