@@ -15,6 +15,7 @@ export const PlayerScreenContainer = (props: TProps) => {
     <PlayerScreenWrapper>
       <PageContainer />
       <HeaderContainer />
+      <FooterContainer />
     </PlayerScreenWrapper>
   )
 }
