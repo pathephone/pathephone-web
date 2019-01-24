@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TServices } from 'types/contextTypes';
+import type { TServicesContext } from 'types/contextTypes';
 import type { TFormAlbum } from "types/uiDataTypes";
 
 import * as React from 'react';
@@ -22,7 +22,7 @@ export const ShareAlbumPageContainer = (props: TProps) => {
   const [ error, setError ] = React.useState<Error | null>(null);
   const [ albumFormData, setAlbumFormData ] = React.useState<TFormAlbum | null>(null);
 
-  const { submitAlbum } = useContextStrict<TServices>(ServicesContext)
+  const { submitAlbum } = useContextStrict<TServicesContext>(ServicesContext)
 
   const handleSubmit = () => {
     if (albumFormData) {

@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TServices } from 'types/contextTypes';
+import type { TServicesContext } from 'types/contextTypes';
 import type { TFeedAlbum } from "types/uiDataTypes";
 
 import * as React from 'react';
@@ -25,7 +25,7 @@ export const SearchAlbumsPageContainer = (props: TProps) => {
 
   const searchValue = props.match.params.query;
 
-  const { getAlbumsByMatcher } = useContextStrict<TServices>(ServicesContext)
+  const { getAlbumsByMatcher } = useContextStrict<TServicesContext>(ServicesContext)
 
   const { isPending, data } = usePromiseEffect<TFeedAlbum[]>(() => getAlbumsByMatcher(searchValue), []);
 

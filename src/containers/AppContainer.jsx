@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TServices } from 'types/contextTypes'
+import type { TServicesContext } from 'types/contextTypes'
 
 import * as React from 'react';
 
@@ -15,7 +15,7 @@ type TProps = {|
 
 export const AppContainer = (props: TProps) => {
 
-  const { startApp } = useContextStrict<TServices>(ServicesContext)
+  const { startApp } = useContextStrict<TServicesContext>(ServicesContext)
 
   const { isPending, data } = usePromiseEffect<void>(startApp, []);
 

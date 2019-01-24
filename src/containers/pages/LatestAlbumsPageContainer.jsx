@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TServices } from 'types/contextTypes';
+import type { TServicesContext } from 'types/contextTypes';
 import type { TFeedAlbum } from "types/uiDataTypes";
 
 import * as React from 'react';
@@ -18,7 +18,7 @@ type TProps = {|
 
 export const LatestAlbumsPageContainer = (props: TProps) => {
 
-  const { getLatestAlbums } = useContextStrict<TServices>(ServicesContext)
+  const { getLatestAlbums } = useContextStrict<TServicesContext>(ServicesContext)
 
   const { isPending, data } = usePromiseEffect<TFeedAlbum[]>(getLatestAlbums, []);
 

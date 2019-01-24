@@ -1,9 +1,9 @@
 // @flow strict
 
-import type { TLocaleStrings } from 'types/contextTypes'
+import type { TLocaleStringsContext } from 'types/contextTypes'
 
 import * as React from 'react';
 
-export type TLocaleStringsContext = TLocaleStrings
+export type TLocaleStringsContextContext = TLocaleStringsContext
 
-export const LocaleStringsContext = React.createContext<TLocaleStrings | null>(null);
+export const LocaleStringsContext = React.createContext<TLocaleStringsContext | null>(null);
