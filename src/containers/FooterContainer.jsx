@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import { FooterWrapper } from 'components/Footer/FooterWrapper';
+
 type TProps = {|
 |}
 
