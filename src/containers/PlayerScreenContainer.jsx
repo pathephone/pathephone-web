@@ -5,7 +5,7 @@ import * as React from 'react';
 import { PlayerScreenWrapper } from 'components/PlayerScreen/PlayerScreenWrapper';
 import { HeaderContainer } from 'containers/HeaderContainer';
 import { PageContainer } from 'containers/PageContainer';
-import { FooterContainer } from './FooterContainer';
+import { PlaybackControlsContainer } from './PlaybackControlsContainer';
 
 type TProps = {|
 |}
@@ -16,7 +16,7 @@ export const PlayerScreenContainer = (props: TProps) => {
     <PlayerScreenWrapper>
       <PageContainer />
       <HeaderContainer />
-      <FooterContainer />
+      <PlaybackControlsContainer />
     </PlayerScreenWrapper>
   )
 }
