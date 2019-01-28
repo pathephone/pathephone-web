@@ -14,8 +14,8 @@ export type TPlayerContext = {|
   playlist: TPlaylistTrack[];
   playingTrackId: null | number;
   isPaused: boolean;
-  toogleIsPaused(): boolean;
-  setPlayingTrackId(id: null | number): boolean;
-  removePlaylistTrack(id: number): boolean;
-  clearPlaylist(): boolean;
+  toggleIsPaused(): void;
+  setPlayingTrackId(id: null | number): void;
+  removePlaylistTrack(id: number): void;
+  clearPlaylist(): void;
 |}
