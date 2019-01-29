@@ -17,7 +17,7 @@ export const AppContainer = (props: TProps) => {
 
   const { startApp } = useContextStrict<TServicesContext>(ServicesContext)
 
-  const { isPending, data } = usePromiseEffect<void>(startApp, []);
+  const { isPending, isSucceeded } = usePromiseEffect<void>(startApp, []);
 
   return (
     <>
@@ -27,7 +27,7 @@ export const AppContainer = (props: TProps) => {
         )
       }
       {
-        data === undefined && (
+        isSucceeded && (
           <PlayerScreenContainer />
         )
       }

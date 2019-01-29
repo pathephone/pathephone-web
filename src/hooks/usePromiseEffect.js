@@ -4,6 +4,7 @@ import React from 'react';
 
 type TReturnValue<TData> = {| 
   isPending: boolean, 
+  isSucceeded: boolean, 
   data: null | TData, 
   error: null | Error
 |}
@@ -26,24 +27,29 @@ export function usePromiseEffect <TData> (
     throw new TypeError('Effect parameters should be an array.')
   }
 
+  const [ isSucceeded, setIsSucceeded ] = React.useState<boolean>(false)
   const [ isPending, setIsPending ] = React.useState<boolean>(false)
   const [ data, setData ] = React.useState<null | TData>(null)
   const [ error, setError ] = React.useState<null | Error>(null)
  
-  if (options && options.throwError === true) {
-    if (error) {
-      throw error
-    }
+  if (options.throwError === true && error && !isPending) {
+    throw error
   }
 
   React.useEffect(() => {
+    setIsSucceeded(false)
     setData(null)
     setIsPending(true)
     getPromise()
       .then(setData)
-      .then(() => setIsPending(false))
+      .then(() => {
+        setIsSucceeded(true)
+      })
       .catch(setError)
+      .then(() => {
+        setIsPending(false)
+      })
   }, effectParams)
 
-  return { data, isPending, error }
+  return { data, error, isPending, isSucceeded }
 }
