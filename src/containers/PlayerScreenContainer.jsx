@@ -22,6 +22,12 @@ export const PlayerScreenContainer = (props: TProps) => {
     setPlaylist([])
   }
 
+  const addPlaylistTracks = (id: number) => {
+    setPlaylist(
+      playlist.filter(track => track.id !== id)
+    )
+  }
+
   const removePlaylistTrack = (id: number) => {
     setPlaylist(
       playlist.filter(track => track.id !== id)
@@ -38,6 +44,7 @@ export const PlayerScreenContainer = (props: TProps) => {
     playingTrackId,
 
     setPlayingTrackId,
+    addPlaylistTracks,
     removePlaylistTrack,
     clearPlaylist,
     toggleIsPaused

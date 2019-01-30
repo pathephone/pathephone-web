@@ -7,6 +7,7 @@ export type TMemoryStorageTrack = {|
 |}
 
 export type TMemoryStorageAlbum = {|
+  id: string;
   title: string;
   cover: File;
   tracklist: TMemoryStorageTrack[];

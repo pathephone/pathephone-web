@@ -3,6 +3,8 @@
 import type { TFormAlbum } from "types/uiDataTypes";
 import type { TMemoryStorageAlbum } from "./albumsStorage";
 
+import { getUniqueString } from "utils/getUniqueString";
+
 const formTrackToMemoryTrack = ({ title, artists, audio }) => ({
   title,
   artists: artists.map(a => a.name),
@@ -16,6 +18,7 @@ export const formAlumToMemoryStorage = ({
     throw new Error('Cover is required');
   }
   return {
+    id: getUniqueString(),
     title,
     cover,
     tracklist: tracklist.map(formTrackToMemoryTrack)

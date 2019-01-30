@@ -16,6 +16,7 @@ export type TPlayerContext = {|
   isPaused: boolean;
   toggleIsPaused(): void;
   setPlayingTrackId(id: null | number): void;
+  addPlaylistTracks(): void;
   removePlaylistTrack(id: number): void;
   clearPlaylist(): void;
 |}
