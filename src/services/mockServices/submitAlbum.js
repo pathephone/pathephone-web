@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormAlbum } from "types/uiDataTypes";
+import type { TFormAlbum } from "types/stateTypes";
 
 import { asyncTimeout } from "utils/asyncTimeout";
 

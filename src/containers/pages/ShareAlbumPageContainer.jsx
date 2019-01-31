@@ -1,7 +1,7 @@
 // @flow strict
 
 import type { TServicesContext } from 'types/contextTypes';
-import type { TFormAlbum } from "types/uiDataTypes";
+import type { TFormAlbum } from "types/stateTypes";
 
 import * as React from 'react';
 

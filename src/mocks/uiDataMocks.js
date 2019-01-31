@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFeedAlbum } from 'types/uiDataTypes'
+import type { TFeedAlbum } from 'types/stateTypes'
 
 export const feedAlbumMock: TFeedAlbum = {
   id: '1',

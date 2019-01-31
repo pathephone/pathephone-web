@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormTrack, TFormArtist } from "types/uiDataTypes";
+import type { TFormTrack, TFormArtist } from "types/stateTypes";
 
 import * as React from 'react';
 

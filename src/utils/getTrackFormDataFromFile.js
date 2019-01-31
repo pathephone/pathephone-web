@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormTrack } from "types/uiDataTypes";
+import type { TFormTrack } from "types/stateTypes";
 
 import * as mm from 'music-metadata-browser';
 

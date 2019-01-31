@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TPlaylistTrack } from "types/uiDataTypes";
+import type { TPlaylistTrack } from "types/stateTypes";
 import type { TMemoryStorageTrack } from "./albumsStorage";
 
 export const momoryStorageAlbumTrackToPlaylist = (
