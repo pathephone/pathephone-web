@@ -1,12 +1,10 @@
 // @flow strict
 
-import type { TFeedAlbum } from "types/stateTypes";
+import type { TServicesAlbum } from "types/servicesTypes";
 
 import { asyncTimeout } from "utils/asyncTimeout";
 
-import { albumsStorage } from "./utils/albumsStorage";
-
-export const getAlbumsByMatcher = async (matcher: string): Promise<TFeedAlbum[]> => {
+export const getAlbumsByMatcher = async (matcher: string): Promise<TServicesAlbum[]> => {
   await asyncTimeout(500)
   return []
 }

@@ -1,13 +1,12 @@
 // @flow strict
 
-import type { TFeedAlbum } from "types/stateTypes";
+import type { TServicesAlbum } from "types/servicesTypes";
 
 import { asyncTimeout } from "utils/asyncTimeout";
 
 import { albumsStorage } from "./utils/albumsStorage";
-import { memoryAlbumToFeed } from "./utils/memoryAlbumToFeed";
 
-export const getLatestAlbums = async (): Promise<TFeedAlbum[]> => {
+export const getLatestAlbums = async (): Promise<TServicesAlbum[]> => {
   await asyncTimeout(500)
-  return albumsStorage.map(memoryAlbumToFeed)
+  return albumsStorage
 }
