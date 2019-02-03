@@ -1,13 +1,11 @@
 // @flow strict
 
-import type { TServicesAlbum } from "types/servicesTypes";
+import type { TMockStorageAlbum } from "types/mockTypes";
 import type { TFeedAlbum } from "types/stateTypes";
 
-import { getUniqueString } from "utils/getUniqueString";
-
-export const servicesAlbumToFeedAlbum = ({
-  title, coverSrc, tracklist
-}: TServicesAlbum): TFeedAlbum => {
+export const mockStorageAlbumToFeedAlbum = ({
+  title, coverSrc, tracklist, id
+}: TMockStorageAlbum): TFeedAlbum => {
   const uniqueArtists = tracklist
     .reduce((acc, track) => {
       const newArtists = track.artists.filter(
@@ -22,6 +20,6 @@ export const servicesAlbumToFeedAlbum = ({
     artistName = uniqueArtists[0] 
   }
   return {
-    id: getUniqueString(), title, artistName, coverSrc
+    id, title, artistName, coverSrc
   }
 }

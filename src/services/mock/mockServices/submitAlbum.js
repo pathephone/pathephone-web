@@ -3,11 +3,12 @@
 import type { TFormAlbum } from "types/stateTypes";
 
 import { asyncTimeout } from "utils/asyncTimeout";
-import { formAlumToMemoryStorage } from "utils/normalize/formAlbumToMemoryStorage";
 
-import { albumsStorage } from "./utils/albumsStorage";
+import { albumsStorage } from "./mockStorage";
+
+import { formAlbumToMockStorageAlbum } from "./normalize/formAlbumToMockStorageAlbum";
 
 export const submitAlbum = async (album: TFormAlbum): Promise<void> => {
   await asyncTimeout(500)
-  albumsStorage.push(formAlumToMemoryStorage(album))
+  albumsStorage.push(formAlbumToMockStorageAlbum(album))
 }

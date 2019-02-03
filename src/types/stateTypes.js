@@ -5,8 +5,6 @@ export type TPlaylistTrack = {|
   title: string;
   artistName: string;
   audioSrc: string;
-  isRemoved: boolean;
-  isPlaying: boolean;
 |}
 
 export type TFeedAlbum = {|

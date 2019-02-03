@@ -1,16 +1,16 @@
 // @flow strict
 
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { ServicesContext } from 'contexts/ServicesContext';
 import { HomelessContextConsumerError } from 'data/errors/LonelyConsumerError';
 import { useContextStrict } from 'hooks/useContextStrict';
-import { mockServices } from 'services/mockServices';
+import { mockServices } from 'services/mock/index';
 
 const Component = () => {
   const context = useContextStrict(ServicesContext)
-  return <h1></h1>
+  return <div />
 }
 
 it('should throw when used outside of the Provider', () => {

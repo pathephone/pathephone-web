@@ -27,7 +27,9 @@ export const SearchAlbumsPageContainer = (props: TProps) => {
 
   const { getAlbumsByMatcher } = useContextStrict<TServicesContext>(ServicesContext)
 
-  const { isPending, data } = usePromiseEffect<TFeedAlbum[]>(() => getAlbumsByMatcher(searchValue), []);
+  const { isPending, data } = usePromiseEffect<TFeedAlbum[]>(
+    () => getAlbumsByMatcher(searchValue), [searchValue]
+  );
 
   return (
     <PageWrapper>

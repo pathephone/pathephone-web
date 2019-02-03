@@ -22,9 +22,9 @@ export const PlayerScreenContainer = (props: TProps) => {
     setPlaylist([])
   }
 
-  const addPlaylistTracks = (id: number) => {
+  const addPlaylistTracks = (tracks: TPlaylistTrack[]) => {
     setPlaylist(
-      playlist.filter(track => track.id !== id)
+      [...playlist, ...tracks]
     )
   }
 
