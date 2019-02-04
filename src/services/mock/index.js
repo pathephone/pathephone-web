@@ -2,4 +2,4 @@
 
 import * as mockServices from "services/mock/mockServices";
 
-export { mockServices }
+export { mockServices };

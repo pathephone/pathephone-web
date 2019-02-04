@@ -2,6 +2,4 @@
 
 import { asyncTimeout } from "utils/asyncTimeout";
 
-export const startApp = (): Promise<void> => (
-  asyncTimeout(500)
-)
+export const startApp = (): Promise<void> => asyncTimeout(500);

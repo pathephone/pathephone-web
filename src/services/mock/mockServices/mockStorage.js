@@ -1,5 +1,5 @@
 // @flow strict
 
-import type { TMockStorageAlbum } from 'types/mockTypes'
+import type { TMockStorageAlbum } from "types/mockTypes";
 
 export const albumsStorage: TMockStorageAlbum[] = [];

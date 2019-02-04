@@ -4,13 +4,13 @@ import type { TFormAlbum, TFormArtist } from "types/stateTypes";
 
 import { getUniqueString } from "utils/getUniqueString";
 
-export const getRawAlbumFormArtistData = ():TFormArtist => ({
+export const getRawAlbumFormArtistData = (): TFormArtist => ({
   key: getUniqueString(),
-  name: ''
-})
+  name: ""
+});
 
 export const getRawAlbumFormData = (): TFormAlbum => ({
-  title: '',
+  title: "",
   cover: null,
   tracklist: []
-})
+});

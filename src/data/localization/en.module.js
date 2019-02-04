@@ -1,5 +1,5 @@
 // @flow strict
 
-import * as enLocaleStrings from './en'
+import * as enLocaleStrings from "./en";
 
-export { enLocaleStrings }
+export { enLocaleStrings };

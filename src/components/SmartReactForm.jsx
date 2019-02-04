@@ -3,10 +3,10 @@
  */
 
 import React from 'react';
-import getValue from 'get-value';
+import getValue from 'get-value'
 
 type TProps = {
-  onChange(e: Event): void;
+  onChange(e: Event): void
 }
 
 export const SmartReactForm = (props: TProps) => {

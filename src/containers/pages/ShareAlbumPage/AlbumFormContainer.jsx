@@ -2,29 +2,28 @@
 
 import type { TFormAlbum } from "types/stateTypes";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { AlbumFormWrapper } from 'components/AlbumForm/AlbumFormComponents';
-import { Card } from 'components/Card/CardComponents';
-import { AlbumFormAboutBlock } from 'components/AlbumForm/AlbumFormComponents';
-import { AlbumFormAboutInputs } from 'components/AlbumForm/AlbumFormComponents';
-import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
-import { AlbumFormFooter } from 'components/AlbumForm/AlbumFormComponents';
-import { AlbumFormButton } from 'components/AlbumForm/AlbumFormComponents';
+import { AlbumFormWrapper } from "components/AlbumForm/AlbumFormComponents";
+import { Card } from "components/Card/CardComponents";
+import { AlbumFormAboutBlock } from "components/AlbumForm/AlbumFormComponents";
+import { AlbumFormAboutInputs } from "components/AlbumForm/AlbumFormComponents";
+import { CustomTextInput } from "components/CustomTextInput/CustomTextInputComponents";
+import { AlbumFormFooter } from "components/AlbumForm/AlbumFormComponents";
+import { AlbumFormButton } from "components/AlbumForm/AlbumFormComponents";
 
-import { CoverInputContainer } from './AlbumForm/CoverInputContainer';
-import { renderTrackInputs } from './AlbumForm/renderTrackInputs';
-import { AlbumTracksInputContainer } from './AlbumForm/AlbumTracksInputContainer';
+import { CoverInputContainer } from "./AlbumForm/CoverInputContainer";
+import { renderTrackInputs } from "./AlbumForm/renderTrackInputs";
+import { AlbumTracksInputContainer } from "./AlbumForm/AlbumTracksInputContainer";
 
 type TProps = {|
-  data: TFormAlbum;
-  onDataChange(data: TFormAlbum): void;
-  onSubmit(): void;
-  onCancel(): void;
-|}
+  data: TFormAlbum,
+  onDataChange(data: TFormAlbum): void,
+  onSubmit(): void,
+  onCancel(): void
+|};
 
 export const AlbumFormContainer = (props: TProps) => {
-
   const { data, onDataChange, onSubmit, onCancel } = props;
 
   const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -32,23 +31,20 @@ export const AlbumFormContainer = (props: TProps) => {
     onDataChange({
       ...data,
       [name]: value
-    })
-  }
+    });
+  };
 
-  const handleTracklistChange = (tracklist) => {
+  const handleTracklistChange = tracklist => {
     onDataChange({
       ...data,
       tracklist
-    })
-  }
+    });
+  };
 
   return (
     <AlbumFormWrapper onSubmit={onSubmit}>
       <AlbumFormAboutBlock>
-        <CoverInputContainer
-          data={data}
-          onDataChange={onDataChange}
-        />
+        <CoverInputContainer data={data} onDataChange={onDataChange} />
         <AlbumFormAboutInputs>
           <CustomTextInput
             label="Album title"
@@ -59,22 +55,13 @@ export const AlbumFormContainer = (props: TProps) => {
         </AlbumFormAboutInputs>
       </AlbumFormAboutBlock>
       <Card withPadding>
-        {
-          data.tracklist.map(renderTrackInputs(handleTracklistChange))
-        }
-        <AlbumTracksInputContainer
-          data={data}
-          onDataChange={onDataChange}
-        />
+        {data.tracklist.map(renderTrackInputs(handleTracklistChange))}
+        <AlbumTracksInputContainer data={data} onDataChange={onDataChange} />
       </Card>
       <AlbumFormFooter>
-        <AlbumFormButton onClick={onSubmit}>
-          share
-        </AlbumFormButton>
-        <AlbumFormButton onClick={onCancel}>
-          cancel
-        </AlbumFormButton>
+        <AlbumFormButton onClick={onSubmit}>share</AlbumFormButton>
+        <AlbumFormButton onClick={onCancel}>cancel</AlbumFormButton>
       </AlbumFormFooter>
     </AlbumFormWrapper>
-  )
-}
+  );
+};

@@ -1,5 +1,5 @@
 // @flow strict
 
-import './index.css';
+import "./index.css";
 
-import './render'
+import "./render";

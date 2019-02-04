@@ -2,38 +2,32 @@
 
 import type { TFormArtist } from "types/stateTypes";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { CustomTextInput } from 'components/CustomTextInput/CustomTextInputComponents';
-import { getRawAlbumFormArtistData } from 'data/models';
-
+import { CustomTextInput } from "components/CustomTextInput/CustomTextInputComponents";
+import { getRawAlbumFormArtistData } from "data/models";
 
 export const renderArtistInput = (
   onChange: (artists: TFormArtist[]) => void
-) => (
-  artist: TFormArtist, artistIndex: number, artists: TFormArtist[]
-) => {
-
-  const handleChange = (e) => {
+) => (artist: TFormArtist, artistIndex: number, artists: TFormArtist[]) => {
+  const handleChange = e => {
     const { value, name } = e.currentTarget;
-    const nextArtists = [
-      ...artists
-    ];
+    const nextArtists = [...artists];
     if (value.length > 0) {
       nextArtists[artistIndex] = {
         ...artist,
         [name]: value
       };
     } else {
-      nextArtists.splice(artistIndex, 1)
+      nextArtists.splice(artistIndex, 1);
     }
     if (artistIndex === artists.length - 1 && value.length > 0) {
-      nextArtists.push(getRawAlbumFormArtistData())
+      nextArtists.push(getRawAlbumFormArtistData());
     }
-    onChange(nextArtists)
-  }
+    onChange(nextArtists);
+  };
 
-  return(
+  return (
     <React.Fragment key={artist.key}>
       <CustomTextInput
         label={`Track artist #${artistIndex + 1}`}
@@ -44,5 +38,5 @@ export const renderArtistInput = (
       <br />
       <br />
     </React.Fragment>
-  )
-}
+  );
+};

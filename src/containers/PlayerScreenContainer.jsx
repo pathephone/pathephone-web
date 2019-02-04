@@ -1,42 +1,38 @@
 // @flow strict
-import type { TPlaylistTrack } from 'types/stateTypes';
+import type { TPlaylistTrack } from "types/stateTypes";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { PlayerScreenWrapper } from 'components/PlayerScreen/PlayerScreenWrapper';
-import { HeaderContainer } from 'containers/HeaderContainer';
-import { PageContainer } from 'containers/PageContainer';
-import { PlaybackControlsContainer } from './PlaybackControlsContainer';
-import { PlayerContext } from 'contexts/PlayerContext';
+import { PlayerScreenWrapper } from "components/PlayerScreen/PlayerScreenWrapper";
+import { HeaderContainer } from "containers/HeaderContainer";
+import { PageContainer } from "containers/PageContainer";
+import { PlaybackControlsContainer } from "./PlaybackControlsContainer";
+import { PlayerContext } from "contexts/PlayerContext";
 
-type TProps = {|
-|}
+type TProps = {||};
 
 export const PlayerScreenContainer = (props: TProps) => {
-
-  const [ isPaused, setIsPaused ] = React.useState<boolean>(false)
-  const [ playlist, setPlaylist ] = React.useState<TPlaylistTrack[]>([])
-  const [ playingTrackId, setPlayingTrackId ] = React.useState<number | null>(null)
+  const [isPaused, setIsPaused] = React.useState<boolean>(false);
+  const [playlist, setPlaylist] = React.useState<TPlaylistTrack[]>([]);
+  const [playingTrackId, setPlayingTrackId] = React.useState<number | null>(
+    null
+  );
 
   const clearPlaylist = () => {
-    setPlaylist([])
-  }
+    setPlaylist([]);
+  };
 
   const addPlaylistTracks = (tracks: TPlaylistTrack[]) => {
-    setPlaylist(
-      [...playlist, ...tracks]
-    )
-  }
+    setPlaylist([...playlist, ...tracks]);
+  };
 
   const removePlaylistTrack = (id: number) => {
-    setPlaylist(
-      playlist.filter(track => track.id !== id)
-    )
-  }
+    setPlaylist(playlist.filter(track => track.id !== id));
+  };
 
   const toggleIsPaused = () => {
-    setIsPaused(!isPaused)
-  }
+    setIsPaused(!isPaused);
+  };
 
   const playerContextValue = {
     playlist,
@@ -48,7 +44,7 @@ export const PlayerScreenContainer = (props: TProps) => {
     removePlaylistTrack,
     clearPlaylist,
     toggleIsPaused
-  }
+  };
 
   return (
     <PlayerContext.Provider value={playerContextValue}>
@@ -58,5 +54,5 @@ export const PlayerScreenContainer = (props: TProps) => {
         <PlaybackControlsContainer />
       </PlayerScreenWrapper>
     </PlayerContext.Provider>
-  )
-}
+  );
+};

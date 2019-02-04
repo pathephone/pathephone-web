@@ -1,14 +1,14 @@
 // @flow strict
 
-import * as React from 'react';
+import * as React from "react";
 
-import styles from './FeedAlbum.module.css'
+import styles from "./FeedAlbum.module.css";
 
 type TProps = {|
-  src: string;
-  alt: string;
-  onClick(): void;
-|}
+  src: string,
+  alt: string,
+  onClick(): void
+|};
 
 export const FeedAlbumCover = ({ src, alt, onClick }: TProps) => (
   <img
@@ -17,4 +17,4 @@ export const FeedAlbumCover = ({ src, alt, onClick }: TProps) => (
     alt={alt}
     onClick={onClick}
   />
-)
+);

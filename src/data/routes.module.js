@@ -1,5 +1,5 @@
 // @flow strict
 
-import * as routes from 'data/routes'
+import * as routes from "data/routes";
 
-export { routes }
+export { routes };

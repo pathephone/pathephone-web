@@ -1,38 +1,34 @@
 // @flow strict
 
-import * as React from 'react';
+import * as React from "react";
 
-import styles from './AlbumTracksInput.module.css';
+import styles from "./AlbumTracksInput.module.css";
 
 type TWrapperProps = {|
-  children: React.Node;  
-|}
+  children: React.Node
+|};
 
 export const AlbumTracksInputWrapper = ({ children }: TWrapperProps) => (
-  <label className={styles.AlbumTracksInput__Wrapper}>
-    {children}
-  </label>
-)
+  <label className={styles.AlbumTracksInput__Wrapper}>{children}</label>
+);
 
 type TInputProps = {|
-  onChange(e: SyntheticEvent<HTMLInputElement>): void;
-|}
+  onChange(e: SyntheticEvent<HTMLInputElement>): void
+|};
 
 export const AlbumTracksInput = ({ onChange }: TInputProps) => (
-  <input 
+  <input
     className={styles.AlbumTracksInput__Input}
-    type="file" 
+    type="file"
     name="tracks"
     onChange={onChange}
   />
-)
+);
 
 type TCustomButtonProps = {|
-  text: string;
-|}
+  text: string
+|};
 
 export const AlbumTracksInputCustomButton = ({ text }: TCustomButtonProps) => (
-  <div className={styles.AlbumTracksInput__CustomButton}>
-    {text}
-  </div>
-)
+  <div className={styles.AlbumTracksInput__CustomButton}>{text}</div>
+);

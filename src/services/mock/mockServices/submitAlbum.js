@@ -9,6 +9,6 @@ import { albumsStorage } from "./mockStorage";
 import { formAlbumToMockStorageAlbum } from "./normalize/formAlbumToMockStorageAlbum";
 
 export const submitAlbum = async (album: TFormAlbum): Promise<void> => {
-  await asyncTimeout(500)
-  albumsStorage.push(formAlbumToMockStorageAlbum(album))
-}
+  await asyncTimeout(500);
+  albumsStorage.push(formAlbumToMockStorageAlbum(album));
+};

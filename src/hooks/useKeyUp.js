@@ -1,24 +1,22 @@
 // @flow strict
 
-import * as React from 'react';
+import * as React from "react";
 
 type TParams = {
-  [x: string]: (e: KeyboardEvent) => void;
-}
+  [x: string]: (e: KeyboardEvent) => void
+};
 
 export const useKeyUp = (handlers: TParams) => {
-
   React.useEffect(() => {
     const handleClick = (e: KeyboardEvent) => {
-      const handler = handlers[e.key]
+      const handler = handlers[e.key];
       if (handler) {
-        handler(e)
+        handler(e);
       }
-    }
-    window.addEventListener('keyup', handleClick)
+    };
+    window.addEventListener("keyup", handleClick);
     return () => {
-      window.removeEventListener('keyup', handleClick)
-    }
-  })
-
-}
+      window.removeEventListener("keyup", handleClick);
+    };
+  });
+};

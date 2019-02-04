@@ -1,33 +1,27 @@
 // @flow strict
 
-import * as React from 'react';
+import * as React from "react";
 
-import styles from './CustomTextInput.module.css'
+import styles from "./CustomTextInput.module.css";
 
 type TProps = {
-  label: string;
-  name: string;
-  value: string;
-  onChange(e: SyntheticEvent<HTMLInputElement>): void;
-}
+  label: string,
+  name: string,
+  value: string,
+  onChange(e: SyntheticEvent<HTMLInputElement>): void
+};
 
-export const CustomTextInput = (
-  { 
-    label,
-    name,
-    value,
-    onChange
-  }: TProps
-) => (
+export const CustomTextInput = ({ label, name, value, onChange }: TProps) => (
   <label>
-    {label}<br />
-    <input 
+    {label}
+    <br />
+    <input
       type="text"
       className={styles.CustomTextInput__Input}
       name={name}
       placeholder={label}
-      value={value} 
+      value={value}
       onChange={onChange}
     />
   </label>
-)
+);

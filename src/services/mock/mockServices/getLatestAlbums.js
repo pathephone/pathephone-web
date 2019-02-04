@@ -8,7 +8,6 @@ import { albumsStorage } from "./mockStorage";
 import { mockStorageAlbumToFeedAlbum } from "./normalize/mockStorageAlbumToFeedAlbum";
 
 export const getLatestAlbums = async (): Promise<TFeedAlbum[]> => {
-  await asyncTimeout(500)
-  return albumsStorage
-    .map(mockStorageAlbumToFeedAlbum)
-}
+  await asyncTimeout(500);
+  return albumsStorage.map(mockStorageAlbumToFeedAlbum);
+};

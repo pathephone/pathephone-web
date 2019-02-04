@@ -1,7 +1,9 @@
 // @flow strict
 
-import type { TServicesContext } from 'types/contextTypes'
+import type { TServicesContext } from "types/contextTypes";
 
-import * as React from 'react';
+import * as React from "react";
 
-export const ServicesContext = React.createContext<TServicesContext | null>(null);
+export const ServicesContext = React.createContext<TServicesContext | null>(
+  null
+);

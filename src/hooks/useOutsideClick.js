@@ -1,37 +1,34 @@
 // @flow strict
 
-import * as React from 'react';
+import * as React from "react";
 
 type TRef<TNode> = {
-  current: TNode | null;
-}
+  current: TNode | null
+};
 
-export function useOutsideClick <TNode> (
-  wrapperRef: TRef<TNode>, onOutsideClick: () => void
+export function useOutsideClick<TNode>(
+  wrapperRef: TRef<TNode>,
+  onOutsideClick: () => void
 ) {
   React.useEffect(() => {
-
     const handleClick = (e: MouseEvent) => {
-
       const wrapperNode = wrapperRef.current;
 
       const targetNode = e.target;
 
       if (
-        targetNode instanceof HTMLElement
-        && wrapperNode instanceof HTMLElement
-        && !wrapperNode.contains(targetNode)
+        targetNode instanceof HTMLElement &&
+        wrapperNode instanceof HTMLElement &&
+        !wrapperNode.contains(targetNode)
       ) {
-        onOutsideClick()
+        onOutsideClick();
       }
+    };
 
-    }
-
-    window.addEventListener('click', handleClick)
+    window.addEventListener("click", handleClick);
 
     return () => {
-      window.removeEventListener('click', handleClick)
-    }
-
-  },[wrapperRef, onOutsideClick])
+      window.removeEventListener("click", handleClick);
+    };
+  }, [wrapperRef, onOutsideClick]);
 }
