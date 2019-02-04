@@ -1,3 +1,10 @@
+# 1.0.0 (2019-02-04)
+
+
+### Features
+
+* **ui:** implement some basic ui ([1fbdec7](https://github.com/pathephone/pathephone-web/commit/1fbdec7))
+
 # 1.0.0 (2018-12-18)
 
 
