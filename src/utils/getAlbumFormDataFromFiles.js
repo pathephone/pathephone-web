@@ -8,7 +8,9 @@ import { getUniqueString } from "utils/getUniqueString";
 import { supportedAudioFileTypes, supportedImageFileTypes, coverRegExp } from 'data/fileTypes';
 import { getRawAlbumFormArtistData } from 'data/models';
 
-// TODO: extract picture from audio metadata
+/*
+
+TODO: extract picture from audio metadata
 
 type TPicture = {|
   format: string;
@@ -16,6 +18,8 @@ type TPicture = {|
   description?: string;
   type?: string;
 |}
+
+*/
 
 type TAudioMetadata = {|
   tracklist: TFormTrack[];

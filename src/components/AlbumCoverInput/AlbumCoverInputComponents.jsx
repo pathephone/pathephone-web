@@ -27,7 +27,7 @@ type TImageProps = {|
 |}
 
 export const AlbumCoverInputImage = ({ src }: TImageProps) => (
-  <img src={src} className={styles.AlbumCoverInput__Image} />
+  <img src={src} className={styles.AlbumCoverInput__Image} alt="cover" />
 )
 
 type TInputProps = {|
