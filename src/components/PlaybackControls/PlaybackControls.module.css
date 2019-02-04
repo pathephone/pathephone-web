@@ -1,0 +1,8 @@
+.PlaybackControls__Wrapper {
+  width: 100%;
+  display: grid;
+  padding: 0 1em;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fill, 15em);
+  justify-items: center;
+}

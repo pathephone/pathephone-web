@@ -1,9 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+// @flow strict
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+import "./index.css";
+
+import "./render";
