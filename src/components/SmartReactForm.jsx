@@ -1,4 +1,6 @@
-// @flow strict
+/**
+ * TODO: enable flow once will be ready
+ */
 
 import React from 'react';
 import getValue from 'get-value';
