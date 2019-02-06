@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://pathephone.github.io/pathephone-web",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pathephone/pathephone-web.git"
+  },
   "dependencies": {
     "music-metadata-browser": "^0.7.1",
     "react": "^16.8.1",
