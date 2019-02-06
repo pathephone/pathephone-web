@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/css/main.d4732426.chunk.css"
   },
   {
-    "revision": "9b890c248a9325351781",
-    "url": "/pathephone-web/static/js/1.9b890c24.chunk.js"
+    "revision": "84c274af30dfec51834a",
+    "url": "/pathephone-web/static/js/1.84c274af.chunk.js"
   },
   {
     "revision": "83e9ffe3a1e7775ea34b",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-keyboard_arrow_down-24px.3eb8b656.svg"
   },
   {
-    "revision": "23bf3ae8f0a96bcc5daad05cd0bb05b7",
+    "revision": "a3ed18b84e3e9276051e429f18a72322",
     "url": "/pathephone-web/index.html"
   }
 ];
