@@ -9,6 +9,7 @@ script:
   - npm run flow
   - npm test
   - npm run build
+  - commitlint-travis
 deploy:
   provider: script
   skip_cleanup: true
