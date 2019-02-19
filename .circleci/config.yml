@@ -11,7 +11,7 @@ jobs:
       - run: npm run flow
       - run: npm run build
       - run: npm test
-      - run: commitlint-travis
+      - run: npx commitlint
       - run: npx semantic-release
 
 workflows:
