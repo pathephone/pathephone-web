@@ -1,31 +1,21 @@
 version: 2
 jobs:
-  test:
-    docker:
-      - image: circleci/node:lts
-    steps:
-      - run: npm run prettier:check
-      - run: npm install
-      - run: npm run flow
-      - run: npm run build
-      - run: npm test
-      - run: commitlint-travis
-
-  release:
+  build:
+    working_directory: ~/pathephone-web
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
-      - run: npm install
+      - run: npm ci
+      - run: npm run prettier:check
+      - run: npm run flow
       - run: npm run build
+      - run: npm test
+      - run: commitlint-travis
       - run: npx semantic-release
 
 workflows:
   version: 2
-  test_and_release:
-    # Run the test jobs first, then the release only when all the test jobs are successful
+  release:
     jobs:
-      - test
-      - release:
-          requires:
-            - test
+      - build
