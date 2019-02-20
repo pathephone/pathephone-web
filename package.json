@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@commitlint/config-angular": "^7.5.0",
-    "@commitlint/travis-cli": "^7.5.2",
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/commit-analyzer": "^6.1.0",
     "@semantic-release/exec": "^3.3.2",
