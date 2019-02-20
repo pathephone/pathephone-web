@@ -31,7 +31,11 @@ export const FeedAlbumContainer = (props: TProps) => {
 
   return (
     <FeedAlbumWrapper>
-      <FeedAlbumCover src={coverSrc} alt="" onClick={handleCoverClick} />
+      <FeedAlbumCover
+        src={coverSrc}
+        alt="album cover"
+        onClick={handleCoverClick}
+      />
       <FeedAlbumInfo>
         <FeedAlbumTitle>{title}</FeedAlbumTitle>
         <FeedAlbumArtist>{artistName}</FeedAlbumArtist>
