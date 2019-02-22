@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-search-24px.8e10fdfe.svg"
   },
   {
-    "revision": "675972c9dcae4dd113ed",
+    "revision": "01cdee79ef8a1129d23f",
     "url": "/pathephone-web/static/css/main.4d94f734.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-menu-24px.f1991872.svg"
   },
   {
-    "revision": "675972c9dcae4dd113ed",
-    "url": "/pathephone-web/static/js/main.675972c9.chunk.js"
+    "revision": "01cdee79ef8a1129d23f",
+    "url": "/pathephone-web/static/js/main.01cdee79.chunk.js"
   },
   {
     "revision": "84e833e5bd6df645154933cd234b33e8",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-keyboard_arrow_down-24px.3eb8b656.svg"
   },
   {
-    "revision": "59ace2644c316dccc462a39ad1189335",
+    "revision": "f359f0b0ec1b50e1911e4e0132493bb8",
     "url": "/pathephone-web/index.html"
   }
 ];
