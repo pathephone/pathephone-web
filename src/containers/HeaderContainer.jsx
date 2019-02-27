@@ -3,15 +3,17 @@
 import * as React from "react";
 import { Redirect } from "react-router-dom";
 
-import { HeaderWrapper } from "components/Header/HeaderWrapper";
 import { MenuIcon } from "icons/round-menu";
 import { SearchIcon } from "icons/round-search";
-import { HeaderButton } from "components/Header/HeaderButton";
 import { MainMenuContainer } from "containers/header/MainMenuContainer";
 import { SearchBarContainer } from "containers/SearchBarContainer";
 import { Left } from "components/Flex/FlexComponents";
 import { Right } from "components/Flex/FlexComponents";
 import { routes } from "data/routes.module";
+import {
+  FixedPanelWrapper,
+  FixedPanelButton
+} from "components/FixedPanel/FixedPanelComponents";
 
 type TProps = {||};
 
@@ -33,19 +35,19 @@ export const HeaderContainer = (props: TProps) => {
   };
 
   return (
-    <HeaderWrapper>
+    <FixedPanelWrapper>
       {hasMainMenu && <MainMenuContainer onClose={toggleMainMenu} />}
       {!hasSearchBar && (
         <>
           <Left>
-            <HeaderButton onClick={toggleMainMenu}>
+            <FixedPanelButton onClick={toggleMainMenu}>
               <MenuIcon />
-            </HeaderButton>
+            </FixedPanelButton>
           </Left>
           <Right>
-            <HeaderButton onClick={toggleSearchBar}>
+            <FixedPanelButton onClick={toggleSearchBar}>
               <SearchIcon />
-            </HeaderButton>
+            </FixedPanelButton>
           </Right>
         </>
       )}
@@ -58,6 +60,6 @@ export const HeaderContainer = (props: TProps) => {
       {searchValue && (
         <Redirect to={routes.searchAlbumsRoute(searchValue)} push />
       )}
-    </HeaderWrapper>
+    </FixedPanelWrapper>
   );
 };
