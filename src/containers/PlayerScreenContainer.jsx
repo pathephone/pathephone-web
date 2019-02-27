@@ -12,10 +12,16 @@ import { PlayerContext } from "contexts/PlayerContext";
 type TProps = {||};
 
 export const PlayerScreenContainer = (props: TProps) => {
+
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
-  const [playlist, setPlaylist] = React.useState<TPlaylistTrack[]>([]);
+  const [playlist, setPlaylist] = React.useState<TPlaylistTrack[]>([{
+    id: 1,
+    title: 'Blah',
+    artistName: 'Blah blah',
+    audioSrc: ''
+  }]);
   const [playingTrackId, setPlayingTrackId] = React.useState<number | null>(
-    null
+    1
   );
 
   const clearPlaylist = () => {
