@@ -12,11 +12,15 @@ export type TAppContext = typeof appContextMock;
 
 export type TPlayerContext = {|
   playlist: TPlaylistTrack[],
-  playingTrackId: null | number,
+  playingTrackId: null | string,
   isPaused: boolean,
+  isShuffle: boolean,
+  isRepeat: boolean,
   toggleIsPaused(): void,
-  setPlayingTrackId(id: null | number): void,
+  toggleIsShuffle(): void,
+  toggleIsRepeat(): void,
+  setPlayingTrackId(id: null | string): void,
   addPlaylistTracks(newTracks: TPlaylistTrack[]): void,
-  removePlaylistTrack(id: number): void,
+  removePlaylistTrack(id: string): void,
   clearPlaylist(): void
 |};
