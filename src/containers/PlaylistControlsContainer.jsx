@@ -3,68 +3,70 @@
 import * as React from "react";
 
 import { ArrowDownIcon } from "icons/round-keyboard_arrow_down";
-import { PlaybackControlsGroup, PlaybackControlsButton } from "components/PlaybackControls/PlaybackControlsConponents";
 import { ShuffleIcon } from "icons/round-shuffle";
 import { RepeatIcon } from "icons/round-repeat";
 import { SkipPreviousIcon } from "icons/round-skip_previous";
 import { SkipNextIcon } from "icons/round-skip_next";
 import { useContextStrict } from "hooks/useContextStrict";
 import { PlayerContext } from "contexts/PlayerContext";
+import { FixedPanelButton } from "components/FixedPanel/FixedPanelComponents";
+import { PlayerControlsButtonsGroup } from "components/PlayerControls/PlayerControlsConponents";
 
 type TProps = {|
-  onSwitchToCurrentTrackMode(): void;  
+  onSwitchToCurrentTrackMode(): void
 |};
 
 export const PlaylistControlsContainer = (props: TProps) => {
+  const { onSwitchToCurrentTrackMode } = props;
 
   const {
-    onSwitchToCurrentTrackMode
-  } = props;
-
-  const {
-    playlist,
-    playingTrackId
-  } = useContextStrict(PlayerContext)
+    isShuffle,
+    isRepeat,
+    toggleIsShuffle,
+    toggleIsRepeat
+  } = useContextStrict(PlayerContext);
 
   const handleRepeat = () => {
-    // TODO: toggle repeat state
-  }
+    toggleIsRepeat();
+  };
 
   const handleShuffle = () => {
-    // TODO: toggle shuffle state
-  }
+    toggleIsShuffle();
+  };
 
-  const handleSkipNext = () => {
+  const handleSkipNext = () => {};
 
-  }
-
-  const handleSkipPrevious = () => {
-
-  }
+  const handleSkipPrevious = () => {};
 
   return (
     <>
-      <PlaybackControlsGroup>
-        <PlaybackControlsButton onClick={handleShuffle}>
+      <PlayerControlsButtonsGroup>
+        <FixedPanelButton
+          hasToggledOnIndicator={isShuffle}
+          onClick={handleShuffle}
+        >
           <ShuffleIcon />
-        </PlaybackControlsButton>
-        <PlaybackControlsButton onClick={handleRepeat}>
+        </FixedPanelButton>
+        <FixedPanelButton
+          hasToggledOnIndicator={isRepeat}
+          onClick={handleRepeat}
+        >
           <RepeatIcon />
-        </PlaybackControlsButton>
-      </PlaybackControlsGroup>
-      <PlaybackControlsGroup>
-        <PlaybackControlsButton onClick={handleSkipPrevious}>
+        </FixedPanelButton>
+      </PlayerControlsButtonsGroup>
+      <PlayerControlsButtonsGroup>
+        <FixedPanelButton onClick={handleSkipPrevious}>
           <SkipPreviousIcon />
-        </PlaybackControlsButton>
-        <PlaybackControlsButton onClick={handleSkipNext}>
+        </FixedPanelButton>
+        <FixedPanelButton onClick={handleSkipNext}>
           <SkipNextIcon />
-        </PlaybackControlsButton>
-      </PlaybackControlsGroup>
-      <PlaybackControlsGroup>
-        <PlaybackControlsButton onClick={onSwitchToCurrentTrackMode}>
+        </FixedPanelButton>
+      </PlayerControlsButtonsGroup>
+      <PlayerControlsButtonsGroup moveButtonsToRight>
+        <FixedPanelButton onClick={onSwitchToCurrentTrackMode}>
           <ArrowDownIcon />
-        </PlaybackControlsButton>
-      </PlaybackControlsGroup>
+        </FixedPanelButton>
+      </PlayerControlsButtonsGroup>
     </>
   );
 };

@@ -6,22 +6,28 @@ import * as React from "react";
 import { PlayerScreenWrapper } from "components/PlayerScreen/PlayerScreenWrapper";
 import { HeaderContainer } from "containers/HeaderContainer";
 import { PageContainer } from "containers/PageContainer";
-import { PlaybackControlsContainer } from "./PlaybackControlsContainer";
 import { PlayerContext } from "contexts/PlayerContext";
+import { getUniqueString } from "utils/getUniqueString";
+import { PlayerControlsContainer } from "./PlayerControlsContainer";
 
 type TProps = {||};
 
-export const PlayerScreenContainer = (props: TProps) => {
+const fakeId = getUniqueString();
 
+export const PlayerScreenContainer = (props: TProps) => {
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
-  const [playlist, setPlaylist] = React.useState<TPlaylistTrack[]>([{
-    id: 1,
-    title: 'Blah',
-    artistName: 'Blah blah',
-    audioSrc: ''
-  }]);
-  const [playingTrackId, setPlayingTrackId] = React.useState<number | null>(
-    1
+  const [isShuffle, setIsShuffle] = React.useState<boolean>(false);
+  const [isRepeat, setIsRepeat] = React.useState<boolean>(false);
+  const [playlist, setPlaylist] = React.useState<TPlaylistTrack[]>([
+    {
+      id: fakeId,
+      title: "Wild Wild Wild Wild Wild Wild West",
+      artistName: "John Wayne",
+      audioSrc: ""
+    }
+  ]);
+  const [playingTrackId, setPlayingTrackId] = React.useState<string | null>(
+    fakeId
   );
 
   const clearPlaylist = () => {
@@ -32,24 +38,36 @@ export const PlayerScreenContainer = (props: TProps) => {
     setPlaylist([...playlist, ...tracks]);
   };
 
-  const removePlaylistTrack = (id: number) => {
+  const removePlaylistTrack = (id: string) => {
     setPlaylist(playlist.filter(track => track.id !== id));
   };
 
   const toggleIsPaused = () => {
-    setIsPaused(!isPaused);
+    setIsPaused(state => !state);
+  };
+
+  const toggleIsShuffle = () => {
+    setIsShuffle(state => !state);
+  };
+
+  const toggleIsRepeat = () => {
+    setIsRepeat(state => !state);
   };
 
   const playerContextValue = {
     playlist,
     isPaused,
+    isShuffle,
+    isRepeat,
     playingTrackId,
 
     setPlayingTrackId,
     addPlaylistTracks,
     removePlaylistTrack,
     clearPlaylist,
-    toggleIsPaused
+    toggleIsPaused,
+    toggleIsRepeat,
+    toggleIsShuffle
   };
 
   return (
@@ -57,7 +75,7 @@ export const PlayerScreenContainer = (props: TProps) => {
       <PlayerScreenWrapper>
         <PageContainer />
         <HeaderContainer />
-        <PlaybackControlsContainer />
+        <PlayerControlsContainer />
       </PlayerScreenWrapper>
     </PlayerContext.Provider>
   );

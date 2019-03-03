@@ -7,7 +7,7 @@ import { MenuIcon } from "icons/round-menu";
 import { SearchIcon } from "icons/round-search";
 import { MainMenuContainer } from "containers/header/MainMenuContainer";
 import { SearchBarContainer } from "containers/SearchBarContainer";
-import { Left } from "components/Flex/FlexComponents";
+import { Left, FlexRow } from "components/Flex/FlexComponents";
 import { Right } from "components/Flex/FlexComponents";
 import { routes } from "data/routes.module";
 import {
@@ -38,7 +38,7 @@ export const HeaderContainer = (props: TProps) => {
     <FixedPanelWrapper>
       {hasMainMenu && <MainMenuContainer onClose={toggleMainMenu} />}
       {!hasSearchBar && (
-        <>
+        <FlexRow>
           <Left>
             <FixedPanelButton onClick={toggleMainMenu}>
               <MenuIcon />
@@ -49,7 +49,7 @@ export const HeaderContainer = (props: TProps) => {
               <SearchIcon />
             </FixedPanelButton>
           </Right>
-        </>
+        </FlexRow>
       )}
       {hasSearchBar && (
         <SearchBarContainer
