@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "music-metadata-browser": "^0.7.1",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5"
   },
@@ -24,7 +24,7 @@
     "@semantic-release/release-notes-generator": "^7.1.4",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
-    "flow-bin": "^0.87.0",
+    "flow-bin": "^0.94.0",
     "gh-pages": "^2.0.1",
     "prettier": "1.16.4"
   },
