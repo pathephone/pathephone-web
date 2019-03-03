@@ -7,7 +7,7 @@ import { SearchBarInput } from "components/SearchBar/SearchBarInput";
 import { ClearIcon } from "icons/round-clear";
 import { SearchBarForm } from "components/SearchBar/SearchBarForm";
 import { useKeyUp } from "hooks/useKeyUp";
-import { FixedPanelButton } from "components/FixedPanel/FixedPanelComponents";
+import { CustomButton } from "components/CustomButton/CustomButtonComponents";
 
 type TProps = {|
   onCancel(): void,
@@ -39,9 +39,9 @@ export const SearchBarContainer = (props: TProps) => {
       <SearchBarForm onSubmit={handleSubmit}>
         <SearchBarInput onChange={handleInputChange} value={searchValue} />
       </SearchBarForm>
-      <FixedPanelButton onClick={onCancel}>
+      <CustomButton onClick={onCancel}>
         <ClearIcon />
-      </FixedPanelButton>
+      </CustomButton>
     </SearchBarWrapper>
   );
 };

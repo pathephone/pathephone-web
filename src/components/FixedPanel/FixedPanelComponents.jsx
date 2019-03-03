@@ -20,21 +20,3 @@ export const FixedPanelWrapper = ({ children, toBottom }: TWrapperProps) => (
     {children}
   </div>
 );
-
-type TButtonProps = {|
-  children: React.Node,
-  hasToggledOnIndicator?: boolean,
-  onClick(e: SyntheticEvent<HTMLButtonElement>): void
-|};
-
-export const FixedPanelButton = ({
-  hasToggledOnIndicator,
-  ...nativeProps
-}: TButtonProps) => (
-  <button
-    {...nativeProps}
-    className={`${styles.FixedPanel__Button} ${
-      hasToggledOnIndicator === true ? styles.FixedPanel__Button_toggledOn : ""
-    }`}
-  />
-);

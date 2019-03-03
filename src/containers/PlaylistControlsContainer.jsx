@@ -9,8 +9,8 @@ import { SkipPreviousIcon } from "icons/round-skip_previous";
 import { SkipNextIcon } from "icons/round-skip_next";
 import { useContextStrict } from "hooks/useContextStrict";
 import { PlayerContext } from "contexts/PlayerContext";
-import { FixedPanelButton } from "components/FixedPanel/FixedPanelComponents";
 import { PlayerControlsButtonsGroup } from "components/PlayerControls/PlayerControlsConponents";
+import { CustomButton } from "components/CustomButton/CustomButtonComponents";
 
 type TProps = {|
   onSwitchToCurrentTrackMode(): void
@@ -41,31 +41,25 @@ export const PlaylistControlsContainer = (props: TProps) => {
   return (
     <>
       <PlayerControlsButtonsGroup>
-        <FixedPanelButton
-          hasToggledOnIndicator={isShuffle}
-          onClick={handleShuffle}
-        >
+        <CustomButton hasToggledOnIndicator={isShuffle} onClick={handleShuffle}>
           <ShuffleIcon />
-        </FixedPanelButton>
-        <FixedPanelButton
-          hasToggledOnIndicator={isRepeat}
-          onClick={handleRepeat}
-        >
+        </CustomButton>
+        <CustomButton hasToggledOnIndicator={isRepeat} onClick={handleRepeat}>
           <RepeatIcon />
-        </FixedPanelButton>
+        </CustomButton>
       </PlayerControlsButtonsGroup>
       <PlayerControlsButtonsGroup>
-        <FixedPanelButton onClick={handleSkipPrevious}>
+        <CustomButton onClick={handleSkipPrevious}>
           <SkipPreviousIcon />
-        </FixedPanelButton>
-        <FixedPanelButton onClick={handleSkipNext}>
+        </CustomButton>
+        <CustomButton onClick={handleSkipNext}>
           <SkipNextIcon />
-        </FixedPanelButton>
+        </CustomButton>
       </PlayerControlsButtonsGroup>
       <PlayerControlsButtonsGroup moveButtonsToRight>
-        <FixedPanelButton onClick={onSwitchToCurrentTrackMode}>
+        <CustomButton onClick={onSwitchToCurrentTrackMode}>
           <ArrowDownIcon />
-        </FixedPanelButton>
+        </CustomButton>
       </PlayerControlsButtonsGroup>
     </>
   );

@@ -9,11 +9,11 @@ import { PlayArrowIcon } from "icons/round-play-arrow";
 import { useContextStrict } from "hooks/useContextStrict";
 import { PlayerContext } from "contexts/PlayerContext";
 import { PlaylistIcon } from "icons/round-queue_music";
-import { FixedPanelButton } from "components/FixedPanel/FixedPanelComponents";
 import {
   PlayerControlsTrackInfo,
   PlayerControlsButtonsGroup
 } from "components/PlayerControls/PlayerControlsConponents";
+import { CustomButton } from "components/CustomButton/CustomButtonComponents";
 
 type TProps = {|
   onSwitchToPlaylistMode(): void,
@@ -30,15 +30,15 @@ export const CurrentTrackControlsContainer = (props: TProps) => {
   return (
     <>
       <PlayerControlsButtonsGroup>
-        <FixedPanelButton onClick={toggleIsPaused}>
+        <CustomButton onClick={toggleIsPaused}>
           {isPaused ? <PauseIcon /> : <PlayArrowIcon />}
-        </FixedPanelButton>
+        </CustomButton>
       </PlayerControlsButtonsGroup>
       <PlayerControlsTrackInfo title={title} artistName={artistName} />
       <PlayerControlsButtonsGroup>
-        <FixedPanelButton onClick={onSwitchToPlaylistMode}>
+        <CustomButton onClick={onSwitchToPlaylistMode}>
           <PlaylistIcon />
-        </FixedPanelButton>
+        </CustomButton>
       </PlayerControlsButtonsGroup>
     </>
   );

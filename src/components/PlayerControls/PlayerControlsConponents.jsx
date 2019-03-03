@@ -50,7 +50,7 @@ export const PlayerControlsTrackInfo = ({
   artistName
 }: TTrackInfoProps) => (
   <div className={styles.PlayerControls__TrackInfo}>
-    <div className={styles.PlayerControls__Title}>{title}</div>
-    <div className={styles.PlayerControls__ArtistName}>{artistName}</div>
+    <span className={styles.PlayerControls__Title}>{title}</span>
+    <span className={styles.PlayerControls__ArtistName}>{artistName}</span>
   </div>
 );
