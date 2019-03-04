@@ -1,0 +1,133 @@
+.Playlist__Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 60px);
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
+}
+
+.Playlist__Header {
+  display: flex;
+  height: 60px;
+  padding: 0 10px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.Playlist__TracksCount {
+  line-height: 60px;
+  font-size: 18px;
+  padding-left: 17.5px;
+}
+
+.Playlist__ClearButton {
+  margin-left: auto;
+}
+
+.Playlist__Body {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+}
+
+.Playlist__BodyContent {
+  padding: 20px 10px;
+}
+
+.Playlist__Track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.Playlist__Track:not(:first-child) {
+  margin-top: 10px;
+}
+
+.Playlist__Track_playing::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -5px;
+  width: 2px;
+  height: 100%;
+  background-color: deeppink;
+}
+
+.Playlist__PlayButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  outline: none;
+  background: none;
+  border: none;
+  padding-left: 5px;
+  padding-right: 70px;
+}
+
+.Playlist__PlayButton::-moz-focus-inner {
+  border: 0;
+}
+
+.Playlist__PlayButton:hover:not(:disabled) {
+  background-color: whitesmoke;
+}
+
+.Playlist__PlayButton:focus:not(:disabled),
+.Playlist__PlayButton:active:not(:disabled) {
+  background-color: lightgrey;
+}
+
+.Playlist__TrackInfo {
+  padding-left: 12.5px;
+  display: grid;
+  text-align: left;
+}
+
+.Playlist__TrackTitle,
+.Playlist__TrackArtist {
+  line-height: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Playlist__TrackTitle {
+  font-size: 16px;
+}
+.Playlist__PlayButton:disabled .Playlist__TrackTitle {
+  color: grey;
+}
+
+.Playlist__TrackArtist {
+  font-size: 14px;
+  color: grey;
+}
+
+.Playlist__CachingIndicator {
+  fill: grey;
+  padding: 2.5px 7.5px;
+  animation: cachingIndicatorAnimation 2s infinite;
+}
+
+.Playlist__SecondaryTrackAction {
+  position: absolute;
+  margin-left: auto;
+  right: 0px;
+}
+
+@keyframes cachingIndicatorAnimation {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}

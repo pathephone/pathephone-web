@@ -11,7 +11,7 @@ import { Left, FlexRow } from "components/Flex/FlexComponents";
 import { Right } from "components/Flex/FlexComponents";
 import { routes } from "data/routes.module";
 import { FixedPanelWrapper } from "components/FixedPanel/FixedPanelComponents";
-import { CustomButton } from "components/CustomButton/CustomButtonComponents";
+import { SquareButton } from "components/SquareButton/SquareButtonComponents";
 
 type TProps = {||};
 
@@ -38,14 +38,14 @@ export const HeaderContainer = (props: TProps) => {
       {!hasSearchBar && (
         <FlexRow>
           <Left>
-            <CustomButton onClick={toggleMainMenu}>
+            <SquareButton onClick={toggleMainMenu}>
               <MenuIcon />
-            </CustomButton>
+            </SquareButton>
           </Left>
           <Right>
-            <CustomButton onClick={toggleSearchBar}>
+            <SquareButton onClick={toggleSearchBar}>
               <SearchIcon />
-            </CustomButton>
+            </SquareButton>
           </Right>
         </FlexRow>
       )}

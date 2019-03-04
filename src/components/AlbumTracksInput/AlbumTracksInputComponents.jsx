@@ -25,10 +25,10 @@ export const AlbumTracksInput = ({ onChange }: TInputProps) => (
   />
 );
 
-type TCustomButtonProps = {|
+type TSquareButtonProps = {|
   text: string
 |};
 
-export const AlbumTracksInputCustomButton = ({ text }: TCustomButtonProps) => (
-  <div className={styles.AlbumTracksInput__CustomButton}>{text}</div>
+export const AlbumTracksInputSquareButton = ({ text }: TSquareButtonProps) => (
+  <div className={styles.AlbumTracksInput__SquareButton}>{text}</div>
 );

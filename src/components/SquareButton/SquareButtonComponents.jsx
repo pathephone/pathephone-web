@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import styles from "./CustomButton.module.css";
+import styles from "./SquareButton.module.css";
 
 type TButtonProps = {|
   children: React.Node,
@@ -10,15 +10,15 @@ type TButtonProps = {|
   onClick(e: SyntheticEvent<HTMLButtonElement>): void
 |};
 
-export const CustomButton = ({
+export const SquareButton = ({
   hasToggledOnIndicator,
   ...nativeProps
 }: TButtonProps) => (
   <button
     {...nativeProps}
-    className={`${styles.CustomButton__Button} ${
+    className={`${styles.SquareButton__Button} ${
       hasToggledOnIndicator === true
-        ? styles.CustomButton__Button_toggledOn
+        ? styles.SquareButton__Button_toggledOn
         : ""
     }`}
   />
