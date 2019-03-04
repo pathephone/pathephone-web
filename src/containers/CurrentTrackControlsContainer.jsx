@@ -13,7 +13,7 @@ import {
   PlayerControlsTrackInfo,
   PlayerControlsButtonsGroup
 } from "components/PlayerControls/PlayerControlsConponents";
-import { CustomButton } from "components/CustomButton/CustomButtonComponents";
+import { SquareButton } from "components/SquareButton/SquareButtonComponents";
 
 type TProps = {|
   onSwitchToPlaylistMode(): void,
@@ -30,15 +30,15 @@ export const CurrentTrackControlsContainer = (props: TProps) => {
   return (
     <>
       <PlayerControlsButtonsGroup>
-        <CustomButton onClick={toggleIsPaused}>
+        <SquareButton onClick={toggleIsPaused}>
           {isPaused ? <PauseIcon /> : <PlayArrowIcon />}
-        </CustomButton>
+        </SquareButton>
       </PlayerControlsButtonsGroup>
       <PlayerControlsTrackInfo title={title} artistName={artistName} />
       <PlayerControlsButtonsGroup>
-        <CustomButton onClick={onSwitchToPlaylistMode}>
+        <SquareButton onClick={onSwitchToPlaylistMode}>
           <PlaylistIcon />
-        </CustomButton>
+        </SquareButton>
       </PlayerControlsButtonsGroup>
     </>
   );

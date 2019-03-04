@@ -10,7 +10,8 @@ import { SkipNextIcon } from "icons/round-skip_next";
 import { useContextStrict } from "hooks/useContextStrict";
 import { PlayerContext } from "contexts/PlayerContext";
 import { PlayerControlsButtonsGroup } from "components/PlayerControls/PlayerControlsConponents";
-import { CustomButton } from "components/CustomButton/CustomButtonComponents";
+import { SquareButton } from "components/SquareButton/SquareButtonComponents";
+import { PlaylistPopupContainer } from "./PlaylistPopupContainer";
 
 type TProps = {|
   onSwitchToCurrentTrackMode(): void
@@ -41,26 +42,27 @@ export const PlaylistControlsContainer = (props: TProps) => {
   return (
     <>
       <PlayerControlsButtonsGroup>
-        <CustomButton hasToggledOnIndicator={isShuffle} onClick={handleShuffle}>
+        <SquareButton hasToggledOnIndicator={isShuffle} onClick={handleShuffle}>
           <ShuffleIcon />
-        </CustomButton>
-        <CustomButton hasToggledOnIndicator={isRepeat} onClick={handleRepeat}>
+        </SquareButton>
+        <SquareButton hasToggledOnIndicator={isRepeat} onClick={handleRepeat}>
           <RepeatIcon />
-        </CustomButton>
+        </SquareButton>
       </PlayerControlsButtonsGroup>
       <PlayerControlsButtonsGroup>
-        <CustomButton onClick={handleSkipPrevious}>
+        <SquareButton onClick={handleSkipPrevious}>
           <SkipPreviousIcon />
-        </CustomButton>
-        <CustomButton onClick={handleSkipNext}>
+        </SquareButton>
+        <SquareButton onClick={handleSkipNext}>
           <SkipNextIcon />
-        </CustomButton>
+        </SquareButton>
       </PlayerControlsButtonsGroup>
       <PlayerControlsButtonsGroup moveButtonsToRight>
-        <CustomButton onClick={onSwitchToCurrentTrackMode}>
+        <SquareButton onClick={onSwitchToCurrentTrackMode}>
           <ArrowDownIcon />
-        </CustomButton>
+        </SquareButton>
       </PlayerControlsButtonsGroup>
+      <PlaylistPopupContainer />
     </>
   );
 };

@@ -13,6 +13,7 @@ import { PlayerControlsContainer } from "./PlayerControlsContainer";
 type TProps = {||};
 
 const fakeId = getUniqueString();
+const fakeId2 = getUniqueString();
 
 export const PlayerScreenContainer = (props: TProps) => {
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
@@ -24,6 +25,12 @@ export const PlayerScreenContainer = (props: TProps) => {
       title: "Wild Wild Wild Wild Wild Wild West",
       artistName: "John Wayne",
       audioSrc: ""
+    },
+    {
+      id: fakeId2,
+      title: "Some shitty pop song from your girlfriend's vk feed",
+      artistName: "Bon Kabon",
+      audioSrc: ""
     }
   ]);
   const [playingTrackId, setPlayingTrackId] = React.useState<string | null>(
@@ -32,6 +39,7 @@ export const PlayerScreenContainer = (props: TProps) => {
 
   const clearPlaylist = () => {
     setPlaylist([]);
+    setPlayingTrackId(null);
   };
 
   const addPlaylistTracks = (tracks: TPlaylistTrack[]) => {
