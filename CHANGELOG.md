@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/pathephone/pathephone-web/compare/v1.1.0...v1.2.0) (2019-03-09)
+
+
+### Features
+
+* **ui:** implement basic playlist ui ([0b2dc49](https://github.com/pathephone/pathephone-web/commit/0b2dc49)), closes [#12](https://github.com/pathephone/pathephone-web/issues/12)
+
 # [1.1.0](https://github.com/pathephone/pathephone-web/compare/v1.0.1...v1.1.0) (2019-03-03)
 
 
