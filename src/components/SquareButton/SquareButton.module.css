@@ -31,5 +31,5 @@
   top: 2px;
   width: 90%;
   height: 2px;
-  background-color: deeppink;
+  background-color: var(--accent-color);
 }

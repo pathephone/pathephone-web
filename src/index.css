@@ -22,4 +22,9 @@ svg {
   display: inline;
   vertical-align: middle;
   height: 1em;
+  fill: currentColor;
+}
+
+button {
+  color: inherit;
 }
