@@ -17,11 +17,13 @@
   border: 0;
 }
 
-.RoundButton__Button:hover,
+.RoundButton__Button:hover {
+  background-color: var(--hover-color);
+}
 .RoundButton__Button:focus {
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: var(--focus-color);
 }
 
 .RoundButton__Button:active {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--active-color);
 }

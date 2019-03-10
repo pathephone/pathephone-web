@@ -38,5 +38,5 @@
 }
 
 .AlbumCoverInput__Input:invalid + .AlbumCoverInput__Preview {
-  border-color: red;
+  border-color: var(--error-color);
 }

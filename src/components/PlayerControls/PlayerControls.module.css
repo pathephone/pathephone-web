@@ -45,5 +45,5 @@
 
 .PlayerControls__ArtistName {
   font-size: 14px;
-  color: grey;
+  color: var(--text-secondary-color);
 }

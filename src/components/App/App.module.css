@@ -1,7 +1,5 @@
 .App__Wrapper {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
+  color: var(--text-primary-color);
 }
 
 .App__ErrorScreen {
@@ -11,7 +9,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: red;
+  color: var(--error-color);
 }
 
 .App__LoadingScreen {

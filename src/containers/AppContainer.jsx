@@ -9,6 +9,8 @@ import { ServicesContext } from "contexts/ServicesContext";
 import { useContextStrict } from "hooks/useContextStrict";
 import { usePromiseEffect } from "hooks/usePromiseEffect";
 import { PlayerScreenContainer } from "containers/PlayerScreenContainer";
+import { Theme } from "components/Themes/ThemesComponents";
+import { AppWrapper } from "components/App/AppWrapper";
 
 type TProps = {||};
 
@@ -18,9 +20,11 @@ export const AppContainer = (props: TProps) => {
   const { isPending, isSucceeded } = usePromiseEffect<void>(startApp, []);
 
   return (
-    <>
-      {isPending && <AppLoadingScreen />}
-      {isSucceeded && <PlayerScreenContainer />}
-    </>
+    <Theme>
+      <AppWrapper>
+        {isPending && <AppLoadingScreen />}
+        {isSucceeded && <PlayerScreenContainer />}
+      </AppWrapper>
+    </Theme>
   );
 };

@@ -52,7 +52,7 @@
   left: -5px;
   width: 2px;
   height: 100%;
-  background-color: deeppink;
+  background-color: var(--accent-color);
 }
 
 .Playlist__PlayButton {
@@ -72,18 +72,27 @@
 }
 
 .Playlist__PlayButton:hover:not(:disabled) {
-  background-color: whitesmoke;
+  background-color: var(--hover-color);
 }
 
-.Playlist__PlayButton:focus:not(:disabled),
+.Playlist__PlayButton:focus:not(:disabled) {
+  background-color: var(--focus-color);
+}
+
 .Playlist__PlayButton:active:not(:disabled) {
-  background-color: lightgrey;
+  background-color: var(--active-color);
 }
 
 .Playlist__TrackInfo {
   padding-left: 12.5px;
   display: grid;
   text-align: left;
+}
+
+.Playlist__PlayButton:disabled .Playlist__CachingIndicator,
+.Playlist__PlayButton:disabled .Playlist__TrackTitle,
+.Playlist__PlayButton:disabled .Playlist__TrackArtist {
+  color: var(--text-inactive-color);
 }
 
 .Playlist__TrackTitle,
@@ -97,17 +106,13 @@
 .Playlist__TrackTitle {
   font-size: 16px;
 }
-.Playlist__PlayButton:disabled .Playlist__TrackTitle {
-  color: grey;
-}
 
 .Playlist__TrackArtist {
   font-size: 14px;
-  color: grey;
+  color: var(--text-secondary-color);
 }
 
 .Playlist__CachingIndicator {
-  fill: grey;
   padding: 2.5px 7.5px;
   animation: cachingIndicatorAnimation 2s infinite;
 }
