@@ -1,0 +1,45 @@
+.PlayerNavigation__Popup {
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  width: 15em;
+  max-width: 70vw;
+  background-color: white;
+  border: 1px solid lightgrey;
+}
+
+.PlayerNavigation__Link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  margin: 10px 0;
+  padding: 0 22px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.PlayerNavigation__Link_current::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  height: calc(100% - 10px);
+  width: 2px;
+  background-color: var(--accent-color);
+}
+
+.PlayerNavigation__Link:hover {
+  background-color: var(--hover-color);
+}
+.PlayerNavigation__Link:active {
+  background-color: var(--active-color);
+}
+.PlayerNavigation__Link:focus {
+  background-color: var(--focus-color);
+}
+
+.PlayerNavigation__CloseButton {
+  width: 100%;
+}
