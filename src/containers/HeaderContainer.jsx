@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 
 import { MenuIcon } from "icons/round-menu";
 import { SearchIcon } from "icons/round-search";
-import { MainMenuContainer } from "containers/header/MainMenuContainer";
+import { PlayerNavigationContainer } from "containers/PlayerNavigationContainer";
 import { SearchBarContainer } from "containers/SearchBarContainer";
 import { Left, FlexRow } from "components/Flex/FlexComponents";
 import { Right } from "components/Flex/FlexComponents";
@@ -17,15 +17,17 @@ type TProps = {||};
 
 export const HeaderContainer = (props: TProps) => {
   const [searchValue, setSearchValue] = React.useState<string>("");
-  const [hasMainMenu, setHasMainMenu] = React.useState<boolean>(false);
+  const [hasPlayerNavigation, setHasPlayerNavigation] = React.useState<boolean>(
+    false
+  );
   const [hasSearchBar, setHasSearchBar] = React.useState<boolean>(false);
 
-  const toggleMainMenu = () => {
-    setHasMainMenu(!hasMainMenu);
+  const togglePlayerNavigation = () => {
+    setHasPlayerNavigation(prevValue => !prevValue);
   };
 
   const toggleSearchBar = () => {
-    setHasSearchBar(!hasSearchBar);
+    setHasSearchBar(prevValue => !prevValue);
   };
 
   const handleSearchSubmit = (value: string) => {
@@ -34,13 +36,15 @@ export const HeaderContainer = (props: TProps) => {
 
   return (
     <FixedPanelWrapper>
-      {hasMainMenu && <MainMenuContainer onClose={toggleMainMenu} />}
       {!hasSearchBar && (
         <FlexRow>
           <Left>
-            <SquareButton onClick={toggleMainMenu}>
+            <SquareButton onClick={togglePlayerNavigation}>
               <MenuIcon />
             </SquareButton>
+            {hasPlayerNavigation && (
+              <PlayerNavigationContainer onClose={togglePlayerNavigation} />
+            )}
           </Left>
           <Right>
             <SquareButton onClick={toggleSearchBar}>
