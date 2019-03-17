@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/pathephone/pathephone-web/compare/v1.2.0...v1.3.0) (2019-03-17)
+
+
+### Features
+
+* **ui:** implement basic navigation ui ([6e33d92](https://github.com/pathephone/pathephone-web/commit/6e33d92)), closes [#17](https://github.com/pathephone/pathephone-web/issues/17)
+
 # [1.2.0](https://github.com/pathephone/pathephone-web/compare/v1.1.0...v1.2.0) (2019-03-09)
 
 
