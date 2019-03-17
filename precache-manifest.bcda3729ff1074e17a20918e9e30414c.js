@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-shuffle-24px.6ffc9aea.svg"
   },
   {
-    "revision": "7c259b26db3b684c1533",
-    "url": "/pathephone-web/static/css/main.3f1acccf.chunk.css"
+    "revision": "d997ef40b66cc64117ee",
+    "url": "/pathephone-web/static/css/main.8398a7e3.chunk.css"
   },
   {
     "revision": "2145a9353646b2e0ab07",
     "url": "/pathephone-web/static/js/runtime~main.2145a935.js"
   },
   {
-    "revision": "c22f0a0557b1d147df51",
-    "url": "/pathephone-web/static/js/2.c22f0a05.chunk.js"
+    "revision": "d6dfae6353a9d2336b16",
+    "url": "/pathephone-web/static/js/2.d6dfae63.chunk.js"
   },
   {
     "revision": "f199187212c1ba0521e82a59a21ae771",
@@ -40,8 +40,8 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-keyboard_arrow_down-24px.3eb8b656.svg"
   },
   {
-    "revision": "7c259b26db3b684c1533",
-    "url": "/pathephone-web/static/js/main.7c259b26.chunk.js"
+    "revision": "d997ef40b66cc64117ee",
+    "url": "/pathephone-web/static/js/main.d997ef40.chunk.js"
   },
   {
     "revision": "aaff14aec848221497685845e7471eaf",
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/pathephone-web/static/media/round-queue_music-24px.c8f95e4d.svg"
   },
   {
-    "revision": "6d6fbb74ecfa5dd2ba8e8743aaf94999",
+    "revision": "6c1b94954e8076a0e1f60f039525709c",
     "url": "/pathephone-web/index.html"
   }
 ];
