@@ -6,15 +6,11 @@ import styles from "./FeedAlbum.module.css";
 
 type TProps = {|
   src: string,
-  alt: string,
-  onClick(): void
+  alt: string
 |};
 
 export const FeedAlbumCover = ({ src, alt, onClick }: TProps) => (
-  <img
-    className={styles.FeedAlbum__Cover}
-    src={src}
-    alt={alt}
-    onClick={onClick}
-  />
+  <div className={styles.FeedAlbum__Cover}>
+    <img className={styles.FeedAlbum__Image} src={src} alt={alt} />
+  </div>
 );
