@@ -25,11 +25,15 @@ export const LatestAlbumsPageContainer = (props: TProps) => {
     []
   );
 
+  const handleLoadMore = () => {
+    // TODO: load more albums
+  };
+
   return (
     <PageWrapper>
       {isPending && <AppLoadingScreen />}
       {data !== null && (
-        <AlbumsFeedWrapper>
+        <AlbumsFeedWrapper onLoadMore={handleLoadMore}>
           {data.map(item => (
             <FeedAlbumContainer data={item} key={item.id} />
           ))}
