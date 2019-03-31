@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/pathephone-web/precache-manifest.bcda3729ff1074e17a20918e9e30414c.js"
+  "/pathephone-web/precache-manifest.f20366381a227971e4801a3e480cf8ce.js"
 );
 
 workbox.clientsClaim();
