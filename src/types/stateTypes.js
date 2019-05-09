@@ -14,6 +14,8 @@ export type TFeedAlbum = {|
   coverSrc: string
 |};
 
+// Album form model
+
 export type TFormArtist = {|
   key: string,
   name: string

@@ -9,7 +9,7 @@ type TProps = {|
   alt: string
 |};
 
-export const FeedAlbumCover = ({ src, alt, onClick }: TProps) => (
+export const FeedAlbumCover = ({ src, alt }: TProps) => (
   <div className={styles.FeedAlbum__Cover}>
     <img className={styles.FeedAlbum__Image} src={src} alt={alt} />
   </div>

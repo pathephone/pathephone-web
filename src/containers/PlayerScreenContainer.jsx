@@ -3,7 +3,6 @@ import type { TPlaylistTrack } from "types/stateTypes";
 
 import * as React from "react";
 
-import { PlayerScreenWrapper } from "components/PlayerScreen/PlayerScreenWrapper";
 import { HeaderContainer } from "containers/HeaderContainer";
 import { PageContainer } from "containers/PageContainer";
 import { PlayerContext } from "contexts/PlayerContext";
@@ -80,11 +79,9 @@ export const PlayerScreenContainer = (props: TProps) => {
 
   return (
     <PlayerContext.Provider value={playerContextValue}>
-      <PlayerScreenWrapper>
-        <PageContainer />
-        <HeaderContainer />
-        <PlayerControlsContainer />
-      </PlayerScreenWrapper>
+      <PageContainer />
+      <HeaderContainer />
+      <PlayerControlsContainer />
     </PlayerContext.Provider>
   );
 };

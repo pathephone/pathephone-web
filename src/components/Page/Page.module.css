@@ -1,11 +1,12 @@
 .Wrapper {
-  padding: 60px 0;
   position: relative;
   z-index: 0;
-  height: 100vh;
+  display: grid;
+  min-height: 100vh;
+  padding: 60px 0;
 }
 
 .Wrapper_centered {
-  padding: 50px 0 0 0;
-  width: 100vw;
+  padding: 60px 0;
+  height: 100vh;
 }

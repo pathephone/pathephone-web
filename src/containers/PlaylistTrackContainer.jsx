@@ -21,11 +21,11 @@ export const PlaylistTrackContainer = ({ track }: TProps) => {
     setPlayingTrackId
   } = useContextStrict(PlayerContext);
 
-  const isCurrentlyPlaying = playingTrackId === id;
+  const playing = playingTrackId === id;
 
   // TODO: figure out how to better
   // track down cached audios
-  const isCached = true;
+  const cached = true;
 
   const memoizedTrack = React.useMemo(() => {
     const handleRemoveTrack = () => {
@@ -39,18 +39,19 @@ export const PlaylistTrackContainer = ({ track }: TProps) => {
       <PlaylistTrack
         artistName={artistName}
         title={title}
-        hasPlayingIndicator={isCurrentlyPlaying}
-        isPlayButtonDisabled={!isCached}
-        hasCachingIndicator={!isCached}
+        hasPlayingIndicator={playing}
+        isPlayButtonDisabled={!cached}
+        hasCachingIndicator={!cached}
         onRemove={handleRemoveTrack}
         onPlay={handlePlayTrack}
       />
     );
   }, [
     id,
+    cached,
     artistName,
     title,
-    isCurrentlyPlaying,
+    playing,
     removePlaylistTrack,
     setPlayingTrackId
   ]);
