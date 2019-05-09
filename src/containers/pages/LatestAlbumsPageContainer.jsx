@@ -1,17 +1,16 @@
 // @flow strict
 
 import type { TServicesContext } from "types/contextTypes";
-import type { TFeedAlbum } from "types/stateTypes";
 
 import * as React from "react";
 
 import { ServicesContext } from "contexts/ServicesContext";
 import { useContextStrict } from "hooks/useContextStrict";
-import { usePromiseEffect } from "hooks/usePromiseEffect";
 import { AlbumsFeedWrapper } from "components/AlbumsFeed/AlbumsFeedWrapper";
 import { FeedAlbumContainer } from "containers/FeedAlbumContainer";
 import { PageWrapper } from "components/Page/PageWrapper";
 import { AppLoadingScreen } from "components/App/AppLoadingScreen";
+import { useAsync } from "hooks/useAsync";
 
 type TProps = {||};
 
@@ -20,21 +19,26 @@ export const LatestAlbumsPageContainer = (props: TProps) => {
     ServicesContext
   );
 
-  const { isPending, data } = usePromiseEffect<TFeedAlbum[]>(
-    getLatestAlbums,
-    []
-  );
+  const [albumsState, onGetAlbums] = useAsync(getLatestAlbums);
+
+  React.useEffect(() => {
+    onGetAlbums();
+  }, [onGetAlbums]);
 
   const handleLoadMore = () => {
     // TODO: load more albums
   };
 
+  const hasLoadingScreen = !!albumsState && albumsState.pending;
+
+  const albums = albumsState && albumsState.data;
+
   return (
     <PageWrapper>
-      {isPending && <AppLoadingScreen />}
-      {data !== null && (
+      {hasLoadingScreen && <AppLoadingScreen />}
+      {albums !== null && (
         <AlbumsFeedWrapper onLoadMore={handleLoadMore}>
-          {data.map(item => (
+          {albums.map(item => (
             <FeedAlbumContainer data={item} key={item.id} />
           ))}
         </AlbumsFeedWrapper>

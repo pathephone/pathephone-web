@@ -1,0 +1,58 @@
+.AlbumTrackEditor__Wrapper {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr auto;
+  border-bottom: 1px solid var(--focus-color);
+  padding: 2em 1em;
+}
+
+.AlbumTrackEditor__Common {
+  display: grid;
+  grid-gap: 0.5em;
+}
+
+.AlbumTrackEditor__Button {
+  display: flex;
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  padding: 0;
+  background: transparent;
+  font-size: 1.25em;
+}
+
+.AlbumTrackEditor__Button svg {
+  margin: auto;
+}
+
+.AlbumTrackEditor__Button:disabled {
+  color: var(--text-inactive-color);
+}
+
+.AlbumTrackEditor__Button:focus:not(:disabled) {
+  background-color: var(--focus-color);
+}
+.AlbumTrackEditor__Button:hover:not(:disabled) {
+  background-color: var(--hover-color);
+}
+
+.AlbumTrackEditor__Button:not(:first-child) {
+  margin-top: 0.5em;
+}
+
+.AlbumTrackEditor__FileInfo {
+  margin-bottom: 1em;
+  line-height: 1.75em;
+}
+
+.AlbumTrackEditor__FileIcon {
+  display: inline;
+  font-size: 36px;
+  vertical-align: top;
+}
+
+.AlbumTrackEditor__FileName {
+  margin-left: 1em;
+}

@@ -1,0 +1,42 @@
+.DropZone__Wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.DropZone__Label {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.DropZone__Input {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.DropZone__Text {
+  width: 20em;
+  margin: auto;
+  text-align: center;
+}
+
+.DropZone__MainText {
+  color: var(--text-secondary-color);
+}
+
+.DropZone__ErrorText,
+.DropZone__SuccessText {
+  margin-bottom: 1.5em;
+}
+
+.DropZone__SuccessText {
+  color: var(--text-primary-color);
+}
+
+.DropZone__ErrorText {
+  color: var(--error-color);
+}

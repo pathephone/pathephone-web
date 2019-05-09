@@ -1,0 +1,62 @@
+.AlbumEditor__Wrapper {
+  margin: auto;
+  width: 100%;
+  max-width: 30em;
+  padding: 1em;
+}
+
+.AlbumEditor__Footer {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+
+.AlbumEditor__FieldsetTitle {
+  line-height: 50px;
+  border-bottom: 1px solid var(--hover-color);
+  padding: 0 1em;
+}
+
+.AlbumEditor__FieldsetBody_padding {
+  padding: 1em 1em;
+}
+
+.AlbumEditor__Fieldset {
+  margin-top: 1em;
+  border-radius: 2px;
+  border: 1px solid lightgrey;
+  background-color: white;
+}
+
+.AlbumEditor__Button {
+  height: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: transparent;
+  outline: none;
+  border-radius: 2px;
+}
+
+.AlbumEditor__Button:hover,
+.AlbumEditor__Button:focus {
+  background-color: var(--hover-color);
+}
+
+.AlbumEditor__Button:active {
+  background-color: var(--active-color);
+}
+
+.AlbumEditor__Button:active {
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.AlbumEditor__Button_primary {
+  background-color: white;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
+.AlbumEditor__Button_secondary {
+  border: 1px solid var(--focus-color);
+}
