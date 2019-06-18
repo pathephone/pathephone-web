@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/pathephone/pathephone-web/compare/v1.4.0...v1.5.0) (2019-06-18)
+
+
+### Features
+
+* **ui:** implement basic share album ui ([82d9d28](https://github.com/pathephone/pathephone-web/commit/82d9d28))
+
 # [1.4.0](https://github.com/pathephone/pathephone-web/compare/v1.3.0...v1.4.0) (2019-03-31)
 
 
