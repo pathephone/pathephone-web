@@ -10,36 +10,42 @@ import { useKeyUp } from "hooks/useKeyUp";
 import { SquareButton } from "components/SquareButton/SquareButtonComponents";
 
 type TProps = {|
-  onCancel(): void,
+  onClose(): void,
   onSubmit(value: string): void
 |};
 
 export const SearchBarContainer = (props: TProps) => {
-  const { onCancel, onSubmit } = props;
+  const { onClose, onSubmit } = props;
 
   const [searchValue, setSearchValue] = React.useState<string>("");
 
-  const handleInputChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    setSearchValue(value);
-  };
+  const handleInputChange = React.useCallback(
+    (e: SyntheticEvent<HTMLInputElement>) => {
+      const { value } = e.currentTarget;
+      setSearchValue(value);
+    },
+    []
+  );
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(searchValue);
-    onCancel();
-  };
+  const handleSubmit = React.useCallback(
+    (e: SyntheticEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onSubmit(searchValue);
+      onClose();
+    },
+    [onClose, onSubmit, searchValue]
+  );
 
   useKeyUp({
-    Escape: onCancel
+    Escape: onClose
   });
 
   return (
-    <SearchBarWrapper onOutsideClick={onCancel}>
+    <SearchBarWrapper onOutsideClick={onClose}>
       <SearchBarForm onSubmit={handleSubmit}>
         <SearchBarInput onChange={handleInputChange} value={searchValue} />
       </SearchBarForm>
-      <SquareButton onClick={onCancel}>
+      <SquareButton onClick={onClose}>
         <ClearIcon />
       </SquareButton>
     </SearchBarWrapper>

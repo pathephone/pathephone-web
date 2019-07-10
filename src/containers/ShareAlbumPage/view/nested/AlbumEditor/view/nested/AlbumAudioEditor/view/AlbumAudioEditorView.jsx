@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormAlbum, TFormTrack } from "types/stateTypes";
+import type { TFormAlbum, TFormTrack } from "types/state";
 
 import * as React from "react";
 

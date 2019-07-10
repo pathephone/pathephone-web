@@ -1,7 +1,8 @@
 // @flow
 
 import * as React from "react";
-import { HomelessContextConsumerError } from "data/errors/LonelyConsumerError";
+
+import { HomelessContextConsumerError } from "data/errors";
 
 export function useContextStrict<TValue>(
   context: React.Context<TValue | null>

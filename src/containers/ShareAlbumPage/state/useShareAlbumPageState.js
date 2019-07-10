@@ -1,14 +1,12 @@
 // @flow strict
 
-import type { TServicesContext } from "types/contextTypes";
-import type { TFormAlbum } from "types/stateTypes";
+import type { TFormAlbum } from "types/state";
 
 import * as React from "react";
 
-import { ServicesContext } from "contexts/ServicesContext";
-import { useContextStrict } from "hooks/useContextStrict";
 import { useAsync } from "hooks/useAsync";
 import { getAlbumFormDataFromFiles } from "utils/getAlbumFormDataFromFiles";
+import { useServices } from "hooks/useServices";
 
 export const useShareAlbumPageState = () => {
   const [errorText, setErrorText] = React.useState();
@@ -18,13 +16,12 @@ export const useShareAlbumPageState = () => {
     null
   );
 
-  const { submitAlbum } = useContextStrict<TServicesContext>(ServicesContext);
+  const { submitAlbum } = useServices();
 
-  const [submitState, onSubmit] = useAsync(submitAlbum, { throwError: false });
+  const [submitState, onSubmit] = useAsync(submitAlbum);
 
   const [transformFilesState, onTransformFiles] = useAsync(
-    getAlbumFormDataFromFiles,
-    { throwError: false }
+    getAlbumFormDataFromFiles
   );
 
   React.useEffect(() => {
@@ -32,8 +29,8 @@ export const useShareAlbumPageState = () => {
       setSuccessText();
       setErrorText();
     }
-    if (transformFilesState && transformFilesState.data) {
-      setAlbumFormData(transformFilesState.data);
+    if (transformFilesState && transformFilesState.value) {
+      setAlbumFormData(transformFilesState.value);
     }
     if (transformFilesState && transformFilesState.error) {
       setErrorText(transformFilesState.error.message);

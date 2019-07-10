@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TPlaylistTrack } from "types/stateTypes";
+import type { TPlaylistTrack } from "types/state";
 
 import * as React from "react";
 

@@ -1,7 +1,7 @@
 // @flow strict
 
 import type { TMockStorageAlbum } from "types/mockTypes";
-import type { TFeedAlbum } from "types/stateTypes";
+import type { TFeedAlbum } from "types/state";
 
 export const mockStorageAlbumToFeedAlbum = ({
   title,
@@ -23,6 +23,7 @@ export const mockStorageAlbumToFeedAlbum = ({
     id,
     title,
     artistName,
-    coverSrc
+    coverSrc,
+    saved: true
   };
 };

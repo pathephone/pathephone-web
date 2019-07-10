@@ -2,72 +2,97 @@
 
 import * as React from "react";
 
-type IPromiseState<TData> = {|
+type IPromiseState<TValue> = {|
   pending: boolean,
   resolved: boolean,
   rejected: boolean,
-  data: null | TData,
+  value: null | TValue,
   error: null | Error
 |};
 
-const getInitialPromiseState = () => ({
+const getRawPromiseState = () => ({
   pending: false,
   resolved: false,
   rejected: false,
-  data: null,
+  value: null,
   error: null
 });
 
-type IReturnValue<TParams, TData> = [
-  null | IPromiseState<TData>,
+type IReturnValue<TParams, TValue> = [
+  null | IPromiseState<TValue>,
   (params: TParams) => void
 ];
 
-type TOptions = {|
-  throwError?: boolean
-|};
+type TOptions = {
+  errorsToKeep?: Class<Error>[]
+};
 
-export function useAsync<TParams, TData>(
-  asyncFunction: (params: TParams) => Promise<TData>,
-  options?: TOptions
-): IReturnValue<TParams, TData> {
-  const { throwError = true } = options || {};
+export class InvalidExceptionError extends TypeError {
+  constructor() {
+    super("useAsync accepts only Error-based exceptions.");
+  }
+}
 
-  const promiseRef = React.useRef<null | Promise<TData>>(null);
+export function useAsync<TParams, TValue>(
+  asyncFunction: (params: TParams) => Promise<TValue>,
+  options?: TOptions = {}
+): IReturnValue<TParams, TValue> {
+  const { errorsToKeep = [] } = options;
+
+  const promiseRef = React.useRef<null | Promise<TValue>>(null);
   const unmountedRef = React.useRef(false);
+  const callbackRef = React.useRef<null | ((params: TParams) => void)>(null);
 
   const [
     promiseState,
     setPromiseState
-  ] = React.useState<null | IPromiseState<TData>>(null);
+  ] = React.useState<null | IPromiseState<TValue>>(null);
 
-  if (throwError && promiseState && promiseState.error) {
-    throw promiseState.error;
+  if (promiseState && promiseState.error !== null) {
+    const { error } = promiseState;
+
+    if (!(error instanceof Error)) {
+      throw new InvalidExceptionError();
+    }
+
+    const keep = errorsToKeep.some(
+      ErrorConstructor => promiseState.error instanceof ErrorConstructor
+    );
+
+    if (!keep) {
+      throw promiseState.error;
+    }
   }
 
-  const trigger = React.useCallback(
+  const callback = React.useCallback(
     (params: TParams) => {
       const promise = asyncFunction(params);
 
       promiseRef.current = promise;
 
-      const handleResolve = nextData => {
-        if (unmountedRef.current === false && promise === promiseRef.current) {
-          setPromiseState({
-            ...getInitialPromiseState(),
-            resolved: true,
-            data: nextData
-          });
+      const isActual = () =>
+        unmountedRef.current === false &&
+        promise === promiseRef.current &&
+        callback === callbackRef.current;
+
+      const handleResolve = nextValue => {
+        if (isActual()) {
+          if (nextValue instanceof Error) {
+            throw nextValue;
+          } else {
+            setPromiseState({
+              ...getRawPromiseState(),
+              resolved: true,
+              value: nextValue
+            });
+          }
         }
       };
 
       const handleReject = (nextError: Error) => {
-        if (unmountedRef.current === false && promise === promiseRef.current) {
-          if (!throwError) {
-            console.error(nextError.message);
-          }
+        if (isActual()) {
           setPromiseState({
-            ...getInitialPromiseState(),
+            ...getRawPromiseState(),
             rejected: true,
             error: nextError
           });
@@ -75,18 +100,20 @@ export function useAsync<TParams, TData>(
       };
 
       setPromiseState({
-        ...getInitialPromiseState(),
+        ...getRawPromiseState(),
         pending: true
       });
 
       promise.then(handleResolve).catch(handleReject);
     },
-    [asyncFunction, throwError]
+    [asyncFunction]
   );
 
   React.useEffect(() => {
     setPromiseState(null);
-  }, [trigger]);
+    promiseRef.current = null;
+    callbackRef.current = callback;
+  }, [callback]);
 
   React.useEffect(() => {
     return () => {
@@ -94,5 +121,5 @@ export function useAsync<TParams, TData>(
     };
   }, []);
 
-  return [promiseState, trigger];
+  return [promiseState, callback];
 }

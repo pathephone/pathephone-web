@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormAlbum } from "types/stateTypes";
+import type { TFormAlbum } from "types/state";
 import type { TMockStorageAlbum } from "types/mockTypes";
 
 import { getUniqueString } from "utils/getUniqueString";

@@ -1,21 +1,18 @@
 // @flow strict
 
-import type { TServicesContext } from "types/contextTypes";
-
 import * as React from "react";
 
 import { AppLoadingScreen } from "components/App/AppLoadingScreen";
-import { ServicesContext } from "contexts/ServicesContext";
-import { useContextStrict } from "hooks/useContextStrict";
 import { PlayerScreenContainer } from "containers/PlayerScreenContainer";
 import { Theme } from "components/Themes/ThemesComponents";
 import { AppWrapper } from "components/App/AppWrapper";
 import { useAsync } from "hooks/useAsync";
+import { useServices } from "hooks/useServices";
 
 type TProps = {||};
 
 export const AppContainer = (props: TProps) => {
-  const { startApp } = useContextStrict<TServicesContext>(ServicesContext);
+  const { startApp } = useServices();
 
   const [startState, onStartApp] = useAsync(startApp);
 
