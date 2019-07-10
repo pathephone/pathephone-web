@@ -3,11 +3,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { RootContainer } from "containers/RootContainer";
 import { appContextMock } from "data/appContextMock";
+import { Root } from "view/Root";
 
 const mountPoint = document.getElementById("root");
 
 if (mountPoint) {
-  ReactDOM.render(<RootContainer {...appContextMock} />, mountPoint);
+  ReactDOM.render(<Root {...appContextMock} />, mountPoint);
 }
