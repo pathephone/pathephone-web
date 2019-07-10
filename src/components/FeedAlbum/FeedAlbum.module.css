@@ -3,22 +3,6 @@
   width: 10em;
 }
 
-.FeedAlbum__Cover {
-  position: relative;
-  height: 0;
-  width: 100%;
-  padding-bottom: 100%;
-}
-
-.FeedAlbum__Image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 3px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-}
-
 .FeedAlbum__Info {
   text-align: center;
   padding: 15px;
@@ -44,50 +28,8 @@
   color: var(--text-secondary-color);
 }
 
-.FeedAlbum__Actions {
-  position: absolute;
-  display: flex;
-  top: 7em;
-  right: 0.25em;
-}
-
-.FeedAlbum__Action {
-  position: relative;
-  display: flex;
-  height: 3em;
-  width: 3em;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  outline: none;
-  border: none;
-  color: var(--text-primary-color);
-  margin: 0.25em;
-}
-
-.FeedAlbum__Action::-moz-focus-inner {
-  border: 0;
-}
-
-.FeedAlbum__Action:hover,
-.FeedAlbum__Action:focus {
-  background: rgba(255, 255, 255, 1);
-}
-
-.FeedAlbum__Action:active {
-  color: var(--text-inactive-color) !important;
-}
-
-.FeedAlbum__Action svg {
-  height: 2em;
-  margin: auto;
-}
-
 @media (min-width: 40em) {
   .FeedAlbum__Wrapper {
     width: 15em;
-  }
-  .FeedAlbum__Actions {
-    top: 11.75em;
-    right: 0.5em;
   }
 }

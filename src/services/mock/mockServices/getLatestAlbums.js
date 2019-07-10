@@ -1,15 +1,12 @@
 // @flow strict
 
-import type { TFeedAlbum } from "types/stateTypes";
+import type { TFeedAlbum } from "types/state";
 
 import { asyncTimeout } from "utils/asyncTimeout";
-
-// import { albumsStorage } from "./mockStorage";
-// import { mockStorageAlbumToFeedAlbum } from "./normalize/mockStorageAlbumToFeedAlbum";
-import { feedAlbumMocks } from "mocks/uiDataMocks";
+import { getFeedAlbumMocks } from "utils/mock";
+import { SERVICE_MOCK_DELAY } from "data/constants";
 
 export const getLatestAlbums = async (): Promise<TFeedAlbum[]> => {
-  await asyncTimeout(500);
-  // return albumsStorage.map(mockStorageAlbumToFeedAlbum);
-  return [...feedAlbumMocks];
+  await asyncTimeout(SERVICE_MOCK_DELAY);
+  return getFeedAlbumMocks(5);
 };

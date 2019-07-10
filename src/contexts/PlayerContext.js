@@ -1,7 +1,7 @@
 // @flow strict
 
-import type { TPlayerContext } from "types/contextTypes";
+import type { TPlayer } from "types/state";
 
 import * as React from "react";
 
-export const PlayerContext = React.createContext<TPlayerContext | null>(null);
+export const PlayerContext = React.createContext<TPlayer | null>(null);

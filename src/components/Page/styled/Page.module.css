@@ -1,0 +1,21 @@
+.Page__Wrapper {
+  position: relative;
+  z-index: 0;
+  display: grid;
+  min-height: 100vh;
+  padding-top: 60px;
+}
+
+.Page__Wrapper_centered {
+  height: 100vh;
+}
+
+.Page__Wrapper_compact {
+  padding: 60px 0;
+}
+
+.Page__Loader {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}

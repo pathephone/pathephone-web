@@ -1,10 +1,10 @@
 // @flow strict
 
-import type { TFormAlbum } from "types/stateTypes";
+import type { TFormAlbum } from "types/state";
 
 import * as React from "react";
 
-import { PageWrapper } from "components/Page/PageWrapper";
+import { Page } from "components/Page";
 
 import { AlbumEditor } from "./nested/AlbumEditor";
 import { DropZone } from "./nested/DropZone";
@@ -38,7 +38,7 @@ export const ShareAlbumPageView = (props: TProps) => {
   } = props;
 
   return (
-    <PageWrapper centered={hasPreloader || hasDropZone}>
+    <Page centered={hasPreloader || hasDropZone}>
       {hasPreloader && <ShareAlbumPagePreloader />}
       {hasAlbumEditor && albumFormData && (
         <AlbumEditor
@@ -55,6 +55,6 @@ export const ShareAlbumPageView = (props: TProps) => {
           successText={successText}
         />
       )}
-    </PageWrapper>
+    </Page>
   );
 };

@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormAlbum, TFormArtist } from "types/stateTypes";
+import type { TFormAlbum, TFormArtist } from "types/state";
 
 import { getUniqueString } from "utils/getUniqueString";
 

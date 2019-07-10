@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { routes } from "data/routes.module";
 import { PlayerNavigationPopup } from "components/PlayerNavigation/PlayerNavigationComponents";
 import { PlayerNavigationLink } from "components/PlayerNavigation/PlayerNavigationComponents";
 import { OutsideClickDetector } from "components/OutsideClickDetector";
+import { routes } from "data/routes";
 
 type TProps = {|
   onClose(): void
@@ -20,7 +20,10 @@ export const PlayerNavigationContainer = (props: TProps) => {
         <PlayerNavigationLink onClick={onClose} to={routes.latestAlbumsRoute()}>
           Latest albums
         </PlayerNavigationLink>
-        <PlayerNavigationLink onClick={onClose} to={routes.searchAlbumsRoute()}>
+        <PlayerNavigationLink
+          onClick={onClose}
+          to={routes.searchQueriesRoute()}
+        >
           Search albums
         </PlayerNavigationLink>
         <PlayerNavigationLink onClick={onClose} to={routes.shareAlbumRoute()}>

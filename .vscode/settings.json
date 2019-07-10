@@ -6,5 +6,6 @@
   "flow.useNPMPackagedFlow": true,
   "javascript.validate.enable": false,
   "javascript.preferences.importModuleSpecifier": "auto",
-  "javascript.updateImportsOnFileMove.enabled": "never"
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "eslint.autoFixOnSave": true
 }

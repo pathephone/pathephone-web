@@ -1,20 +1,23 @@
 // @flow strict
 
-import type { TAppContext } from "types/contextTypes";
+import type { TServices, TIntl } from "types/state";
 
 import * as React from "react";
-import { BrowserRouter } from "react-router-dom";
 
 import { ServicesContext } from "contexts/ServicesContext";
 import { LocaleStringsContext } from "contexts/LocaleStringsContext";
 import { AppContainer } from "containers/AppContainer";
 import { ErrorBoundary } from "components/ErrorBoundary";
 import { AppErrorScreen } from "components/App/AppErrorScreen";
+import { RouterProvider } from "./RouterProvider";
 
-type TProps = TAppContext;
+type TProps = {
+  services: TServices,
+  defaultLocaleStrings: TIntl
+};
 
 export const RootContainer = ({ services, defaultLocaleStrings }: TProps) => (
-  <BrowserRouter>
+  <RouterProvider>
     <ServicesContext.Provider value={services}>
       <LocaleStringsContext.Provider value={defaultLocaleStrings}>
         <ErrorBoundary
@@ -25,5 +28,5 @@ export const RootContainer = ({ services, defaultLocaleStrings }: TProps) => (
         </ErrorBoundary>
       </LocaleStringsContext.Provider>
     </ServicesContext.Provider>
-  </BrowserRouter>
+  </RouterProvider>
 );
