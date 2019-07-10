@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/pathephone/pathephone-web/compare/v1.5.0...v1.6.0) (2019-07-10)
+
+
+### Features
+
+* **ui:** implenets basic albums search ui ([bf015d7](https://github.com/pathephone/pathephone-web/commit/bf015d7)), closes [#28](https://github.com/pathephone/pathephone-web/issues/28)
+
 # [1.5.0](https://github.com/pathephone/pathephone-web/compare/v1.4.0...v1.5.0) (2019-06-18)
 
 
