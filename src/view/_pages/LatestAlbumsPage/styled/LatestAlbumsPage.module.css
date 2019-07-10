@@ -1,0 +1,16 @@
+.LatestAlbumsPage__Wrapper_feed {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75em;
+  grid-gap: 0.75em;
+  grid-template-columns: repeat(auto-fit, minmax(5em, 10em));
+}
+
+@media (min-width: 40em) {
+  .LatestAlbumsPage__Wrapper_feed {
+    padding: 1em;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(5em, 15em));
+  }
+}

@@ -1,0 +1,35 @@
+.PlaylistPopup__Wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 60px);
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
+}
+
+.PlaylistPopup__Header {
+  display: flex;
+  height: 60px;
+  padding: 0 10px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.PlaylistPopup__Count {
+  line-height: 60px;
+  font-size: 18px;
+  padding-left: 17.5px;
+}
+
+.PlaylistPopup__Button {
+  margin-left: auto;
+}
+
+.PlaylistPopup__Body {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+}
+
+.PlaylistPopup__Content {
+  padding: 20px 10px;
+}
