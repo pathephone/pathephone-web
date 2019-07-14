@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/pathephone/pathephone-web/compare/v1.6.0...v1.6.1) (2019-07-14)
+
+
+### Bug Fixes
+
+* **ui:** brings set of UI fixes ([b1fa946](https://github.com/pathephone/pathephone-web/commit/b1fa946))
+
 # [1.6.0](https://github.com/pathephone/pathephone-web/compare/v1.5.0...v1.6.0) (2019-07-10)
 
 
