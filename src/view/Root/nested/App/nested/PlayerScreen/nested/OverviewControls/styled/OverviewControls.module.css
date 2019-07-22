@@ -1,0 +1,11 @@
+.OverviewControls__Wrapper {
+  display: flex;
+}
+
+.OverviewControls__Group_nav {
+  margin-right: auto;
+}
+
+.OverviewControls__Group_search {
+  margin-left: auto;
+}

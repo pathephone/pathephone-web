@@ -1,59 +1,27 @@
 // @flow strict
 
-import type { TFormAlbum } from "types/state";
-
 import * as React from "react";
 
 import { Page } from "view/Page";
+import { useShareAlbumPageState } from "hooks/useShareAlbumPageState";
 
 import { AlbumEditor } from "./nested/AlbumEditor";
 import { DropZone } from "./nested/DropZone";
-import { ShareAlbumPagePreloader } from "./styled/ShareAlbumPagePreloader";
+import { ShareAlbumPageLoader } from "./styled/ShareAlbumPageLoader";
 
-type TProps = {|
-  hasPreloader: boolean,
-  hasDropZone: boolean,
-  hasAlbumEditor: boolean,
-  albumFormData: null | TFormAlbum,
-  errorText?: string,
-  successText?: string,
-  handleFilesRecieved(files: FileList): void,
-  handleAlbumFormDataChange(nextAlbum: TFormAlbum): void,
-  handleSubmit(): void,
-  handleCancel(): void
-|};
+export const ShareAlbumPageView = () => {
+  const { screenMap, error, didSucceed } = useShareAlbumPageState();
 
-export const ShareAlbumPageView = (props: TProps) => {
-  const {
-    hasPreloader,
-    hasDropZone,
-    hasAlbumEditor,
-    errorText,
-    successText,
-    albumFormData,
-    handleAlbumFormDataChange,
-    handleSubmit,
-    handleCancel,
-    handleFilesRecieved
-  } = props;
+  const errorText = error ? error.message : undefined;
+
+  const successText = didSucceed ? "Album successfully shared" : undefined;
 
   return (
-    <Page centered={hasPreloader || hasDropZone}>
-      {hasPreloader && <ShareAlbumPagePreloader />}
-      {hasAlbumEditor && albumFormData && (
-        <AlbumEditor
-          data={albumFormData}
-          onDataChange={handleAlbumFormDataChange}
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-        />
-      )}
-      {hasDropZone && (
-        <DropZone
-          onFilesRecieved={handleFilesRecieved}
-          errorText={errorText}
-          successText={successText}
-        />
+    <Page centered={screenMap.LOADING || screenMap.SELECTING_FILES}>
+      {screenMap.LOADING && <ShareAlbumPageLoader />}
+      {screenMap.EDITING_ALBUM && <AlbumEditor />}
+      {screenMap.SELECTING_FILES && (
+        <DropZone errorText={errorText} successText={successText} />
       )}
     </Page>
   );

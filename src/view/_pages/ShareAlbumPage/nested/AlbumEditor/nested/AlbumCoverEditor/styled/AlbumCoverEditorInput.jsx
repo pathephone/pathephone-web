@@ -6,15 +6,26 @@ import styles from "./AlbumCoverEditor.module.css";
 
 type TProps = {|
   errorMessage?: string,
-  onChange(e: SyntheticEvent<HTMLInputElement>): void
+  onFileChange(file: File): void
 |};
 
-export const AlbumCoverEditorInput = ({ onChange, errorMessage }: TProps) => {
+export const AlbumCoverEditorInput = ({
+  onFileChange,
+  errorMessage = ""
+}: TProps) => {
   const inputNodeRef = React.useRef<null | HTMLInputElement>(null);
+
+  const onChange = React.useCallback(
+    (event: SyntheticEvent<HTMLInputElement>) => {
+      onFileChange(event.currentTarget.files[0]);
+      event.currentTarget.value = "";
+    },
+    [onFileChange]
+  );
 
   React.useEffect(() => {
     const inputNode = inputNodeRef.current;
-    if (inputNode && errorMessage !== undefined) {
+    if (inputNode) {
       inputNode.setCustomValidity(errorMessage);
     }
   }, [errorMessage]);

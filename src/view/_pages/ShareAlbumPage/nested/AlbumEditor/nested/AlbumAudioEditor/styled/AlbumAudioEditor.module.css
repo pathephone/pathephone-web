@@ -1,5 +1,6 @@
-.AlbumAudioEditor__Label {
+.AlbumAudioEditor__Wrapper {
   position: relative;
+  z-index: 0;
 }
 
 .AlbumAudioEditor__Input {
@@ -10,26 +11,37 @@
   left: 0;
 }
 
+.AlbumAudioEditor__Input:invalid {
+  border-color: var(--error-color);
+}
+
 .AlbumAudioEditor__Input:not(:first-child) {
   margin-top: 0.25em;
 }
 
-.AlbumAudioEditor__Text {
+.AlbumAudioEditor__Label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 4em;
-  line-height: 4em;
+  line-height: 1.25em;
   text-align: center;
-  text-transform: uppercase;
 }
 
-.AlbumAudioEditor__Text:hover {
+.AlbumAudioEditor__Label:hover {
   background-color: var(--hover-color);
 }
 
-.AlbumAudioEditor__Input:invalid + .AlbumAudioEditor__Text {
-  border-color: var(--error-color);
+.AlbumAudioEditor__Input:focus-within + .AlbumAudioEditor__Label {
+  background-color: var(--focus-color);
 }
 
-.AlbumAudioEditor__Input:focus-within + .AlbumAudioEditor__Text {
-  background-color: var(--focus-color);
+.AlbumAudioEditor__Text {
+  text-transform: uppercase;
+}
+
+.AlbumAudioEditor__Error {
+  color: var(--error-color);
 }

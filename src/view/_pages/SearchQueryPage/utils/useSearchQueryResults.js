@@ -25,12 +25,12 @@ export const useSearchQueryResults = (query: string) => {
   // Creates service state
   const { getSearchResults: getSearchResultsService } = useServices();
 
-  const getResultsByQueryService = React.useCallback(
-    () => getSearchResultsService(query),
-    [query, getSearchResultsService]
-  );
+  const [resultsState, injectResultsPromise] = useAsync();
 
-  const [resultsState, getResults] = useAsync(getResultsByQueryService);
+  const getResults = React.useCallback(
+    () => injectResultsPromise(getSearchResultsService(query)),
+    [getSearchResultsService, injectResultsPromise, query]
+  );
 
   // Creates effect that handles fetched results
   React.useEffect(() => {

@@ -6,18 +6,19 @@ import styles from "./AlbumEditor.module.css";
 
 type TProps = {|
   children: string,
-  isPrimary?: boolean,
-  onClick(): void
+  submit?: boolean,
+  onClick?: () => void
 |};
 
-export const AlbumEditorButton = ({ children, isPrimary, onClick }: TProps) => (
+export const AlbumEditorButton = ({ children, submit, onClick }: TProps) => (
   <button
     onClick={onClick}
     className={`${styles.AlbumEditor__Button} ${
-      isPrimary === true
+      submit === true
         ? styles.AlbumEditor__Button_primary
         : styles.AlbumEditor__Button_secondary
     }`}
+    type={submit === true ? "submit" : "button"}
   >
     {children}
   </button>

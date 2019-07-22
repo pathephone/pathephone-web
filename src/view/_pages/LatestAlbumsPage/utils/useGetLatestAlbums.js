@@ -19,18 +19,18 @@ export const useGetLatestAlbums = () => {
   // Creates async state that fetches search queries
   const { getLatestAlbums: getLatestAlbumsService } = useServices();
 
-  const [listLoadingState, loadList] = useAsync(getLatestAlbumsService);
+  const [listLoadingState, loadList] = useAsync({ errorsToKeep: [] });
 
   // Callback that reloads all pages
   const reload = React.useCallback(() => {
     setList(null);
-    loadList({ startPage: 1, pagesCount: page });
-  }, [loadList, page]);
+    loadList(getLatestAlbumsService({ startPage: 1, pagesCount: page }));
+  }, [getLatestAlbumsService, loadList, page]);
 
   // Load list on initial render and once page changes
   React.useEffect(() => {
-    loadList({ startPage: page });
-  }, [loadList, page]);
+    loadList(getLatestAlbumsService({ startPage: page }));
+  }, [getLatestAlbumsService, loadList, page]);
 
   // Merges search queries
   React.useEffect(() => {

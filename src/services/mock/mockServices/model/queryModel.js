@@ -3,7 +3,7 @@
 import type { TFeedAlbum } from "types/state";
 
 import { getUID } from "utils/uid";
-import { getFeedAlbumMocks } from "utils/mock";
+import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
 
 type TRecord = {
   id: number,

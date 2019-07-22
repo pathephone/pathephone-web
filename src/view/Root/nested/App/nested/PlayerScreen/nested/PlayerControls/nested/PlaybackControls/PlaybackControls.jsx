@@ -1,44 +1,68 @@
 // @flow strict
 
-import type { TPlaylistTrack } from "types/state";
-
 import * as React from "react";
 
 import { PauseIcon } from "icons/round-pause";
 import { PlayArrowIcon } from "icons/round-play-arrow";
-import { useContextStrict } from "hooks/useContextStrict";
-import { PlayerContext } from "contexts/PlayerContext";
 import { PlaylistIcon } from "icons/round-queue_music";
 import { SquareButton } from "view/SquareButton";
+import { Spinner } from "view/Spinner";
+import { useDispatch } from "hooks/useDispatch";
 
 import { PlaybackControlsInfo } from "./styled/PlaybackControlsInfo";
 import { PlaybackControlsGroup } from "./styled/PlaybackControlsGroup";
+import { usePlayingTrack } from "./state/usePlayingTrack";
+import { usePlayerContext } from "hooks/usePlayerContext";
+import { PlaybackControlsWrapper } from "./styled/PlaybackControlsWrapper";
 
-type TProps = {|
-  onSwitchToPlaylistMode(): void,
-  playingTrack: TPlaylistTrack
-|};
+type TProps = {||};
 
 export const PlaybackControls = (props: TProps) => {
-  const { onSwitchToPlaylistMode, playingTrack } = props;
+  const dispatch = useDispatch();
 
-  const { title, artistName } = playingTrack;
+  const { title, artistName } = usePlayingTrack();
 
-  const { isPaused, toggleIsPaused } = useContextStrict(PlayerContext);
+  const { audioStatus } = usePlayerContext();
+
+  const handlePause = React.useCallback(() => {
+    dispatch({ type: "PLAYBACK_CONTROLS__PAUSE" });
+  }, [dispatch]);
+
+  const handlePlay = React.useCallback(() => {
+    dispatch({ type: "PLAYBACK_CONTROLS__PLAY" });
+  }, [dispatch]);
+
+  const handleOpenPlaylist = React.useCallback(() => {
+    dispatch({ type: "PLAYBACK_CONTROLS__OPEN_PLAYLIST" });
+  }, [dispatch]);
+
+  const hasPauseButton = audioStatus === "PLAYING";
+
+  const hasPlayButton = audioStatus === "PAUSED";
+
+  const hasLoader = audioStatus === "WAITING";
 
   return (
-    <>
-      <PlaybackControlsGroup>
-        <SquareButton onClick={toggleIsPaused}>
-          {isPaused ? <PauseIcon /> : <PlayArrowIcon />}
-        </SquareButton>
+    <PlaybackControlsWrapper>
+      <PlaybackControlsGroup mod="player">
+        {hasPauseButton && (
+          <SquareButton onClick={handlePause}>
+            <PauseIcon />
+          </SquareButton>
+        )}
+        {hasPlayButton && (
+          <SquareButton onClick={handlePlay}>
+            <PlayArrowIcon />
+          </SquareButton>
+        )}
+        {hasLoader && <Spinner />}
       </PlaybackControlsGroup>
       <PlaybackControlsInfo title={title} artistName={artistName} />
-      <PlaybackControlsGroup toRight>
-        <SquareButton onClick={onSwitchToPlaylistMode}>
+      <PlaybackControlsGroup mod="playlist">
+        <SquareButton onClick={handleOpenPlaylist}>
           <PlaylistIcon />
         </SquareButton>
       </PlaybackControlsGroup>
-    </>
+    </PlaybackControlsWrapper>
   );
 };

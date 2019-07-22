@@ -1,32 +1,48 @@
 // @flow strict
 
-import React from "react";
+import * as React from "react";
 
-import { DropZoneView } from "./DropZoneView";
+import { DropZoneWrapper } from "./styled/DropZoneWrapper";
+import { DropZoneLabel } from "./styled/DropZoneLabel";
+import { DropZoneInput } from "./styled/DropZoneInput";
+import { DropZoneText } from "./styled/DropZoneText";
+import { useDispatch } from "hooks/useDispatch";
+import { useIntlDictionary } from "hooks/useIntl";
 
 type TProps = {|
-  onFilesRecieved(data: FileList): void,
   errorText?: string,
   successText?: string
 |};
 
 export const DropZone = (props: TProps) => {
-  const { onFilesRecieved, errorText, successText } = props;
+  const { errorText, successText } = props;
 
-  const onChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
-    onFilesRecieved(files);
-    e.currentTarget.value = "";
-  };
+  const {
+    dropZone: { mainText }
+  } = useIntlDictionary();
 
-  const mainText = "Click to select album files or drag’n’drop files here";
+  const dispatch = useDispatch();
 
-  const viewProps = {
-    errorText,
-    successText,
-    onChange,
-    mainText
-  };
+  const onFilesChange = React.useCallback(
+    (files: FileList) => {
+      dispatch({
+        type: "DROP_ZONE__FILES_RECIEVED",
+        payload: files
+      });
+    },
+    [dispatch]
+  );
 
-  return <DropZoneView {...viewProps} />;
+  return (
+    <DropZoneWrapper>
+      <DropZoneLabel>
+        <DropZoneInput onFilesChange={onFilesChange} />
+        <DropZoneText
+          mainText={mainText}
+          errorText={errorText}
+          successText={successText}
+        />
+      </DropZoneLabel>
+    </DropZoneWrapper>
+  );
 };

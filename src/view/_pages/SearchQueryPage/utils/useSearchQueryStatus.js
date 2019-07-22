@@ -17,24 +17,24 @@ export const useSearchQueryStatus = (query: string) => {
   // Pending status state
   const [pending, setPending] = React.useState(true);
 
-  // Get status service state
-  const getSearchInfoByQuery = React.useCallback(
-    () => getSearchInfoService(query),
-    [getSearchInfoService, query]
-  );
-
-  const [getSearchInfoState, getSearchInfo] = useAsync(getSearchInfoByQuery);
+  const [getSearchInfoState, injectGetSearchInfoPromise] = useAsync();
 
   // Save status service state
-  const [saveSearchState, saveSearch] = useAsync(saveSearchService);
+  const [saveSearchState, saveSearch] = useAsync();
 
   // Delete status service state
-  const [deleteSearchState, deleteSearch] = useAsync(deleteSearchService);
+  const [deleteSearchState, deleteSearch] = useAsync();
+
+  // Get status service state
+  const getSearchInfoByQuery = React.useCallback(
+    () => injectGetSearchInfoPromise(getSearchInfoService(query)),
+    [getSearchInfoService, injectGetSearchInfoPromise, query]
+  );
 
   // Initial status retrival
   React.useEffect(() => {
-    getSearchInfo();
-  }, [getSearchInfo]);
+    getSearchInfoByQuery();
+  }, [getSearchInfoByQuery]);
 
   // Turn on pending status on search info retrival
   React.useEffect(() => {
@@ -46,9 +46,9 @@ export const useSearchQueryStatus = (query: string) => {
   // Status retrival on save / delete resolve
   React.useEffect(() => {
     if (saveSearchState && saveSearchState.resolved) {
-      getSearchInfo();
+      getSearchInfoByQuery();
     }
-  }, [saveSearchState, deleteSearchState, getSearchInfo]);
+  }, [saveSearchState, deleteSearchState, getSearchInfoByQuery]);
 
   // Turn on pending status on save / delete
   // services requested
@@ -88,11 +88,18 @@ export const useSearchQueryStatus = (query: string) => {
 
   const toggleStatus = React.useCallback(() => {
     if (saved === true) {
-      deleteSearch(query);
+      deleteSearch(deleteSearchService(query));
     } else {
-      saveSearch(query);
+      saveSearch(saveSearchService(query));
     }
-  }, [saved, query, deleteSearch, saveSearch]);
+  }, [
+    saved,
+    deleteSearch,
+    deleteSearchService,
+    query,
+    saveSearch,
+    saveSearchService
+  ]);
 
   return {
     saved,

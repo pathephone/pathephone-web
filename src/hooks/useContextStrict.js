@@ -2,14 +2,16 @@
 
 import * as React from "react";
 
-import { HomelessContextConsumerError } from "data/errors";
+import { StrictHookError } from "data/errors";
 
 export function useContextStrict<TValue>(
   context: React.Context<TValue | null>
 ): TValue {
   const contextValue = React.useContext(context);
+
   if (contextValue === null) {
-    throw new HomelessContextConsumerError();
+    throw new StrictHookError();
   }
+
   return contextValue;
 }

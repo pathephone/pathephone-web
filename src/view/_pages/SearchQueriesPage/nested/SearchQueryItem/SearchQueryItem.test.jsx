@@ -1,15 +1,13 @@
 // @flow strict
 
-import type { TSearchInfo } from "types/state";
-
 import React from "react";
 
 import { render, fireEvent, cleanup } from "@testing-library/react";
 
 import { routes } from "data/routes";
 import { testId } from "utils/testId";
-import { getSearchInfoMock } from "utils/mock";
-import { RouterProvider } from "view/RouterProvider";
+import { TestingProvider } from "utils/TestingProvider";
+import { getSearchInfoMock } from "utils/mock/getSearchInfoMock";
 
 import { SearchQueryItem } from "./SearchQueryItem";
 
@@ -22,9 +20,9 @@ const renderComponent = () => {
   };
 
   const mounted = render(
-    <RouterProvider>
+    <TestingProvider>
       <SearchQueryItem {...props} />
-    </RouterProvider>
+    </TestingProvider>
   );
 
   const getLinkNode = () => mounted.getByTestId(testId.SEARCH_QUERY_ITEM__LINK);

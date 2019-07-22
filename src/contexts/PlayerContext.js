@@ -1,7 +1,14 @@
 // @flow strict
 
-import type { TPlayer } from "types/state";
+import type { TPlayerState } from "types/state";
 
 import * as React from "react";
 
-export const PlayerContext = React.createContext<TPlayer | null>(null);
+const fallbackValue: TPlayerState = {
+  screen: "OVERVIEW",
+  playlist: [],
+  playingTrackId: null,
+  audioStatus: "PAUSED"
+};
+
+export const PlayerContext = React.createContext<TPlayerState>(fallbackValue);
