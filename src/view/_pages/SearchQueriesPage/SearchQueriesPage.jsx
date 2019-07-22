@@ -2,12 +2,17 @@
 
 import React from "react";
 
-import { useSearchQuieries } from "./utils/useSearchQueries";
+import { useIntlDictionary } from "hooks/useIntl";
 
-import { SearchQueriesPageView } from "./SearchQueriesPageView";
+import { useSearchQuieries } from "./utils/useSearchQueries";
 import { useDeleteQuery } from "./utils/useDeleteQuery";
+import { SearchQueriesPageView } from "./SearchQueriesPageView";
 
 export const SearchQueriesPage = () => {
+  const {
+    searchQueriesPage: { loadMoreButtonText, fallbackText }
+  } = useIntlDictionary();
+
   const [hasPageLoader, setHasPageLoader] = React.useState(true);
 
   // Inject search queries service state
@@ -62,10 +67,6 @@ export const SearchQueriesPage = () => {
   const hasFallback = !!list && list.length === 0 && !pending;
 
   const hasLoadMoreButton = !!list && lastPageFlag === false;
-
-  const loadMoreButtonText = "load more";
-
-  const fallbackText = "you have no saved queries";
 
   const queriesList = list || [];
 

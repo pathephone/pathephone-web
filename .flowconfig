@@ -7,6 +7,7 @@
 [lints]
 
 [options]
+module.name_mapper='^providers\/\(.*\)$' -> '<PROJECT_ROOT>/src/providers/\1'
 module.name_mapper='^view\/\(.*\)$' -> '<PROJECT_ROOT>/src/view/\1'
 module.name_mapper='^contexts\/\(.*\)$' -> '<PROJECT_ROOT>/src/contexts/\1'
 module.name_mapper='^hooks\/\(.*\)$' -> '<PROJECT_ROOT>/src/hooks/\1'

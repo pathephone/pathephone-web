@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { PlayerContext } from "contexts/PlayerContext";
-import { useContextStrict } from "hooks/useContextStrict";
-
 import { PlaylistTrack } from "./nested/PlaylistTrack";
+
+import { useDispatch } from "hooks/useDispatch";
+import { usePlayerContext } from "hooks/usePlayerContext";
 
 import { PlaylistPopupWrapper } from "./styled/PlaylistPopupWrapper";
 import { PlaylistPopupHeader } from "./styled/PlaylistPopupHeader";
@@ -14,11 +14,17 @@ import { PlaylistPopupBody } from "./styled/PlaylistPopupBody";
 type TProps = {||};
 
 export const PlaylistPopup = (props: TProps) => {
-  const { playlist, clearPlaylist } = useContextStrict(PlayerContext);
+  const { playlist } = usePlayerContext();
 
-  const handleClearPlaylist = clearPlaylist;
+  const dispatch = useDispatch();
 
-  const tracksNode = React.useMemo(
+  const handleClearPlaylist = React.useCallback(() => {
+    dispatch({
+      type: "PLAYLIST_POPUP__CLEAR"
+    });
+  }, [dispatch]);
+
+  const playlistNode = React.useMemo(
     () => playlist.map(track => <PlaylistTrack track={track} key={track.id} />),
     [playlist]
   );
@@ -29,7 +35,7 @@ export const PlaylistPopup = (props: TProps) => {
         tracksCount={playlist.length}
         onClearPlaylist={handleClearPlaylist}
       />
-      <PlaylistPopupBody>{tracksNode}</PlaylistPopupBody>
+      <PlaylistPopupBody>{playlistNode}</PlaylistPopupBody>
     </PlaylistPopupWrapper>
   );
 };

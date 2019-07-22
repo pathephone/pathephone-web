@@ -1,88 +1,32 @@
 // @flow strict
-import type { TPlaylistTrack } from "types/state";
-
 import * as React from "react";
 
-import { PlayerContext } from "contexts/PlayerContext";
-import { getUniqueString } from "utils/getUniqueString";
-
-import { Header } from "./nested/Header";
 import { PlayerControls } from "./nested/PlayerControls";
-import { Content } from "./nested/Content/index";
+import { PlayerContent } from "./nested/PlayerContent";
+import { SearchControls } from "./nested/SearchControls/index";
+import { OverviewControls } from "./nested/OverviewControls/index";
+import { usePlayingTrackId } from "hooks/usePlayingTrackId";
+import { usePlayerScreen } from "hooks/usePlayerScreen";
 
 type TProps = {||};
 
-const fakeId = getUniqueString();
-const fakeId2 = getUniqueString();
-
 export const PlayerScreen = (props: TProps) => {
-  const [isPaused, setIsPaused] = React.useState<boolean>(false);
-  const [isShuffle, setIsShuffle] = React.useState<boolean>(false);
-  const [isRepeat, setIsRepeat] = React.useState<boolean>(false);
-  const [playlist, setPlaylist] = React.useState<TPlaylistTrack[]>([
-    {
-      id: fakeId,
-      title: "Wild Wild Wild Wild Wild Wild West",
-      artistName: "John Wayne",
-      audioSrc: ""
-    },
-    {
-      id: fakeId2,
-      title: "Some shitty pop song from your girlfriend's vk feed",
-      artistName: "Bon Kabon",
-      audioSrc: ""
-    }
-  ]);
-  const [playingTrackId, setPlayingTrackId] = React.useState<string | null>(
-    fakeId
-  );
+  const screen = usePlayerScreen();
 
-  const clearPlaylist = () => {
-    setPlaylist([]);
-    setPlayingTrackId(null);
-  };
+  const playingTrackId = usePlayingTrackId();
 
-  const addPlaylistTracks = (tracks: TPlaylistTrack[]) => {
-    setPlaylist([...playlist, ...tracks]);
-  };
+  const hasPlayerControls = playingTrackId !== null;
 
-  const removePlaylistTrack = (id: string) => {
-    setPlaylist(playlist.filter(track => track.id !== id));
-  };
+  const hasSearchControls = screen === "SEARCH";
 
-  const toggleIsPaused = () => {
-    setIsPaused(state => !state);
-  };
-
-  const toggleIsShuffle = () => {
-    setIsShuffle(state => !state);
-  };
-
-  const toggleIsRepeat = () => {
-    setIsRepeat(state => !state);
-  };
-
-  const playerContextValue = {
-    playlist,
-    isPaused,
-    isShuffle,
-    isRepeat,
-    playingTrackId,
-
-    setPlayingTrackId,
-    addPlaylistTracks,
-    removePlaylistTrack,
-    clearPlaylist,
-    toggleIsPaused,
-    toggleIsRepeat,
-    toggleIsShuffle
-  };
+  const hasNavigationControls = screen === "OVERVIEW";
 
   return (
-    <PlayerContext.Provider value={playerContextValue}>
-      <Content />
-      <Header />
-      <PlayerControls />
-    </PlayerContext.Provider>
+    <>
+      <PlayerContent />
+      {hasSearchControls && <SearchControls />}
+      {hasNavigationControls && <OverviewControls />}
+      {hasPlayerControls && <PlayerControls />}
+    </>
   );
 };

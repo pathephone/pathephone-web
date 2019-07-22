@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import styles from "./DropZone.module.css";
+import { testId } from "utils/testId";
 
 type TProps = {|
   mainText: string,
@@ -12,7 +13,10 @@ type TProps = {|
 
 export const DropZoneText = ({ mainText, errorText, successText }: TProps) => {
   return (
-    <div className={styles.DropZone__Text}>
+    <div
+      className={styles.DropZone__Text}
+      data-testid={testId.SHARE_ALBUM_PAGE__DROP_ZONE_TEXT}
+    >
       {errorText !== undefined && (
         <div className={styles.DropZone__ErrorText}>{errorText}</div>
       )}

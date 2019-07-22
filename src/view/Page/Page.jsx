@@ -2,22 +2,21 @@
 
 import * as React from "react";
 
-import { useContextStrict } from "hooks/useContextStrict";
-import { PlayerContext } from "contexts/PlayerContext";
-
 import { PageWrapper } from "./styled/PageWrapper";
 import { PageLoader } from "./styled/PageLoader";
 
-type TProps = {
+import { usePlayerContext } from "hooks/usePlayerContext";
+
+type TProps = {|
   children: React.Node,
   centered?: boolean,
   hasLoader?: boolean
-};
+|};
 
 export const Page = (props: TProps) => {
   const { children, centered, hasLoader } = props;
 
-  const { playingTrackId } = useContextStrict(PlayerContext);
+  const { playingTrackId } = usePlayerContext();
 
   const hasCompactView = playingTrackId !== null;
 

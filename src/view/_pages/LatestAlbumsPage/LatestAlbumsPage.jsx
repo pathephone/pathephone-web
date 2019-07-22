@@ -10,10 +10,15 @@ import { FeedAlbum } from "./nested/FeedAlbum";
 import { LatestAlbumsPageWrapper } from "./styled/LatestAlbumsPageWrapper";
 import { LatestAlbumsPageText } from "./styled/LatestAlbumsPageText";
 import { useGetLatestAlbums } from "./utils/useGetLatestAlbums";
+import { useIntlDictionary } from "hooks/useIntl";
 
 type TProps = {||};
 
 export const LatestAlbumsPage = (props: TProps) => {
+  const { latestAlbumsPage } = useIntlDictionary();
+
+  const { fallbackText, loadMoreButtonText } = latestAlbumsPage;
+
   const [hasPageLoader, setHasPageLoader] = React.useState(true);
 
   // Inject get latest albums service state
@@ -42,10 +47,6 @@ export const LatestAlbumsPage = (props: TProps) => {
   const hasFallback = !!list && list.length === 0;
 
   const hasLoadMoreButton = !!list && list.length > 0 && !lastPageFlag;
-
-  const loadMoreButtonText = "load more";
-
-  const fallbackText = "no albums in you library yet";
 
   const albums = list || [];
 

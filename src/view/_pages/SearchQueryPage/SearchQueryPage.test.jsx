@@ -7,18 +7,15 @@ import {
   cleanup,
   render,
   wait,
-  waitForElement,
-  waitForElementToBeRemoved,
+  waitForDomChange,
   fireEvent
 } from "@testing-library/react";
 
 import { testId } from "utils/testId";
-import { ServicesContext } from "contexts/ServicesContext";
-import { RouterProvider } from "view/RouterProvider";
-import { mockServices } from "services/mock/index";
-import { getFeedAlbumMocks, getPlayerContextMock } from "utils/mock";
-import { PlayerContext } from "contexts/PlayerContext";
+import { mockServices } from "services/mock";
 import { routes } from "data/routes";
+import { TestingProvider } from "utils/TestingProvider";
+import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
 
 import { SearchQueryPage, type TSearchQueryPageProps } from "./SearchQueryPage";
 
@@ -69,13 +66,9 @@ const renderComponent = (params?: TParams) => {
   })();
 
   const mounted = render(
-    <RouterProvider>
-      <PlayerContext.Provider value={getPlayerContextMock()}>
-        <ServicesContext.Provider value={services}>
-          <SearchQueryPage {...props} />
-        </ServicesContext.Provider>
-      </PlayerContext.Provider>
-    </RouterProvider>
+    <TestingProvider services={services}>
+      <SearchQueryPage {...props} />
+    </TestingProvider>
   );
 
   const getLoaderNode = () =>
@@ -160,50 +153,57 @@ describe("not saved query case", () => {
   test("should display save search button eventually", async () => {
     const { getSaveSearchButtonNode } = renderComponent();
 
-    await waitForElement(getSaveSearchButtonNode);
+    await waitForDomChange();
+
+    expect(getSaveSearchButtonNode).not.toThrow();
   });
   describe("on save query button click", () => {
     test("should display loader", async () => {
-      const {
-        getSaveSearchButtonNode,
-        getLoaderNode,
-        clickSaveSearchButton
-      } = renderComponent();
-      await waitForElement(getSaveSearchButtonNode);
+      const { getLoaderNode, clickSaveSearchButton } = renderComponent();
+
+      await waitForDomChange();
+
       clickSaveSearchButton();
-      expect(() => getLoaderNode()).not.toThrow();
+
+      expect(getLoaderNode).not.toThrow();
     });
     test("should hide button", async () => {
       const {
         getSaveSearchButtonNode,
         clickSaveSearchButton
       } = renderComponent();
-      await waitForElement(getSaveSearchButtonNode);
+
+      await waitForDomChange();
+
       clickSaveSearchButton();
-      expect(() => getSaveSearchButtonNode()).toThrow();
+
+      expect(getSaveSearchButtonNode).toThrow();
     });
     test("should call save search service once", async () => {
       const {
-        getSaveSearchButtonNode,
         clickSaveSearchButton,
         getSaveSearchServiceMock
       } = renderComponent();
-      await waitForElement(getSaveSearchButtonNode);
+
+      await waitForDomChange();
+
       clickSaveSearchButton();
+
       expect(getSaveSearchServiceMock()).toBeCalledTimes(1);
     });
-    test("should show delete search button eventually", async () => {
+    test("should show delete search button on third render", async () => {
       const {
-        getSaveSearchButtonNode,
         clickSaveSearchButton,
         getDeleteSearchButtonNode
       } = renderComponent({ useJestServicesMocks: false });
 
-      await waitForElement(getSaveSearchButtonNode);
+      await waitForDomChange();
 
       clickSaveSearchButton();
 
-      await waitForElement(getDeleteSearchButtonNode);
+      await waitForDomChange();
+
+      expect(getDeleteSearchButtonNode).not.toThrow();
     });
   });
 });
@@ -214,19 +214,17 @@ describe("saved query case", () => {
       simulateSavedSearch: true
     });
 
-    await waitForElement(() => getDeleteSearchButtonNode());
+    await waitForDomChange();
+
+    expect(getDeleteSearchButtonNode).not.toThrow();
   });
   describe("on delete search button click", () => {
     test("should display loader", async () => {
-      const {
-        getDeleteSearchButtonNode,
-        getLoaderNode,
-        clickDeleteSearchButton
-      } = renderComponent({
+      const { getLoaderNode, clickDeleteSearchButton } = renderComponent({
         simulateSavedSearch: true
       });
 
-      await waitForElement(() => getDeleteSearchButtonNode());
+      await waitForDomChange();
 
       clickDeleteSearchButton();
 
@@ -234,26 +232,24 @@ describe("saved query case", () => {
     });
     test("should call delete search service once", async () => {
       const {
-        getDeleteSearchButtonNode,
         clickDeleteSearchButton,
         getDeleteSearchServiceMock
       } = renderComponent({
         simulateSavedSearch: true
       });
 
-      await waitForElement(() => getDeleteSearchButtonNode());
+      await waitForDomChange();
 
       clickDeleteSearchButton();
 
       expect(getDeleteSearchServiceMock()).toBeCalledTimes(1);
     });
     test("should redirect to search queries list eventually", async () => {
-      const {
-        clickDeleteSearchButton,
-        getDeleteSearchButtonNode
-      } = renderComponent({ useJestServicesMocks: false });
+      const { clickDeleteSearchButton } = renderComponent({
+        useJestServicesMocks: false
+      });
 
-      await waitForElement(getDeleteSearchButtonNode);
+      await waitForDomChange();
 
       clickDeleteSearchButton();
 
@@ -270,32 +266,36 @@ describe("has results case", () => {
       results: getFeedAlbumMocks(1)
     });
 
-    await waitForElementToBeRemoved(getFallbackNode);
+    await waitForDomChange();
+
+    expect(getFallbackNode).toThrow();
   });
   test("should show feed eventually", async () => {
     const { getFeedNode } = renderComponent({
       results: getFeedAlbumMocks(1)
     });
 
-    await waitForElement(getFeedNode);
+    await waitForDomChange();
+
+    expect(getFeedNode).not.toThrow();
   });
   test("should display correct feed items count", async () => {
     const itemsCount = 5;
 
-    const { getFeedNode, getFeedItemsCount } = renderComponent({
+    const { getFeedItemsCount } = renderComponent({
       results: getFeedAlbumMocks(itemsCount)
     });
 
-    await waitForElement(getFeedNode);
+    await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(itemsCount);
   });
   test("should not display load more button", async () => {
-    const { getFeedNode, getNewResultsButtonNode } = renderComponent({
+    const { getNewResultsButtonNode } = renderComponent({
       results: getFeedAlbumMocks(1)
     });
 
-    await waitForElement(getFeedNode);
+    await waitForDomChange();
 
     expect(getNewResultsButtonNode).toThrow();
   });

@@ -4,6 +4,8 @@ import type { ContextRouter } from "react-router-dom";
 
 import React from "react";
 
+import { useIntlDictionary } from "hooks/useIntl";
+
 import { SearchQueryPageView } from "./SearchQueryPageView";
 import { useSearchQueryStatus } from "./utils/useSearchQueryStatus";
 import { useSearchQueryResults } from "./utils/useSearchQueryResults";
@@ -22,6 +24,15 @@ export const SearchQueryPage = (props: TProps) => {
   if (typeof searchValue !== "string") {
     throw new TypeError();
   }
+
+  const {
+    searchQueryPage: {
+      fallbackText,
+      saveSearchButtonText,
+      deleteSearchButtonText,
+      showNewResultsButtonText
+    }
+  } = useIntlDictionary();
 
   const { saved, pending: statusPending, toggleStatus } = useSearchQueryStatus(
     searchValue
@@ -46,14 +57,6 @@ export const SearchQueryPage = (props: TProps) => {
   const hasFeed = results.length > 0;
 
   const titleText = searchValue;
-
-  const fallbackText = "searching...";
-
-  const saveSearchButtonText = "save search";
-
-  const deleteSearchButtonText = "delete search";
-
-  const showNewResultsButtonText = "show new results";
 
   const feedItems = results;
 

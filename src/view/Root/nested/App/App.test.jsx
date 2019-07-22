@@ -2,20 +2,28 @@
 import React from "react";
 import { render, cleanup, waitForDomChange } from "@testing-library/react";
 
-import { RouterProvider } from "view/RouterProvider";
 import { testId } from "utils/testId";
-import { ServicesContext } from "contexts/ServicesContext";
-import { mockServices } from "services/mock";
+import { TestingProvider } from "utils/TestingProvider";
+import { getAppStateMock } from "utils/mock/getAppStateMock";
 
 import { App } from "./App";
 
-const renderComponent = () => {
+type TParams = {|
+  simulateLoading?: boolean
+|};
+
+const renderComponent = (params?: TParams) => {
+  const { simulateLoading = false } = params || {};
+
+  const appState = {
+    ...getAppStateMock(),
+    activeScreen: simulateLoading ? "LOADING" : "PLAYER"
+  };
+
   const mounted = render(
-    <RouterProvider>
-      <ServicesContext.Provider value={mockServices}>
-        <App />
-      </ServicesContext.Provider>
-    </RouterProvider>
+    <TestingProvider appState={appState}>
+      <App />
+    </TestingProvider>
   );
 
   const getAppWrapperNode = () => mounted.getByTestId(testId.APP__WRAPPER);
@@ -34,7 +42,7 @@ const renderComponent = () => {
 afterEach(cleanup);
 
 test("should display loader", () => {
-  const { getLoaderNode } = renderComponent();
+  const { getLoaderNode } = renderComponent({ simulateLoading: true });
 
   expect(getLoaderNode).not.toThrow();
 });

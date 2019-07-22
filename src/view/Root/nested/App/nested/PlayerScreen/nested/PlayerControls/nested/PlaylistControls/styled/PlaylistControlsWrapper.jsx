@@ -2,17 +2,18 @@
 
 import * as React from "react";
 
+import { FixedPanel } from "view/_ui/FixedPanel/index";
+
 import styles from "./PlaylistControls.module.css";
 
 type TProps = {|
-  children: React.Node,
-  toRight?: boolean
+  children: React.Node
 |};
 
-export const PlaylistControlsWrapper = ({ toRight, children }: TProps) => {
-  const className = `${styles.PlaylistControls__Wrapper} ${
-    toRight === true ? styles.PlaylistControls__Wrapper_toRight : ""
-  }`;
-
-  return <div className={className}>{children}</div>;
+export const PlaylistControlsWrapper = ({ children }: TProps) => {
+  return (
+    <FixedPanel position="bottom">
+      <div className={styles.PlaylistControls__Wrapper}>{children}</div>;
+    </FixedPanel>
+  );
 };

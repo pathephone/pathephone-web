@@ -4,15 +4,14 @@ import type { TFeedAlbum } from "types/state";
 
 import * as React from "react";
 
-import { useContextStrict } from "hooks/useContextStrict";
-import { PlayerContext } from "contexts/PlayerContext";
-import { useServices } from "hooks/useServices";
 import { AlbumCover } from "view/AlbumCover";
 
 import { FeedAlbumWrapper } from "./styled/FeedAlbumWrapper";
 import { FeedAlbumInfo } from "./styled/FeedAlbumInfo";
 import { FeedAlbumTitle } from "./styled/FeedAlbumTitle";
 import { FeedAlbumArtist } from "./styled/FeedAlbumArtist";
+import { useDispatch } from "hooks/useDispatch";
+import { useServices } from "hooks/useServices";
 
 type TProps = {|
   data: TFeedAlbum
@@ -21,27 +20,29 @@ type TProps = {|
 export const FeedAlbum = (props: TProps) => {
   const { data } = props;
 
-  const { getPlaylistTracksByAlbumId } = useServices();
+  const dispatch = useDispatch();
 
-  const {
-    addPlaylistTracks,
-    clearPlaylist,
-    setPlayingTrackId
-  } = useContextStrict(PlayerContext);
+  const { getPlaylistTracksByAlbumId } = useServices();
 
   const { title, artistName, coverSrc, id } = data;
 
-  const handleAddAlbumToPlaylist = () => {
-    getPlaylistTracksByAlbumId(id).then(addPlaylistTracks);
-  };
-
-  const handlePlayAlbum = () => {
-    clearPlaylist();
+  const handleAddAlbumToPlaylist = React.useCallback(() => {
     getPlaylistTracksByAlbumId(id).then(tracks => {
-      addPlaylistTracks(tracks);
-      setPlayingTrackId(tracks[0].id);
+      dispatch({
+        type: "FEED_ALBUM__ADD_TO_PLAYLIST",
+        payload: tracks
+      });
     });
-  };
+  }, [dispatch, getPlaylistTracksByAlbumId, id]);
+
+  const handlePlayAlbum = React.useCallback(() => {
+    getPlaylistTracksByAlbumId(id).then(tracks => {
+      dispatch({
+        type: "FEED_ALBUM__PLAY",
+        payload: tracks
+      });
+    });
+  }, [dispatch, getPlaylistTracksByAlbumId, id]);
 
   return (
     <FeedAlbumWrapper>
