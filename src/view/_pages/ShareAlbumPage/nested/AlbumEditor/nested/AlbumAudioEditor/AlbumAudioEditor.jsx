@@ -1,38 +1,48 @@
 // @flow strict
 
-import type { TFormAlbum, TFormTrack } from "types/state";
-
 import * as React from "react";
 
-import { getTrackFormDataFromFile } from "utils/getTrackFormDataFromFile";
-import { AlbumAudioEditorLabel } from "./styled/AlbumAudioEditorLabel";
+import { useAlbumFormTracklistValidity } from "hooks/useAlbumForm";
+import { useDispatch } from "hooks/useDispatch";
+import { testId } from "utils/testId";
+
 import { AlbumAudioEditorInput } from "./styled/AlbumAudioEditorInput";
-import { AlbumAudioEditorText } from "./styled/AlbumAudioEditorText";
+import { AlbumAudioEditorWrapper } from "./styled/AlbumAudioEditorWrapper";
+import { AlbumAudioEditorLabel } from "./styled/AlbumAudioEditorLabel";
 
-type TProps = {|
-  data: TFormAlbum,
-  onDataChange(data: TFormAlbum): void
-|};
+export const AlbumAudioEditor = () => {
+  const dispatch = useDispatch();
 
-export const AlbumAudioEditor = (props: TProps) => {
-  const { data, onDataChange } = props;
+  const valid = useAlbumFormTracklistValidity();
 
-  const handleAddTrack = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
-    Promise.all([...files].map(getTrackFormDataFromFile)).then(
-      (tracks: TFormTrack[]) => {
-        onDataChange({
-          ...data,
-          tracklist: [...data.tracklist, ...tracks]
-        });
-      }
-    );
-  };
+  const validationMessage = React.useMemo(() => {
+    if (!valid) {
+      return "At least one track required";
+    }
+  }, [valid]);
+
+  const handleAddTrack = React.useCallback(
+    (files: FileList) => {
+      dispatch({
+        type: "ALBUM_AUDIO_EDITOR__TRACKS_RECIEVED",
+        payload: files
+      });
+    },
+    [dispatch]
+  );
 
   return (
-    <AlbumAudioEditorLabel>
-      <AlbumAudioEditorInput onChange={handleAddTrack} />
-      <AlbumAudioEditorText>Add tracks</AlbumAudioEditorText>
-    </AlbumAudioEditorLabel>
+    <AlbumAudioEditorWrapper>
+      <AlbumAudioEditorInput
+        validationMessage={validationMessage}
+        onFilesChange={handleAddTrack}
+        testId={testId.ALBUM_TRACKLIST__TRACK_INPUT}
+      />
+      <AlbumAudioEditorLabel
+        text="Add tracks"
+        validationMessage={validationMessage}
+        validationTestId={testId.ALBUM_TRACKLIST__VALIDATION}
+      />
+    </AlbumAudioEditorWrapper>
   );
 };

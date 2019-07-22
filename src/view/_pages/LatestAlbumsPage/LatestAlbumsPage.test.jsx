@@ -13,11 +13,10 @@ import {
 
 import { testId } from "utils/testId";
 import { ServicesContext } from "contexts/ServicesContext";
-import { mockServices } from "services/mock/index";
+import { mockServices } from "services/mock";
+import { getFeedAlbumMocks } from "utils/mock";
 
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
-import { PlayerContext } from "contexts/PlayerContext";
-import { getPlayerContextMock, getFeedAlbumMocks } from "utils/mock";
 
 type TParams = {|
   simulateNoAlbumsCase?: boolean,
@@ -50,9 +49,7 @@ const renderComponent = (params?: TParams) => {
 
   const mounted = render(
     <ServicesContext.Provider value={services}>
-      <PlayerContext.Provider value={getPlayerContextMock()}>
-        <LatestAlbumsPage />
-      </PlayerContext.Provider>
+      <LatestAlbumsPage />
     </ServicesContext.Provider>
   );
 
@@ -69,11 +66,6 @@ const renderComponent = (params?: TParams) => {
   const getFeedItemsCount = () =>
     mounted.getAllByTestId(testId.FEED_ALBUM_WRAPPER).length;
 
-  const waitForNextChange = () =>
-    waitForDomChange({
-      container: getPageWrapperNode()
-    });
-
   const getLoadMoreButtonNode = () =>
     mounted.getByTestId(testId.LATEST_LABUMS_PAGE__LOAD_MORE_BUTTON);
 
@@ -89,8 +81,7 @@ const renderComponent = (params?: TParams) => {
     getFeedItemsCount,
     getLoadMoreButtonNode,
     getFeedLoader,
-    clickLoadMoreButton,
-    waitForNextChange
+    clickLoadMoreButton
   };
 };
 
@@ -104,11 +95,11 @@ test("should display page loader", () => {
 
 describe("no albums case", () => {
   test("should display fallback on next dom change", async () => {
-    const { waitForNextChange, getFallbackNode } = renderComponent({
+    const { getFallbackNode } = renderComponent({
       simulateNoAlbumsCase: true
     });
 
-    await waitForNextChange();
+    await waitForDomChange();
 
     expect(getFallbackNode).not.toThrow();
   });
@@ -116,20 +107,20 @@ describe("no albums case", () => {
 
 describe("has albums case", () => {
   test("should display feed on next dom change", async () => {
-    const { waitForNextChange, getFeedNode } = renderComponent();
+    const { getFeedNode } = renderComponent();
 
-    await waitForNextChange();
+    await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
   });
   test("feed items count should be correct", async () => {
     const count = 5;
 
-    const { getFeedNode, getFeedItemsCount } = renderComponent({
+    const { getFeedItemsCount } = renderComponent({
       feedItemsCount: count
     });
 
-    await waitForElement(getFeedNode);
+    await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(count);
   });
@@ -137,13 +128,9 @@ describe("has albums case", () => {
 
 describe("click load more button", () => {
   it("should display feed loader", async () => {
-    const {
-      getLoadMoreButtonNode,
-      getFeedLoader,
-      clickLoadMoreButton
-    } = renderComponent();
+    const { getFeedLoader, clickLoadMoreButton } = renderComponent();
 
-    await waitForElement(getLoadMoreButtonNode);
+    await waitForDomChange();
 
     clickLoadMoreButton();
 

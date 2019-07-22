@@ -1,10 +1,23 @@
 .PlaylistControls__Wrapper {
   display: flex;
   justify-content: space-between;
-  flex-shrink: 0;
-  padding: 0 10px;
+  width: 100%;
 }
 
-.PlaylistControls__Wrapper_toRight {
-  justify-content: flex-end;
+.PlaylistControls__Group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.PlaylistControls__Group > *:not(:first-child) {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.PlaylistControls__Group_skip {
+  justify-self: flex-start;
+}
+
+.PlaylistControls__Group_close {
+  justify-self: flex-end;
 }

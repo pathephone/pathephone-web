@@ -3,67 +3,68 @@
 import * as React from "react";
 
 import { ArrowDownIcon } from "icons/round-keyboard_arrow_down";
-import { ShuffleIcon } from "icons/round-shuffle";
-import { RepeatIcon } from "icons/round-repeat";
+// import { ShuffleIcon } from "icons/round-shuffle";
+// import { RepeatIcon } from "icons/round-repeat";
 import { SkipPreviousIcon } from "icons/round-skip_previous";
 import { SkipNextIcon } from "icons/round-skip_next";
-import { useContextStrict } from "hooks/useContextStrict";
-import { PlayerContext } from "contexts/PlayerContext";
 import { SquareButton } from "view/SquareButton";
+import { useDispatch } from "hooks/useDispatch";
 
 import { PlaylistPopup } from "./nested/PlaylistPopup";
 import { PlaylistControlsWrapper } from "./styled/PlaylistControlsWrapper";
+import { PlaylistControlsGroup } from "./styled/PlaylistControlsGroup";
 
-type TProps = {|
-  onSwitchToCurrentTrackMode(): void
-|};
+type TProps = {||};
 
 export const PlaylistControls = (props: TProps) => {
-  const { onSwitchToCurrentTrackMode } = props;
+  const dispatch = useDispatch();
 
-  const {
-    isShuffle,
-    isRepeat,
-    toggleIsShuffle,
-    toggleIsRepeat
-  } = useContextStrict(PlayerContext);
+  // const { isShuffle, isRepeat } = usePlaylistState();
 
-  const handleRepeat = React.useCallback(() => {
-    toggleIsRepeat();
-  }, [toggleIsRepeat]);
+  // const handleRepeat = React.useCallback(() => {
+  //   toggleIsRepeat();
+  // }, []);
 
-  const handleShuffle = React.useCallback(() => {
-    toggleIsShuffle();
-  }, [toggleIsShuffle]);
+  // const handleShuffle = React.useCallback(() => {
+  //   toggleIsShuffle();
+  // }, []);
 
-  const handleSkipNext = React.useCallback(() => {}, []);
+  const handlePlayNextTrack = React.useCallback(() => {
+    dispatch({ type: "PLAYLIST_CONTROLS__PLAY_NEXT" });
+  }, [dispatch]);
 
-  const handleSkipPrevious = React.useCallback(() => {}, []);
+  const handlePlayPreviousTrack = React.useCallback(() => {
+    dispatch({ type: "PLAYLIST_CONTROLS__PLAY_PREVIOUS" });
+  }, [dispatch]);
+
+  const onClose = React.useCallback(() => {
+    dispatch({ type: "PLAYLIST_CONTROLS__CLOSE" });
+  }, [dispatch]);
 
   return (
-    <>
-      <PlaylistControlsWrapper>
+    <PlaylistControlsWrapper>
+      {/* <PlaylistControlsWrapper>
         <SquareButton hasToggledOnIndicator={isShuffle} onClick={handleShuffle}>
           <ShuffleIcon />
         </SquareButton>
         <SquareButton hasToggledOnIndicator={isRepeat} onClick={handleRepeat}>
           <RepeatIcon />
         </SquareButton>
-      </PlaylistControlsWrapper>
-      <PlaylistControlsWrapper>
-        <SquareButton onClick={handleSkipPrevious}>
+      </PlaylistControlsWrapper> */}
+      <PlaylistControlsGroup mod="skip">
+        <SquareButton onClick={handlePlayPreviousTrack}>
           <SkipPreviousIcon />
         </SquareButton>
-        <SquareButton onClick={handleSkipNext}>
+        <SquareButton onClick={handlePlayNextTrack}>
           <SkipNextIcon />
         </SquareButton>
-      </PlaylistControlsWrapper>
-      <PlaylistControlsWrapper toRight>
-        <SquareButton onClick={onSwitchToCurrentTrackMode}>
+      </PlaylistControlsGroup>
+      <PlaylistControlsGroup mod="close">
+        <SquareButton onClick={onClose}>
           <ArrowDownIcon />
         </SquareButton>
-      </PlaylistControlsWrapper>
+      </PlaylistControlsGroup>
       <PlaylistPopup />
-    </>
+    </PlaylistControlsWrapper>
   );
 };

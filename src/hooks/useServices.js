@@ -1,8 +1,9 @@
 // @flow strict
 
-import { useContextStrict } from "./useContextStrict";
+import React from "react";
+
 import { ServicesContext } from "contexts/ServicesContext";
 
 export const useServices = () => {
-  return useContextStrict(ServicesContext);
+  return React.useContext(ServicesContext);
 };

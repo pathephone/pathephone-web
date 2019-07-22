@@ -9,14 +9,14 @@ import {
   cleanup,
   fireEvent,
   waitForElement,
-  waitForElementToBeRemoved
+  waitForElementToBeRemoved,
+  waitForDomChange
 } from "@testing-library/react";
 
 import { ServicesContext } from "contexts/ServicesContext";
-import { mockServices } from "services/mock/index";
+import { mockServices } from "services/mock";
 import { testId } from "utils/testId";
-import { PlayerContext } from "contexts/PlayerContext";
-import { getPlayerContextMock, getSearchInfoMocks } from "utils/mock";
+import { getSearchInfoMocks } from "utils/mock";
 import { RouterProvider } from "view/RouterProvider";
 
 import { SearchQueriesPage } from "./SearchQueriesPage";
@@ -41,9 +41,7 @@ const renderComponent = (params: TParams = {}) => {
   const mounted = render(
     <RouterProvider>
       <ServicesContext.Provider value={services}>
-        <PlayerContext.Provider value={getPlayerContextMock()}>
-          <SearchQueriesPage />
-        </PlayerContext.Provider>
+        <SearchQueriesPage />
       </ServicesContext.Provider>
     </RouterProvider>
   );
@@ -111,21 +109,23 @@ test("should show page loader", () => {
 test("should hide page loader eventually", async () => {
   const { getPageLoaderNode } = renderComponent();
 
-  await waitForElementToBeRemoved(getPageLoaderNode);
+  await waitForDomChange();
+
+  expect(getPageLoaderNode).toThrow();
 });
 
 describe("no queries case", () => {
-  test("should display fallback once page loader disappear", async () => {
-    const { getFallbackNode, getPageLoaderNode } = renderComponent();
+  test("should display fallback on next render", async () => {
+    const { getFallbackNode } = renderComponent();
 
-    await waitForElementToBeRemoved(getPageLoaderNode);
+    await waitForDomChange();
 
     expect(getFallbackNode).not.toThrow();
   });
   test("should not display feed alongside fallback", async () => {
-    const { getFallbackNode, getFeedNode } = renderComponent();
+    const { getFeedNode } = renderComponent();
 
-    await waitForElement(getFallbackNode);
+    await waitForDomChange();
 
     expect(getFeedNode).toThrow();
   });
@@ -133,44 +133,41 @@ describe("no queries case", () => {
 
 describe("has queries case", () => {
   test("should display feed once loader disappear", async () => {
-    const { getFeedNode, getPageLoaderNode } = renderComponent({
+    const { getFeedNode } = renderComponent({
       simulateItemsCount: 5
     });
 
-    await waitForElementToBeRemoved(getPageLoaderNode);
+    await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
   });
   test("feed items count should match", async () => {
     const count = 5;
-    const { getFeedNode, getFeedItemsCount } = renderComponent({
+
+    const { getFeedItemsCount } = renderComponent({
       simulateItemsCount: count
     });
 
-    await waitForElement(getFeedNode);
+    await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(count);
   });
   test("should not display fallback alongside feed", async () => {
-    const { getFeedNode, getFallbackNode } = renderComponent({
+    const { getFallbackNode } = renderComponent({
       simulateItemsCount: 5
     });
 
-    await waitForElement(getFeedNode);
+    await waitForDomChange();
 
     expect(getFallbackNode).toThrow();
   });
   describe("on delete query button click", () => {
     test("should display loader", async () => {
-      const {
-        getFeedNode,
-        getPageLoaderNode,
-        clickDeleteQueryButton
-      } = renderComponent({
+      const { getPageLoaderNode, clickDeleteQueryButton } = renderComponent({
         simulateItemsCount: 5
       });
 
-      await waitForElement(getFeedNode);
+      await waitForDomChange();
 
       clickDeleteQueryButton(1);
 
@@ -178,14 +175,13 @@ describe("has queries case", () => {
     });
     test("get search queries service should be called eventually", async () => {
       const {
-        getFeedNode,
         getSearchQueriesService,
         clickDeleteQueryButton
       } = renderComponent({
         simulateItemsCount: 5
       });
 
-      await waitForElement(getFeedNode);
+      await waitForDomChange();
 
       clickDeleteQueryButton(1);
 
@@ -206,35 +202,29 @@ test("should display load more button eventually", async () => {
     simulateItemsCount: 1
   });
 
-  await waitForElement(getLoadMoreButton);
+  await waitForDomChange();
+
+  expect(getLoadMoreButton).not.toThrow();
 });
 
 describe("click load more button", () => {
   test("should display feed loader", async () => {
-    const {
-      getLoadMoreButton,
-      clickLoadMoreButton,
-      getFeedLoaderNode
-    } = renderComponent({
+    const { clickLoadMoreButton, getFeedLoaderNode } = renderComponent({
       simulateItemsCount: 1
     });
 
-    await waitForElement(getLoadMoreButton);
+    await waitForDomChange();
 
     clickLoadMoreButton();
 
     expect(getFeedLoaderNode).not.toThrow();
   });
   test("should not display page loader", async () => {
-    const {
-      clickLoadMoreButton,
-      getPageLoaderNode,
-      getLoadMoreButton
-    } = renderComponent({
+    const { clickLoadMoreButton, getPageLoaderNode } = renderComponent({
       simulateItemsCount: 1
     });
 
-    await waitForElement(getLoadMoreButton);
+    await waitForDomChange();
 
     clickLoadMoreButton();
 

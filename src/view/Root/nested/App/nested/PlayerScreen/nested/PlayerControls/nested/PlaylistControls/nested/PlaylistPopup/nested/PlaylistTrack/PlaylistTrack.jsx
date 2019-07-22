@@ -4,8 +4,8 @@ import type { TPlaylistTrack } from "types/state";
 
 import * as React from "react";
 
-import { PlayerContext } from "contexts/PlayerContext";
-import { useContextStrict } from "hooks/useContextStrict";
+import { useDispatch } from "hooks/useDispatch";
+import { usePlayerContext } from "hooks/usePlayerContext";
 
 import { PlaylistTrackView } from "./PlaylistTrackView";
 
@@ -16,25 +16,29 @@ type TProps = {|
 export const PlaylistTrack = ({ track }: TProps) => {
   const { id, artistName, title } = track;
 
-  const {
-    removePlaylistTrack,
-    playingTrackId,
-    setPlayingTrackId
-  } = useContextStrict(PlayerContext);
+  const { playingTrackId } = usePlayerContext();
 
   const playing = playingTrackId === id;
 
+  const dispatch = useDispatch();
+
   // TODO: figure out how to better
   // track down cached audios
-  const cached = false;
+  const cached = true;
 
   const handleRemoveTrack = React.useCallback(() => {
-    removePlaylistTrack(id);
-  }, [id, removePlaylistTrack]);
+    dispatch({
+      type: "PLAYLIST_TRACK__REMOVE",
+      payload: id
+    });
+  }, [dispatch, id]);
 
   const handlePlayTrack = React.useCallback(() => {
-    setPlayingTrackId(id);
-  }, [id, setPlayingTrackId]);
+    dispatch({
+      type: "PLAYLIST_TRACK__PLAY",
+      payload: id
+    });
+  }, [dispatch, id]);
 
   const hasPlayingScreen = playing;
 

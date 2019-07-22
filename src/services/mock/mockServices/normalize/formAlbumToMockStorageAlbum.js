@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFormAlbum } from "types/state";
+import type { TAlbumFormData } from "types/state";
 import type { TMockStorageAlbum } from "types/mockTypes";
 
 import { getUniqueString } from "utils/getUniqueString";
@@ -15,7 +15,7 @@ export const formAlbumToMockStorageAlbum = ({
   title,
   cover,
   tracklist
-}: TFormAlbum): TMockStorageAlbum => {
+}: TAlbumFormData): TMockStorageAlbum => {
   if (cover === null) {
     throw new Error("Cover is required");
   }

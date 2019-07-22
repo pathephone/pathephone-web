@@ -1,5 +1,7 @@
 // @flow strict
 
+export type TAudioStatus = "PAUSED" | "PLAYING" | "PENDING";
+
 export type TPlaylistTrack = {|
   id: string,
   title: string,
@@ -7,17 +9,11 @@ export type TPlaylistTrack = {|
   audioSrc: string
 |};
 
-export type TPlayer = {|
+export type TPlayerState = {|
+  screen: "OVERVIEW" | "SEARCH",
   playlist: TPlaylistTrack[],
   playingTrackId: null | string,
-  isPaused: boolean,
-  isShuffle: boolean,
-  isRepeat: boolean,
-  toggleIsPaused(): void,
-  toggleIsShuffle(): void,
-  toggleIsRepeat(): void,
-  setPlayingTrackId(id: null | string): void,
-  addPlaylistTracks(newTracks: TPlaylistTrack[]): void,
-  removePlaylistTrack(id: string): void,
-  clearPlaylist(): void
+  audioStatus: TAudioStatus
+  // isShuffle: boolean,
+  // isRepeat: boolean
 |};

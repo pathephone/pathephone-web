@@ -17,5 +17,11 @@ export const albumModel = {
       ...targetAlbum,
       tracklist: [...targetAlbum.tracklist]
     };
+  },
+  getAllAlbums(startIndex: number, endIndex: number): TMockStorageAlbum[] {
+    return store.slice(startIndex, endIndex);
+  },
+  getLastAlbumIndex() {
+    return store.length - 1;
   }
 };

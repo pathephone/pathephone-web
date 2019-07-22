@@ -18,23 +18,25 @@ export const useSearchQuieries = () => {
   // Creates async state that fetches search queries
   const { getSearchQueries: getSearchQueriesService } = useServices();
 
-  const [listLoadingState, loadList] = useAsync(getSearchQueriesService);
+  const [queriesPromiseState, injectQueriesPromise] = useAsync();
 
   // Callback that reloads all pages
   const reload = React.useCallback(() => {
     setList(null);
-    loadList({ startPage: 1, pagesCount: page });
-  }, [loadList, page]);
+    injectQueriesPromise(
+      getSearchQueriesService({ startPage: 1, pagesCount: page })
+    );
+  }, [getSearchQueriesService, injectQueriesPromise, page]);
 
   // Load list on initial render and once page changes
   React.useEffect(() => {
-    loadList({ startPage: page });
-  }, [loadList, page]);
+    injectQueriesPromise(getSearchQueriesService({ startPage: page }));
+  }, [getSearchQueriesService, injectQueriesPromise, page]);
 
   // Merges search queries
   React.useEffect(() => {
-    if (listLoadingState && listLoadingState.value) {
-      const { items } = listLoadingState.value;
+    if (queriesPromiseState && queriesPromiseState.value) {
+      const { items } = queriesPromiseState.value;
       setList(prevValue => {
         if (prevValue) {
           return [...prevValue, ...items];
@@ -42,17 +44,17 @@ export const useSearchQuieries = () => {
         return items;
       });
     }
-  }, [listLoadingState]);
+  }, [queriesPromiseState]);
 
   // State normalization
-  const pending = !listLoadingState || listLoadingState.pending;
+  const pending = !queriesPromiseState || queriesPromiseState.pending;
 
   const loadNextPage = incrementPage;
 
   const lastPageFlag =
-    !!listLoadingState &&
-    !!listLoadingState.value &&
-    listLoadingState.value.lastPageFlag;
+    !!queriesPromiseState &&
+    !!queriesPromiseState.value &&
+    queriesPromiseState.value.lastPageFlag;
 
   return { pending, list, loadNextPage, reload, lastPageFlag };
 };

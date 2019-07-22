@@ -29,7 +29,6 @@
 /* Error */
 
 .AlbumCoverEditor__Error {
-  display: none;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -38,10 +37,6 @@
   padding-top: 5%;
   text-align: center;
   color: var(--error-color);
-}
-
-.AlbumCoverEditor__Editor:invalid ~ .AlbumCoverEditor__ErrorMessage {
-  display: block;
 }
 
 /* Preview */
@@ -57,7 +52,7 @@
   cursor: pointer;
 }
 
-.AlbumCoverEditor__Editor:invalid ~ .AlbumCoverEditor__Preview {
+.AlbumCoverEditor__Input:invalid ~ .AlbumCoverEditor__Preview {
   border-color: var(--error-color);
 }
 

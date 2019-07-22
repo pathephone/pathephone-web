@@ -1,5 +1,5 @@
 // @flow strict
 
-import { defaultLocaleStrings } from "data/defaultLocaleStrings";
+import { defaultIntl } from "data/defaultIntl";
 
-export type TIntl = typeof defaultLocaleStrings;
+export type TIntl = typeof defaultIntl;

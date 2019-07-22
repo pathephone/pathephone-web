@@ -1,119 +1,70 @@
 // @flow strict
 
-import type { TFormTrack, TFormArtist } from "types/state";
-
 import * as React from "react";
 
-import { FloatingLabelInput } from "view/FloatingLabelInput";
 import { ArrowUpIcon } from "icons/round-keyboard_arrow_up";
 import { ArrowDownIcon } from "icons/round-keyboard_arrow_down";
 import { DeleteIcon } from "icons/round-delete";
+import { useDispatch } from "hooks/useDispatch";
 
-import { AlbumArtistInput } from "./nested/AlbumArtistInput";
 import { AlbumTrackEditorWrapper } from "./styled/AlbumTrackEditorWrapper";
-import { AlbumTrackEditorCommon } from "./styled/AlbumTrackEditorCommon";
-import { AlbumTrackEditorTitle } from "./styled/AlbumTrackEditorTitle";
 import { AlbumTrackEditorButton } from "./styled/AlbumTrackEditorButton";
 import { AlbumTrackEditorControls } from "./styled/AlbumTrackEditorControls";
+import { AlbumTrackEditorInputs } from "./AlbumTrackEditorInputs";
+import { testId } from "utils/testId";
 
 type TProps = {
-  track: TFormTrack,
-  trackIndex: number,
-  tracklist: TFormTrack[],
-  onChange: (tracklist: TFormTrack[]) => void
+  trackId: string,
+  moveDownDisabled: boolean,
+  moveUpDisabled: boolean
 };
 
 export const AlbumTrackEditor = (props: TProps) => {
-  const { track, trackIndex, tracklist, onChange } = props;
+  const { trackId, moveDownDisabled, moveUpDisabled } = props;
 
-  const handleTrackInputChange = e => {
-    const { name, value } = e.currentTarget;
-    const nextTracklist = [...tracklist];
-    nextTracklist[trackIndex] = {
-      ...track,
-      [name]: value
-    };
-    onChange(nextTracklist);
-  };
+  const dispatch = useDispatch();
 
-  const handleArtistsChange = React.useCallback(
-    (artists: TFormArtist[]) => {
-      const nextTracklist = [...tracklist];
-      nextTracklist[trackIndex] = {
-        ...track,
-        artists
-      };
-      onChange(nextTracklist);
-    },
-    [onChange, tracklist, track, trackIndex]
-  );
+  const handleRemove = React.useCallback(() => {
+    dispatch({
+      type: "ALBUM_TRACK_EDITOR__REMOVE",
+      payload: trackId
+    });
+  }, [dispatch, trackId]);
 
-  const handleRemove = () => {
-    const nextTracklist = tracklist.filter(({ key }) => key !== track.key);
-    onChange(nextTracklist);
-  };
+  const handleMoveUp = React.useCallback(() => {
+    dispatch({
+      type: "ALBUM_TRACK_EDITOR__MOVE_UP",
+      payload: trackId
+    });
+  }, [dispatch, trackId]);
 
-  const handleMoveUp = () => {
-    const nextTracklist = [...tracklist];
-    const swapTargetIndex = trackIndex - 1;
-    // $FlowFixMe
-    [nextTracklist[trackIndex], nextTracklist[swapTargetIndex]] = [
-      nextTracklist[swapTargetIndex],
-      nextTracklist[trackIndex]
-    ];
-    onChange(nextTracklist);
-  };
-
-  const handleMoveDown = () => {
-    const nextTracklist = [...tracklist];
-    const swapTargetIndex = trackIndex + 1;
-    // $FlowFixMe
-    [nextTracklist[trackIndex], nextTracklist[swapTargetIndex]] = [
-      nextTracklist[swapTargetIndex],
-      nextTracklist[trackIndex]
-    ];
-    onChange(nextTracklist);
-  };
-
-  const artistInputsNode = React.useMemo(
-    () =>
-      track.artists.map((artist, artistIndex, artists) => (
-        <AlbumArtistInput
-          onChange={handleArtistsChange}
-          artist={artist}
-          artistIndex={artistIndex}
-          artists={artists}
-        />
-      )),
-    [track.artists, handleArtistsChange]
-  );
+  const handleMoveDown = React.useCallback(() => {
+    dispatch({
+      type: "ALBUM_TRACK_EDITOR__MOVE_DOWN",
+      payload: trackId
+    });
+  }, [dispatch, trackId]);
 
   return (
     <AlbumTrackEditorWrapper>
-      <AlbumTrackEditorCommon>
-        <AlbumTrackEditorTitle text={track.audio.name} />
-        <FloatingLabelInput
-          name="title"
-          value={track.title}
-          placeholder="Track title"
-          onChange={handleTrackInputChange}
-        />
-        {artistInputsNode}
-      </AlbumTrackEditorCommon>
+      <AlbumTrackEditorInputs trackId={trackId} />
       <AlbumTrackEditorControls>
         <AlbumTrackEditorButton
-          isDisabled={trackIndex === 0}
+          isDisabled={moveUpDisabled}
           onClick={handleMoveUp}
         >
           <ArrowUpIcon />
         </AlbumTrackEditorButton>
         <AlbumTrackEditorButton
-          isDisabled={trackIndex === tracklist.length - 1}
+          isDisabled={moveDownDisabled}
           onClick={handleMoveDown}
         >
           <ArrowDownIcon />
         </AlbumTrackEditorButton>
-        <AlbumTrackEditorButton onClick={handleRemove}>
+        <AlbumTrackEditorButton
+          onClick={handleRemove}
+          testId={testId.ALBUM_TRACK_EDITOR__REMOVE_BUTTON}
+        >
           <DeleteIcon />
         </AlbumTrackEditorButton>
       </AlbumTrackEditorControls>

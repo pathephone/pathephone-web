@@ -1,12 +1,13 @@
 // @flow strict
 
-export class HomelessContextConsumerError extends Error {
-  message = "Context has been used outside of the provider.";
+export class StrictHookError extends Error {
+  message = "Expected data is not available yet.";
 }
 
 export class UnreachableError extends TypeError {
-  constructor(param: empty) {
-    super(param);
-    this.message = "Unreachable type error.";
-  }
+  message = "Unreachable type error.";
+}
+
+export class MissingAudioFilesError extends Error {
+  message = "No audio files selected.";
 }

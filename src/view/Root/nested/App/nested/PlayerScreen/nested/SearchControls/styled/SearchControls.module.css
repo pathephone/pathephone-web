@@ -1,0 +1,22 @@
+.SearchControls__Wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.SearchControls__Form {
+  flex-basis: 100%;
+}
+
+.SearchControls__Input {
+  padding-left: 20px;
+  font-size: 16px;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.SearchControls__Button {
+}

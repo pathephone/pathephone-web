@@ -9,3 +9,6 @@ export * from "./mockServices/saveSearch";
 export * from "./mockServices/deleteSearch";
 export * from "./mockServices/submitAlbum";
 export * from "./mockServices/getPlaylistTracksByAlbumId";
+export * from "./mockServices/getAlbumFormDataFromFiles";
+export * from "./mockServices/getTrackFormDataFromFile";
+export * from "./mockServices/getTrackFormDataFromFiles";

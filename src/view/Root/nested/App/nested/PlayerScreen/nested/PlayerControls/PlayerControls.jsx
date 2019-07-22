@@ -2,49 +2,23 @@
 
 import * as React from "react";
 
-import { PlayerContext } from "contexts/PlayerContext";
-import { useContextStrict } from "hooks/useContextStrict";
+import { EventBoundary } from "view/EventBoundary";
+import { useAudio } from "hooks/useAudio";
 
 import { PlaylistControls } from "./nested/PlaylistControls";
 import { PlaybackControls } from "./nested/PlaybackControls";
-import { PlayerControlsPanel } from "./styled/PlayerControlsPanel";
+import { usePlayerControlsState } from "./state/usePlayerControlsState";
 
 type TProps = {||};
 
 export const PlayerControls = (props: TProps) => {
-  const { playlist, playingTrackId } = useContextStrict(PlayerContext);
+  const [state, dispatch] = usePlayerControlsState();
 
-  const [hasPlaylistMode, setHasPlaylistMode] = React.useState<boolean>(false);
+  useAudio();
 
-  if (playingTrackId !== null) {
-    const playingTrack = playlist.find(({ id }) => id === playingTrackId);
-    if (!playingTrack) {
-      throw new TypeError();
-    }
-
-    const handleSwitchToCurrentTrackMode = () => {
-      setHasPlaylistMode(false);
-    };
-
-    const handleSwitchToPlaylistMode = () => {
-      setHasPlaylistMode(true);
-    };
-
-    return (
-      <PlayerControlsPanel>
-        {hasPlaylistMode ? (
-          <PlaylistControls
-            onSwitchToCurrentTrackMode={handleSwitchToCurrentTrackMode}
-          />
-        ) : (
-          <PlaybackControls
-            onSwitchToPlaylistMode={handleSwitchToPlaylistMode}
-            playingTrack={playingTrack}
-          />
-        )}
-      </PlayerControlsPanel>
-    );
-  }
-
-  return null;
+  return (
+    <EventBoundary handler={dispatch}>
+      {state.hasPlaylistMode ? <PlaylistControls /> : <PlaybackControls />}
+    </EventBoundary>
+  );
 };

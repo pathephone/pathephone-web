@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFeedAlbum, TPlayer, TSearchInfo } from "types/state";
+import type { TFeedAlbum, TSearchInfo } from "types/state";
 
 import { getUIDString, getUID } from "utils/uid";
 
@@ -31,21 +31,6 @@ export const getFeedAlbumMocks = (initialCount: number) => {
   }
   return mocks;
 };
-
-export const getPlayerContextMock = (): TPlayer => ({
-  playlist: [],
-  playingTrackId: null,
-  isPaused: false,
-  isShuffle: false,
-  isRepeat: false,
-  toggleIsPaused() {},
-  toggleIsShuffle() {},
-  toggleIsRepeat() {},
-  setPlayingTrackId() {},
-  addPlaylistTracks() {},
-  removePlaylistTrack() {},
-  clearPlaylist() {}
-});
 
 export const getSearchInfoMock = (): TSearchInfo => ({
   text: `text${getUID()}`,

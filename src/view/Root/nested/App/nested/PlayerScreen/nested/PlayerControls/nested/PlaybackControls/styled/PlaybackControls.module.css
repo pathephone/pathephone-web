@@ -1,12 +1,25 @@
-.PlaybackControls__Group {
+.PlaybackControls__Wrapper {
   display: flex;
   justify-content: space-between;
-  flex-shrink: 0;
-  padding: 0 10px;
+  width: 100%;
 }
 
-.PlaybackControls__Group_toRight {
-  justify-content: flex-end;
+.PlaybackControls__Group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.PlaybackControls__Group > *:not(:first-child) {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.PlaybackControls__Group_player {
+  justify-self: flex-start;
+}
+
+.PlaybackControls__Group_playlist {
+  justify-self: flex-end;
 }
 
 .PlaybackControls__Info {

@@ -2,29 +2,31 @@
 
 import * as React from "react";
 
+import { useAlbumFormCoverInput } from "hooks/useAlbumForm";
 import { useFileURL } from "hooks/useObjectURL";
-
+import { useDispatch } from "hooks/useDispatch";
 import { AlbumIcon } from "icons/round-album";
+
 import { AlbumCoverEditorWrapper } from "./styled/AlbumCoverEditorWrapper";
 import { AlbumCoverEditorInput } from "./styled/AlbumCoverEditorInput";
 import { AlbumCoverEditorPreview } from "./styled/AlbumCoverEditorPreview";
 import { AlbumCoverEditorImage } from "./styled/AlbumCoverEditorImage";
 import { AlbumCoverEditorError } from "./styled/AlbumCoverEditorError";
 
-type TProps = {|
-  value: null | File,
-  errorMessage?: string,
-  onChange(nextValue: File): void
-|};
+export const AlbumCoverEditor = () => {
+  const dispatch = useDispatch();
 
-export const AlbumCoverEditor = (props: TProps) => {
-  const { value, errorMessage, onChange } = props;
+  const { value, errorMessage } = useAlbumFormCoverInput();
 
-  const handleCoverChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const { files } = e.currentTarget;
-    onChange(files[0]);
-    e.currentTarget.value = "";
-  };
+  const handleFileChange = React.useCallback(
+    (file: File) => {
+      dispatch({
+        type: "ALBUM_COVER_EDITOR__FILE_RECIEVED",
+        payload: file
+      });
+    },
+    [dispatch]
+  );
 
   const coverPreviewUrl = useFileURL(value);
 
@@ -32,7 +34,7 @@ export const AlbumCoverEditor = (props: TProps) => {
     <AlbumCoverEditorWrapper>
       <AlbumCoverEditorInput
         errorMessage={errorMessage}
-        onChange={handleCoverChange}
+        onFileChange={handleFileChange}
       />
       <AlbumCoverEditorPreview>
         {coverPreviewUrl !== null && errorMessage === undefined ? (
