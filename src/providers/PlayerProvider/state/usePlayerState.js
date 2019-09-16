@@ -68,25 +68,39 @@ const playerStateReducer = (
       };
     }
 
-    case "AUDIO__ENDED":
-    case "PLAYLIST_CONTROLS__PLAY_NEXT": {
+    case "AUDIO__ENDED": {
+      const nextTrackId = getNextPlayingTrackId(state);
+      const fallbackTrackId = state.playlist[0].id;
       return {
         ...state,
-        playingTrackId: getNextPlayingTrackId(state)
+        playingTrackId: nextTrackId !== null ? nextTrackId : fallbackTrackId,
+        audioStatus: nextTrackId !== null ? "PLAYING" : "PAUSED"
+      };
+    }
+
+    case "PLAYLIST_CONTROLS__PLAY_NEXT": {
+      const nextTrackId = getNextPlayingTrackId(state);
+      const fallbackTrackId = state.playlist[0].id;
+      return {
+        ...state,
+        playingTrackId: nextTrackId !== null ? nextTrackId : fallbackTrackId
       };
     }
 
     case "PLAYLIST_CONTROLS__PLAY_PREVIOUS": {
+      const prevTrackId = getPreviousPlayingTrackId(state);
+      const fallbackTrackId = state.playlist[0].id;
       return {
         ...state,
-        playingTrackId: getPreviousPlayingTrackId(state)
+        playingTrackId: prevTrackId !== null ? prevTrackId : fallbackTrackId
       };
     }
 
     case "PLAYLIST_TRACK__PLAY": {
       return {
         ...state,
-        playingTrackId: event.payload
+        playingTrackId: event.payload,
+        audioStatus: "PLAYING"
       };
     }
 

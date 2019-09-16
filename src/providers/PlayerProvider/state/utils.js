@@ -2,7 +2,7 @@
 
 import type { TPlayerState } from "types/state";
 
-export const getNextPlayingTrackId = (state: TPlayerState): string => {
+export const getNextPlayingTrackId = (state: TPlayerState): null | string => {
   const currentTrackIndex = state.playlist.findIndex(track => {
     return track.id === state.playingTrackId;
   });
@@ -14,13 +14,15 @@ export const getNextPlayingTrackId = (state: TPlayerState): string => {
       return nextTrack.id;
     }
 
-    return state.playlist[0].id;
+    return null;
   }
 
   throw new TypeError();
 };
 
-export const getPreviousPlayingTrackId = (state: TPlayerState) => {
+export const getPreviousPlayingTrackId = (
+  state: TPlayerState
+): null | string => {
   const currentTrackIndex = state.playlist.findIndex(track => {
     return track.id === state.playingTrackId;
   });
@@ -32,7 +34,7 @@ export const getPreviousPlayingTrackId = (state: TPlayerState) => {
       return nextTrack.id;
     }
 
-    return state.playlist[0].id;
+    return null;
   }
 
   throw new TypeError();
