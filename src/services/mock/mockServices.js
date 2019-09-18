@@ -12,3 +12,4 @@ export * from "./mockServices/getPlaylistTracksByAlbumId";
 export * from "./mockServices/getAlbumFormDataFromFiles";
 export * from "./mockServices/getTrackFormDataFromFile";
 export * from "./mockServices/getTrackFormDataFromFiles";
+export * from "./mockServices/getIntl";

@@ -11,3 +11,7 @@ export class UnreachableError extends TypeError {
 export class MissingAudioFilesError extends Error {
   message = "No audio files selected.";
 }
+
+export class UnexpectedError extends Error {
+  message = "Unexpected error.";
+}

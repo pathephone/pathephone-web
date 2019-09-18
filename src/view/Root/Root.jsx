@@ -6,6 +6,7 @@ import * as React from "react";
 
 import { ServicesContext } from "contexts/ServicesContext";
 import { RouterProvider } from "view/RouterProvider";
+import { AppStateProvider } from "providers/AppStateProvider/index";
 
 import { App } from "./nested/App";
 import { ThemeProvider } from "./nested/ThemeProvider";
@@ -20,7 +21,9 @@ export const Root = ({ services }: TProps) => (
     <ServicesContext.Provider value={services}>
       <ThemeProvider>
         <RootFallback>
-          <App />
+          <AppStateProvider>
+            <App />
+          </AppStateProvider>
         </RootFallback>
       </ThemeProvider>
     </ServicesContext.Provider>
