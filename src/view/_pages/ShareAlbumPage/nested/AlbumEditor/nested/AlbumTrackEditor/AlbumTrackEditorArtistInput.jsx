@@ -8,6 +8,7 @@ import { FloatingLabelInput } from "view/_ui/FloatingLabelInput";
 import { useDispatch } from "hooks/useDispatch";
 import { useAlbumFormArtistValidity } from "hooks/useAlbumForm";
 import { testId } from "utils/testId";
+import { useIntlDictionary } from "hooks/useIntl";
 
 type TProps = {
   trackId: string,
@@ -17,6 +18,13 @@ type TProps = {
 
 export const AlbumTrackEditorArtistInput = (props: TProps) => {
   const { trackId, artist, artistIndex } = props;
+
+  const {
+    albumTrackEditor: {
+      missingArtistNameValidationText,
+      artistNameInputPlaceholderText
+    }
+  } = useIntlDictionary();
 
   const dispatch = useDispatch();
 
@@ -37,7 +45,9 @@ export const AlbumTrackEditorArtistInput = (props: TProps) => {
     [artist.id, dispatch, trackId]
   );
 
-  const validationMessage = !valid ? "Required field" : undefined;
+  const validationMessage = !valid
+    ? missingArtistNameValidationText
+    : undefined;
 
   return (
     <FloatingLabelInput
@@ -47,7 +57,7 @@ export const AlbumTrackEditorArtistInput = (props: TProps) => {
       name="name"
       value={artist.name}
       validationMessage={validationMessage}
-      placeholder={`Track artist #${artistIndex + 1}`}
+      placeholder={artistNameInputPlaceholderText(artistIndex + 1)}
       onChange={handleArtistChange}
     />
   );

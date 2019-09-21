@@ -5,6 +5,7 @@ import type { TSearchInfo } from "types/state";
 import React from "react";
 
 import { routes } from "data/routes";
+import { useIntlDictionary } from "hooks/useIntl";
 
 import { SearchQueryItemView } from "./SearchQueryItemView";
 
@@ -19,6 +20,10 @@ export const SearchQueryItem = (props: TProps) => {
     onDelete
   } = props;
 
+  const {
+    searchQueryItem: { resultsCountText, noResultsText }
+  } = useIntlDictionary();
+
   // State normalization
   const onDeleteButtonClick = React.useCallback(() => {
     onDelete(text);
@@ -26,15 +31,11 @@ export const SearchQueryItem = (props: TProps) => {
 
   const linkText = text;
 
-  const resultsCountTextPostfix = "albums found";
-
-  const resultsCountFallbackText = "no albums found";
-
   const countText = (() => {
     if (resultsCount === 0) {
-      return resultsCountFallbackText;
+      return noResultsText;
     }
-    return `${resultsCount} ${resultsCountTextPostfix}`;
+    return `${resultsCount} ${resultsCountText}`;
   })();
 
   const hasResultsAccent = resultsCount > 0;

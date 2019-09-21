@@ -5,13 +5,18 @@ import * as React from "react";
 import { FloatingLabelInput } from "view/_ui/FloatingLabelInput";
 import { useDispatch } from "hooks/useDispatch";
 import { useAlbumFormTitleInput } from "hooks/useAlbumForm";
+import { testId } from "utils/testId";
+import { useIntlDictionary } from "hooks/useIntl";
 
 import { AlbumEditorFieldset } from "./styled/AlbumEditorFieldset";
 import { AlbumEditorFieldsetTitle } from "./styled/AlbumEditorFieldsetTitle";
 import { AlbumEditorAboutFieldsetBody } from "./styled/AlbumEditorFieldsetBody";
-import { testId } from "utils/testId";
 
 export const AlbumEditorAbout = () => {
+  const {
+    albumEditor: { aboutFieldsetTitleText, albumTitleInputPlaceholderText }
+  } = useIntlDictionary();
+
   const dispatch = useDispatch();
 
   const { value, errorMessage } = useAlbumFormTitleInput();
@@ -28,11 +33,11 @@ export const AlbumEditorAbout = () => {
 
   return (
     <AlbumEditorFieldset>
-      <AlbumEditorFieldsetTitle text="About" />
+      <AlbumEditorFieldsetTitle text={aboutFieldsetTitleText} />
       <AlbumEditorAboutFieldsetBody withPadding>
         <FloatingLabelInput
           name="title"
-          placeholder="Album title"
+          placeholder={albumTitleInputPlaceholderText}
           value={value}
           validationMessage={errorMessage}
           onChange={handleInputChange}

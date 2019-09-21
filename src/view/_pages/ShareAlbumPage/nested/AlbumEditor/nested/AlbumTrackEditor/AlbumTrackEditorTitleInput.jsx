@@ -6,6 +6,7 @@ import { FloatingLabelInput } from "view/_ui/FloatingLabelInput";
 import { useDispatch } from "hooks/useDispatch";
 import { useAlbumFormTrackTitleInput } from "hooks/useAlbumForm";
 import { testId } from "utils/testId";
+import { useIntlDictionary } from "hooks/useIntl";
 
 type TProps = {
   trackId: string
@@ -13,6 +14,10 @@ type TProps = {
 
 export const AlbumTrackEditorTitleInput = (props: TProps) => {
   const { trackId } = props;
+
+  const {
+    albumTrackEditor: { titleInputPlaceholderText }
+  } = useIntlDictionary();
 
   const { value, validationMessage } = useAlbumFormTrackTitleInput(trackId);
 
@@ -36,7 +41,7 @@ export const AlbumTrackEditorTitleInput = (props: TProps) => {
       name="title"
       value={value}
       validationMessage={validationMessage}
-      placeholder="Track title"
+      placeholder={titleInputPlaceholderText}
       onChange={handleTrackInputChange}
     />
   );

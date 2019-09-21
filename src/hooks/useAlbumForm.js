@@ -5,6 +5,7 @@ import type { TAlbumFormValidity } from "types/state";
 import { StrictHookError } from "data/errors";
 
 import { useShareAlbumPageState } from "./useShareAlbumPageState";
+import { useIntlDictionary } from "./useIntl";
 
 export const useAlbumFormData = () => {
   const { albumFormData } = useShareAlbumPageState();
@@ -50,13 +51,17 @@ export const useAlbumFormCoverInput = () => {
   const data = useAlbumFormDataStrict();
   const validation = useAlbumFormValidation();
 
+  const {
+    albumCoverEditor: { missingCoverValidationText }
+  } = useIntlDictionary();
+
   const value = data.cover;
 
   const errorMessage = validation.reduce<string | void>(
     (acc, validity: TAlbumFormValidity) => {
       switch (validity.type) {
         case "COVER_REQUIRED":
-          return "Cover is required";
+          return missingCoverValidationText;
         default:
           return acc;
       }
@@ -96,6 +101,10 @@ export const useAlbumFormArtistValidity = (params: {
 export const useAlbumFormTrackTitleInput = (trackId: string) => {
   const { tracklist } = useAlbumFormDataStrict();
 
+  const {
+    albumTrackEditor: { missingTitleValidationText }
+  } = useIntlDictionary();
+
   const validation = useAlbumFormValidation();
 
   const track = tracklist.find(track => track.id === trackId);
@@ -112,7 +121,7 @@ export const useAlbumFormTrackTitleInput = (trackId: string) => {
         validity.type === "EMPTY_TRACK_TITLE" &&
         validity.payload === trackId
       ) {
-        return "Field is required";
+        return missingTitleValidationText;
       }
       return acc;
     },

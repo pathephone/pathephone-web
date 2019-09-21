@@ -4,9 +4,11 @@ import * as React from "react";
 
 import { routes } from "data/routes";
 
+import { testId } from "utils/testId";
+import { useIntlDictionary } from "hooks/useIntl";
+
 import { PlayerNavigationPopup } from "./styled/PlayerNavigationPopup";
 import { PlayerNavigationLink } from "./styled/PlayerNavigationLink";
-import { testId } from "utils/testId";
 
 type TProps = {|
   onClose(): void
@@ -15,22 +17,30 @@ type TProps = {|
 export const PlayerNavigation = (props: TProps) => {
   const { onClose } = props;
 
+  const { playerNavigation } = useIntlDictionary();
+
+  const {
+    latestAlbumsLinkText,
+    searchAlbumsLinkText,
+    shareAlbumLinkText
+  } = playerNavigation;
+
   return (
     <PlayerNavigationPopup onOutsideClick={onClose}>
       <PlayerNavigationLink
-        text="Latest albums"
+        text={latestAlbumsLinkText}
         onClick={onClose}
         to={routes.latestAlbumsRoute()}
         testId={testId.PLAYER_NAVIGATION__LATEST_ALBUMS_LINK}
       />
       <PlayerNavigationLink
-        text="Search albums"
+        text={searchAlbumsLinkText}
         onClick={onClose}
         to={routes.searchQueriesRoute()}
         testId={testId.PLAYER_NAVIGATION__SEARCH_ALBUMS_LINK}
       />
       <PlayerNavigationLink
-        text="Share album"
+        text={shareAlbumLinkText}
         onClick={onClose}
         to={routes.shareAlbumRoute()}
         testId={testId.PLAYER_NAVIGATION__SHARE_ALBUM_LINK}

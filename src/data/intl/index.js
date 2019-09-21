@@ -6,9 +6,10 @@ import { UnexpectedError } from "data/errors";
 
 const availableIntlMap = new Map();
 
-const fallbackCode = "en";
-
 availableIntlMap.set("en", () => import("./en"));
+availableIntlMap.set("ru", () => import("./ru"));
+
+const fallbackCode = "en";
 
 export const getIntlByCode = async (code: string): Promise<TIntl> => {
   const currentCode = availableIntlMap.has(code) ? code : fallbackCode;

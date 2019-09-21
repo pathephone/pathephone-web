@@ -10,8 +10,13 @@ import { AlbumEditorAboutFieldsetBody } from "./styled/AlbumEditorFieldsetBody";
 
 import { AlbumTrackEditor } from "./nested/AlbumTrackEditor";
 import { AlbumAudioEditor } from "./nested/AlbumAudioEditor";
+import { useIntlDictionary } from "hooks/useIntl";
 
 export const AlbumEditorTracklist = () => {
+  const {
+    albumEditor: { tracklistFieldsetTitleText }
+  } = useIntlDictionary();
+
   const { tracklist } = useAlbumFormDataStrict();
 
   const trackInputsNode = React.useMemo(
@@ -29,7 +34,7 @@ export const AlbumEditorTracklist = () => {
 
   return (
     <AlbumEditorFieldset>
-      <AlbumEditorFieldsetTitle text="Tracklist" />
+      <AlbumEditorFieldsetTitle text={tracklistFieldsetTitleText} />
       <AlbumEditorAboutFieldsetBody>
         {trackInputsNode}
       </AlbumEditorAboutFieldsetBody>

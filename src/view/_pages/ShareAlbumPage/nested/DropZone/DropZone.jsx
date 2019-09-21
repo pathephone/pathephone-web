@@ -7,6 +7,7 @@ import { DropZoneLabel } from "./styled/DropZoneLabel";
 import { DropZoneInput } from "./styled/DropZoneInput";
 import { DropZoneText } from "./styled/DropZoneText";
 import { useDispatch } from "hooks/useDispatch";
+import { useIntlDictionary } from "hooks/useIntl";
 
 type TProps = {|
   errorText?: string,
@@ -15,6 +16,10 @@ type TProps = {|
 
 export const DropZone = (props: TProps) => {
   const { errorText, successText } = props;
+
+  const {
+    dropZone: { mainText }
+  } = useIntlDictionary();
 
   const dispatch = useDispatch();
 
@@ -27,8 +32,6 @@ export const DropZone = (props: TProps) => {
     },
     [dispatch]
   );
-
-  const mainText = "Click to select album files or drag’n’drop files here";
 
   return (
     <DropZoneWrapper>
