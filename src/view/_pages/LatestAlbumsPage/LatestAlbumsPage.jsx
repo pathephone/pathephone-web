@@ -5,12 +5,12 @@ import * as React from "react";
 import { testId } from "utils/testId";
 import { Page } from "view/Page";
 import { LoadMoreButton } from "view/LoadMoreButton";
+import { useIntlDictionary } from "hooks/useIntl";
+import { FeedAlbum } from "view/FeedAlbum";
 
-import { FeedAlbum } from "./nested/FeedAlbum";
 import { LatestAlbumsPageWrapper } from "./styled/LatestAlbumsPageWrapper";
 import { LatestAlbumsPageText } from "./styled/LatestAlbumsPageText";
 import { useGetLatestAlbums } from "./utils/useGetLatestAlbums";
-import { useIntlDictionary } from "hooks/useIntl";
 
 type TProps = {||};
 

@@ -1,13 +1,28 @@
 // @flow strict
 
+import type { ContextRouter } from "react-router-dom";
+
 import * as React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { routes } from "data/routes";
 import { LatestAlbumsPage } from "view/_pages/LatestAlbumsPage";
-import { SearchQueriesPage } from "view/_pages/SearchQueriesPage";
-import { SearchQueryPage } from "view/_pages/SearchQueryPage";
 import { ShareAlbumPage } from "view/_pages/ShareAlbumPage";
+import { SearchAlbumsPage } from "view/_pages/SearchAlbumsPage/SearchAlbumsPage";
+
+const SearchAlbumsPageWithRouter = (props: ContextRouter) => {
+  const {
+    match: {
+      params: { query }
+    }
+  } = props;
+
+  if (typeof query !== "string") {
+    throw new TypeError();
+  }
+
+  return <SearchAlbumsPage searchQuery={query} />;
+};
 
 export const PlayerContent = () => {
   return (
@@ -19,13 +34,8 @@ export const PlayerContent = () => {
       />
       <Route
         exact
-        path={routes.searchQueriesPattern}
-        component={SearchQueriesPage}
-      />
-      <Route
-        exact
-        path={routes.searchQueryPattern}
-        component={SearchQueryPage}
+        path={routes.searchAlbumsPattern}
+        component={SearchAlbumsPageWithRouter}
       />
       <Route exact path={routes.shareAlbumPattern} component={ShareAlbumPage} />
       <Route

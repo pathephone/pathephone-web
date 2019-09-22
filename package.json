@@ -41,7 +41,9 @@
     "style:check": "prettier \"src/**/*.{js,jsx,css}\" --check",
     "commitlint": "commitlint from=HEAD",
     "predeploy": "npm run build",
-    "deploy": "node ./publish.js"
+    "deploy": "node ./publish.js",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": [
     ">0.2%",
@@ -62,5 +64,11 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.2.1",
+    "@storybook/addon-links": "^5.2.1",
+    "@storybook/addons": "^5.2.1",
+    "@storybook/react": "^5.2.1"
   }
 }

@@ -10,19 +10,11 @@ export type TIntlDictionary = {|
     loadMoreButtonText: string,
     fallbackText: string
   |},
-  searchQueriesPage: {|
-    loadMoreButtonText: string,
-    fallbackText: string
-  |},
-  searchQueryItem: {|
-    resultsCountText: string,
-    noResultsText: string
-  |},
-  searchQueryPage: {|
-    fallbackText: string,
-    saveSearchButtonText: string,
-    deleteSearchButtonText: string,
-    showNewResultsButtonText: string
+  searchAlbumsPage: {|
+    subTitleText: string,
+    fallbackSubTitleText: string,
+    newResultsButtonText: string,
+    fallbackButtonText: string
   |},
   albumEditor: {|
     aboutFieldsetTitleText: string,

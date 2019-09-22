@@ -28,9 +28,6 @@ const renderComponent = () => {
   const getLatestAlbumsLinkNode = () =>
     mounted.getByTestId(testId.PLAYER_NAVIGATION__LATEST_ALBUMS_LINK);
 
-  const getSearchAlbumsLinkNode = () =>
-    mounted.getByTestId(testId.PLAYER_NAVIGATION__SEARCH_ALBUMS_LINK);
-
   const getShareAlbumLinkNode = () =>
     mounted.getByTestId(testId.PLAYER_NAVIGATION__SHARE_ALBUM_LINK);
 
@@ -41,15 +38,11 @@ const renderComponent = () => {
   const clickLatestAlbumsLink = () =>
     fireEvent.click(getLatestAlbumsLinkNode());
 
-  const clickSearchAlbumsLink = () =>
-    fireEvent.click(getSearchAlbumsLinkNode());
-
   const clickShareAlbumLink = () => fireEvent.click(getShareAlbumLinkNode());
 
   return {
     clickOutside,
     clickLatestAlbumsLink,
-    clickSearchAlbumsLink,
     clickShareAlbumLink,
     getOnCloseCallback
   };
@@ -71,16 +64,14 @@ describe("on link get clicked", () => {
   test("should call onClose callback once", () => {
     const {
       clickLatestAlbumsLink,
-      clickSearchAlbumsLink,
       clickShareAlbumLink,
       getOnCloseCallback
     } = renderComponent();
 
     clickLatestAlbumsLink();
-    clickSearchAlbumsLink();
     clickShareAlbumLink();
 
-    expect(getOnCloseCallback()).toBeCalledTimes(3);
+    expect(getOnCloseCallback()).toBeCalledTimes(2);
   });
 });
 
@@ -91,13 +82,6 @@ describe("should set correct location", () => {
     clickLatestAlbumsLink();
 
     expect(window.location.pathname).toEqual(routes.latestAlbumsRoute());
-  });
-  test("search albums link get clicked", () => {
-    const { clickSearchAlbumsLink } = renderComponent();
-
-    clickSearchAlbumsLink();
-
-    expect(window.location.pathname).toEqual(routes.searchQueriesRoute());
   });
   test("share album link get clicked", () => {
     const { clickShareAlbumLink } = renderComponent();

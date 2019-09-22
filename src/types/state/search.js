@@ -5,3 +5,9 @@ export type TSearchInfo = {|
   saved: boolean,
   resultsCount: number
 |};
+
+export type TSearchAlbumsPageScreen =
+  | "LOADING"
+  | "HAS_RESULTS"
+  | "HAS_NEW_RESULTS"
+  | "FALLBACK";

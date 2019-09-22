@@ -35,7 +35,7 @@ export const SearchControls = (props: TProps) => {
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      history.push(routes.searchQueryRoute(searchValue));
+      history.push(routes.searchAlbumsRoute(searchValue));
 
       dispatch({
         type: "SEARCH_CONTROLS__SUBMIT",

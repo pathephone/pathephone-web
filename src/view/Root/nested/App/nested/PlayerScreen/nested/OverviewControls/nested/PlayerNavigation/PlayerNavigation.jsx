@@ -19,11 +19,7 @@ export const PlayerNavigation = (props: TProps) => {
 
   const { playerNavigation } = useIntlDictionary();
 
-  const {
-    latestAlbumsLinkText,
-    searchAlbumsLinkText,
-    shareAlbumLinkText
-  } = playerNavigation;
+  const { latestAlbumsLinkText, shareAlbumLinkText } = playerNavigation;
 
   return (
     <PlayerNavigationPopup onOutsideClick={onClose}>
@@ -32,12 +28,6 @@ export const PlayerNavigation = (props: TProps) => {
         onClick={onClose}
         to={routes.latestAlbumsRoute()}
         testId={testId.PLAYER_NAVIGATION__LATEST_ALBUMS_LINK}
-      />
-      <PlayerNavigationLink
-        text={searchAlbumsLinkText}
-        onClick={onClose}
-        to={routes.searchQueriesRoute()}
-        testId={testId.PLAYER_NAVIGATION__SEARCH_ALBUMS_LINK}
       />
       <PlayerNavigationLink
         text={shareAlbumLinkText}
