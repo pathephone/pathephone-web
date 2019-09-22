@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/pathephone/pathephone-web/compare/v1.6.1...v1.7.0) (2019-09-22)
+
+
+### Features
+
+* **logic:** fixes [#34](https://github.com/pathephone/pathephone-web/issues/34) ([d35893c](https://github.com/pathephone/pathephone-web/commit/d35893c))
+
 ## [1.6.1](https://github.com/pathephone/pathephone-web/compare/v1.6.0...v1.6.1) (2019-07-14)
 
 
