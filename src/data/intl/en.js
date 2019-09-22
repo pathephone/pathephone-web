@@ -12,19 +12,11 @@ const intlDictionaryEn: TIntlDictionary = {
     loadMoreButtonText: "Load more",
     fallbackText: "No albums in you library yet"
   },
-  searchQueriesPage: {
-    loadMoreButtonText: "Load more",
-    fallbackText: "You have no saved queries"
-  },
-  searchQueryPage: {
-    fallbackText: "Searching...",
-    saveSearchButtonText: "Save search",
-    deleteSearchButtonText: "Delete search",
-    showNewResultsButtonText: "Show new results"
-  },
-  searchQueryItem: {
-    resultsCountText: "Albums found",
-    noResultsText: "No albums found"
+  searchAlbumsPage: {
+    subTitleText: "The search continues while the page is open",
+    fallbackSubTitleText: "Something went wrong",
+    newResultsButtonText: "Show new results",
+    fallbackButtonText: "Try again"
   },
   albumEditor: {
     aboutFieldsetTitleText: "About",

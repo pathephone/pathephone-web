@@ -1,0 +1,63 @@
+.SearchAlbumsPage__Content {
+}
+
+.SearchAlbumsPage__Results {
+}
+
+.SearchAlbumsPage__Fallback,
+.SearchAlbumsPage__Loader {
+  text-align: center;
+  margin-top: 5em;
+}
+
+.SearchAlbumsPage__Fallback {
+  color: var(--error-color);
+}
+
+.SearchAlbumsPage__Loader {
+  color: var(--text-inactive-color);
+}
+
+.SearchAlbumsPage__Hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 5em;
+}
+
+.SearchAlbumsPage__Action {
+  margin-top: 1em;
+  height: 2em;
+  display: flex;
+}
+
+.SearchAlbumsPage__Title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.SearchAlbumsPage__SubTitle {
+  color: var(--text-inactive-color);
+  text-align: center;
+  margin-top: 2em;
+}
+
+.SearchAlbumsPage__Button {
+  margin: auto;
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.SearchAlbumsPage__Button_newResults {
+  width: 100%;
+  background-color: #217f00;
+  color: white;
+  padding: 1em;
+}

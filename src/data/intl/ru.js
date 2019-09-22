@@ -12,19 +12,11 @@ const intlDictionaryRu: TIntlDictionary = {
     loadMoreButtonText: "Дальше",
     fallbackText: "Пока нет альбомов"
   },
-  searchQueriesPage: {
-    loadMoreButtonText: "Дальше",
-    fallbackText: "Пока нет поисковых запросов"
-  },
-  searchQueryItem: {
-    resultsCountText: "Альбомов найдено",
-    noResultsText: "Пока ничего не найдено"
-  },
-  searchQueryPage: {
-    fallbackText: "Идет поиск...",
-    saveSearchButtonText: "Сохранить поиск",
-    deleteSearchButtonText: "Удалить поиск",
-    showNewResultsButtonText: "Показать новые результаты"
+  searchAlbumsPage: {
+    subTitleText: "Поиск продолжается, пока открыта страница",
+    fallbackSubTitleText: "Произошла ошибка, попробуйте еще раз",
+    newResultsButtonText: "Показать новые результаты",
+    fallbackButtonText: "Попробовать еще раз"
   },
   albumEditor: {
     aboutFieldsetTitleText: "Общая информация",
