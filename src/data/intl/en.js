@@ -18,6 +18,9 @@ const intlDictionaryEn: TIntlDictionary = {
     newResultsButtonText: "Show new results",
     fallbackButtonText: "Try again"
   },
+  shareAlbumPage: {
+    didSucceedText: "Album successfully shared"
+  },
   albumEditor: {
     aboutFieldsetTitleText: "About",
     tracklistFieldsetTitleText: "Tracklist",
