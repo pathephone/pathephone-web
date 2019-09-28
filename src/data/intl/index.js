@@ -11,8 +11,11 @@ availableIntlMap.set("ru", () => import("./ru"));
 
 const fallbackCode = "en";
 
-export const getIntlByCode = async (code: string): Promise<TIntl> => {
-  const currentCode = availableIntlMap.has(code) ? code : fallbackCode;
+export const getIntlByCodes = async (codes: string[]): Promise<TIntl> => {
+  const firstAvailableCode = codes.find(code => availableIntlMap.has(code));
+
+  const currentCode =
+    firstAvailableCode !== undefined ? firstAvailableCode : fallbackCode;
 
   const dictionarySource = availableIntlMap.get(currentCode);
 
