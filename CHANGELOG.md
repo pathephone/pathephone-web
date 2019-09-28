@@ -1,3 +1,15 @@
+# [1.9.0](https://github.com/pathephone/pathephone-web/compare/v1.8.0...v1.9.0) (2019-09-28)
+
+
+### Bug Fixes
+
+* **i18n:** adds missing i18n strings for ShareAlbumPage ([d107e8e](https://github.com/pathephone/pathephone-web/commit/d107e8e))
+
+
+### Features
+
+* **i18n:** adds support for more accurate i18n detection ([e74057a](https://github.com/pathephone/pathephone-web/commit/e74057a))
+
 # [1.8.0](https://github.com/pathephone/pathephone-web/compare/v1.7.0...v1.8.0) (2019-09-28)
 
 
