@@ -16,6 +16,9 @@ export type TIntlDictionary = {|
     newResultsButtonText: string,
     fallbackButtonText: string
   |},
+  shareAlbumPage: {|
+    didSucceedText: string
+  |},
   albumEditor: {|
     aboutFieldsetTitleText: string,
     tracklistFieldsetTitleText: string,

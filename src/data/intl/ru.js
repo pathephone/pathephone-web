@@ -18,6 +18,9 @@ const intlDictionaryRu: TIntlDictionary = {
     newResultsButtonText: "Показать новые результаты",
     fallbackButtonText: "Попробовать еще раз"
   },
+  shareAlbumPage: {
+    didSucceedText: "Альбом успешно опубликован"
+  },
   albumEditor: {
     aboutFieldsetTitleText: "Общая информация",
     tracklistFieldsetTitleText: "Список композиций",
