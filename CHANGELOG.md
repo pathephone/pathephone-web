@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/pathephone/pathephone-web/compare/v1.7.0...v1.8.0) (2019-09-28)
+
+
+### Features
+
+* implements albums search page ([7421b9d](https://github.com/pathephone/pathephone-web/commit/7421b9d))
+
 # [1.7.0](https://github.com/pathephone/pathephone-web/compare/v1.6.1...v1.7.0) (2019-09-22)
 
 
