@@ -1,5 +1,7 @@
 // @flow strict
 
+import type { TPlayingTrackScreen } from "types/state";
+
 import React from "react";
 
 import { DeleteIcon } from "icons/round-delete";
@@ -7,31 +9,27 @@ import { RoundButton } from "view/RoundButton";
 
 import { PlaylistTrackWrapper } from "./styled/PlaylistTrackWrapper";
 import { PlaylistTrackButton } from "./styled/PlaylistTrackButton";
-import { PlaylistTrackCachingIndicator } from "./styled/PlaylistTrackCachingIndicator";
 import { PlaylistTrackInfo } from "./styled/PlaylistTrackInfo";
 import { PlaylistTrackSecondaryAction } from "./styled/PlaylistTrackSecondaryAction";
 
 type TProps = {|
+  screen: TPlayingTrackScreen,
   artistName: string,
   title: string,
-  hasPlayingScreen: boolean,
-  hasCachingScreen: boolean,
   onPlay(): void,
   onRemove(): void
 |};
 
 export const PlaylistTrackView = ({
+  screen,
   artistName,
   title,
-  hasPlayingScreen,
-  hasCachingScreen,
   onPlay,
   onRemove
 }: TProps) => {
   return (
-    <PlaylistTrackWrapper playing={hasPlayingScreen}>
-      <PlaylistTrackButton disabled={hasCachingScreen} onClick={onPlay}>
-        {hasCachingScreen && <PlaylistTrackCachingIndicator />}
+    <PlaylistTrackWrapper playing={screen === "PLAYING"}>
+      <PlaylistTrackButton onClick={onPlay}>
         <PlaylistTrackInfo title={title} artistName={artistName} />
       </PlaylistTrackButton>
       <PlaylistTrackSecondaryAction>

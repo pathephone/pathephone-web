@@ -6,7 +6,7 @@ import styles from "./Playlist.module.css";
 
 type TProps = {|
   children: React.Node,
-  disabled: boolean,
+  disabled?: boolean,
   onClick(): void
 |};
 

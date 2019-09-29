@@ -53,7 +53,6 @@
   text-align: left;
 }
 
-.PlaylistTrack__Button:disabled .PlaylistTrack__CachingIndicator,
 .PlaylistTrack__Button:disabled .PlaylistTrack__Title,
 .PlaylistTrack__Button:disabled .PlaylistTrack__Artist {
   color: var(--text-inactive-color);
@@ -76,27 +75,8 @@
   color: var(--text-secondary-color);
 }
 
-.PlaylistTrack__CachingIndicator {
-  padding: 2.5px 7.5px;
-  animation: cachingIndicatorAnimation 2s infinite;
-}
-
 .PlaylistTrack__SecondaryAction {
   position: absolute;
   margin-left: auto;
   right: 0px;
-}
-
-@keyframes cachingIndicatorAnimation {
-  0% {
-    opacity: 0.2;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.2;
-  }
 }

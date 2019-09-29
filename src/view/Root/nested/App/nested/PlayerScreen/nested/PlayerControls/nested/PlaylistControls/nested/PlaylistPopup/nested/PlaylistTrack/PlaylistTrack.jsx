@@ -22,10 +22,6 @@ export const PlaylistTrack = ({ track }: TProps) => {
 
   const dispatch = useDispatch();
 
-  // TODO: figure out how to better
-  // track down cached audios
-  const cached = true;
-
   const handleRemoveTrack = React.useCallback(() => {
     dispatch({
       type: "PLAYLIST_TRACK__REMOVE",
@@ -40,29 +36,19 @@ export const PlaylistTrack = ({ track }: TProps) => {
     });
   }, [dispatch, id]);
 
-  const hasPlayingScreen = playing;
-
-  const hasCachingScreen = !cached;
+  const screen = playing ? "PLAYING" : "DEFAULT";
 
   const memoizedTrack = React.useMemo(() => {
     return (
       <PlaylistTrackView
+        screen={screen}
         artistName={artistName}
         title={title}
-        hasPlayingScreen={hasPlayingScreen}
-        hasCachingScreen={hasCachingScreen}
         onRemove={handleRemoveTrack}
         onPlay={handlePlayTrack}
       />
     );
-  }, [
-    artistName,
-    title,
-    hasPlayingScreen,
-    hasCachingScreen,
-    handleRemoveTrack,
-    handlePlayTrack
-  ]);
+  }, [screen, artistName, title, handleRemoveTrack, handlePlayTrack]);
 
   return memoizedTrack;
 };

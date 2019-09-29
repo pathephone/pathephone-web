@@ -17,3 +17,5 @@ export type TPlayerState = {|
   // isShuffle: boolean,
   // isRepeat: boolean
 |};
+
+export type TPlayingTrackScreen = "DEFAULT" | "PLAYING";
