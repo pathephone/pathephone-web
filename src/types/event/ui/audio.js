@@ -16,4 +16,9 @@ type TEnded = {|
   type: "AUDIO__ENDED"
 |};
 
-export type TAudioEvent = TPaused | TPlayed | TWaiting | TEnded;
+type TFailed = {|
+  type: "AUDIO__FAILED",
+  payload: null | MediaError
+|};
+
+export type TAudioEvent = TPaused | TPlayed | TWaiting | TEnded | TFailed;

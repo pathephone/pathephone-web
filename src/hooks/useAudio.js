@@ -90,7 +90,10 @@ export const useAudio = () => {
     };
 
     const errorHandler = (event: Event) => {
-      console.error(event);
+      dispatch({
+        type: "AUDIO__FAILED",
+        payload: audio.error || null
+      });
     };
 
     audio.addEventListener("pause", pauseHandler);
