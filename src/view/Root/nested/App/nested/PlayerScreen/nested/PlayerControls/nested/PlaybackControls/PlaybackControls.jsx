@@ -1,19 +1,15 @@
 // @flow strict
 
+import type { TAudioStatus } from "types/state";
+
 import * as React from "react";
 
-import { PauseIcon } from "icons/round-pause";
-import { PlayArrowIcon } from "icons/round-play-arrow";
-import { PlaylistIcon } from "icons/round-queue_music";
-import { SquareButton } from "view/SquareButton";
-import { Spinner } from "view/Spinner";
 import { useDispatch } from "hooks/useDispatch";
+import { useAudioStatus } from "hooks/usePlayerContext";
+import { UnreachableError } from "data/errors";
 
-import { PlaybackControlsInfo } from "./styled/PlaybackControlsInfo";
-import { PlaybackControlsGroup } from "./styled/PlaybackControlsGroup";
 import { usePlayingTrack } from "./state/usePlayingTrack";
-import { usePlayerContext } from "hooks/usePlayerContext";
-import { PlaybackControlsWrapper } from "./styled/PlaybackControlsWrapper";
+import { PlaybackControlsView } from "./PlaybackControlsView";
 
 type TProps = {||};
 
@@ -22,47 +18,44 @@ export const PlaybackControls = (props: TProps) => {
 
   const { title, artistName } = usePlayingTrack();
 
-  const { audioStatus } = usePlayerContext();
+  const audioStatus: TAudioStatus = useAudioStatus();
 
-  const handlePause = React.useCallback(() => {
-    dispatch({ type: "PLAYBACK_CONTROLS__PAUSE" });
-  }, [dispatch]);
+  const onPlaybackButtonClick = React.useCallback(() => {
+    if (audioStatus === "PLAYING") {
+      dispatch({ type: "PLAYBACK_CONTROLS__PAUSE" });
+    }
 
-  const handlePlay = React.useCallback(() => {
-    dispatch({ type: "PLAYBACK_CONTROLS__PLAY" });
-  }, [dispatch]);
+    if (audioStatus === "PAUSED") {
+      dispatch({ type: "PLAYBACK_CONTROLS__PLAY" });
+    }
+  }, [audioStatus, dispatch]);
 
-  const handleOpenPlaylist = React.useCallback(() => {
+  const onPlaylistButtonClick = React.useCallback(() => {
     dispatch({ type: "PLAYBACK_CONTROLS__OPEN_PLAYLIST" });
   }, [dispatch]);
 
-  const hasPauseButton = audioStatus === "PLAYING";
+  const screen = (() => {
+    switch (audioStatus) {
+      case "PLAYING":
+        return "PLAYING";
+      case "PAUSED":
+        return "PAUSED";
+      case "PENDING":
+        return "PENDING";
+      case "FAILED":
+        return "FAILED";
+      default:
+        throw new UnreachableError(audioStatus);
+    }
+  })();
 
-  const hasPlayButton = audioStatus === "PAUSED";
+  const viewProps = {
+    screen,
+    title,
+    artistName,
+    onPlaybackButtonClick,
+    onPlaylistButtonClick
+  };
 
-  const hasLoader = audioStatus === "WAITING";
-
-  return (
-    <PlaybackControlsWrapper>
-      <PlaybackControlsGroup mod="player">
-        {hasPauseButton && (
-          <SquareButton onClick={handlePause}>
-            <PauseIcon />
-          </SquareButton>
-        )}
-        {hasPlayButton && (
-          <SquareButton onClick={handlePlay}>
-            <PlayArrowIcon />
-          </SquareButton>
-        )}
-        {hasLoader && <Spinner />}
-      </PlaybackControlsGroup>
-      <PlaybackControlsInfo title={title} artistName={artistName} />
-      <PlaybackControlsGroup mod="playlist">
-        <SquareButton onClick={handleOpenPlaylist}>
-          <PlaylistIcon />
-        </SquareButton>
-      </PlaybackControlsGroup>
-    </PlaybackControlsWrapper>
-  );
+  return <PlaybackControlsView {...viewProps} />;
 };

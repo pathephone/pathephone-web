@@ -78,6 +78,13 @@ const playerStateReducer = (
       };
     }
 
+    case "AUDIO__FAILED": {
+      return {
+        ...state,
+        audioStatus: "FAILED"
+      };
+    }
+
     case "PLAYLIST_CONTROLS__PLAY_NEXT": {
       const nextTrackId = getNextPlayingTrackId(state);
       const fallbackTrackId = state.playlist[0].id;

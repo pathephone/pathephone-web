@@ -16,12 +16,12 @@
   border: 0;
 }
 
-.SquareButton__Button:hover,
-.SquareButton__Button:focus {
+.SquareButton__Button:not(:disabled):hover,
+.SquareButton__Button:not(:disabled):focus {
   background-color: rgba(0, 0, 0, 0.07);
 }
 
-.SquareButton__Button:active {
+.SquareButton__Button:not(:disabled):active {
   background-color: rgba(0, 0, 0, 0.1);
 }
 

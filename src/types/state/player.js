@@ -1,6 +1,6 @@
 // @flow strict
 
-export type TAudioStatus = "PAUSED" | "PLAYING" | "PENDING";
+export type TAudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
 
 export type TPlaylistTrack = {|
   id: string,
@@ -19,3 +19,9 @@ export type TPlayerState = {|
 |};
 
 export type TPlayingTrackScreen = "DEFAULT" | "PLAYING";
+
+export type TPlaybackControlsScreen =
+  | "PLAYING"
+  | "PAUSED"
+  | "PENDING"
+  | "FAILED";
