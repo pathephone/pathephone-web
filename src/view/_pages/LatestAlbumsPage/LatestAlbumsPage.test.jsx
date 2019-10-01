@@ -52,8 +52,6 @@ const renderComponent = (params?: TParams) => {
     </TestingProvider>
   );
 
-  const getPageWrapperNode = () => mounted.getByTestId(testId.PAGE_WRAPPER);
-
   const getPageLoaderNode = () => mounted.getByTestId(testId.PAGE_LOADER);
 
   const getFallbackNode = () =>
