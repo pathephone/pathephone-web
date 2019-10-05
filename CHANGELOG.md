@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/pathephone/pathephone-web/compare/v1.9.0...v1.10.0) (2019-10-05)
+
+
+### Features
+
+* **ui:** implements failed playback indicator ([f3cf380](https://github.com/pathephone/pathephone-web/commit/f3cf380))
+
 # [1.9.0](https://github.com/pathephone/pathephone-web/compare/v1.8.0...v1.9.0) (2019-09-28)
 
 
