@@ -1,26 +1,25 @@
 {
   "files": {
-    "main.css": "/pathephone-web/static/css/main.1daffe16.chunk.css",
-    "main.js": "/pathephone-web/static/js/main.42f9b7c8.chunk.js",
-    "main.js.map": "/pathephone-web/static/js/main.42f9b7c8.chunk.js.map",
+    "main.css": "/pathephone-web/static/css/main.1b36db62.chunk.css",
+    "main.js": "/pathephone-web/static/js/main.275ddfe7.chunk.js",
+    "main.js.map": "/pathephone-web/static/js/main.275ddfe7.chunk.js.map",
     "runtime~main.js": "/pathephone-web/static/js/runtime~main.12380fc3.js",
     "runtime~main.js.map": "/pathephone-web/static/js/runtime~main.12380fc3.js.map",
-    "static/js/2.5d0e6be5.chunk.js": "/pathephone-web/static/js/2.5d0e6be5.chunk.js",
-    "static/js/2.5d0e6be5.chunk.js.map": "/pathephone-web/static/js/2.5d0e6be5.chunk.js.map",
+    "static/js/2.2720f46c.chunk.js": "/pathephone-web/static/js/2.2720f46c.chunk.js",
+    "static/js/2.2720f46c.chunk.js.map": "/pathephone-web/static/js/2.2720f46c.chunk.js.map",
     "static/js/3.764016ee.chunk.js": "/pathephone-web/static/js/3.764016ee.chunk.js",
     "static/js/3.764016ee.chunk.js.map": "/pathephone-web/static/js/3.764016ee.chunk.js.map",
     "static/js/4.9e4965a8.chunk.js": "/pathephone-web/static/js/4.9e4965a8.chunk.js",
     "static/js/4.9e4965a8.chunk.js.map": "/pathephone-web/static/js/4.9e4965a8.chunk.js.map",
     "index.html": "/pathephone-web/index.html",
-    "precache-manifest.b7380a7d4a3c01ec6f09423d718f89d0.js": "/pathephone-web/precache-manifest.b7380a7d4a3c01ec6f09423d718f89d0.js",
+    "precache-manifest.64361f71bfd6ae61af196d4ca3243117.js": "/pathephone-web/precache-manifest.64361f71bfd6ae61af196d4ca3243117.js",
     "service-worker.js": "/pathephone-web/service-worker.js",
-    "static/css/main.1daffe16.chunk.css.map": "/pathephone-web/static/css/main.1daffe16.chunk.css.map",
+    "static/css/main.1b36db62.chunk.css.map": "/pathephone-web/static/css/main.1b36db62.chunk.css.map",
     "static/media/round-album-24px.d4230c04.svg": "/pathephone-web/static/media/round-album-24px.d4230c04.svg",
     "static/media/round-clear-24px.84e833e5.svg": "/pathephone-web/static/media/round-clear-24px.84e833e5.svg",
     "static/media/round-clear_all-24px.f4987d47.svg": "/pathephone-web/static/media/round-clear_all-24px.f4987d47.svg",
     "static/media/round-delete-24px.7fa3c9cb.svg": "/pathephone-web/static/media/round-delete-24px.7fa3c9cb.svg",
     "static/media/round-file-24px.4d555ee0.svg": "/pathephone-web/static/media/round-file-24px.4d555ee0.svg",
-    "static/media/round-get_app-24px.9ded83db.svg": "/pathephone-web/static/media/round-get_app-24px.9ded83db.svg",
     "static/media/round-keyboard_arrow_down-24px.3eb8b656.svg": "/pathephone-web/static/media/round-keyboard_arrow_down-24px.3eb8b656.svg",
     "static/media/round-keyboard_arrow_up-24px.ae736693.svg": "/pathephone-web/static/media/round-keyboard_arrow_up-24px.ae736693.svg",
     "static/media/round-menu-24px.f1991872.svg": "/pathephone-web/static/media/round-menu-24px.f1991872.svg",
@@ -31,6 +30,7 @@
     "static/media/round-search-24px.8e10fdfe.svg": "/pathephone-web/static/media/round-search-24px.8e10fdfe.svg",
     "static/media/round-skip_next-24px.9bd23c1a.svg": "/pathephone-web/static/media/round-skip_next-24px.9bd23c1a.svg",
     "static/media/round-skip_previous-24px.f1732ec6.svg": "/pathephone-web/static/media/round-skip_previous-24px.f1732ec6.svg",
-    "static/media/round-sync-24px.d447d047.svg": "/pathephone-web/static/media/round-sync-24px.d447d047.svg"
+    "static/media/round-sync-24px.d447d047.svg": "/pathephone-web/static/media/round-sync-24px.d447d047.svg",
+    "static/media/round-warning-24px.44d3b423.svg": "/pathephone-web/static/media/round-warning-24px.44d3b423.svg"
   }
 }
