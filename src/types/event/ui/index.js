@@ -14,6 +14,7 @@ import type { TAlbumTrackEditorEvent } from "./albumTrackEditor";
 import type { TAlbumEditorEvent } from "./albumEditor";
 import type { TDropZoneEvent } from "./dropZone";
 import type { TLatestAlbumsPageEvent } from "./latestAlbumsPage";
+import type { TSearchAlbumsPageEvent } from "./searchAlbumsPage";
 
 export type TUiEvent =
   | TPlaylistPopupEvent
@@ -29,4 +30,5 @@ export type TUiEvent =
   | TAlbumTrackEditorEvent
   | TAlbumEditorEvent
   | TDropZoneEvent
-  | TLatestAlbumsPageEvent;
+  | TLatestAlbumsPageEvent
+  | TSearchAlbumsPageEvent;

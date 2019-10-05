@@ -39,7 +39,7 @@ export const SearchAlbumsPageView = (props: TProps) => {
   } = props;
 
   const feedItemsNode = React.useMemo(() => {
-    return feedItems.map(item => <FeedAlbum data={item} />);
+    return feedItems.map(item => <FeedAlbum data={item} key={item.id} />);
   }, [feedItems]);
 
   return (
