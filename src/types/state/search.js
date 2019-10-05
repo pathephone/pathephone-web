@@ -1,5 +1,13 @@
 // @flow strict
 
+import type { TFeedAlbum } from "types/state";
+
+export type TSearchAlbumsPageState = {|
+  failed: boolean,
+  albums: TFeedAlbum[],
+  newAlbums: TFeedAlbum[]
+|};
+
 export type TSearchInfo = {|
   text: string,
   saved: boolean,
