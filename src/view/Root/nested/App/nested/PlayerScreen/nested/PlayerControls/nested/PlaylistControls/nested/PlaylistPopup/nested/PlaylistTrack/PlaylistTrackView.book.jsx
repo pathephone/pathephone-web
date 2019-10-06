@@ -4,6 +4,7 @@ import React from "react";
 
 import { PlaylistTrackView } from "./PlaylistTrackView";
 import { ThemeProvider } from "view/Root/nested/ThemeProvider/index";
+import { MultiSizeScreen } from "utils/MultiSizeScreen";
 
 export default { title: "PlaylistTrackView" };
 
@@ -15,13 +16,17 @@ const props = {
 };
 
 export const hasDefaultScreen = () => (
-  <ThemeProvider>
-    <PlaylistTrackView {...props} screen="DEFAULT" />
-  </ThemeProvider>
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <PlaylistTrackView {...props} screen="DEFAULT" />
+    </ThemeProvider>
+  </MultiSizeScreen>
 );
 
 export const hasPlayingScreen = () => (
-  <ThemeProvider>
-    <PlaylistTrackView {...props} screen="PLAYING" />
-  </ThemeProvider>
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <PlaylistTrackView {...props} screen="PLAYING" />
+    </ThemeProvider>
+  </MultiSizeScreen>
 );

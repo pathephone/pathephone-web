@@ -4,6 +4,8 @@ import React from "react";
 
 import { SearchAlbumsPageView } from "./SearchAlbumsPageView";
 import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
+import { ThemeProvider } from "view/Root/nested/ThemeProvider/index";
+import { MultiSizeScreen } from "utils/MultiSizeScreen";
 
 export default { title: "SearchAlbumsPageView" };
 
@@ -19,17 +21,33 @@ const props = {
 };
 
 export const loadingScreen = () => (
-  <SearchAlbumsPageView {...props} screen="LOADING" />
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <SearchAlbumsPageView {...props} screen="LOADING" />
+    </ThemeProvider>
+  </MultiSizeScreen>
 );
 
 export const hasResultsScreen = () => (
-  <SearchAlbumsPageView {...props} screen="HAS_RESULTS" />
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <SearchAlbumsPageView {...props} screen="HAS_RESULTS" />
+    </ThemeProvider>
+  </MultiSizeScreen>
 );
 
 export const hasNewResultsScreen = () => (
-  <SearchAlbumsPageView {...props} screen="HAS_NEW_RESULTS" />
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <SearchAlbumsPageView {...props} screen="HAS_NEW_RESULTS" />
+    </ThemeProvider>
+  </MultiSizeScreen>
 );
 
 export const fallbackScreen = () => (
-  <SearchAlbumsPageView {...props} screen="FALLBACK" />
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <SearchAlbumsPageView {...props} screen="FALLBACK" />
+    </ThemeProvider>
+  </MultiSizeScreen>
 );
