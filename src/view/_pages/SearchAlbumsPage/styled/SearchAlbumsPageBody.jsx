@@ -8,6 +8,6 @@ type TProps = {|
   children: React.Node
 |};
 
-export const SearchAlbumsPageHero = ({ children }: TProps) => {
-  return <div className={styles.SearchAlbumsPage__Hero}>{children}</div>;
+export const SearchAlbumsPageBody = ({ children }: TProps) => {
+  return <div className={styles.SearchAlbumsPage__Body}>{children}</div>;
 };

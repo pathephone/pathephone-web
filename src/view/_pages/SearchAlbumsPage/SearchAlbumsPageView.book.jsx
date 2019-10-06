@@ -9,12 +9,21 @@ import { MultiSizeScreen } from "utils/MultiSizeScreen";
 
 export default { title: "SearchAlbumsPageView" };
 
+const text = "Some text";
+
+const longText =
+  "Some long long long long long long long long long long long text";
+
+const longTextWithoutSpaces =
+  "Somelonglonglonglonglonglonglonglonglonglonglongtext";
+
 const props = {
-  titleText: "title",
-  subTitleText: "sub title",
-  fallbackSubTitleText: "fallback subtitle",
-  fallbackButtonText: "fallback button",
-  newResultsButtonText: "show new results",
+  screen: "LOADING",
+  titleText: text,
+  subTitleText: text,
+  fallbackSubTitleText: text,
+  fallbackButtonText: text,
+  newResultsButtonText: text,
   feedItems: getFeedAlbumMocks(1),
   onNewResultsButtonClick: () => {},
   onFallbackButtonClick: () => {}
@@ -24,6 +33,14 @@ export const loadingScreen = () => (
   <MultiSizeScreen>
     <ThemeProvider>
       <SearchAlbumsPageView {...props} screen="LOADING" />
+    </ThemeProvider>
+  </MultiSizeScreen>
+);
+
+export const fallbackScreen = () => (
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <SearchAlbumsPageView {...props} screen="FALLBACK" />
     </ThemeProvider>
   </MultiSizeScreen>
 );
@@ -44,10 +61,26 @@ export const hasNewResultsScreen = () => (
   </MultiSizeScreen>
 );
 
-export const fallbackScreen = () => (
+export const withLongText = () => (
   <MultiSizeScreen>
     <ThemeProvider>
-      <SearchAlbumsPageView {...props} screen="FALLBACK" />
+      <SearchAlbumsPageView
+        {...props}
+        titleText={longText}
+        subTitleText={longText}
+      />
+    </ThemeProvider>
+  </MultiSizeScreen>
+);
+
+export const withLongTextWithoutSpaces = () => (
+  <MultiSizeScreen>
+    <ThemeProvider>
+      <SearchAlbumsPageView
+        {...props}
+        titleText={longTextWithoutSpaces}
+        subTitleText={longTextWithoutSpaces}
+      />
     </ThemeProvider>
   </MultiSizeScreen>
 );
