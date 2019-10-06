@@ -3,6 +3,7 @@
 import React from "react";
 
 import { PlaybackControlsView } from "./PlaybackControlsView";
+import { ThemeProvider } from "view/Root/nested/ThemeProvider/index";
 
 export default { title: "PlaybackControlsView" };
 
@@ -15,13 +16,25 @@ const props = {
 };
 
 export const hasLoadingScreen = () => (
-  <PlaybackControlsView {...props} screen="PENDING" />
+  <ThemeProvider>
+    <PlaybackControlsView {...props} screen="PENDING" />
+  </ThemeProvider>
 );
 
 export const hasPlayingScreen = () => (
-  <PlaybackControlsView {...props} screen="PLAYING" />
+  <ThemeProvider>
+    <PlaybackControlsView {...props} screen="PLAYING" />
+  </ThemeProvider>
 );
 
 export const hasPausedScreen = () => (
-  <PlaybackControlsView {...props} screen="PAUSED" />
+  <ThemeProvider>
+    <PlaybackControlsView {...props} screen="PAUSED" />
+  </ThemeProvider>
+);
+
+export const hasFailedScreen = () => (
+  <ThemeProvider>
+    <PlaybackControlsView {...props} screen="FAILED" />
+  </ThemeProvider>
 );
