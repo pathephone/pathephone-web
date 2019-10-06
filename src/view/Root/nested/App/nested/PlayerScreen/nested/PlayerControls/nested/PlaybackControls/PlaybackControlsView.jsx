@@ -23,26 +23,24 @@ type TProps = {|
   onPlaylistButtonClick(): void
 |};
 
-export const PlaybackControlsView = (props: TProps) => {
-  const {
-    screen,
-    title,
-    artistName,
-    onPlaybackButtonClick,
-    onPlaylistButtonClick
-  } = props;
-
+export const PlaybackControlsView = ({
+  screen,
+  title,
+  artistName,
+  onPlaybackButtonClick,
+  onPlaylistButtonClick
+}: TProps) => {
   return (
     <PlaybackControlsWrapper>
       <PlaybackControlsGroup mod="player">
         <SquareButton
-          disabled={screen === "LOADING" || screen === "FAILED"}
+          disabled={screen === "PENDING" || screen === "FAILED"}
           onClick={onPlaybackButtonClick}
         >
           {screen === "PLAYING" && <PauseIcon />}
           {screen === "PAUSED" && <PlayArrowIcon />}
           {screen === "FAILED" && <WarningIcon />}
-          {screen === "LOADING" && <Spinner />}
+          {screen === "PENDING" && <Spinner />}
         </SquareButton>
       </PlaybackControlsGroup>
       <PlaybackControlsInfo title={title} artistName={artistName} />
