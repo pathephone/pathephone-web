@@ -1,17 +1,25 @@
-.SearchAlbumsPage__Content {
+.SearchAlbumsPage__Wrapper {
 }
 
-.SearchAlbumsPage__Results {
+.SearchAlbumsPage__Wrapper_loading {
 }
 
-.SearchAlbumsPage__Fallback,
-.SearchAlbumsPage__Loader {
+.SearchAlbumsPage__Wrapper_fallback {
+}
+
+.SearchAlbumsPage__Wrapper_hasResults {
+}
+
+.SearchAlbumsPage__Wrapper_hasNewResults {
+}
+
+.SearchAlbumsPage__Body {
+}
+
+.SearchAlbumsPage__Wrapper_loading .SearchAlbumsPage__Body,
+.SearchAlbumsPage__Wrapper_fallback .SearchAlbumsPage__Body {
   text-align: center;
-  margin-top: 5em;
-}
-
-.SearchAlbumsPage__Fallback {
-  color: var(--error-color);
+  padding-top: 5em;
 }
 
 .SearchAlbumsPage__Loader {
@@ -27,24 +35,22 @@
   padding: 5em;
 }
 
-.SearchAlbumsPage__Action {
-  margin-top: 1em;
-  height: 2em;
-  display: flex;
-}
-
 .SearchAlbumsPage__Title {
   margin: 0;
   font-size: 24px;
   line-height: 28px;
   text-align: center;
   color: rgba(0, 0, 0, 0.87);
+  word-break: break-all;
+  word-break: break-word;
 }
 
 .SearchAlbumsPage__SubTitle {
   color: var(--text-inactive-color);
   text-align: center;
   margin-top: 2em;
+  word-break: break-all;
+  word-break: break-word;
 }
 
 .SearchAlbumsPage__Button {
@@ -55,9 +61,14 @@
   font-size: 14px;
 }
 
-.SearchAlbumsPage__Button_newResults {
+.SearchAlbumsPage__Wrapper_hasNewResults .SearchAlbumsPage__Button {
   width: 100%;
   background-color: #217f00;
   color: white;
   padding: 1em;
+}
+
+.SearchAlbumsPage__Wrapper_fallback .SearchAlbumsPage__Button {
+  color: var(--error-color);
+  font-weight: bold;
 }

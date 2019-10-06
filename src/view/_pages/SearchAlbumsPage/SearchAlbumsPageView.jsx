@@ -5,13 +5,16 @@ import type { TFeedAlbum, TSearchAlbumsPageScreen } from "types/state";
 import * as React from "react";
 
 import { FeedAlbum } from "view/FeedAlbum";
+import { testId } from "utils/testId";
 
 import { SearchAlbumsPageHero } from "./styled/SearchAlbumsPageHero";
 import { SearchAlbumsPageButton } from "./styled/SearchAlbumsPageButton";
 import { SearchAlbumsPageWrapper } from "./styled/SearchAlbumsPageWrapper";
-import { SearchAlbumsPageResults } from "./styled/SearchAlbumsPageResults";
 import { SearchAlbumsPageLoader } from "./styled/SearchAlbumsPageLoader";
 import { SearchAlbumsPageFeed } from "./styled/SearchAlbumsPageFeed";
+import { SearchAlbumsPageBody } from "./styled/SearchAlbumsPageBody";
+import { SearchAlbumsPageTitle } from "./styled/SearchAlbumsPageTitle";
+import { SearchAlbumsPageSubTitle } from "./styled/SearchAlbumsPageSubTitle";
 
 type TProps = {|
   screen: TSearchAlbumsPageScreen,
@@ -43,32 +46,41 @@ export const SearchAlbumsPageView = (props: TProps) => {
   }, [feedItems]);
 
   return (
-    <SearchAlbumsPageWrapper>
-      <SearchAlbumsPageHero
-        title={titleText}
-        subTitle={screen === "FALLBACK" ? fallbackSubTitleText : subTitleText}
-        mod={screen === "FALLBACK" ? "fallback" : "default"}
-      />
-      <SearchAlbumsPageResults>
-        {screen === "LOADING" && <SearchAlbumsPageLoader />}
+    <SearchAlbumsPageWrapper screen={screen}>
+      <SearchAlbumsPageHero>
+        <SearchAlbumsPageTitle
+          text={titleText}
+          testId={testId.SEARCH_ALBUMS_PAGE__TITLE}
+        />
+        <SearchAlbumsPageSubTitle
+          text={screen === "FALLBACK" ? fallbackSubTitleText : subTitleText}
+          testId={testId.SEARCH_ALBUMS_PAGE__SUB_TITLE}
+        />
+      </SearchAlbumsPageHero>
+      <SearchAlbumsPageBody>
+        {screen === "LOADING" && (
+          <SearchAlbumsPageLoader testId={testId.SEARCH_ALBUMS_PAGE__LOADER} />
+        )}
         {screen === "FALLBACK" && (
           <SearchAlbumsPageButton
-            mod="fallback"
+            testId={testId.SEARCH_ALBUMS_PAGE__FALLBACK_BUTTON}
             text={fallbackButtonText}
             onClick={onFallbackButtonClick}
           />
         )}
         {screen === "HAS_NEW_RESULTS" && (
           <SearchAlbumsPageButton
-            mod="new-results"
+            testId={testId.SEARCH_ALBUMS_PAGE__NEW_RESULTS_BUTTON}
             text={newResultsButtonText}
             onClick={onNewResultsButtonClick}
           />
         )}
         {(screen === "HAS_RESULTS" || screen === "HAS_NEW_RESULTS") && (
-          <SearchAlbumsPageFeed>{feedItemsNode}</SearchAlbumsPageFeed>
+          <SearchAlbumsPageFeed testId={testId.SEARCH_ALBUMS_PAGE__FEED}>
+            {feedItemsNode}
+          </SearchAlbumsPageFeed>
         )}
-      </SearchAlbumsPageResults>
+      </SearchAlbumsPageBody>
     </SearchAlbumsPageWrapper>
   );
 };
