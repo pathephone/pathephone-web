@@ -10,6 +10,7 @@
   width: 100%;
   padding: 0 0.75em;
   grid-gap: 0.75em;
+  box-sizing: border-box;
   grid-template-columns: repeat(auto-fit, minmax(5em, 10em));
 }
 
