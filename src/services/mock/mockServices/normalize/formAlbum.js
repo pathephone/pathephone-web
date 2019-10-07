@@ -7,7 +7,8 @@ import { getUniqueString } from "utils/getUniqueString";
 
 const formTrackToServicesTrack = ({ title, artists, audio }) => ({
   title,
-  artists: artists.map(a => a.name),
+  // TODO: figure out how to avoid empty names to be submited
+  artists: artists.filter(artist => !!artist.name).map(artist => artist.name),
   audioSrc: URL.createObjectURL(audio)
 });
 
