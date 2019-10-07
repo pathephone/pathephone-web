@@ -4,10 +4,10 @@ import React from "react";
 
 import { LatestAlbumsPageProvider } from "providers/LatestAlbumsPageProvider";
 
-import { LatestAlbumsPageView } from "./LatestAlbumsPageView";
+import { LatestAlbumsPageContainer } from "./LatestAlbumsPageContainer";
 
 export const LatestAlbumsPage = () => (
   <LatestAlbumsPageProvider>
-    <LatestAlbumsPageView />
+    <LatestAlbumsPageContainer />
   </LatestAlbumsPageProvider>
 );
