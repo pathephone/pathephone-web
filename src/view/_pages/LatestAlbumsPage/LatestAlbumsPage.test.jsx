@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TServices } from "types/state";
+import type { TServices, TFeedAlbum } from "types/state";
 
 import React from "react";
 import {
@@ -18,32 +18,29 @@ import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
 
 type TParams = {|
-  simulateNoAlbumsCase?: boolean,
-  simulateLastPageCase?: boolean,
-  feedItemsCount?: number
+  firstPageResults?: TFeedAlbum[],
+  secondPageResults?: TFeedAlbum[]
 |};
 
 const renderComponent = (params?: TParams) => {
-  const {
-    simulateNoAlbumsCase = false,
-    simulateLastPageCase = false,
-    feedItemsCount = 1
-  } = params || {};
+  const { firstPageResults = [], secondPageResults = [] } = params || {};
 
   const services: TServices = {
     ...mockServices,
-    getLatestAlbums: jest.fn().mockImplementation(() => {
-      if (simulateNoAlbumsCase) {
-        return Promise.resolve({
-          items: [],
-          lastPageFlag: true
-        });
-      }
-      return Promise.resolve({
-        items: getFeedAlbumMocks(feedItemsCount),
-        lastPageFlag: simulateLastPageCase
-      });
-    })
+    getLatestAlbums: jest
+      .fn()
+      .mockImplementationOnce(async () => ({
+        items: firstPageResults,
+        lastPageFlag: secondPageResults.length === 0
+      }))
+      .mockImplementationOnce(async () => ({
+        items: secondPageResults,
+        lastPageFlag: true
+      }))
+      .mockImplementation(async () => ({
+        items: [],
+        lastPageFlag: false
+      }))
   };
 
   const mounted = render(
@@ -92,9 +89,7 @@ test("should display page loader", () => {
 
 describe("no albums case", () => {
   test("should display fallback on next dom change", async () => {
-    const { getFallbackNode } = renderComponent({
-      simulateNoAlbumsCase: true
-    });
+    const { getFallbackNode } = renderComponent();
 
     await waitForDomChange();
 
@@ -104,7 +99,9 @@ describe("no albums case", () => {
 
 describe("has albums case", () => {
   test("should display feed on next dom change", async () => {
-    const { getFeedNode } = renderComponent();
+    const { getFeedNode } = renderComponent({
+      firstPageResults: getFeedAlbumMocks(1)
+    });
 
     await waitForDomChange();
 
@@ -114,7 +111,7 @@ describe("has albums case", () => {
     const count = 5;
 
     const { getFeedItemsCount } = renderComponent({
-      feedItemsCount: count
+      firstPageResults: getFeedAlbumMocks(5)
     });
 
     await waitForDomChange();
@@ -125,12 +122,34 @@ describe("has albums case", () => {
 
 describe("click load more button", () => {
   it("should display feed loader", async () => {
-    const { getFeedLoader, clickLoadMoreButton } = renderComponent();
+    const { getFeedLoader, clickLoadMoreButton } = renderComponent({
+      firstPageResults: getFeedAlbumMocks(5),
+      secondPageResults: getFeedAlbumMocks(5)
+    });
 
     await waitForDomChange();
 
     clickLoadMoreButton();
 
     expect(getFeedLoader).not.toThrow();
+  });
+  it("should display feed loader", async () => {
+    const firstPageItemsCount = 5;
+    const secondPageItemsCount = 5;
+
+    const { getFeedItemsCount, clickLoadMoreButton } = renderComponent({
+      firstPageResults: getFeedAlbumMocks(firstPageItemsCount),
+      secondPageResults: getFeedAlbumMocks(secondPageItemsCount)
+    });
+
+    await waitForDomChange();
+
+    clickLoadMoreButton();
+
+    await waitForDomChange();
+
+    expect(getFeedItemsCount()).toEqual(
+      firstPageItemsCount + secondPageItemsCount
+    );
   });
 });

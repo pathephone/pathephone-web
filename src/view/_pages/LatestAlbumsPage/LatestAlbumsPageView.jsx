@@ -1,61 +1,41 @@
 // @flow strict
 
+import type { TFeedAlbum } from "types/state";
+
 import * as React from "react";
 
 import { testId } from "utils/testId";
 import { Page } from "view/Page";
 import { LoadMoreButton } from "view/LoadMoreButton";
-import { useIntlDictionary } from "hooks/useIntl";
 import { FeedAlbum } from "view/FeedAlbum";
-import { useLatestAlbumsPageState } from "hooks/useLatestAlbumsPageState";
-import { useDispatch } from "hooks/useDispatch";
-import { useGetLatestAlbumsService } from "hooks/useGetLatestAlbumsService";
 
 import { LatestAlbumsPageWrapper } from "./styled/LatestAlbumsPageWrapper";
 import { LatestAlbumsPageText } from "./styled/LatestAlbumsPageText";
 
-type TProps = {||};
+type TProps = {|
+  hasLoadMoreButton: boolean,
+  hasPageLoader: boolean,
+  hasFeed: boolean,
+  hasFeedLoader: boolean,
+  hasFallback: boolean,
+  albums: TFeedAlbum[],
+  fallbackText: string,
+  loadMoreButtonText: string,
+  onLoadMoreButtonClick(): void
+|};
 
 export const LatestAlbumsPageView = (props: TProps) => {
-  const getLatestAlbums = useGetLatestAlbumsService();
-
   const {
-    latestAlbumsPage: { fallbackText, loadMoreButtonText }
-  } = useIntlDictionary();
-
-  const dispatch = useDispatch();
-
-  const {
+    hasLoadMoreButton,
+    hasPageLoader,
+    hasFeed,
+    hasFeedLoader,
+    hasFallback,
     albums,
-    loading,
-    latestPage,
-    noMoreAlbums
-  } = useLatestAlbumsPageState();
-
-  // Load list on initial render and once page changes
-  React.useEffect(() => {
-    if (latestPage !== null) {
-      getLatestAlbums(latestPage);
-    }
-  }, [getLatestAlbums, latestPage]);
-
-  const hasPageLoader = latestPage === 1 && loading;
-
-  const hasFeed = albums.length > 0;
-
-  const hasFeedLoader = albums.length > 0 && loading;
-
-  const hasFallback = albums.length === 0 && noMoreAlbums;
-
-  const hasLoadMoreButton = albums.length > 0 && !noMoreAlbums;
-
-  const onLoadMoreButtonClick = React.useCallback(() => {
-    if (!loading) {
-      dispatch({
-        type: "LATEST_ALBUMS_PAGE__LOAD_MORE"
-      });
-    }
-  }, [dispatch, loading]);
+    fallbackText,
+    loadMoreButtonText,
+    onLoadMoreButtonClick
+  } = props;
 
   const feedItemsNode = React.useMemo(() => {
     return albums.map(item => <FeedAlbum data={item} key={item.id} />);
