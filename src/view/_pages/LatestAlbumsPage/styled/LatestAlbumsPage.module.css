@@ -14,3 +14,12 @@
     grid-template-columns: repeat(auto-fit, minmax(5em, 15em));
   }
 }
+
+.LatestAlbumsPage__Text_fallback {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary-color);
+}
