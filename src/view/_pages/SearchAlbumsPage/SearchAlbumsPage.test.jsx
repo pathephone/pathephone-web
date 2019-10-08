@@ -7,7 +7,8 @@ import {
   cleanup,
   render,
   waitForDomChange,
-  fireEvent
+  fireEvent,
+  wait
 } from "@testing-library/react";
 
 import { testId } from "utils/testId";
@@ -119,13 +120,15 @@ const renderComponent = (params?: TParams) => {
 
 afterEach(cleanup);
 
-test("should not display fallback button", () => {
+test("should not display fallback button", async () => {
   const { getFallbackButtonNode } = renderComponent();
 
   expect(() => getFallbackButtonNode()).toThrow();
+
+  await wait();
 });
 
-test("should display correct title", () => {
+test("should display correct title", async () => {
   const searchValue = "custom search value";
 
   const { getTitleText } = renderComponent({
@@ -133,20 +136,26 @@ test("should display correct title", () => {
   });
 
   expect(getTitleText).not.toThrow(searchValue);
+
+  await wait();
 });
 
-test("should display correct sub title", () => {
+test("should display correct sub title", async () => {
   const { getSubTitleText } = renderComponent();
 
   expect(getSubTitleText()).toEqual(
     "The search continues while the page is open"
   );
+
+  await wait();
 });
 
-test("should display loader", () => {
+test("should display loader", async () => {
   const { getLoaderNode } = renderComponent();
 
   expect(getLoaderNode).not.toThrow();
+
+  await wait();
 });
 
 // ONCE FIRST RESULTS RECIEVED
@@ -160,6 +169,8 @@ describe("once first results recieved", () => {
     await waitForDomChange();
 
     expect(getFallbackButtonNode).toThrow();
+
+    await wait();
   });
   test("should not display loader", async () => {
     const { getLoaderNode } = renderComponent({
@@ -169,6 +180,8 @@ describe("once first results recieved", () => {
     await waitForDomChange();
 
     expect(getLoaderNode).toThrow();
+
+    await wait();
   });
   test("should display feed", async () => {
     const { getFeedNode } = renderComponent({
@@ -178,6 +191,8 @@ describe("once first results recieved", () => {
     await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
+
+    await wait();
   });
   test("expected feed items count should match", async () => {
     const itemsCount = 5;
@@ -189,6 +204,8 @@ describe("once first results recieved", () => {
     await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(itemsCount);
+
+    await wait();
   });
   test("should not display new results button", async () => {
     const { getNewResultsButtonNode } = renderComponent({
@@ -198,6 +215,8 @@ describe("once first results recieved", () => {
     await waitForDomChange();
 
     expect(getNewResultsButtonNode).toThrow();
+
+    await wait();
   });
 });
 
@@ -215,6 +234,8 @@ describe("once new results recieved", () => {
     await waitForDomChange();
 
     expect(getFallbackButtonNode).toThrow();
+
+    await wait();
   });
   test("should not display loader", async () => {
     const { getLoaderNode } = renderComponent({
@@ -227,6 +248,8 @@ describe("once new results recieved", () => {
     await waitForDomChange();
 
     expect(getLoaderNode).toThrow();
+
+    await wait();
   });
   test("should display feed", async () => {
     const { getFeedNode } = renderComponent({
@@ -239,6 +262,8 @@ describe("once new results recieved", () => {
     await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
+
+    await wait();
   });
   test("expected feed items count should match", async () => {
     const initialItemsCount = 5;
@@ -253,6 +278,8 @@ describe("once new results recieved", () => {
     await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(initialItemsCount);
+
+    await wait();
   });
   test("should display new results button", async () => {
     const { getNewResultsButtonNode } = renderComponent({
@@ -265,6 +292,8 @@ describe("once new results recieved", () => {
     await waitForDomChange();
 
     expect(getNewResultsButtonNode).not.toThrow();
+
+    await wait();
   });
 });
 
@@ -284,6 +313,8 @@ describe("once new results button clicked", () => {
     clickNewResultsButton();
 
     expect(getFallbackButtonNode).toThrow();
+
+    await wait();
   });
   test("should not display loader", async () => {
     const { getLoaderNode, clickNewResultsButton } = renderComponent({
@@ -298,6 +329,8 @@ describe("once new results button clicked", () => {
     clickNewResultsButton();
 
     expect(getLoaderNode).toThrow();
+
+    await wait();
   });
   test("should display feed", async () => {
     const { getFeedNode, clickNewResultsButton } = renderComponent({
@@ -312,6 +345,8 @@ describe("once new results button clicked", () => {
     clickNewResultsButton();
 
     expect(getFeedNode).not.toThrow();
+
+    await wait();
   });
   test("expected feed items count should match", async () => {
     const initialItemsCount = 5;
@@ -329,6 +364,8 @@ describe("once new results button clicked", () => {
     clickNewResultsButton();
 
     expect(getFeedItemsCount()).toEqual(initialItemsCount + nextItemsCount);
+
+    await wait();
   });
   test("should not display new results button", async () => {
     const { getNewResultsButtonNode, clickNewResultsButton } = renderComponent({
@@ -343,6 +380,8 @@ describe("once new results button clicked", () => {
     clickNewResultsButton();
 
     expect(getNewResultsButtonNode).toThrow();
+
+    await wait();
   });
 });
 
@@ -357,6 +396,8 @@ describe("once service call failed", () => {
     await waitForDomChange();
 
     expect(getSubTitleText()).toEqual("Something went wrong");
+
+    await wait();
   });
   test("should display fallback button", async () => {
     const { getFallbackButtonNode } = renderComponent({
@@ -366,6 +407,8 @@ describe("once service call failed", () => {
     await waitForDomChange();
 
     expect(getFallbackButtonNode).not.toThrow();
+
+    await wait();
   });
   test("should not display loader", async () => {
     const { getLoaderNode } = renderComponent({
@@ -375,6 +418,8 @@ describe("once service call failed", () => {
     await waitForDomChange();
 
     expect(getLoaderNode).toThrow();
+
+    await wait();
   });
   test("should not display feed", async () => {
     const { getFeedNode } = renderComponent({
@@ -384,6 +429,8 @@ describe("once service call failed", () => {
     await waitForDomChange();
 
     expect(getFeedNode).toThrow();
+
+    await wait();
   });
   test("should not display new results button", async () => {
     const { getNewResultsButtonNode } = renderComponent({
@@ -393,5 +440,7 @@ describe("once service call failed", () => {
     await waitForDomChange();
 
     expect(getNewResultsButtonNode).toThrow();
+
+    await wait();
   });
 });
