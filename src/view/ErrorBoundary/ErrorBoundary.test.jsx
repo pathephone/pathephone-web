@@ -5,19 +5,29 @@ import { render, cleanup } from "@testing-library/react";
 import { ErrorBoundary } from "./ErrorBoundary";
 
 type TParams = {|
-  simulateThrow?: boolean,
   error?: Error,
   constructors?: Class<Error>[]
 |};
 
-const DEFAULT_MESSAGE = "default message";
+const errorLogger = console.error;
+
+beforeAll(() => {
+  // Silence all console.error calls.
+  // $FlowFixMe
+  console.error = () => {};
+});
+
+afterAll(() => {
+  // Restore error logger .
+  // $FlowFixMe
+  console.error = errorLogger;
+});
+
+const customError = new Error("Custom error");
+const customTypeError = new TypeError("Custom type error");
 
 const renderComponent = (params: TParams) => {
-  const {
-    simulateThrow = false,
-    error = new Error(DEFAULT_MESSAGE),
-    constructors = []
-  } = params || {};
+  const { error, constructors = [] } = params || {};
 
   const FALLBACK_VIEW = "FALLBACK_VIEW";
   const CHILD_VIEW = "CHILD_VIEW";
@@ -27,7 +37,7 @@ const renderComponent = (params: TParams) => {
   );
 
   const ChildView = () => {
-    if (simulateThrow) {
+    if (error) {
       throw error;
     }
     return <div data-testid={CHILD_VIEW} />;
@@ -54,8 +64,7 @@ describe("on throw error", () => {
   describe("match case", () => {
     test("should render fallback view", () => {
       const { getFallbackNode } = renderComponent({
-        simulateThrow: true,
-        error: new TypeError(),
+        error: customTypeError,
         constructors: [TypeError]
       });
 
@@ -63,37 +72,31 @@ describe("on throw error", () => {
     });
     test("should not render child view", () => {
       const { getChildNode } = renderComponent({
-        simulateThrow: true,
-        error: new TypeError(),
+        error: customTypeError,
         constructors: [TypeError]
       });
 
       expect(getChildNode).toThrow();
     });
     test("rendered text should match error message", () => {
-      const errorMessage = "cool";
-
       const { getFallbackText } = renderComponent({
-        simulateThrow: true,
-        error: new Error(errorMessage),
+        error: customError,
         constructors: [Error]
       });
 
-      expect(getFallbackText()).toEqual(errorMessage);
+      expect(getFallbackText()).toEqual(customError.message);
     });
   });
+
   describe("does not match case", () => {
     test("should rethrow error away", () => {
-      const errorToThrow = new Error();
-
       try {
         renderComponent({
-          simulateThrow: true,
-          error: errorToThrow,
+          error: customError,
           constructors: [TypeError]
         });
       } catch (error) {
-        expect(error).toEqual(errorToThrow);
+        expect(error).toEqual(customError);
       }
     });
   });
