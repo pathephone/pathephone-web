@@ -1,9 +1,0 @@
-.Card__Wrapper {
-  border-radius: 2px;
-  border: 1px solid lightgrey;
-  background-color: white;
-}
-
-.Card__Wrapper_withPadding {
-  padding: 1em;
-}
