@@ -26,6 +26,12 @@ export class ErrorBoundary extends React.Component<TProps, TState> {
     throw new TypeError("ErrorBoundary accepts only instances of Error.");
   }
 
+  componentDidCatch(error: Error) {
+    if (process.env.NODE_ENV === "development") {
+      console.log(error);
+    }
+  }
+
   render() {
     const { children, fallbackView, constructors } = this.props;
     const { error } = this.state;
