@@ -5,7 +5,7 @@ import type { TServices, TAppState } from "types/state";
 import * as React from "react";
 
 import { ServicesContext } from "contexts/ServicesContext";
-import { RouterProvider } from "view/RouterProvider";
+import { RouterProvider } from "view/root/RouterProvider";
 import { mockServices } from "services/mock/index";
 import { AppContext } from "contexts/AppContext";
 import { getAppStateMock } from "utils/mock/getAppStateMock";

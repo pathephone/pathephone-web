@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { EventBoundary } from "view/EventBoundary";
+import { EventBoundary } from "utils/EventBoundary";
 import { AppContext } from "contexts/AppContext";
 
 import { useAppReducer } from "./state/useAppReducer";

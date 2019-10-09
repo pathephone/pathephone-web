@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { appContextMock } from "data/appContextMock";
-import { Root } from "view/Root";
+import { Root } from "view/root/Root";
 
 const mountPoint = document.getElementById("root");
 

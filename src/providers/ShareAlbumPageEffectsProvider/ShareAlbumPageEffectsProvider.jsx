@@ -4,7 +4,7 @@ import type { TEvent } from "types/event";
 
 import * as React from "react";
 
-import { EventBoundary } from "view/EventBoundary";
+import { EventBoundary } from "utils/EventBoundary";
 import { useShareAlbumPageState } from "hooks/useShareAlbumPageState";
 
 import { useSubmitAlbumService } from "./state/useSubmitAlbumService";

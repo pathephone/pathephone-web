@@ -2,7 +2,7 @@
 import * as React from "react";
 
 import { PlayerContext } from "contexts/PlayerContext";
-import { EventBoundary } from "view/EventBoundary";
+import { EventBoundary } from "utils/EventBoundary";
 
 import { usePlayerState } from "./state/usePlayerState";
 

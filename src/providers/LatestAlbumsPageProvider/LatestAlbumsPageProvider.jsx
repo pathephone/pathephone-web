@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { EventBoundary } from "view/EventBoundary";
+import { EventBoundary } from "utils/EventBoundary";
 import { LatestAlbumsPageContext } from "contexts/LatestAlbumsPageContext";
 
 import { latestAlbumsPageReducer } from "./state/latestAlbumsPageReducer";
