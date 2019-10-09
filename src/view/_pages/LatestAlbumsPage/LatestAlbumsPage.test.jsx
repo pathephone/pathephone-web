@@ -7,7 +7,8 @@ import {
   render,
   cleanup,
   fireEvent,
-  waitForDomChange
+  waitForDomChange,
+  wait
 } from "@testing-library/react";
 
 import { testId } from "utils/testId";
@@ -81,10 +82,12 @@ const renderComponent = (params?: TParams) => {
 
 afterEach(cleanup);
 
-test("should display page loader", () => {
+test("should display page loader", async () => {
   const { getPageLoaderNode } = renderComponent();
 
   expect(getPageLoaderNode).not.toThrow();
+
+  await wait();
 });
 
 describe("no albums case", () => {
@@ -94,6 +97,8 @@ describe("no albums case", () => {
     await waitForDomChange();
 
     expect(getFallbackNode).not.toThrow();
+
+    await wait();
   });
 });
 
@@ -106,6 +111,8 @@ describe("has albums case", () => {
     await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
+
+    await wait();
   });
   test("feed items count should be correct", async () => {
     const count = 5;
@@ -117,6 +124,8 @@ describe("has albums case", () => {
     await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(count);
+
+    await wait();
   });
 });
 
@@ -132,6 +141,8 @@ describe("click load more button", () => {
     clickLoadMoreButton();
 
     expect(getFeedLoader).not.toThrow();
+
+    await wait();
   });
   it("should display feed loader", async () => {
     const firstPageItemsCount = 5;
@@ -151,5 +162,7 @@ describe("click load more button", () => {
     expect(getFeedItemsCount()).toEqual(
       firstPageItemsCount + secondPageItemsCount
     );
+
+    await wait();
   });
 });

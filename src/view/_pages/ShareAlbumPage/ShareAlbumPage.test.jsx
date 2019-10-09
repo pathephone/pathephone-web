@@ -13,7 +13,7 @@ import {
   fireEvent,
   cleanup
 } from "@testing-library/react";
-import { getAllByTestId, getByTestId } from "@testing-library/dom";
+import { getAllByTestId, getByTestId, wait } from "@testing-library/dom";
 
 import { testId } from "utils/testId";
 
@@ -324,27 +324,33 @@ const renderComponent = (params?: TParams) => {
 
 afterEach(cleanup);
 
-test("should display drop-zone by default", () => {
+test("should display drop-zone by default", async () => {
   const { getDropZoneInputNode } = renderComponent();
 
   expect(() => getDropZoneInputNode()).not.toThrow();
+
+  await wait();
 });
 
 describe("on correct filelist selected", () => {
-  test("drop-zone should disappear", () => {
+  test("drop-zone should disappear", async () => {
     const { getDropZoneInputNode, selectDropZoneFiles } = renderComponent();
 
     selectDropZoneFiles();
 
     expect(() => getDropZoneInputNode()).toThrow();
+
+    await wait();
   });
 
-  test("loader should appear", () => {
+  test("loader should appear", async () => {
     const { getLoaderNode, selectDropZoneFiles } = renderComponent();
 
     selectDropZoneFiles();
 
     expect(() => getLoaderNode()).not.toThrow();
+
+    await wait();
   });
 
   test("loader should disappear on next render", async () => {
@@ -355,6 +361,8 @@ describe("on correct filelist selected", () => {
     await waitForDomChange();
 
     expect(() => getLoaderNode()).toThrow();
+
+    await wait();
   });
 
   test("album editor should appear on next render", async () => {
@@ -365,6 +373,8 @@ describe("on correct filelist selected", () => {
     await waitForDomChange();
 
     expect(() => getAlbumEditorNode()).not.toThrow();
+
+    await wait();
   });
 
   test("correct album title should be set", async () => {
@@ -382,6 +392,8 @@ describe("on correct filelist selected", () => {
     await waitForDomChange();
 
     expect(getAlbumTitleInputValue()).toEqual(value);
+
+    await wait();
   });
 
   test("number of track editors should match", async () => {
@@ -399,6 +411,8 @@ describe("on correct filelist selected", () => {
     await waitForDomChange();
 
     expect(getAlbumTrackEditorsCount()).toEqual(tracklist.length);
+
+    await wait();
   });
 
   test("correct track titles should be set", async () => {
@@ -430,6 +444,8 @@ describe("on correct filelist selected", () => {
     tracklist.forEach((track, index) => {
       expect(getAlbumTrackTitleInputValue(index)).toEqual(track.title);
     });
+
+    await wait();
   });
 
   test("number of track artist name inputs should match", async () => {
@@ -451,6 +467,8 @@ describe("on correct filelist selected", () => {
         track.artists.length + 1
       );
     });
+
+    await wait();
   });
 
   test("correct track artist name should be set", async () => {
@@ -474,6 +492,8 @@ describe("on correct filelist selected", () => {
         ).toEqual(artist.name);
       });
     });
+
+    await wait();
   });
 
   test("each track editor should have empty artist name input", async () => {
@@ -502,6 +522,8 @@ describe("on correct filelist selected", () => {
         })
       ).toEqual("");
     });
+
+    await wait();
   });
 });
 
@@ -516,6 +538,8 @@ describe("on no audio files selected", () => {
     await waitForDomChange();
 
     expect(typeof getDropZoneTextMessage()).toEqual("string");
+
+    await wait();
   });
 });
 
@@ -541,6 +565,8 @@ describe("on album title change", () => {
     changeAlbumTitleInputValue(value);
 
     expect(getAlbumTitleInputValue()).toEqual(value);
+
+    await wait();
   });
 });
 
@@ -581,6 +607,8 @@ describe("on empty artist name input change", () => {
     expect(getAlbumArtistNameInputsCount(trackIndex)).toEqual(
       expectedArtistNameInputsCount
     );
+
+    await wait();
   });
 });
 
@@ -614,6 +642,8 @@ describe("on track title input get cleared", () => {
     });
 
     expect(getAlbumTrackTitleValidation(0)).not.toEqual("");
+
+    await wait();
   });
 });
 
@@ -650,6 +680,8 @@ describe("on last empty artist name input get cleared", () => {
     expect(
       getAlbumArtistNameValidation({ trackIndex: 0, artistIndex: 0 })
     ).not.toEqual("");
+
+    await wait();
   });
 });
 
@@ -672,6 +704,8 @@ describe("on empty tracklist", () => {
     await waitForDomChange();
 
     expect(getAlbumTracklistValidation()).not.toEqual("");
+
+    await wait();
   });
 });
 
@@ -697,5 +731,7 @@ describe("on remove track", () => {
     removeTrack(0);
 
     expect(getAlbumTrackEditorsCount()).toEqual(1);
+
+    await wait();
   });
 });
