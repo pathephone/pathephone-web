@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pathephone-web/precache-manifest.c4ec9c62dfb836681ea1c8401f770720.js"
+  "/pathephone-web/precache-manifest.ce3879e880174ba866745a6cc73189f0.js"
 );
 
 self.addEventListener('message', (event) => {
