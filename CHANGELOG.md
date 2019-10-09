@@ -1,3 +1,14 @@
+## [1.10.1](https://github.com/pathephone/pathephone-web/compare/v1.10.0...v1.10.1) (2019-10-09)
+
+
+### Bug Fixes
+
+* **ui:** center latest page fallback text ([5261563](https://github.com/pathephone/pathephone-web/commit/52615637fcfefbbdf7ef602bd165a049512fd682))
+* **ui:** implements correct centering of albums feed content ([6897199](https://github.com/pathephone/pathephone-web/commit/6897199e4d18fc06e45314e3b7ecb56c16b659ba))
+* **ui:** removes extra comma at the end of joined track artists string ([18d7958](https://github.com/pathephone/pathephone-web/commit/18d795864162ee75a2584f22c343011fba3bb63f))
+* **ui:** resolve issue with search albums page title overflow ([7ace2c9](https://github.com/pathephone/pathephone-web/commit/7ace2c989cfe20c84a4f93b6d40cac03a127eabe))
+* **ui:** show correct playback controls ui for audio pending case ([5fde7f5](https://github.com/pathephone/pathephone-web/commit/5fde7f5d0e3beee1d072fedc78901a1eaa4a7975))
+
 # [1.10.0](https://github.com/pathephone/pathephone-web/compare/v1.9.0...v1.10.0) (2019-10-05)
 
 
