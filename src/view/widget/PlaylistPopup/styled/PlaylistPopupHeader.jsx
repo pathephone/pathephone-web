@@ -5,7 +5,7 @@ import * as React from "react";
 import styles from "./Playlist.module.css";
 
 import { SquareButton } from "view/kit/SquareButton";
-import { ClearAllIcon } from "icons/round-clear_all";
+import { ClearAllIcon } from "view/icon/round-clear_all";
 
 type TProps = {|
   tracksCount: number,

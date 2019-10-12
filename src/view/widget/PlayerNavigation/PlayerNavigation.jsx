@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { routes } from "data/routes";
+import { routes } from "util/route";
 
-import { testId } from "utils/testId";
-import { useIntlDictionary } from "hooks/useIntl";
+import { testId } from "util/testId";
+import { useIntlDictionary } from "hook/useIntl";
 
 import { PlayerNavigationPopup } from "./styled/PlayerNavigationPopup";
 import { PlayerNavigationLink } from "./styled/PlayerNavigationLink";

@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-import { EventBoundary } from "utils/EventBoundary";
-import { useAudio } from "hooks/useAudio";
+import { EventBoundary } from "util/react/EventBoundary";
+import { useAudio } from "hook/useAudio";
 
 import { PlaylistControls } from "view/widget/PlaylistControls";
 import { PlaybackControls } from "view/widget/PlaybackControls";

@@ -1,18 +1,18 @@
 // @flow strict
 
 import * as React from "react";
-import { ClearIcon } from "icons/round-clear";
 
-import { testId } from "utils/testId";
-import { useKeyUp } from "hooks/useKeyUp";
+import { ClearIcon } from "view/icon/round-clear";
+import { testId } from "util/testId";
+import { useKeyUp } from "hook/useKeyUp";
 import { SquareButton } from "view/kit/SquareButton";
-import { useDispatch } from "hooks/useDispatch";
-import { useRouter } from "hooks/useRouter";
+import { useDispatch } from "hook/useDispatch";
+import { useRouterHistory } from "hook/useRouterHistory";
+import { routes } from "util/route";
 
 import { SearchControlsWrapper } from "./styled/SearchControlsWrapper";
 import { SearchControlsForm } from "./styled/SearchControlsForm";
 import { SearchControlsInput } from "./styled/SearchControlsInput";
-import { routes } from "data/routes";
 
 type TProps = {||};
 
@@ -21,7 +21,7 @@ export const SearchControls = (props: TProps) => {
 
   const dispatch = useDispatch();
 
-  const { history } = useRouter();
+  const history = useRouterHistory();
 
   const handleInputChange = React.useCallback(
     (e: SyntheticEvent<HTMLInputElement>) => {

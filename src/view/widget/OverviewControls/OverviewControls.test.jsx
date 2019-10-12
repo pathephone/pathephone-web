@@ -2,9 +2,9 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
-import { testId } from "utils/testId";
-import { EventBoundary } from "utils/EventBoundary";
-import { TestingProvider } from "utils/TestingProvider";
+import { testId } from "util/testId";
+import { EventBoundary } from "util/react/EventBoundary";
+import { TestingProvider } from "util/react/TestingProvider";
 
 import { OverviewControls } from "./OverviewControls";
 

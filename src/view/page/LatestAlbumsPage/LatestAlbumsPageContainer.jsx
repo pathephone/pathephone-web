@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { useIntlDictionary } from "hooks/useIntl";
-import { useLatestAlbumsPageState } from "hooks/useLatestAlbumsPageState";
-import { useDispatch } from "hooks/useDispatch";
-import { useGetLatestAlbumsService } from "hooks/useGetLatestAlbumsService";
+import { useIntlDictionary } from "hook/useIntl";
+import { useLatestAlbumsPageState } from "hook/useLatestAlbumsPageState";
+import { useDispatch } from "hook/useDispatch";
+import { useGetLatestAlbumsService } from "hook/useGetLatestAlbumsService";
 
 import { LatestAlbumsPageView } from "./LatestAlbumsPageView";
 

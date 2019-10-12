@@ -1,11 +1,11 @@
 // @flow strict
 
-import type { TPlaylistTrack } from "types/state";
+import type { TPlaylistTrack } from "type/state";
 
 import * as React from "react";
 
-import { useDispatch } from "hooks/useDispatch";
-import { usePlayerContext } from "hooks/usePlayerContext";
+import { useDispatch } from "hook/useDispatch";
+import { usePlayerContext } from "hook/usePlayerContext";
 
 import { PlaylistTrackView } from "./PlaylistTrackView";
 

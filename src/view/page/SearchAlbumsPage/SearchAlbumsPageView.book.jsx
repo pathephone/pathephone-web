@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
-import { MultiSizeScreen } from "utils/MultiSizeScreen";
+import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
+import { MultiSizeScreen } from "util/react/MultiSizeScreen";
 import { ThemeProvider } from "view/root/ThemeProvider";
 
 import { SearchAlbumsPageView } from "./SearchAlbumsPageView";

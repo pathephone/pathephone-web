@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { UnreachableError } from "data/errors";
+import { UnreachableError } from "util/error";
 
 import styles from "./FixedPanel.module.css";
 

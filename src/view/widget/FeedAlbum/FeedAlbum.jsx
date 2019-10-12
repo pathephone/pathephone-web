@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TFeedAlbum } from "types/state";
+import type { TFeedAlbum } from "type/state";
 
 import * as React from "react";
 
@@ -10,8 +10,8 @@ import { FeedAlbumWrapper } from "./styled/FeedAlbumWrapper";
 import { FeedAlbumInfo } from "./styled/FeedAlbumInfo";
 import { FeedAlbumTitle } from "./styled/FeedAlbumTitle";
 import { FeedAlbumArtist } from "./styled/FeedAlbumArtist";
-import { useDispatch } from "hooks/useDispatch";
-import { useServices } from "hooks/useServices";
+import { useDispatch } from "hook/useDispatch";
+import { useServices } from "hook/useServices";
 
 type TProps = {|
   data: TFeedAlbum

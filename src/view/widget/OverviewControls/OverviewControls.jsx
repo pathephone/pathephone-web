@@ -1,13 +1,13 @@
 // @flow strict
 
 import * as React from "react";
-import { MenuIcon } from "icons/round-menu";
-import { SearchIcon } from "icons/round-search";
+import { MenuIcon } from "view/icon/round-menu";
+import { SearchIcon } from "view/icon/round-search";
 
 import { SquareButton } from "view/kit/SquareButton";
 import { PlayerNavigation } from "view/widget/PlayerNavigation";
-import { testId } from "utils/testId";
-import { useDispatch } from "hooks/useDispatch";
+import { testId } from "util/testId";
+import { useDispatch } from "hook/useDispatch";
 
 import { OverviewControlsWrapper } from "./styled/OverviewControlsWrapper";
 import { OverviewControlsGroup } from "./styled/OverviewControlsGroup";

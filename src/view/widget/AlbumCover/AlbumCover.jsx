@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import { PlayArrowIcon as PlayIcon } from "icons/round-play-arrow";
-import { PlaylistAddIcon as AddToPlaylistIcon } from "icons/round-playlist_add";
+import { PlayArrowIcon as PlayIcon } from "view/icon/round-play-arrow";
+import { PlaylistAddIcon as AddToPlaylistIcon } from "view/icon/round-playlist_add";
 
 import { AlbumCoverWrapper } from "./styled/AlbumCoverWrapper";
 import { AlbumCoverImage } from "./styled/AlbumCoverImage";

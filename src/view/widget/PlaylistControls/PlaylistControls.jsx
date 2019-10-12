@@ -2,13 +2,13 @@
 
 import * as React from "react";
 
-import { ArrowDownIcon } from "icons/round-keyboard_arrow_down";
-// import { ShuffleIcon } from "icons/round-shuffle";
-// import { RepeatIcon } from "icons/round-repeat";
-import { SkipPreviousIcon } from "icons/round-skip_previous";
-import { SkipNextIcon } from "icons/round-skip_next";
+import { ArrowDownIcon } from "view/icon/round-keyboard_arrow_down";
+// import { ShuffleIcon } from "view/icon/round-shuffle";
+// import { RepeatIcon } from "view/icon/round-repeat";
+import { SkipPreviousIcon } from "view/icon/round-skip_previous";
+import { SkipNextIcon } from "view/icon/round-skip_next";
 import { SquareButton } from "view/kit/SquareButton";
-import { useDispatch } from "hooks/useDispatch";
+import { useDispatch } from "hook/useDispatch";
 import { PlaylistPopup } from "view/widget/PlaylistPopup";
 
 import { PlaylistControlsWrapper } from "./styled/PlaylistControlsWrapper";

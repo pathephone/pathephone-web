@@ -4,7 +4,7 @@ import * as React from "react";
 
 import styles from "./AlbumTrackEditor.module.css";
 
-import { FileIcon } from "icons/round-file";
+import { FileIcon } from "view/icon/round-file";
 
 type TFileProps = {|
   text: string

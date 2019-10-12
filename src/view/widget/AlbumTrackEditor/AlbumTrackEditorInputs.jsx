@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { useAlbumFormTrackStrict } from "hooks/useAlbumForm";
+import { useAlbumFormTrackStrict } from "hook/useAlbumForm";
 
 import { AlbumTrackEditorCommon } from "./styled/AlbumTrackEditorCommon";
 import { AlbumTrackEditorTitleInput } from "./AlbumTrackEditorTitleInput";

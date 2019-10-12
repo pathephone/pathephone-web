@@ -1,6 +1,6 @@
 // @flow strict
 
-import { usePlayerContext } from "hooks/usePlayerContext";
+import { usePlayerContext } from "hook/usePlayerContext";
 
 export const usePlayingTrack = () => {
   const { playlist, playingTrackId } = usePlayerContext();

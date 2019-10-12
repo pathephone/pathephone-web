@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TSearchAlbumsPageScreen } from "types/state";
+import type { TSearchAlbumsPageScreen } from "type/state";
 
 import * as React from "react";
 

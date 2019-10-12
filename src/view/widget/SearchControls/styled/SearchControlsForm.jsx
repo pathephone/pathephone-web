@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import styles from "./SearchControls.module.css";
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 type TProps = {|
   onSubmit(e: SyntheticEvent<HTMLFormElement>): void,

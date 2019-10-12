@@ -7,17 +7,15 @@
 [lints]
 
 [options]
-module.name_mapper='^providers\/\(.*\)$' -> '<PROJECT_ROOT>/src/providers/\1'
+module.name_mapper='^provider\/\(.*\)$' -> '<PROJECT_ROOT>/src/provider/\1'
 module.name_mapper='^view\/\(.*\)$' -> '<PROJECT_ROOT>/src/view/\1'
-module.name_mapper='^contexts\/\(.*\)$' -> '<PROJECT_ROOT>/src/contexts/\1'
-module.name_mapper='^hooks\/\(.*\)$' -> '<PROJECT_ROOT>/src/hooks/\1'
-module.name_mapper='^icons\/\(.*\)$' -> '<PROJECT_ROOT>/src/icons/\1'
-module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
-module.name_mapper='^services\/\(.*\)$' -> '<PROJECT_ROOT>/src/services/\1'
-module.name_mapper='^data\/\(.*\)$' -> '<PROJECT_ROOT>/src/data/\1'
-module.name_mapper='^mocks\/\(.*\)$' -> '<PROJECT_ROOT>/src/mocks/\1'
-module.name_mapper='^types\/\(.*\)$' -> '<PROJECT_ROOT>/src/types/\1'
-module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/src/styles/\1'
+module.name_mapper='^context\/\(.*\)$' -> '<PROJECT_ROOT>/src/context/\1'
+module.name_mapper='^hook\/\(.*\)$' -> '<PROJECT_ROOT>/src/hook/\1'
+module.name_mapper='^util\/\(.*\)$' -> '<PROJECT_ROOT>/src/util/\1'
+module.name_mapper='^service\/\(.*\)$' -> '<PROJECT_ROOT>/src/service/\1'
+module.name_mapper='^reducer\/\(.*\)$' -> '<PROJECT_ROOT>/src/reducer/\1'
+module.name_mapper='^intl\/\(.*\)$' -> '<PROJECT_ROOT>/src/intl/\1'
+module.name_mapper='^type\/\(.*\)$' -> '<PROJECT_ROOT>/src/type/\1'
 module.name_mapper.extension='svg' -> 'SVGModule'
 module.system=haste
 

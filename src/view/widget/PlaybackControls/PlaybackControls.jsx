@@ -1,12 +1,12 @@
 // @flow strict
 
-import type { TAudioStatus } from "types/state";
+import type { TAudioStatus } from "type/state";
 
 import * as React from "react";
 
-import { useDispatch } from "hooks/useDispatch";
-import { useAudioStatus } from "hooks/usePlayerContext";
-import { UnreachableError } from "data/errors";
+import { useDispatch } from "hook/useDispatch";
+import { useAudioStatus } from "hook/usePlayerContext";
+import { UnreachableError } from "util/error";
 
 import { usePlayingTrack } from "./state/usePlayingTrack";
 import { PlaybackControlsView } from "./PlaybackControlsView";

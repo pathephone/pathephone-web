@@ -1,14 +1,14 @@
 // @flow strict
 
-import type { TAlbumFormArtist } from "types/state";
+import type { TAlbumFormArtist } from "type/state";
 
 import * as React from "react";
 
 import { FloatingLabelInput } from "view/kit/FloatingLabelInput";
-import { useDispatch } from "hooks/useDispatch";
-import { useAlbumFormArtistValidity } from "hooks/useAlbumForm";
-import { testId } from "utils/testId";
-import { useIntlDictionary } from "hooks/useIntl";
+import { useDispatch } from "hook/useDispatch";
+import { useAlbumFormArtistValidity } from "hook/useAlbumForm";
+import { testId } from "util/testId";
+import { useIntlDictionary } from "hook/useIntl";
 
 type TProps = {
   trackId: string,

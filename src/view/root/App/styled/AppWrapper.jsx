@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 import styles from "./App.module.css";
 

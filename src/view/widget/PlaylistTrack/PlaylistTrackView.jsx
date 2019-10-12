@@ -1,10 +1,10 @@
 // @flow strict
 
-import type { TPlayingTrackScreen } from "types/state";
+import type { TPlayingTrackScreen } from "type/state";
 
 import React from "react";
 
-import { DeleteIcon } from "icons/round-delete";
+import { DeleteIcon } from "view/icon/round-delete";
 import { RoundButton } from "view/kit/RoundButton";
 
 import { PlaylistTrackWrapper } from "./styled/PlaylistTrackWrapper";

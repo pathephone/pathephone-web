@@ -1,8 +1,9 @@
 // @flow strict
 
-import type { TFeedAlbum, TServices } from "types/state";
+import type { TFeedAlbum, TServices } from "type/state";
 
 import React from "react";
+import { createMemoryHistory } from "history";
 import {
   cleanup,
   render,
@@ -11,12 +12,13 @@ import {
   wait
 } from "@testing-library/react";
 
-import { testId } from "utils/testId";
-import { mockServices } from "services/mock";
-import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
-import { TestingProvider } from "utils/TestingProvider";
+import { testId } from "util/testId";
+import { mockServices } from "service/mock";
+import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
+import { TestingProvider } from "util/react/TestingProvider";
 
 import { SearchAlbumsPage } from "./SearchAlbumsPage";
+import { routes } from "util/route";
 
 type TParams = {|
   searchValue?: string,
@@ -59,9 +61,17 @@ const renderComponent = (params?: TParams) => {
     }
   })();
 
+  const history = createMemoryHistory({
+    initialEntries: [routes.searchAlbumsRoute(searchValue)]
+  });
+
   const mounted = render(
-    <TestingProvider services={services}>
-      <SearchAlbumsPage searchQuery={searchValue} searchInterval={100} />
+    <TestingProvider
+      services={services}
+      history={history}
+      path={routes.searchAlbumsPattern}
+    >
+      <SearchAlbumsPage searchInterval={100} />
     </TestingProvider>
   );
 

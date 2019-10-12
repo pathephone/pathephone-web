@@ -4,7 +4,7 @@ import * as React from "react";
 
 import styles from "./SearchControls.module.css";
 
-import { useOutsideClick } from "hooks/useOutsideClick";
+import { useOutsideClick } from "hook/useOutsideClick";
 import { FixedPanel } from "view/kit/FixedPanel/index";
 
 type TProps = {|

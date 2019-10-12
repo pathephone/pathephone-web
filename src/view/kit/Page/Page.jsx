@@ -5,7 +5,7 @@ import * as React from "react";
 import { PageWrapper } from "./styled/PageWrapper";
 import { PageLoader } from "./styled/PageLoader";
 
-import { usePlayerContext } from "hooks/usePlayerContext";
+import { usePlayerContext } from "hook/usePlayerContext";
 
 type TProps = {|
   children: React.Node,
