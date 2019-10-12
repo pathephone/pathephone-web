@@ -42,7 +42,9 @@ export const getAlbumFormDataFromFiles = async (
       coverRegExp.test(customFile.file.name)
     );
 
-    const cover = coverFile ? coverFile.file : null;
+    const fallbackCover = imageFiles[0] ? imageFiles[0].file : null;
+
+    const cover = coverFile ? coverFile.file : fallbackCover;
 
     return {
       tracklist,
