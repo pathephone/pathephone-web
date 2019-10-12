@@ -27,7 +27,9 @@ export const AlbumAudioEditor = () => {
   }, [missingAudioValidationText, valid]);
 
   const handleAddTrack = React.useCallback(
-    (files: FileList) => {
+    (fileList: FileList) => {
+      const files = [...fileList];
+
       dispatch({
         type: "ALBUM_AUDIO_EDITOR__TRACKS_RECIEVED",
         payload: files

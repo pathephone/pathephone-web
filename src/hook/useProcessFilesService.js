@@ -43,7 +43,7 @@ export const useProcessFilesService = () => {
   }, [dispatch, processPromiseState]);
 
   const processFiles = React.useCallback(
-    (files: FileList) => {
+    (files: File[]) => {
       injectProcessPromise(processFilesService(files));
     },
     [injectProcessPromise, processFilesService]
