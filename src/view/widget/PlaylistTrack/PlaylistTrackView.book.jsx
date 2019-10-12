@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { MultiSizeScreen } from "utils/MultiSizeScreen";
+import { MultiSizeScreen } from "util/react/MultiSizeScreen";
 import { ThemeProvider } from "view/root/ThemeProvider/index";
 
 import { PlaylistTrackView } from "./PlaylistTrackView";

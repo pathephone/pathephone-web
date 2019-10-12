@@ -1,10 +1,11 @@
 // @flow strict
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
+import { createMemoryHistory } from "history";
 
-import { routes } from "data/routes";
-import { testId } from "utils/testId";
-import { TestingProvider } from "utils/TestingProvider";
+import { routes } from "util/route";
+import { testId } from "util/testId";
+import { TestingProvider } from "util/react/TestingProvider";
 
 import { PlayerNavigation } from "./PlayerNavigation";
 
@@ -15,8 +16,10 @@ const renderComponent = () => {
     onClose: jest.fn()
   };
 
+  const history = createMemoryHistory();
+
   const mounted = render(
-    <TestingProvider>
+    <TestingProvider history={history}>
       <div data-testid={OUTSIDE_CONTAINER}>
         <PlayerNavigation {...props} />
       </div>
@@ -40,11 +43,14 @@ const renderComponent = () => {
 
   const clickShareAlbumLink = () => fireEvent.click(getShareAlbumLinkNode());
 
+  const getActualRoute = () => history.location.pathname;
+
   return {
     clickOutside,
     clickLatestAlbumsLink,
     clickShareAlbumLink,
-    getOnCloseCallback
+    getOnCloseCallback,
+    getActualRoute
   };
 };
 
@@ -77,17 +83,17 @@ describe("on link get clicked", () => {
 
 describe("should set correct location", () => {
   test("latest albums link get clicked", () => {
-    const { clickLatestAlbumsLink } = renderComponent();
+    const { clickLatestAlbumsLink, getActualRoute } = renderComponent();
 
     clickLatestAlbumsLink();
 
-    expect(window.location.pathname).toEqual(routes.latestAlbumsRoute());
+    expect(getActualRoute()).toEqual(routes.latestAlbumsRoute());
   });
   test("share album link get clicked", () => {
-    const { clickShareAlbumLink } = renderComponent();
+    const { clickShareAlbumLink, getActualRoute } = renderComponent();
 
     clickShareAlbumLink();
 
-    expect(window.location.pathname).toEqual(routes.shareAlbumRoute());
+    expect(getActualRoute()).toEqual(routes.shareAlbumRoute());
   });
 });

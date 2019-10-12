@@ -4,7 +4,7 @@ import React from "react";
 
 import { Spinner } from "view/kit/Spinner/index";
 
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 import styles from "./Page.module.css";
 

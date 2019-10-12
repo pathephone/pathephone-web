@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TServices, TFeedAlbum } from "types/state";
+import type { TServices, TFeedAlbum } from "type/state";
 
 import React from "react";
 import {
@@ -11,10 +11,10 @@ import {
   wait
 } from "@testing-library/react";
 
-import { testId } from "utils/testId";
-import { mockServices } from "services/mock";
-import { TestingProvider } from "utils/TestingProvider";
-import { getFeedAlbumMocks } from "utils/mock/getFeedAlbumMock";
+import { testId } from "util/testId";
+import { mockServices } from "service/mock";
+import { TestingProvider } from "util/react/TestingProvider";
+import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
 
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
 

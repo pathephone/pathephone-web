@@ -1,6 +1,6 @@
 // @flow strict
 
-import type { TEvent } from "types/event";
+import type { TEvent } from "type/event";
 
 import * as React from "react";
 

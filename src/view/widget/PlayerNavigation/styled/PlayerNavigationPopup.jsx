@@ -3,8 +3,8 @@
 import * as React from "react";
 
 import styles from "./PlayerNavigation.module.css";
-import { useOutsideClick } from "hooks/useOutsideClick";
-import { testId } from "utils/testId";
+import { useOutsideClick } from "hook/useOutsideClick";
+import { testId } from "util/testId";
 
 type TProps = {|
   children: React.Node,

@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import { SyncIcon } from "icons/round-sync";
+import { SyncIcon } from "view/icon/round-sync";
 
 import styles from "./ShareAlbumPage.module.css";
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 export const ShareAlbumPageLoader = () => (
   <div

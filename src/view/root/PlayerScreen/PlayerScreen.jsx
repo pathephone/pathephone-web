@@ -5,8 +5,8 @@ import { PlayerControls } from "view/widget/PlayerControls";
 import { SearchControls } from "view/widget/SearchControls/index";
 import { OverviewControls } from "view/widget/OverviewControls/index";
 import { PlayerContent } from "view/root/PlayerContent";
-import { usePlayingTrackId } from "hooks/usePlayingTrackId";
-import { usePlayerScreen } from "hooks/usePlayerScreen";
+import { usePlayingTrackId } from "hook/usePlayingTrackId";
+import { usePlayerScreen } from "hook/usePlayerScreen";
 
 type TProps = {||};
 

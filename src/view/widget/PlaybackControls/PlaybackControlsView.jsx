@@ -1,13 +1,13 @@
 // @flow strict
 
-import type { TPlaybackControlsScreen } from "types/state";
+import type { TPlaybackControlsScreen } from "type/state";
 
 import * as React from "react";
 
-import { WarningIcon } from "icons/round-warning";
-import { PauseIcon } from "icons/round-pause";
-import { PlayArrowIcon } from "icons/round-play-arrow";
-import { PlaylistIcon } from "icons/round-queue_music";
+import { WarningIcon } from "view/icon/round-warning";
+import { PauseIcon } from "view/icon/round-pause";
+import { PlayArrowIcon } from "view/icon/round-play-arrow";
+import { PlaylistIcon } from "view/icon/round-queue_music";
 import { SquareButton } from "view/kit/SquareButton";
 import { Spinner } from "view/kit/Spinner";
 

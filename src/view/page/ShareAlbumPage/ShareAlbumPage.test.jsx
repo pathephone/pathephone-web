@@ -4,7 +4,7 @@ import type {
   TAlbumFormData,
   TAlbumFormTrack,
   TAlbumFormArtist
-} from "types/state";
+} from "type/state";
 
 import React from "react";
 import {
@@ -15,15 +15,15 @@ import {
 } from "@testing-library/react";
 import { getAllByTestId, getByTestId, wait } from "@testing-library/dom";
 
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
-import { ServicesContext } from "contexts/ServicesContext";
-import { mockServices } from "services/mock/index";
-import { MissingAudioFilesError } from "data/errors";
+import { ServicesContext } from "context/ServicesContext";
+import { mockServices } from "service/mock/index";
+import { MissingAudioFilesError } from "util/error";
 
 import { ShareAlbumPage } from "./ShareAlbumPage";
-import { getUIDString } from "utils/uid";
-import { TestingProvider } from "utils/TestingProvider";
+import { getUIDString } from "util/uid";
+import { TestingProvider } from "util/react/TestingProvider";
 
 const getAudioFileMock = (): File => {
   const audioFileMock = new File(["(⌐□_□)"], "track.ogg", {

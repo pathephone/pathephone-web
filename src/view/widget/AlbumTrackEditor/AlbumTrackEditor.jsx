@@ -2,16 +2,16 @@
 
 import * as React from "react";
 
-import { ArrowUpIcon } from "icons/round-keyboard_arrow_up";
-import { ArrowDownIcon } from "icons/round-keyboard_arrow_down";
-import { DeleteIcon } from "icons/round-delete";
-import { useDispatch } from "hooks/useDispatch";
+import { ArrowUpIcon } from "view/icon/round-keyboard_arrow_up";
+import { ArrowDownIcon } from "view/icon/round-keyboard_arrow_down";
+import { DeleteIcon } from "view/icon/round-delete";
+import { useDispatch } from "hook/useDispatch";
 
 import { AlbumTrackEditorWrapper } from "./styled/AlbumTrackEditorWrapper";
 import { AlbumTrackEditorButton } from "./styled/AlbumTrackEditorButton";
 import { AlbumTrackEditorControls } from "./styled/AlbumTrackEditorControls";
 import { AlbumTrackEditorInputs } from "./AlbumTrackEditorInputs";
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 type TProps = {
   trackId: string,

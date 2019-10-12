@@ -1,11 +1,11 @@
 // @flow strict
 
-import type { TFeedAlbum, TSearchAlbumsPageScreen } from "types/state";
+import type { TFeedAlbum, TSearchAlbumsPageScreen } from "type/state";
 
 import * as React from "react";
 
 import { FeedAlbum } from "view/widget/FeedAlbum";
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 import { SearchAlbumsPageHero } from "./styled/SearchAlbumsPageHero";
 import { SearchAlbumsPageButton } from "./styled/SearchAlbumsPageButton";

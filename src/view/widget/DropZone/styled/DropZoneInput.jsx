@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import styles from "./DropZone.module.css";
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 type TProps = {|
   onFilesChange(files: FileList): void

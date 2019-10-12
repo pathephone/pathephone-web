@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { useAlbumFormTracklistValidity } from "hooks/useAlbumForm";
-import { useDispatch } from "hooks/useDispatch";
-import { testId } from "utils/testId";
-import { useIntlDictionary } from "hooks/useIntl";
+import { useAlbumFormTracklistValidity } from "hook/useAlbumForm";
+import { useDispatch } from "hook/useDispatch";
+import { testId } from "util/testId";
+import { useIntlDictionary } from "hook/useIntl";
 
 import { AlbumAudioEditorInput } from "./styled/AlbumAudioEditorInput";
 import { AlbumAudioEditorWrapper } from "./styled/AlbumAudioEditorWrapper";

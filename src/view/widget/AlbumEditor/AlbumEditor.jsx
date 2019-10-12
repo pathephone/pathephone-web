@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-import { useDispatch } from "hooks/useDispatch";
-import { useIntlDictionary } from "hooks/useIntl";
+import { useDispatch } from "hook/useDispatch";
+import { useIntlDictionary } from "hook/useIntl";
 
 import { AlbumCoverEditor } from "view/widget/AlbumCoverEditor";
 

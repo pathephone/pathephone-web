@@ -3,11 +3,11 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
-import { testId } from "utils/testId";
-import { EventBoundary } from "utils/EventBoundary";
+import { testId } from "util/testId";
+import { EventBoundary } from "util/react/EventBoundary";
+import { TestingProvider } from "util/react/TestingProvider";
 
 import { SearchControls } from "./SearchControls";
-import { RouterProvider } from "view/root/RouterProvider";
 
 const renderComponent = () => {
   const OUTSIDE_CONTAINER = "OUTSIDE_CONTAINER";
@@ -15,13 +15,13 @@ const renderComponent = () => {
   const dispatch = jest.fn();
 
   const mounted = render(
-    <div data-testid={OUTSIDE_CONTAINER}>
-      <EventBoundary handler={dispatch}>
-        <RouterProvider>
+    <TestingProvider>
+      <div data-testid={OUTSIDE_CONTAINER}>
+        <EventBoundary handler={dispatch}>
           <SearchControls />
-        </RouterProvider>
-      </EventBoundary>
-    </div>
+        </EventBoundary>
+      </div>
+    </TestingProvider>
   );
 
   const getOutsideContainerNode = () => mounted.getByTestId(OUTSIDE_CONTAINER);

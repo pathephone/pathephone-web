@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { useAlbumFormCoverInput } from "hooks/useAlbumForm";
-import { useFileURL } from "hooks/useObjectURL";
-import { useDispatch } from "hooks/useDispatch";
-import { AlbumIcon } from "icons/round-album";
+import { useAlbumFormCoverInput } from "hook/useAlbumForm";
+import { useFileURL } from "hook/useObjectURL";
+import { useDispatch } from "hook/useDispatch";
+import { AlbumIcon } from "view/icon/round-album";
 
 import { AlbumCoverEditorWrapper } from "./styled/AlbumCoverEditorWrapper";
 import { AlbumCoverEditorInput } from "./styled/AlbumCoverEditorInput";

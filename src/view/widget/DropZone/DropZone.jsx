@@ -6,8 +6,8 @@ import { DropZoneWrapper } from "./styled/DropZoneWrapper";
 import { DropZoneLabel } from "./styled/DropZoneLabel";
 import { DropZoneInput } from "./styled/DropZoneInput";
 import { DropZoneText } from "./styled/DropZoneText";
-import { useDispatch } from "hooks/useDispatch";
-import { useIntlDictionary } from "hooks/useIntl";
+import { useDispatch } from "hook/useDispatch";
+import { useIntlDictionary } from "hook/useIntl";
 
 type TProps = {|
   errorText?: string,

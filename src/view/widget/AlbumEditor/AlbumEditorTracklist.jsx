@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { useAlbumFormDataStrict } from "hooks/useAlbumForm";
+import { useAlbumFormDataStrict } from "hook/useAlbumForm";
 
 import { AlbumEditorFieldset } from "./styled/AlbumEditorFieldset";
 import { AlbumEditorFieldsetTitle } from "./styled/AlbumEditorFieldsetTitle";
@@ -10,7 +10,7 @@ import { AlbumEditorAboutFieldsetBody } from "./styled/AlbumEditorFieldsetBody";
 
 import { AlbumTrackEditor } from "view/widget/AlbumTrackEditor";
 import { AlbumAudioEditor } from "view/widget/AlbumAudioEditor";
-import { useIntlDictionary } from "hooks/useIntl";
+import { useIntlDictionary } from "hook/useIntl";
 
 export const AlbumEditorTracklist = () => {
   const {

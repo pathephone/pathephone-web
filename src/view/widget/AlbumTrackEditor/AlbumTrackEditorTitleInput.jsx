@@ -3,10 +3,10 @@
 import * as React from "react";
 
 import { FloatingLabelInput } from "view/kit/FloatingLabelInput";
-import { useDispatch } from "hooks/useDispatch";
-import { useAlbumFormTrackTitleInput } from "hooks/useAlbumForm";
-import { testId } from "utils/testId";
-import { useIntlDictionary } from "hooks/useIntl";
+import { useDispatch } from "hook/useDispatch";
+import { useAlbumFormTrackTitleInput } from "hook/useAlbumForm";
+import { testId } from "util/testId";
+import { useIntlDictionary } from "hook/useIntl";
 
 type TProps = {
   trackId: string

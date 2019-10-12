@@ -1,12 +1,12 @@
 // @flow strict
 
-import type { TServices } from "types/state";
+import type { TServices } from "type/state";
 
 import * as React from "react";
+import { BrowserRouter as RouterProvider } from "react-router-dom";
 
-import { ServicesContext } from "contexts/ServicesContext";
-import { AppStateProvider } from "providers/AppStateProvider/index";
-import { RouterProvider } from "view/root/RouterProvider";
+import { ServicesContext } from "context/ServicesContext";
+import { AppProvider } from "provider/AppProvider";
 import { App } from "view/root/App";
 import { ThemeProvider } from "view/root/ThemeProvider";
 import { RootFallback } from "view/root/RootFallback";
@@ -20,9 +20,9 @@ export const Root = ({ services }: TProps) => (
     <ServicesContext.Provider value={services}>
       <ThemeProvider>
         <RootFallback>
-          <AppStateProvider>
+          <AppProvider>
             <App />
-          </AppStateProvider>
+          </AppProvider>
         </RootFallback>
       </ThemeProvider>
     </ServicesContext.Provider>

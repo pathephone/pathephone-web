@@ -2,17 +2,14 @@
 
 import React from "react";
 
-import { ShareAlbumPageStateProvider } from "providers/ShareAlbumPageStateProvider";
-import { ShareAlbumPageEffectsProvider } from "providers/ShareAlbumPageEffectsProvider/index";
+import { ShareAlbumPageProvider } from "provider/ShareAlbumPageProvider";
 
-import { ShareAlbumPageView } from "./ShareAlbumPageView";
+import { ShareAlbumPageContainer } from "./ShareAlbumPageContainer";
 
 export const ShareAlbumPage = () => {
   return (
-    <ShareAlbumPageStateProvider>
-      <ShareAlbumPageEffectsProvider>
-        <ShareAlbumPageView />
-      </ShareAlbumPageEffectsProvider>
-    </ShareAlbumPageStateProvider>
+    <ShareAlbumPageProvider>
+      <ShareAlbumPageContainer />
+    </ShareAlbumPageProvider>
   );
 };

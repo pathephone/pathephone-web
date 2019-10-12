@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import styles from "./Page.module.css";
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 type TProps = {|
   children: React.Node,

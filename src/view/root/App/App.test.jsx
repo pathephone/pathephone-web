@@ -2,9 +2,9 @@
 import React from "react";
 import { render, cleanup, waitForDomChange } from "@testing-library/react";
 
-import { testId } from "utils/testId";
-import { TestingProvider } from "utils/TestingProvider";
-import { getAppStateMock } from "utils/mock/getAppStateMock";
+import { testId } from "util/testId";
+import { TestingProvider } from "util/react/TestingProvider";
+import { getAppStateMock } from "util/mock/getAppStateMock";
 
 import { App } from "./App";
 

@@ -1,10 +1,10 @@
 // @flow strict
 
-import type { TFeedAlbum } from "types/state";
+import type { TFeedAlbum } from "type/state";
 
 import * as React from "react";
 
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 import { Page } from "view/kit/Page";
 import { LoadMoreButton } from "view/kit/LoadMoreButton";
 import { FeedAlbum } from "view/widget/FeedAlbum";

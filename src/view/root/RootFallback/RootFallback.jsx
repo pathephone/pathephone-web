@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { ErrorBoundary } from "utils/ErrorBoundary";
+import { ErrorBoundary } from "util/react/ErrorBoundary";
 
 import { RootFallbackScreen } from "./styled/RootFallbackScreen";
 

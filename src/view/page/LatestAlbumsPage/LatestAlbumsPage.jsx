@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { LatestAlbumsPageProvider } from "providers/LatestAlbumsPageProvider";
+import { LatestAlbumsPageProvider } from "provider/LatestAlbumsPageProvider";
 
 import { LatestAlbumsPageContainer } from "./LatestAlbumsPageContainer";
 

@@ -4,7 +4,7 @@ import * as React from "react";
 
 import styles from "./AlbumTrackEditor.module.css";
 
-import { testId } from "utils/testId";
+import { testId } from "util/testId";
 
 type TProps = {|
   children: React.Node

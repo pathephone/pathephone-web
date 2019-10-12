@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-import { useDispatch } from "hooks/useDispatch";
-import { usePlayerContext } from "hooks/usePlayerContext";
+import { useDispatch } from "hook/useDispatch";
+import { usePlayerContext } from "hook/usePlayerContext";
 import { PlaylistTrack } from "view/widget/PlaylistTrack";
 
 import { PlaylistPopupWrapper } from "./styled/PlaylistPopupWrapper";

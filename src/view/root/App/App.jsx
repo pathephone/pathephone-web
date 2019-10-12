@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { PlayerProvider } from "providers/PlayerProvider";
-import { useGetIntlService } from "hooks/useGetIntlService";
+import { PlayerProvider } from "provider/PlayerProvider";
+import { useGetIntlService } from "hook/useGetIntlService";
 import { PlayerScreen } from "view/root/PlayerScreen";
-import { useAppState } from "hooks/useAppState";
+import { useAppState } from "hook/useAppState";
 
 import { AppWrapper } from "./styled/AppWrapper";
 import { AppLoader } from "./styled/AppLoader";
