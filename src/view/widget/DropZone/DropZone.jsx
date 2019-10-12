@@ -24,7 +24,8 @@ export const DropZone = (props: TProps) => {
   const dispatch = useDispatch();
 
   const onFilesChange = React.useCallback(
-    (files: FileList) => {
+    (fileList: FileList) => {
+      const files = [...fileList];
       dispatch({
         type: "DROP_ZONE__FILES_RECIEVED",
         payload: files

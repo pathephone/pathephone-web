@@ -1,22 +1,13 @@
 // @flow strict
 
-import type { TAlbumFormData, TAlbumFormTrack } from "type/state";
+import type { TAlbumFormData } from "type/state";
 
-import * as mm from "music-metadata-browser";
-
-import { getUniqueString } from "util/getUniqueString";
 import { MissingAudioFilesError } from "util/error";
 
-const supportedAudioFileTypes = [
-  "audio/flac",
-  "audio/wave",
-  "audio/wav",
-  "audio/mpeg",
-  "audio/mp3",
-  "audio/ogg"
-];
-
-const supportedImageFileTypes = ["image/jpeg", "image/png", "image/webp"];
+import { getAlbumMetadataFromAudioFiles } from "./util/getAlbumMetadataFromAudioFiles";
+import { getCustomFileFromFile } from "./util/getCustomFileFromFile";
+import { filterAudioFiles } from "./util/filterAudioFiles";
+import { filterImageFiles } from "./util/filterImageFiles";
 
 const coverRegExp = /(front|cover)/g;
 
@@ -33,62 +24,30 @@ type TPicture = {|
 
 */
 
-type TAudioMetadata = {|
-  tracklist: TAlbumFormTrack[],
-  title: string
-|};
-
-const getAlbumMetadataFromAudioFiles = async (
-  files: File[]
-): Promise<TAudioMetadata> => {
-  const audiosMetadata = await Promise.all(files.map(mm.parseBlob));
-
-  const titles = audiosMetadata.map(({ common }) => common.album);
-
-  const tracklist: TAlbumFormTrack[] = audiosMetadata.map(
-    ({ common }, index) => {
-      const artists = common.artists.map((name: string) => ({
-        name,
-        id: getUniqueString()
-      }));
-      return {
-        id: getUniqueString(),
-        title: common.title,
-        artists,
-        audio: files[index]
-      };
-    }
-  );
-
-  return {
-    title: titles.find(title => !!title) || "",
-    tracklist
-  };
-};
-
 export const getAlbumFormDataFromFiles = async (
-  files: FileList
+  originalFiles: File[]
 ): Promise<TAlbumFormData> => {
-  const filesArray = [...files];
+  const files = await Promise.all(originalFiles.map(getCustomFileFromFile));
 
-  const audioFiles = filesArray.filter(({ type }) =>
-    supportedAudioFileTypes.includes(type)
-  );
-  const imageFiles = filesArray.filter(({ type }) =>
-    supportedImageFileTypes.includes(type)
-  );
+  const audioFiles = filterAudioFiles(files);
+
+  const imageFiles = filterImageFiles(files);
 
   if (audioFiles.length > 0) {
     const { tracklist, title } = await getAlbumMetadataFromAudioFiles(
-      audioFiles
+      audioFiles.map(customFile => customFile.file)
     );
 
-    const cover = imageFiles.find(file => coverRegExp.test(file.name));
+    const coverFile = imageFiles.find(customFile =>
+      coverRegExp.test(customFile.file.name)
+    );
+
+    const cover = coverFile ? coverFile.file : null;
 
     return {
       tracklist,
       title,
-      cover: cover || null
+      cover
     };
   }
 

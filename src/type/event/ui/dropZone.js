@@ -2,7 +2,7 @@
 
 type TFilesRecieved = {
   type: "DROP_ZONE__FILES_RECIEVED",
-  payload: FileList
+  payload: File[]
 };
 
 export type TDropZoneEvent = TFilesRecieved;

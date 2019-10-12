@@ -61,7 +61,7 @@ export type TAlbumFormValidity =
 export type TShareAlbumPageState = {|
   screen: TShareAlbumPageScreen,
   // Files selected by user:
-  files: null | FileList,
+  files: null | File[],
   // Editable album candidate instance,
   // extracted from the selected files:
   albumFormData: null | TAlbumFormData,

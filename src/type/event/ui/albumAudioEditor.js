@@ -2,7 +2,7 @@
 
 type TTracksRecieved = {
   type: "ALBUM_AUDIO_EDITOR__TRACKS_RECIEVED",
-  payload: FileList
+  payload: File[]
 };
 
 export type TAlbumAudioEditorEvent = TTracksRecieved;
