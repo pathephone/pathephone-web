@@ -1,3 +1,13 @@
+## [1.10.2](https://github.com/pathephone/pathephone-web/compare/v1.10.1...v1.10.2) (2019-10-13)
+
+
+### Bug Fixes
+
+* improve audio / image file type detection ([e0d1e8f](https://github.com/pathephone/pathephone-web/commit/e0d1e8f6ad1738e9eaca25718db04a67c6866ebc))
+* resolve issue with share form autosubmit ([ab4293c](https://github.com/pathephone/pathephone-web/commit/ab4293c889e7872972645a64adaac8b44a06f700))
+* update icons, title, description etc ([3412c6f](https://github.com/pathephone/pathephone-web/commit/3412c6f086a8babaae9edb4b2f2403da549e2529))
+* use first selected image as a fallback cover ([a737565](https://github.com/pathephone/pathephone-web/commit/a737565fb90534ec3b96a396b06df36e46968157))
+
 ## [1.10.1](https://github.com/pathephone/pathephone-web/compare/v1.10.0...v1.10.1) (2019-10-09)
 
 
