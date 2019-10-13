@@ -1,7 +1,5 @@
 import { usePlayerContext } from "hook/usePlayerContext";
 
-// TODO: move to hooks
-
 export const usePlayingTrack = () => {
   const { playlist, playingTrackId } = usePlayerContext();
 
