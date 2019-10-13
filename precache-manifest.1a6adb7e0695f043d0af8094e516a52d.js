@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "600af6815db973f05682fcb98d107a06",
+    "revision": "6abe475d90aa8b376132abde683dfcd4",
     "url": "/pathephone-web/index.html"
   },
   {
-    "revision": "22157c075425ccbd69c3",
+    "revision": "c4315f4d66a07dcf1162",
     "url": "/pathephone-web/static/css/main.dfe1663f.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pathephone-web/static/js/4.cb1d1164.chunk.js"
   },
   {
-    "revision": "22157c075425ccbd69c3",
-    "url": "/pathephone-web/static/js/main.d547d1ee.chunk.js"
+    "revision": "c4315f4d66a07dcf1162",
+    "url": "/pathephone-web/static/js/main.acbcedaa.chunk.js"
   },
   {
     "revision": "ce4855d86ac78d495d94",
