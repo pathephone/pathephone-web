@@ -224,7 +224,8 @@ export const shareAlbumPageReducer = (
         screen: "SELECTING_FILES",
         albumFormData: null,
         albumFormValidation: [],
-        didSucceed: true
+        didSucceed: true,
+        submited: false
       };
     }
     case "SUBMIT_ALBUM_SERVICE__REJECTED":
@@ -235,6 +236,7 @@ export const shareAlbumPageReducer = (
         albumFormData: null,
         albumFormValidation: [],
         didSucceed: false,
+        submited: false,
         error: event.payload
       };
     }
