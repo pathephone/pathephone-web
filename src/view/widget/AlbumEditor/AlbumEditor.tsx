@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { useDispatch } from "hook/useDispatch";
 import { useIntlDictionary } from "hook/useIntl";
-
+import { testId } from "util/testId";
 import { AlbumCoverEditor } from "view/widget/AlbumCoverEditor";
 
 import { AlbumEditorWrapper } from "./styled/AlbumEditorWrapper";
@@ -37,8 +37,13 @@ export const AlbumEditor = () => {
       <AlbumEditorAbout />
       <AlbumEditorTracklist />
       <AlbumEditorFooter>
-        <AlbumEditorButton submit>{submitButtonText}</AlbumEditorButton>
-        <AlbumEditorButton onClick={handleCancel}>
+        <AlbumEditorButton submit testId={testId.ALBUM_EDITOR__SUBMIT_BUTTON}>
+          {submitButtonText}
+        </AlbumEditorButton>
+        <AlbumEditorButton
+          onClick={handleCancel}
+          testId={testId.ALBUM_EDITOR__CANCEL_BUTTON}
+        >
           {cancelButtonText}
         </AlbumEditorButton>
       </AlbumEditorFooter>

@@ -18,6 +18,22 @@ import { ShareAlbumPage } from "./ShareAlbumPage";
 import { getUIDString } from "util/uid";
 import { TestingProvider } from "util/react/TestingProvider";
 
+const createObjectURLOrig = window.URL.createObjectURL;
+const revokeObjectURLOrig = window.URL.revokeObjectURL;
+
+beforeAll(() => {
+  // @ts-ignore
+  window.URL.createObjectURL = () => {};
+
+  window.URL.revokeObjectURL = () => {};
+});
+
+afterAll(() => {
+  window.URL.createObjectURL = createObjectURLOrig;
+
+  window.URL.revokeObjectURL = revokeObjectURLOrig;
+});
+
 const getAudioFileMock = (): File => {
   const audioFileMock = new File(["(⌐□_□)"], "track.ogg", {
     type: "audio/ogg"
@@ -56,9 +72,7 @@ const getAlbumFormTrackMock = () => {
 
 const getAlbumFormDataMock = () => {
   const dataMock: TAlbumFormData = {
-    // TODO: unable to test with cover field filled with File instance
-    // due to lack of support for URL.createObjectURL() in jsdom.
-    cover: null,
+    cover: getImageFileMock(),
     title: "title",
     tracklist: [getAlbumFormTrackMock()]
   };
@@ -288,8 +302,26 @@ const renderComponent = (params?: TParams) => {
     return buttonNode;
   };
 
+  const getSubmitButtonNode = () =>
+    mounted.getByTestId(testId.ALBUM_EDITOR__SUBMIT_BUTTON);
+
+  const getCancelButtonNode = () =>
+    mounted.getByTestId(testId.ALBUM_EDITOR__CANCEL_BUTTON);
+
   const removeTrack = (trackIdex: number) => {
     const buttonNode = getRemoveTrackButton(trackIdex);
+
+    fireEvent.click(buttonNode);
+  };
+
+  const clickSubmitButton = () => {
+    const buttonNode = getSubmitButtonNode();
+
+    fireEvent.click(buttonNode);
+  };
+
+  const clickCancelButton = () => {
+    const buttonNode = getCancelButtonNode();
 
     fireEvent.click(buttonNode);
   };
@@ -313,7 +345,9 @@ const renderComponent = (params?: TParams) => {
     setAlbumTrackTitleInputValue,
     getAlbumTrackTitleValidation,
     getAlbumTracklistValidation,
-    removeTrack
+    removeTrack,
+    clickSubmitButton,
+    clickCancelButton
   };
 };
 
@@ -728,5 +762,67 @@ describe("on remove track", () => {
     expect(getAlbumTrackEditorsCount()).toEqual(1);
 
     await wait();
+  });
+});
+
+describe("on form cancel", () => {
+  test("should show drop zone again", async () => {
+    const {
+      selectDropZoneFiles,
+      clickCancelButton,
+      getDropZoneInputNode
+    } = renderComponent();
+
+    selectDropZoneFiles();
+
+    await waitForDomChange();
+
+    clickCancelButton();
+
+    expect(getDropZoneInputNode).not.toThrow();
+  });
+});
+
+describe("on valid form submit", () => {
+  test("should show loader", async () => {
+    const {
+      selectDropZoneFiles,
+      clickSubmitButton,
+      getLoaderNode
+    } = renderComponent();
+
+    selectDropZoneFiles();
+
+    await waitForDomChange();
+
+    clickSubmitButton();
+
+    expect(getLoaderNode).not.toThrow();
+
+    await wait();
+  });
+});
+
+describe("on second files select", () => {
+  test("should show editor again", async () => {
+    const {
+      selectDropZoneFiles,
+      clickSubmitButton,
+      getAlbumEditorNode
+    } = renderComponent();
+
+    selectDropZoneFiles();
+
+    await waitForDomChange();
+
+    clickSubmitButton();
+
+    await waitForDomChange();
+
+    selectDropZoneFiles();
+
+    await waitForDomChange();
+
+    expect(getAlbumEditorNode).not.toThrow();
   });
 });

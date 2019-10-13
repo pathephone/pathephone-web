@@ -4,11 +4,17 @@ import styles from "./AlbumEditor.module.css";
 
 type TProps = {
   children: string;
+  testId: string;
   submit?: boolean;
   onClick?: () => void;
 };
 
-export const AlbumEditorButton = ({ children, submit, onClick }: TProps) => (
+export const AlbumEditorButton = ({
+  children,
+  submit,
+  testId,
+  onClick
+}: TProps) => (
   <button
     onClick={onClick}
     className={`${styles.AlbumEditor__Button} ${
@@ -17,6 +23,7 @@ export const AlbumEditorButton = ({ children, submit, onClick }: TProps) => (
         : styles.AlbumEditor__Button_secondary
     }`}
     type={submit === true ? "submit" : "button"}
+    data-testid={testId}
   >
     {children}
   </button>
