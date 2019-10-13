@@ -18,8 +18,12 @@
     "@semantic-release/release-notes-generator": "^7.1.4",
     "@testing-library/react": "^9.3.0",
     "@testing-library/react-hooks": "^1.1.0",
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.12",
+    "@types/react": "16.9.5",
+    "@types/react-dom": "16.9.1",
+    "@types/react-router-dom": "^5.1.0",
     "file-type": "^12.3.0",
-    "flow-bin": "^0.102.0",
     "gh-pages": "^2.0.1",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
@@ -29,15 +33,15 @@
     "react-dom": "^16.10.2",
     "react-event-boundary": "^1.0.7",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.0.1",
-    "react-test-renderer": "^16.10.2"
+    "react-scripts": "3.2.0",
+    "react-test-renderer": "^16.10.2",
+    "typescript": "3.6.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "flow": "flow",
     "style:write": "prettier \"src/**/*.{js,jsx,css}\" --write",
     "style:check": "prettier \"src/**/*.{js,jsx,css}\" --check",
     "commitlint": "commitlint from=HEAD",
@@ -46,18 +50,24 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "npm run style:write",
+      "prettier --write",
       "git add"
     ]
   },
