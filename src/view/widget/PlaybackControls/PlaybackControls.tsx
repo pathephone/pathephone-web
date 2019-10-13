@@ -4,14 +4,12 @@ import * as React from "react";
 
 import { useDispatch } from "hook/useDispatch";
 import { useAudioStatus } from "hook/usePlayerContext";
+import { usePlayingTrack } from "hook/usePlayingTrack";
 import { UnreachableError } from "util/error";
 
-import { usePlayingTrack } from "./state/usePlayingTrack";
 import { PlaybackControlsView } from "./PlaybackControlsView";
 
-type TProps = {};
-
-export const PlaybackControls = (props: TProps) => {
+export const PlaybackControls = () => {
   const dispatch = useDispatch();
 
   const { title, artistName } = usePlayingTrack();
