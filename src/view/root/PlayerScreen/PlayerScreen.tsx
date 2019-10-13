@@ -7,10 +7,29 @@ import { usePlayingTrackId } from "hook/usePlayingTrackId";
 import { PlaylistControls } from "view/widget/PlaylistControls";
 import { PlaybackControls } from "view/widget/PlaybackControls";
 import { usePlayerContext } from "hook/usePlayerContext";
+import { useAudio } from "hook/useAudio";
+import { usePlayingTrackURL } from "hook/usePlayingTrackURL";
 
-type TProps = {};
+export const PlayerScreen = () => {
+  const { play, stop } = useAudio();
 
-export const PlayerScreen = (props: TProps) => {
+  const trackURL = usePlayingTrackURL();
+
+  // Effect tracks playing track url and
+  // loads it into Audio object
+  React.useEffect(() => {
+    if (trackURL) {
+      play(trackURL);
+    } else {
+      stop();
+    }
+  }, [play, stop, trackURL]);
+
+  // Effect cleans up Audio object before unmount
+  React.useEffect(() => {
+    return stop;
+  }, [stop]);
+
   const { primaryControls, secondaryControls } = usePlayerContext();
 
   const playingTrackId = usePlayingTrackId();

@@ -1,12 +1,9 @@
 import * as React from "react";
 
-import { usePlayingTrackURL } from "hook/usePlayingTrackURL";
 import { useAudioPausedFlag } from "hook/useAudioPausedFlag";
 import { useDispatch } from "./useDispatch";
 
 export const useAudio = () => {
-  const trackURL = usePlayingTrackURL();
-
   const dispatch = useDispatch();
 
   const paused = useAudioPausedFlag();
@@ -16,34 +13,29 @@ export const useAudio = () => {
   const audioRef = React.useRef(new Audio());
 
   // Method that unloads current track from Audio object
-  const stopAudio = React.useCallback(() => {
+  const stop = React.useCallback(() => {
     const { current: audio } = audioRef;
-    audio.removeAttribute("src");
-    audio.load();
+
+    if (audio.src) {
+      audio.removeAttribute("src");
+      audio.load();
+    }
   }, []);
 
-  // Effect tracks playing track url and
-  // loads it into Audio object
-  React.useEffect(() => {
-    const { current: audio } = audioRef;
+  const play = React.useCallback(
+    (source: string) => {
+      const { current: audio } = audioRef;
 
-    if (trackURL) {
-      if (audio.src !== trackURL) {
-        audio.src = trackURL;
+      if (audio.src !== source) {
+        audio.src = source;
 
         if (!paused) {
           audio.play();
         }
       }
-    } else {
-      stopAudio();
-    }
-  }, [paused, stopAudio, trackURL]);
-
-  // Effect cleans up Audio object before unmount
-  React.useEffect(() => {
-    return stopAudio;
-  }, [stopAudio]);
+    },
+    [paused]
+  );
 
   // Effect will pause / resume playback
   // in response to paused state change
@@ -108,4 +100,6 @@ export const useAudio = () => {
       audio.removeEventListener("error", errorHandler);
     };
   }, [dispatch]);
+
+  return { play, stop };
 };

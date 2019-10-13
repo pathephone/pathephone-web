@@ -40,7 +40,7 @@ export const playerReducer = (
         ...state,
         playlist: [...event.payload],
         playingTrackId: event.payload[0].id,
-        audioStatus: "PLAYING"
+        audioStatus: "PENDING"
       };
     }
 
@@ -106,7 +106,7 @@ export const playerReducer = (
       return {
         ...state,
         playingTrackId: event.payload,
-        audioStatus: "PLAYING"
+        audioStatus: "PENDING"
       };
     }
 
