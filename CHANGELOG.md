@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/pathephone/pathephone-web/compare/v1.10.2...v1.10.3) (2019-10-13)
+
+
+### Bug Fixes
+
+* bring back audio playback ([6542d4b](https://github.com/pathephone/pathephone-web/commit/6542d4b92b1fdf2e8579deee5099cfcd82de83ad))
+
 ## [1.10.2](https://github.com/pathephone/pathephone-web/compare/v1.10.1...v1.10.2) (2019-10-13)
 
 
