@@ -6,7 +6,7 @@ export const usePlayingTrackURL = () => {
   const playingTrack = playlist.find(track => track.id === playingTrackId);
 
   if (!playingTrack) {
-    throw new TypeError();
+    return null;
   }
 
   return playingTrack.audioSrc;
