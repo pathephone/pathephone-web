@@ -5,7 +5,8 @@ import { getNextPlayingTrackId } from "util/getNextPlayingTrackId";
 import { getPreviousPlayingTrackId } from "util/getPreviousPlayingTrackId";
 
 export const initialPlayerState: TPlayerState = {
-  screen: "OVERVIEW",
+  primaryControls: "OVERVIEW",
+  secondaryControls: "PLAYBACK",
   playlist: [],
   playingTrackId: null,
   audioStatus: "PAUSED"
@@ -146,7 +147,7 @@ export const playerReducer = (
     case "OVERVIEW_CONTROLS__OPEN_SEARCH": {
       return {
         ...state,
-        screen: "SEARCH"
+        primaryControls: "SEARCH"
       };
     }
 
@@ -154,10 +155,21 @@ export const playerReducer = (
     case "SEARCH_CONTROLS__CANCEL": {
       return {
         ...state,
-        screen: "OVERVIEW"
+        primaryControls: "OVERVIEW"
       };
     }
 
+    case "PLAYLIST_CONTROLS__CLOSE":
+      return {
+        ...state,
+        secondaryControls: "PLAYBACK"
+      };
+
+    case "PLAYBACK_CONTROLS__OPEN_PLAYLIST":
+      return {
+        ...state,
+        secondaryControls: "PLAYLIST"
+      };
     default:
       return state;
   }
