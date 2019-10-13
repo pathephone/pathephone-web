@@ -8,7 +8,8 @@ export type TPlaylistTrack = {
 };
 
 export type TPlayerState = {
-  screen: "OVERVIEW" | "SEARCH";
+  primaryControls: "OVERVIEW" | "SEARCH";
+  secondaryControls: "PLAYBACK" | "PLAYLIST";
   playlist: TPlaylistTrack[];
   playingTrackId: null | string;
   audioStatus: TAudioStatus;

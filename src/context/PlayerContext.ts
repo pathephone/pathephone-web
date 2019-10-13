@@ -3,7 +3,8 @@ import * as React from "react";
 import { TPlayerState } from "type/state";
 
 const fallbackValue: TPlayerState = {
-  screen: "OVERVIEW",
+  primaryControls: "OVERVIEW",
+  secondaryControls: "PLAYBACK",
   playlist: [],
   playingTrackId: null,
   audioStatus: "PAUSED"
