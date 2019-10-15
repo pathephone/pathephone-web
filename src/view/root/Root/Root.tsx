@@ -11,10 +11,11 @@ import { RootFallback } from "view/root/RootFallback";
 
 type TProps = {
   services: TServices;
+  routerBasename?: string;
 };
 
-export const Root = ({ services }: TProps) => (
-  <RouterProvider>
+export const Root = ({ services, routerBasename }: TProps) => (
+  <RouterProvider basename={routerBasename}>
     <ServicesContext.Provider value={services}>
       <ThemeProvider>
         <RootFallback>
