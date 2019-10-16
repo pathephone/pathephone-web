@@ -1,4 +1,4 @@
-import { TIntl } from "type/state";
+import { Intl } from "type/intl";
 
 type TPending = {
   type: "GET_INTL_SERVICE__PENDING";
@@ -6,7 +6,7 @@ type TPending = {
 
 type TResolved = {
   type: "GET_INTL_SERVICE__RESOLVED";
-  payload: TIntl;
+  payload: Intl;
 };
 
 type TRejected = {

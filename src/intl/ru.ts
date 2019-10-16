@@ -1,6 +1,6 @@
-import { TIntlDictionary } from "type/state";
+import { IntlDictionary } from "type/intl";
 
-const intlDictionaryRu: TIntlDictionary = {
+const intlDictionaryRu: IntlDictionary = {
   playerNavigation: {
     latestAlbumsLinkText: "Последние альбомы",
     searchAlbumsLinkText: "Искать альбомы",
