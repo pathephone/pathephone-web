@@ -1,4 +1,4 @@
-import { TMockStorageAlbum } from "type/mockTypes";
+import { TMockStorageAlbum } from "service/mock/type";
 
 const store: TMockStorageAlbum[] = [];
 

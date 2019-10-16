@@ -1,4 +1,4 @@
-import { TMockStorageAlbum } from "type/mockTypes";
+import { TMockStorageAlbum } from "service/mock/type";
 import { TFeedAlbum } from "type/state";
 
 const toFeedAlbum = ({
