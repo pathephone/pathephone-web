@@ -1,5 +1,5 @@
 import { TPlaylistTrack } from "type/state";
-import { TMockStorageTrack } from "type/mockTypes";
+import { TMockStorageTrack } from "service/mock/type";
 
 import { getUniqueString } from "util/getUniqueString";
 

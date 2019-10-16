@@ -1,7 +1,6 @@
 import { TAlbumFormData, TAlbumFormTrack } from "type/state";
-import { TMockStorageAlbum } from "type/mockTypes";
-
 import { getUniqueString } from "util/getUniqueString";
+import { TMockStorageAlbum } from "service/mock/type";
 
 const formTrackToServicesTrack = ({
   title,
