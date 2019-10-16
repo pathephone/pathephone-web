@@ -1,5 +1,6 @@
 import { TEvent } from "type/event";
-import { TPlayerState, TPlaylistTrack } from "type/state";
+import { TPlayerState } from "type/state";
+import { TrackPreview } from "type/model";
 
 import { getNextPlayingTrackId } from "util/getNextPlayingTrackId";
 import { getPreviousPlayingTrackId } from "util/getPreviousPlayingTrackId";
@@ -113,7 +114,7 @@ export const playerReducer = (
     case "PLAYLIST_TRACK__REMOVE": {
       // Create next playlist without removed track
       const nextPlaylist = state.playlist.filter(
-        (track: TPlaylistTrack) => track.id !== event.payload
+        (track: TrackPreview) => track.id !== event.payload
       );
 
       // Handle case when last track was removed.

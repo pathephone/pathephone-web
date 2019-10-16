@@ -1,14 +1,13 @@
-import { TPlaylistTrack } from "type/state";
 import { TMockStorageTrack } from "service/mock/type";
-
 import { getUniqueString } from "util/getUniqueString";
+import { TrackPreview } from "type/model";
 
 export const normalizeMockStorageTrack = {
   toPlaylistTrack({
     title,
     artists,
     audioSrc
-  }: TMockStorageTrack): TPlaylistTrack {
+  }: TMockStorageTrack): TrackPreview {
     return {
       id: getUniqueString(),
       title,

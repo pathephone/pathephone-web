@@ -1,14 +1,13 @@
-import { TPlaylistTrack } from "type/state";
-
 import * as React from "react";
 
 import { useDispatch } from "hook/useDispatch";
 import { usePlayerContext } from "hook/usePlayerContext";
+import { TrackPreview } from "type/model";
 
 import { PlaylistTrackView } from "./PlaylistTrackView";
 
 type TProps = {
-  track: TPlaylistTrack;
+  track: TrackPreview;
 };
 
 export const PlaylistTrack = ({ track }: TProps) => {
