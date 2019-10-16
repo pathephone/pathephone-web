@@ -1,5 +1,3 @@
-import { TServices, TFeedAlbum } from "type/state";
-
 import React from "react";
 import {
   render,
@@ -13,12 +11,14 @@ import { testId } from "util/testId";
 import { mockServices } from "service/mock";
 import { TestingProvider } from "util/react/TestingProvider";
 import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
+import { TServices } from "type/state";
+import { AlbumPreview } from "type/model";
 
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
 
 type TParams = {
-  firstPageResults?: TFeedAlbum[];
-  secondPageResults?: TFeedAlbum[];
+  firstPageResults?: AlbumPreview[];
+  secondPageResults?: AlbumPreview[];
 };
 
 const renderComponent = (params?: TParams) => {

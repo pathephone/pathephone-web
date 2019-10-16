@@ -3,14 +3,14 @@ import React from "react";
 import { useAsync } from "hook/useAsync";
 import { useServices } from "hook/useServices";
 import { useDispatch } from "hook/useDispatch";
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 export const useSearchAlbumsService = () => {
   // Import service to get albums by query.
   const { getAlbumsByQuery: searchAlbumsService } = useServices();
 
   // Create service promise state.
-  const [servicePromiseState, injectServicePromise] = useAsync<TFeedAlbum[]>({
+  const [servicePromiseState, injectServicePromise] = useAsync<AlbumPreview[]>({
     errorsToKeep: [Error]
   });
 

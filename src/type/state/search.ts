@@ -1,9 +1,9 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 export type TSearchAlbumsPageState = {
   failed: boolean;
-  albums: TFeedAlbum[];
-  newAlbums: TFeedAlbum[];
+  albums: AlbumPreview[];
+  newAlbums: AlbumPreview[];
 };
 
 export type TSearchInfo = {

@@ -1,4 +1,4 @@
-export type TFeedAlbum = {
+export type AlbumPreview = {
   id: string;
   title: string;
   artistName: string;

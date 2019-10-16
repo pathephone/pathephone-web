@@ -4,7 +4,7 @@ import { TPlaylistControlsEvent } from "./playlistControls";
 import { TPlaybackControlsEvent } from "./playbackControls";
 import { TSearchControlsEvent } from "./searchControls";
 import { TOverviewControlsEvent } from "./overviewControls";
-import { TFeedAlbumEvent } from "./feedAlbum";
+import { AlbumPreviewEvent } from "./feedAlbum";
 import { TAudioEvent } from "./audio";
 import { TAlbumAudioEditorEvent } from "./albumAudioEditor";
 import { TAlbumCoverEditorEvent } from "./albumCoverEditor";
@@ -21,7 +21,7 @@ export type TUiEvent =
   | TPlaybackControlsEvent
   | TSearchControlsEvent
   | TOverviewControlsEvent
-  | TFeedAlbumEvent
+  | AlbumPreviewEvent
   | TAudioEvent
   | TAlbumAudioEditorEvent
   | TAlbumCoverEditorEvent

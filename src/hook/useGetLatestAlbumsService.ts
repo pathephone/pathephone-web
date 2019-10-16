@@ -3,10 +3,10 @@ import * as React from "react";
 import { useAsync } from "hook/useAsync";
 import { useServices } from "hook/useServices";
 import { useDispatch } from "hook/useDispatch";
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 type TValue = {
-  items: TFeedAlbum[];
+  items: AlbumPreview[];
   lastPageFlag: boolean;
 };
 

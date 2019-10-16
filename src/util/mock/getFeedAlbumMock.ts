@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 import { getUIDString } from "util/uid";
 
@@ -12,7 +12,7 @@ const getRandomCoverURL = () => {
   return coverURLs[Math.floor(Math.random() * coverURLs.length)];
 };
 
-export const getFeedAlbumMock = (): TFeedAlbum => ({
+export const getFeedAlbumMock = (): AlbumPreview => ({
   id: getUIDString(),
   artistName: "Artist name",
   title: "Album title",
@@ -22,7 +22,7 @@ export const getFeedAlbumMock = (): TFeedAlbum => ({
 
 export const getFeedAlbumMocks = (initialCount: number) => {
   let count = initialCount;
-  const mocks: TFeedAlbum[] = [];
+  const mocks: AlbumPreview[] = [];
   while (count > 0) {
     mocks.push(getFeedAlbumMock());
     count -= 1;
