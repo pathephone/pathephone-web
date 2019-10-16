@@ -1,16 +1,11 @@
-export type TAudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
+import { TrackPreview } from "type/model";
 
-export type TPlaylistTrack = {
-  id: string;
-  title: string;
-  artistName: string;
-  audioSrc: string;
-};
+export type TAudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
 
 export type TPlayerState = {
   primaryControls: "OVERVIEW" | "SEARCH";
   secondaryControls: "PLAYBACK" | "PLAYLIST";
-  playlist: TPlaylistTrack[];
+  playlist: TrackPreview[];
   playingTrackId: null | string;
   audioStatus: TAudioStatus;
   // isShuffle: boolean,
