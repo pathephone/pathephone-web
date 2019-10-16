@@ -10,4 +10,4 @@ type TPlay = {
   payload: TPlaylistTrack[];
 };
 
-export type TFeedAlbumEvent = TAddToPlaylist | TPlay;
+export type AlbumPreviewEvent = TAddToPlaylist | TPlay;

@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 type TPending = {
   type: "GET_LATEST_ALBUMS_SERVICE__PENDING";
@@ -7,7 +7,7 @@ type TPending = {
 type TResolved = {
   type: "GET_LATEST_ALBUMS_SERVICE__RESOLVED";
   payload: {
-    albums: TFeedAlbum[];
+    albums: AlbumPreview[];
     lastPageFlag: boolean;
   };
 };

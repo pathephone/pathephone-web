@@ -1,5 +1,3 @@
-import { TFeedAlbum, TServices } from "type/state";
-
 import React from "react";
 import { createMemoryHistory } from "history";
 import {
@@ -14,20 +12,22 @@ import { testId } from "util/testId";
 import { mockServices } from "service/mock";
 import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
 import { TestingProvider } from "util/react/TestingProvider";
+import { routes } from "util/route";
+import { AlbumPreview } from "type/model";
+import { TServices } from "type/state";
 
 import { SearchAlbumsPage } from "./SearchAlbumsPage";
-import { routes } from "util/route";
 
 type TParams = {
   searchValue?: string;
-  results?: TFeedAlbum[];
-  nextResults?: TFeedAlbum[];
+  results?: AlbumPreview[];
+  nextResults?: AlbumPreview[];
   simulateServiceError?: boolean;
 };
 
-const defaultResults: TFeedAlbum[] = [];
+const defaultResults: AlbumPreview[] = [];
 
-const defaultNewResults: TFeedAlbum[] = [];
+const defaultNewResults: AlbumPreview[] = [];
 
 const defaultSearchValue = "default search value";
 

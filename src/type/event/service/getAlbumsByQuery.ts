@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 type TPending = {
   type: "GET_ALBUMS_BY_QUERY_SERVICE__PENDING";
@@ -6,7 +6,7 @@ type TPending = {
 
 type TResolved = {
   type: "GET_ALBUMS_BY_QUERY_SERVICE__RESOLVED";
-  payload: TFeedAlbum[];
+  payload: AlbumPreview[];
 };
 
 type TRejected = {

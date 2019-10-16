@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 import * as React from "react";
 
@@ -16,7 +16,7 @@ type TProps = {
   hasFeed: boolean;
   hasFeedLoader: boolean;
   hasFallback: boolean;
-  albums: TFeedAlbum[];
+  albums: AlbumPreview[];
   fallbackText: string;
   loadMoreButtonText: string;
   onLoadMoreButtonClick(): void;

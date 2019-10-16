@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 import { setAsyncTimeout } from "util/setAsyncTimeout";
 import { SERVICE_MOCK_DELAY } from "util/constant";
@@ -8,7 +8,7 @@ import { normalizeMockStorageAlbum } from "./normalize/mockStorageAlbum";
 
 export const getAlbumsByQuery = async (
   query: string
-): Promise<TFeedAlbum[]> => {
+): Promise<AlbumPreview[]> => {
   await setAsyncTimeout(SERVICE_MOCK_DELAY);
 
   const targetAlbums = albumModel.getAlbumsByQuery(query);

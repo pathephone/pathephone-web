@@ -1,8 +1,8 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 export type TLatestAlbumsPageState = {
   latestPage: number;
   loading: boolean;
-  albums: TFeedAlbum[];
+  albums: AlbumPreview[];
   noMoreAlbums: boolean;
 };

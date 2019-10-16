@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 import * as React from "react";
 
@@ -12,7 +12,7 @@ import { useDispatch } from "hook/useDispatch";
 import { useServices } from "hook/useServices";
 
 type TProps = {
-  data: TFeedAlbum;
+  data: AlbumPreview;
 };
 
 export const FeedAlbum = (props: TProps) => {

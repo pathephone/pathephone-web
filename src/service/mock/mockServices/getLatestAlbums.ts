@@ -1,4 +1,4 @@
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 import { setAsyncTimeout } from "util/setAsyncTimeout";
 import { SERVICE_MOCK_DELAY, ALBUMS_FEED_PER_PAGE_LIMIT } from "util/constant";
@@ -7,7 +7,7 @@ import { albumModel } from "./model/albumModel";
 import { normalizeMockStorageAlbum } from "./normalize/mockStorageAlbum";
 
 type TOutput = {
-  items: TFeedAlbum[];
+  items: AlbumPreview[];
   lastPageFlag: boolean;
 };
 

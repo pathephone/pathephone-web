@@ -1,12 +1,12 @@
 import { TMockStorageAlbum } from "service/mock/type";
-import { TFeedAlbum } from "type/state";
+import { AlbumPreview } from "type/model";
 
 const toFeedAlbum = ({
   title,
   coverSrc,
   tracklist,
   id
-}: TMockStorageAlbum): TFeedAlbum => {
+}: TMockStorageAlbum): AlbumPreview => {
   const uniqueArtists = tracklist.reduce((acc: string[], track) => {
     const newArtists = track.artists.filter(artist => !acc.includes(artist));
     return [...acc, ...newArtists];

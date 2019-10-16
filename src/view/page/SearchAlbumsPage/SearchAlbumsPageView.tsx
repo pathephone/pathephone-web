@@ -1,9 +1,9 @@
-import { TFeedAlbum, TSearchAlbumsPageScreen } from "type/state";
-
 import * as React from "react";
 
 import { FeedAlbum } from "view/widget/FeedAlbum";
 import { testId } from "util/testId";
+import { AlbumPreview } from "type/model";
+import { TSearchAlbumsPageScreen } from "type/state";
 
 import { SearchAlbumsPageHero } from "./styled/SearchAlbumsPageHero";
 import { SearchAlbumsPageButton } from "./styled/SearchAlbumsPageButton";
@@ -21,7 +21,7 @@ type TProps = {
   fallbackSubTitleText: string;
   fallbackButtonText: string;
   newResultsButtonText: string;
-  feedItems: TFeedAlbum[];
+  feedItems: AlbumPreview[];
   onNewResultsButtonClick(): void;
   onFallbackButtonClick(): void;
 };
