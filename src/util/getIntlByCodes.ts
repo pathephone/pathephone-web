@@ -1,4 +1,4 @@
-import { TIntl } from "type/state";
+import { Intl } from "type/intl";
 
 import { UnexpectedError } from "util/error";
 
@@ -9,7 +9,7 @@ availableIntlMap.set("ru", () => import("intl/ru"));
 
 const fallbackCode = "en";
 
-export const getIntlByCodes = async (codes: string[]): Promise<TIntl> => {
+export const getIntlByCodes = async (codes: string[]): Promise<Intl> => {
   const firstAvailableCode = codes.find(code => availableIntlMap.has(code));
 
   const currentCode =

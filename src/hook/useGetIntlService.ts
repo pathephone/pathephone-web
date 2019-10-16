@@ -4,12 +4,12 @@ import { useServices } from "hook/useServices";
 import { useAsync } from "hook/useAsync";
 
 import { useDispatch } from "./useDispatch";
-import { TIntl } from "type/state";
+import { Intl } from "type/intl";
 
 export const useGetIntlService = () => {
   const { getIntl } = useServices();
 
-  const [intlPromiseState, injectIntlPromise] = useAsync<TIntl>();
+  const [intlPromiseState, injectIntlPromise] = useAsync<Intl>();
 
   const dispatch = useDispatch();
 
