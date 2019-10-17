@@ -1,4 +1,4 @@
-import { TAudioStatus, TPlaybackControlsScreen } from "type/state";
+import { AudioStatus, PlaybackControlsScreen } from "type/state";
 
 import * as React from "react";
 
@@ -14,7 +14,7 @@ export const PlaybackControls = () => {
 
   const { title, artistName } = usePlayingTrack();
 
-  const audioStatus: TAudioStatus = useAudioStatus();
+  const audioStatus: AudioStatus = useAudioStatus();
 
   const onPlaybackButtonClick = React.useCallback(() => {
     if (audioStatus === "PLAYING") {
@@ -30,7 +30,7 @@ export const PlaybackControls = () => {
     dispatch({ type: "PLAYBACK_CONTROLS__OPEN_PLAYLIST" });
   }, [dispatch]);
 
-  const screen: TPlaybackControlsScreen = (() => {
+  const screen: PlaybackControlsScreen = (() => {
     switch (audioStatus) {
       case "PLAYING":
         return "PLAYING";

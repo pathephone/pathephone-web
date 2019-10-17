@@ -1,4 +1,4 @@
-import { TPlayingTrackScreen } from "type/state";
+import { PlayingTrackScreen } from "type/state";
 
 import React from "react";
 
@@ -11,7 +11,7 @@ import { PlaylistTrackInfo } from "./styled/PlaylistTrackInfo";
 import { PlaylistTrackSecondaryAction } from "./styled/PlaylistTrackSecondaryAction";
 
 type TProps = {
-  screen: TPlayingTrackScreen;
+  screen: PlayingTrackScreen;
   artistName: string;
   title: string;
   onPlay(): void;

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { TPlayerState } from "type/state";
+import { PlayerState } from "type/state";
 
-const fallbackValue: TPlayerState = {
+const fallbackValue: PlayerState = {
   primaryControls: "OVERVIEW",
   secondaryControls: "PLAYBACK",
   playlist: [],
@@ -10,4 +10,4 @@ const fallbackValue: TPlayerState = {
   audioStatus: "PAUSED"
 };
 
-export const PlayerContext = React.createContext<TPlayerState>(fallbackValue);
+export const PlayerContext = React.createContext<PlayerState>(fallbackValue);

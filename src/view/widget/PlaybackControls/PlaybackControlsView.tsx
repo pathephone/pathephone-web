@@ -1,4 +1,4 @@
-import { TPlaybackControlsScreen } from "type/state";
+import { PlaybackControlsScreen } from "type/state";
 
 import * as React from "react";
 
@@ -14,7 +14,7 @@ import { PlaybackControlsGroup } from "./styled/PlaybackControlsGroup";
 import { PlaybackControlsWrapper } from "./styled/PlaybackControlsWrapper";
 
 type TProps = {
-  screen: TPlaybackControlsScreen;
+  screen: PlaybackControlsScreen;
   title: string;
   artistName: string;
   onPlaybackButtonClick(): void;

@@ -1,20 +1,20 @@
 import { TrackPreview } from "type/model";
 
-export type TAudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
+export type AudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
 
-export type TPlayerState = {
+export type PlayerState = {
   primaryControls: "OVERVIEW" | "SEARCH";
   secondaryControls: "PLAYBACK" | "PLAYLIST";
   playlist: TrackPreview[];
   playingTrackId: null | string;
-  audioStatus: TAudioStatus;
+  audioStatus: AudioStatus;
   // isShuffle: boolean,
   // isRepeat: boolean
 };
 
-export type TPlayingTrackScreen = "DEFAULT" | "PLAYING";
+export type PlayingTrackScreen = "DEFAULT" | "PLAYING";
 
-export type TPlaybackControlsScreen =
+export type PlaybackControlsScreen =
   | "PLAYING"
   | "PAUSED"
   | "PENDING"
