@@ -1,26 +1,26 @@
-export type TShareAlbumPageScreen =
+export type ShareAlbumPageScreen =
   | "SELECTING_FILES"
   | "EDITING_ALBUM"
   | "LOADING";
 
 // Album form data types
 
-export type TAlbumFormArtist = {
+export type AlbumFormArtist = {
   id: string;
   name: string;
 };
 
-export type TAlbumFormTrack = {
+export type AlbumFormTrack = {
   id: string;
   title: string;
-  artists: TAlbumFormArtist[];
+  artists: AlbumFormArtist[];
   audio: File;
 };
 
-export type TAlbumFormData = {
+export type AlbumFormData = {
   title: string;
   cover: File | null;
-  tracklist: TAlbumFormTrack[];
+  tracklist: AlbumFormTrack[];
 };
 
 // Album form validation types
@@ -47,7 +47,7 @@ type TEmptyTrackArtists = {
   payload: string;
 };
 
-export type TAlbumFormValidity =
+export type AlbumFormValidity =
   | TTitleRequired
   | TCoverRequired
   | TEmptyTracklist
@@ -56,14 +56,14 @@ export type TAlbumFormValidity =
 
 // Share album page data
 
-export type TShareAlbumPageState = {
-  screen: TShareAlbumPageScreen;
+export type ShareAlbumPageState = {
+  screen: ShareAlbumPageScreen;
   // Files selected by user:
   files: null | File[];
   // Editable album candidate instance,
   // extracted from the selected files:
-  albumFormData: null | TAlbumFormData;
-  albumFormValidation: TAlbumFormValidity[];
+  albumFormData: null | AlbumFormData;
+  albumFormValidation: AlbumFormValidity[];
   // Flag that indicates success of the sharing process:
   didSucceed: boolean;
   // Flag that indicates that user has submited the form:

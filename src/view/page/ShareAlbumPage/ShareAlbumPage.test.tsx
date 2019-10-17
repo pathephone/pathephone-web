@@ -8,7 +8,7 @@ import {
 import { getAllByTestId, getByTestId, wait } from "@testing-library/dom";
 
 import { testId } from "util/testId";
-import { TAlbumFormData, TAlbumFormTrack, TAlbumFormArtist } from "type/state";
+import { AlbumFormData, AlbumFormTrack, AlbumFormArtist } from "type/state";
 import { mockService } from "service/mock/index";
 import { MissingAudioFilesError } from "util/error";
 import { getUIDString } from "util/uid";
@@ -50,7 +50,7 @@ const getImageFileMock = (): File => {
 };
 
 const getAlbumFormArtistMock = () => {
-  const artistMock: TAlbumFormArtist = {
+  const artistMock: AlbumFormArtist = {
     id: getUIDString(),
     name: "artist name"
   };
@@ -59,7 +59,7 @@ const getAlbumFormArtistMock = () => {
 };
 
 const getAlbumFormTrackMock = () => {
-  const trackMock: TAlbumFormTrack = {
+  const trackMock: AlbumFormTrack = {
     artists: [getAlbumFormArtistMock()],
     audio: getAudioFileMock(),
     id: getUIDString(),
@@ -70,7 +70,7 @@ const getAlbumFormTrackMock = () => {
 };
 
 const getAlbumFormDataMock = () => {
-  const dataMock: TAlbumFormData = {
+  const dataMock: AlbumFormData = {
     cover: getImageFileMock(),
     title: "title",
     tracklist: [getAlbumFormTrackMock()]
@@ -82,8 +82,8 @@ const getAlbumFormDataMock = () => {
 type TParams = {
   simulateMissingAudioFilesError?: boolean;
   simulateNoCover?: boolean;
-  albumFormDataMock?: TAlbumFormData;
-  albumFormTrackMock?: TAlbumFormTrack;
+  albumFormDataMock?: AlbumFormData;
+  albumFormTrackMock?: AlbumFormTrack;
 };
 
 const renderComponent = (params?: TParams) => {

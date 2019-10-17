@@ -1,11 +1,11 @@
-import { TAlbumFormData, TAlbumFormValidity } from "type/state";
+import { AlbumFormData, AlbumFormValidity } from "type/state";
 
 export const validateAlbumFormData = (
-  data: TAlbumFormData
-): TAlbumFormValidity[] => {
+  data: AlbumFormData
+): AlbumFormValidity[] => {
   const { title, cover, tracklist } = data;
 
-  const validation: TAlbumFormValidity[] = [];
+  const validation: AlbumFormValidity[] = [];
 
   if (!title) {
     validation.push({

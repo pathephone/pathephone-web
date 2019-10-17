@@ -1,4 +1,4 @@
-import { TAlbumFormData, TAlbumFormArtist, TAlbumFormTrack } from "type/state";
+import { AlbumFormData, AlbumFormArtist, AlbumFormTrack } from "type/state";
 
 import { getRawAlbumFormArtistData } from "util/getRawAlbumFormArtistData";
 
@@ -23,7 +23,7 @@ type TMoveTrackParams = {
   direction: "UP" | "DOWN";
 };
 
-export const patchAlbumFormData = (albumFormData: TAlbumFormData) => {
+export const patchAlbumFormData = (albumFormData: AlbumFormData) => {
   return {
     // Return form data.
 
@@ -33,7 +33,7 @@ export const patchAlbumFormData = (albumFormData: TAlbumFormData) => {
 
     // Add new tracks.
 
-    addTracks(tracks: TAlbumFormTrack[]) {
+    addTracks(tracks: AlbumFormTrack[]) {
       const nextFormData = {
         ...albumFormData,
         tracklist: [...albumFormData.tracklist, ...tracks]
@@ -45,7 +45,7 @@ export const patchAlbumFormData = (albumFormData: TAlbumFormData) => {
     // Remove track.
 
     removeTrack(trackId: string) {
-      const nextTracklist: TAlbumFormTrack[] = albumFormData.tracklist.filter(
+      const nextTracklist: AlbumFormTrack[] = albumFormData.tracklist.filter(
         ({ id }) => id !== trackId
       );
 
@@ -60,8 +60,8 @@ export const patchAlbumFormData = (albumFormData: TAlbumFormData) => {
     // Set track title name
 
     setTrackTitle({ trackId, value }: TSetTrackTitleParams) {
-      const nextTracklist: TAlbumFormTrack[] = albumFormData.tracklist.reduce(
-        (acc: TAlbumFormTrack[], track) => {
+      const nextTracklist: AlbumFormTrack[] = albumFormData.tracklist.reduce(
+        (acc: AlbumFormTrack[], track) => {
           if (track.id === trackId) {
             const nextTrack = {
               ...track,
@@ -112,10 +112,10 @@ export const patchAlbumFormData = (albumFormData: TAlbumFormData) => {
     // Remove artist
 
     removeArtist({ trackId, artistId }: TRemoveArtistParams) {
-      const nextTracklist: TAlbumFormTrack[] = albumFormData.tracklist.reduce(
-        (acc: TAlbumFormTrack[], track) => {
+      const nextTracklist: AlbumFormTrack[] = albumFormData.tracklist.reduce(
+        (acc: AlbumFormTrack[], track) => {
           if (track.id === trackId) {
-            const nextArtists: TAlbumFormArtist[] = track.artists.filter(
+            const nextArtists: AlbumFormArtist[] = track.artists.filter(
               artist => artist.id !== artistId
             );
 
@@ -143,11 +143,11 @@ export const patchAlbumFormData = (albumFormData: TAlbumFormData) => {
     // Change artist name
 
     setArtistName({ trackId, artistId, value }: TSetArtistNameParams) {
-      const nextTracklist: TAlbumFormTrack[] = albumFormData.tracklist.reduce(
-        (acc: TAlbumFormTrack[], track) => {
+      const nextTracklist: AlbumFormTrack[] = albumFormData.tracklist.reduce(
+        (acc: AlbumFormTrack[], track) => {
           if (track.id === trackId) {
-            const nextArtists: TAlbumFormArtist[] = track.artists.reduce(
-              (acc: TAlbumFormArtist[], artist) => {
+            const nextArtists: AlbumFormArtist[] = track.artists.reduce(
+              (acc: AlbumFormArtist[], artist) => {
                 if (artist.id === artistId) {
                   const nextArtist = {
                     ...artist,

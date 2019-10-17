@@ -1,10 +1,10 @@
-import { TShareAlbumPageState } from "type/state";
+import { ShareAlbumPageState } from "type/state";
 import { TEvent } from "type/event";
 
 import { validateAlbumFormData } from "util/validateAlbumFormData";
 import { patchAlbumFormData } from "util/patchAlbumFormData";
 
-export const initialShareAlbumPageState: TShareAlbumPageState = {
+export const initialShareAlbumPageState: ShareAlbumPageState = {
   screen: "SELECTING_FILES",
   files: null,
   albumFormData: null,
@@ -15,9 +15,9 @@ export const initialShareAlbumPageState: TShareAlbumPageState = {
 };
 
 export const shareAlbumPageReducer = (
-  state: TShareAlbumPageState,
+  state: ShareAlbumPageState,
   event: TEvent
-): TShareAlbumPageState => {
+): ShareAlbumPageState => {
   switch (event.type) {
     case "ALBUM_EDITOR__TITLE_CHANGE": {
       if (state.albumFormData) {

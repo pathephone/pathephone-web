@@ -1,4 +1,4 @@
-import { TAlbumFormArtist } from "type/state";
+import { AlbumFormArtist } from "type/state";
 
 import * as React from "react";
 
@@ -10,7 +10,7 @@ import { useIntlDictionary } from "hook/useIntl";
 
 type TProps = {
   trackId: string;
-  artist: TAlbumFormArtist;
+  artist: AlbumFormArtist;
   artistIndex: number;
 };
 
