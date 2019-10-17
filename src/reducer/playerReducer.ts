@@ -1,11 +1,11 @@
 import { TEvent } from "type/event";
-import { TPlayerState } from "type/state";
+import { PlayerState } from "type/state";
 import { TrackPreview } from "type/model";
 
 import { getNextPlayingTrackId } from "util/getNextPlayingTrackId";
 import { getPreviousPlayingTrackId } from "util/getPreviousPlayingTrackId";
 
-export const initialPlayerState: TPlayerState = {
+export const initialPlayerState: PlayerState = {
   primaryControls: "OVERVIEW",
   secondaryControls: "PLAYBACK",
   playlist: [],
@@ -14,9 +14,9 @@ export const initialPlayerState: TPlayerState = {
 };
 
 export const playerReducer = (
-  state: TPlayerState,
+  state: PlayerState,
   event: TEvent
-): TPlayerState => {
+): PlayerState => {
   switch (event.type) {
     case "FEED_ALBUM__ADD_TO_PLAYLIST": {
       // Handle case when ampty array was dispatched

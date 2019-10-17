@@ -1,7 +1,7 @@
-import { TPlayerState } from "type/state";
+import { PlayerState } from "type/state";
 
 export const getPreviousPlayingTrackId = (
-  state: TPlayerState
+  state: PlayerState
 ): null | string => {
   const currentTrackIndex = state.playlist.findIndex(track => {
     return track.id === state.playingTrackId;
