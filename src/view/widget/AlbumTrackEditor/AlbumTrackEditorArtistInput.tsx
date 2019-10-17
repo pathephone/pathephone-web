@@ -1,16 +1,15 @@
-import { AlbumFormArtist } from "type/state";
-
 import * as React from "react";
 
 import { FloatingLabelInput } from "view/kit/FloatingLabelInput";
 import { useDispatch } from "hook/useDispatch";
-import { useAlbumFormArtistValidity } from "hook/useAlbumForm";
+import { useArtistCandidateValidity } from "hook/useAlbumForm";
 import { testId } from "util/testId";
 import { useIntlDictionary } from "hook/useIntl";
+import { ArtistCandidate } from "type/model";
 
 type TProps = {
   trackId: string;
-  artist: AlbumFormArtist;
+  artist: ArtistCandidate;
   artistIndex: number;
 };
 
@@ -26,7 +25,7 @@ export const AlbumTrackEditorArtistInput = (props: TProps) => {
 
   const dispatch = useDispatch();
 
-  const valid = useAlbumFormArtistValidity({
+  const valid = useArtistCandidateValidity({
     trackId,
     artistId: artist.id
   });

@@ -8,7 +8,7 @@ import {
 import { getAllByTestId, getByTestId, wait } from "@testing-library/dom";
 
 import { testId } from "util/testId";
-import { AlbumFormData, AlbumFormTrack, AlbumFormArtist } from "type/state";
+import { AlbumCandidate, TrackCandidate, ArtistCandidate } from "type/model";
 import { mockService } from "service/mock/index";
 import { MissingAudioFilesError } from "util/error";
 import { getUIDString } from "util/uid";
@@ -49,8 +49,8 @@ const getImageFileMock = (): File => {
   return imageFileMock;
 };
 
-const getAlbumFormArtistMock = () => {
-  const artistMock: AlbumFormArtist = {
+const getArtistCandidateMock = () => {
+  const artistMock: ArtistCandidate = {
     id: getUIDString(),
     name: "artist name"
   };
@@ -58,9 +58,9 @@ const getAlbumFormArtistMock = () => {
   return artistMock;
 };
 
-const getAlbumFormTrackMock = () => {
-  const trackMock: AlbumFormTrack = {
-    artists: [getAlbumFormArtistMock()],
+const getTrackCandidateMock = () => {
+  const trackMock: TrackCandidate = {
+    artists: [getArtistCandidateMock()],
     audio: getAudioFileMock(),
     id: getUIDString(),
     title: "title"
@@ -69,11 +69,11 @@ const getAlbumFormTrackMock = () => {
   return trackMock;
 };
 
-const getAlbumFormDataMock = () => {
-  const dataMock: AlbumFormData = {
+const getAlbumCandidateMock = () => {
+  const dataMock: AlbumCandidate = {
     cover: getImageFileMock(),
     title: "title",
-    tracklist: [getAlbumFormTrackMock()]
+    tracklist: [getTrackCandidateMock()]
   };
 
   return dataMock;
@@ -82,21 +82,21 @@ const getAlbumFormDataMock = () => {
 type TParams = {
   simulateMissingAudioFilesError?: boolean;
   simulateNoCover?: boolean;
-  albumFormDataMock?: AlbumFormData;
-  albumFormTrackMock?: AlbumFormTrack;
+  albumFormDataMock?: AlbumCandidate;
+  albumFormTrackMock?: TrackCandidate;
 };
 
 const renderComponent = (params?: TParams) => {
   const {
     simulateMissingAudioFilesError = false,
     simulateNoCover = false,
-    albumFormDataMock = getAlbumFormDataMock(),
-    albumFormTrackMock = getAlbumFormTrackMock()
+    albumFormDataMock = getAlbumCandidateMock(),
+    albumFormTrackMock = getTrackCandidateMock()
   } = params || {};
 
   const service: Service = {
     ...mockService,
-    getAlbumFormDataFromFiles: jest.fn().mockImplementation(async () => {
+    getAlbumCandidateFromFiles: jest.fn().mockImplementation(async () => {
       if (simulateMissingAudioFilesError) {
         throw new MissingAudioFilesError();
       }
@@ -108,7 +108,7 @@ const renderComponent = (params?: TParams) => {
       }
       return albumFormDataMock;
     }),
-    getTrackFormDataFromFile: jest.fn().mockResolvedValue(albumFormTrackMock)
+    getTrackCandidateFromFile: jest.fn().mockResolvedValue(albumFormTrackMock)
   };
 
   const mounted = render(
@@ -410,7 +410,7 @@ describe("on correct filelist selected", () => {
 
     const { getAlbumTitleInputValue, selectDropZoneFiles } = renderComponent({
       albumFormDataMock: {
-        ...getAlbumFormDataMock(),
+        ...getAlbumCandidateMock(),
         title: value
       }
     });
@@ -425,11 +425,11 @@ describe("on correct filelist selected", () => {
   });
 
   test("number of track editors should match", async () => {
-    const tracklist = [getAlbumFormTrackMock(), getAlbumFormTrackMock()];
+    const tracklist = [getTrackCandidateMock(), getTrackCandidateMock()];
 
     const { getAlbumTrackEditorsCount, selectDropZoneFiles } = renderComponent({
       albumFormDataMock: {
-        ...getAlbumFormDataMock(),
+        ...getAlbumCandidateMock(),
         tracklist
       }
     });
@@ -446,11 +446,11 @@ describe("on correct filelist selected", () => {
   test("correct track titles should be set", async () => {
     const tracklist = [
       {
-        ...getAlbumFormTrackMock(),
+        ...getTrackCandidateMock(),
         title: "track 1"
       },
       {
-        ...getAlbumFormTrackMock(),
+        ...getTrackCandidateMock(),
         title: "track 2"
       }
     ];
@@ -460,7 +460,7 @@ describe("on correct filelist selected", () => {
       selectDropZoneFiles
     } = renderComponent({
       albumFormDataMock: {
-        ...getAlbumFormDataMock(),
+        ...getAlbumCandidateMock(),
         tracklist
       }
     });
@@ -477,7 +477,7 @@ describe("on correct filelist selected", () => {
   });
 
   test("number of track artist name inputs should match", async () => {
-    const albumFormDataMock = getAlbumFormDataMock();
+    const albumFormDataMock = getAlbumCandidateMock();
 
     const {
       getAlbumArtistNameInputsCount,
@@ -500,7 +500,7 @@ describe("on correct filelist selected", () => {
   });
 
   test("correct track artist name should be set", async () => {
-    const albumFormDataMock = getAlbumFormDataMock();
+    const albumFormDataMock = getAlbumCandidateMock();
 
     const {
       getAlbumArtistNameInputValue,
@@ -525,7 +525,7 @@ describe("on correct filelist selected", () => {
   });
 
   test("each track editor should have empty artist name input", async () => {
-    const albumFormDataMock = getAlbumFormDataMock();
+    const albumFormDataMock = getAlbumCandidateMock();
 
     const {
       getAlbumArtistNameInputValue,
@@ -579,7 +579,7 @@ describe("on album title change", () => {
       getAlbumTitleInputValue
     } = renderComponent({
       albumFormDataMock: {
-        ...getAlbumFormDataMock(),
+        ...getAlbumCandidateMock(),
         title: "initial value"
       }
     });
@@ -601,11 +601,11 @@ describe("on album title change", () => {
 describe("on empty artist name input change", () => {
   test("new empty artist name should appear", async () => {
     const albumFormDataMock = {
-      ...getAlbumFormDataMock(),
+      ...getAlbumCandidateMock(),
       tracklist: [
         {
-          ...getAlbumFormTrackMock(),
-          artists: [getAlbumFormArtistMock()]
+          ...getTrackCandidateMock(),
+          artists: [getArtistCandidateMock()]
         }
       ]
     };
@@ -643,11 +643,11 @@ describe("on empty artist name input change", () => {
 describe("on track title input get cleared", () => {
   test("validation message should appear", async () => {
     const albumFormDataMock = {
-      ...getAlbumFormDataMock(),
+      ...getAlbumCandidateMock(),
       tracklist: [
         {
-          ...getAlbumFormTrackMock(),
-          artists: [getAlbumFormArtistMock()]
+          ...getTrackCandidateMock(),
+          artists: [getArtistCandidateMock()]
         }
       ]
     };
@@ -678,11 +678,11 @@ describe("on track title input get cleared", () => {
 describe("on last empty artist name input get cleared", () => {
   test("validation message should appear", async () => {
     const albumFormDataMock = {
-      ...getAlbumFormDataMock(),
+      ...getAlbumCandidateMock(),
       tracklist: [
         {
-          ...getAlbumFormTrackMock(),
-          artists: [getAlbumFormArtistMock()]
+          ...getTrackCandidateMock(),
+          artists: [getArtistCandidateMock()]
         }
       ]
     };
@@ -716,7 +716,7 @@ describe("on last empty artist name input get cleared", () => {
 describe("on empty tracklist", () => {
   test("should show validation message", async () => {
     const albumFormDataMock = {
-      ...getAlbumFormDataMock(),
+      ...getAlbumCandidateMock(),
       tracklist: []
     };
 
@@ -740,8 +740,8 @@ describe("on empty tracklist", () => {
 describe("on remove track", () => {
   test("track editors count should decrese", async () => {
     const albumFormDataMock = {
-      ...getAlbumFormDataMock(),
-      tracklist: [getAlbumFormTrackMock(), getAlbumFormTrackMock()]
+      ...getAlbumCandidateMock(),
+      tracklist: [getTrackCandidateMock(), getTrackCandidateMock()]
     };
 
     const {

@@ -5,14 +5,14 @@ import { AlbumFormValidity } from "type/state";
 import { useShareAlbumPageState } from "./useShareAlbumPageState";
 import { useIntlDictionary } from "./useIntl";
 
-export const useAlbumFormData = () => {
+export const useAlbumCandidate = () => {
   const { albumFormData } = useShareAlbumPageState();
 
   return albumFormData;
 };
 
-export const useAlbumFormDataStrict = () => {
-  const data = useAlbumFormData();
+export const useAlbumCandidateStrict = () => {
+  const data = useAlbumCandidate();
 
   if (!data) {
     throw new StrictHookError();
@@ -28,7 +28,7 @@ export const useAlbumFormValidation = () => {
 };
 
 export const useAlbumFormTitleInput = () => {
-  const data = useAlbumFormDataStrict();
+  const data = useAlbumCandidateStrict();
   const validation = useAlbumFormValidation();
 
   const value = data.title;
@@ -46,7 +46,7 @@ export const useAlbumFormTitleInput = () => {
 };
 
 export const useAlbumFormCoverInput = () => {
-  const data = useAlbumFormDataStrict();
+  const data = useAlbumCandidateStrict();
   const validation = useAlbumFormValidation();
 
   const {
@@ -70,8 +70,8 @@ export const useAlbumFormCoverInput = () => {
   return { value, errorMessage };
 };
 
-export const useAlbumFormTrackStrict = (targetId: string) => {
-  const { tracklist } = useAlbumFormDataStrict();
+export const useTrackCandidateStrict = (targetId: string) => {
+  const { tracklist } = useAlbumCandidateStrict();
 
   const track = tracklist.find(({ id }) => id === targetId);
 
@@ -82,7 +82,7 @@ export const useAlbumFormTrackStrict = (targetId: string) => {
   return track;
 };
 
-export const useAlbumFormArtistValidity = (params: {
+export const useArtistCandidateValidity = (params: {
   trackId: string;
   artistId: string;
 }) => {
@@ -96,8 +96,8 @@ export const useAlbumFormArtistValidity = (params: {
   });
 };
 
-export const useAlbumFormTrackTitleInput = (trackId: string) => {
-  const { tracklist } = useAlbumFormDataStrict();
+export const useTrackCandidateTitleInput = (trackId: string) => {
+  const { tracklist } = useAlbumCandidateStrict();
 
   const {
     albumTrackEditor: { missingTitleValidationText }
@@ -129,7 +129,7 @@ export const useAlbumFormTrackTitleInput = (trackId: string) => {
   return { value, validationMessage };
 };
 
-export const useAlbumFormTracklistValidity = () => {
+export const useTrackCandidatelistValidity = () => {
   const validation = useAlbumFormValidation();
 
   return !validation.some((validity: AlbumFormValidity) => {

@@ -1,8 +1,7 @@
 import { ShareAlbumPageState } from "type/state";
 import { TEvent } from "type/event";
-
-import { validateAlbumFormData } from "util/validateAlbumFormData";
-import { patchAlbumFormData } from "util/patchAlbumFormData";
+import { validateAlbumCandidate } from "util/validateAlbumCandidate";
+import { patchAlbumCandidate } from "util/patchAlbumFormData";
 
 export const initialShareAlbumPageState: ShareAlbumPageState = {
   screen: "SELECTING_FILES",
@@ -26,7 +25,7 @@ export const shareAlbumPageReducer = (
           title: event.payload
         };
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -43,7 +42,7 @@ export const shareAlbumPageReducer = (
           cover: event.payload
         };
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -55,14 +54,14 @@ export const shareAlbumPageReducer = (
     }
     case "ALBUM_TRACK_EDITOR__MOVE_UP": {
       if (state.albumFormData) {
-        const nextFormData = patchAlbumFormData(state.albumFormData)
+        const nextFormData = patchAlbumCandidate(state.albumFormData)
           .moveTrack({
             trackId: event.payload,
             direction: "UP"
           })
           .done();
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -74,14 +73,14 @@ export const shareAlbumPageReducer = (
     }
     case "ALBUM_TRACK_EDITOR__MOVE_DOWN": {
       if (state.albumFormData) {
-        const nextFormData = patchAlbumFormData(state.albumFormData)
+        const nextFormData = patchAlbumCandidate(state.albumFormData)
           .moveTrack({
             trackId: event.payload,
             direction: "DOWN"
           })
           .done();
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -95,11 +94,11 @@ export const shareAlbumPageReducer = (
       if (state.albumFormData) {
         const { trackId, value } = event.payload;
 
-        const nextFormData = patchAlbumFormData(state.albumFormData)
+        const nextFormData = patchAlbumCandidate(state.albumFormData)
           .setTrackTitle({ trackId, value })
           .done();
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -116,7 +115,7 @@ export const shareAlbumPageReducer = (
         let nextFormData = state.albumFormData;
 
         if (!value) {
-          nextFormData = patchAlbumFormData(nextFormData)
+          nextFormData = patchAlbumCandidate(nextFormData)
             .removeArtist({
               trackId,
               artistId
@@ -124,7 +123,7 @@ export const shareAlbumPageReducer = (
             .addRawArtists()
             .done();
         } else {
-          nextFormData = patchAlbumFormData(nextFormData)
+          nextFormData = patchAlbumCandidate(nextFormData)
             .setArtistName({
               trackId,
               artistId,
@@ -134,7 +133,7 @@ export const shareAlbumPageReducer = (
             .done();
         }
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -146,11 +145,11 @@ export const shareAlbumPageReducer = (
     }
     case "ALBUM_TRACK_EDITOR__REMOVE": {
       if (state.albumFormData) {
-        const nextFormData = patchAlbumFormData(state.albumFormData)
+        const nextFormData = patchAlbumCandidate(state.albumFormData)
           .removeTrack(event.payload)
           .done();
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -187,12 +186,12 @@ export const shareAlbumPageReducer = (
       if (state.albumFormData) {
         const { albumFormData } = state;
 
-        let nextFormData = patchAlbumFormData(albumFormData)
+        let nextFormData = patchAlbumCandidate(albumFormData)
           .addTracks(event.payload.tracklist)
           .addRawArtists()
           .done();
 
-        const nextFormValidation = validateAlbumFormData(nextFormData);
+        const nextFormValidation = validateAlbumCandidate(nextFormData);
 
         return {
           ...state,
@@ -202,11 +201,11 @@ export const shareAlbumPageReducer = (
         };
       }
 
-      const nextFormData = patchAlbumFormData(event.payload)
+      const nextFormData = patchAlbumCandidate(event.payload)
         .addRawArtists()
         .done();
 
-      const nextFormValidation = validateAlbumFormData(nextFormData);
+      const nextFormValidation = validateAlbumCandidate(nextFormData);
 
       return {
         ...state,

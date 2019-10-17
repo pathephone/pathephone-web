@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useAlbumFormTracklistValidity } from "hook/useAlbumForm";
+import { useTrackCandidatelistValidity } from "hook/useAlbumForm";
 import { useDispatch } from "hook/useDispatch";
 import { testId } from "util/testId";
 import { useIntlDictionary } from "hook/useIntl";
@@ -16,7 +16,7 @@ export const AlbumAudioEditor = () => {
 
   const dispatch = useDispatch();
 
-  const valid = useAlbumFormTracklistValidity();
+  const valid = useTrackCandidatelistValidity();
 
   const validationMessage = React.useMemo(() => {
     if (!valid) {

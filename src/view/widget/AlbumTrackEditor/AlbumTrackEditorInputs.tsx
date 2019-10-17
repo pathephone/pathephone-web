@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useAlbumFormTrackStrict } from "hook/useAlbumForm";
+import { useTrackCandidateStrict } from "hook/useAlbumForm";
 
 import { AlbumTrackEditorCommon } from "./styled/AlbumTrackEditorCommon";
 import { AlbumTrackEditorTitleInput } from "./AlbumTrackEditorTitleInput";
@@ -14,7 +14,7 @@ type TProps = {
 export const AlbumTrackEditorInputs = (props: TProps) => {
   const { trackId } = props;
 
-  const track = useAlbumFormTrackStrict(trackId);
+  const track = useTrackCandidateStrict(trackId);
 
   const artistInputsNode = React.useMemo(
     () =>

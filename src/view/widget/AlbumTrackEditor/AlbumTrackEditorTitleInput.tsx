@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { FloatingLabelInput } from "view/kit/FloatingLabelInput";
 import { useDispatch } from "hook/useDispatch";
-import { useAlbumFormTrackTitleInput } from "hook/useAlbumForm";
+import { useTrackCandidateTitleInput } from "hook/useAlbumForm";
 import { testId } from "util/testId";
 import { useIntlDictionary } from "hook/useIntl";
 
@@ -17,7 +17,7 @@ export const AlbumTrackEditorTitleInput = (props: TProps) => {
     albumTrackEditor: { titleInputPlaceholderText }
   } = useIntlDictionary();
 
-  const { value, validationMessage } = useAlbumFormTrackTitleInput(trackId);
+  const { value, validationMessage } = useTrackCandidateTitleInput(trackId);
 
   const dispatch = useDispatch();
 
