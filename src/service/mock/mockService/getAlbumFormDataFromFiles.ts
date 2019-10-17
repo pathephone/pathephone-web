@@ -1,4 +1,4 @@
-import { TAlbumFormData } from "type/state";
+import { AlbumFormData } from "type/state";
 
 import { MissingAudioFilesError } from "util/error";
 
@@ -24,7 +24,7 @@ type TPicture = {
 
 export const getAlbumFormDataFromFiles = async (
   originalFiles: File[]
-): Promise<TAlbumFormData> => {
+): Promise<AlbumFormData> => {
   const files = await Promise.all(originalFiles.map(getCustomFileFromFile));
 
   const audioFiles = filterAudioFiles(files);

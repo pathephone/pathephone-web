@@ -1,6 +1,6 @@
 import { StrictHookError } from "util/error";
 
-import { TAlbumFormValidity } from "type/state";
+import { AlbumFormValidity } from "type/state";
 
 import { useShareAlbumPageState } from "./useShareAlbumPageState";
 import { useIntlDictionary } from "./useIntl";
@@ -33,7 +33,7 @@ export const useAlbumFormTitleInput = () => {
 
   const value = data.title;
   const errorMessage = validation.reduce<string | undefined>(
-    (acc, validity: TAlbumFormValidity) => {
+    (acc, validity: AlbumFormValidity) => {
       if (validity.type === "TITLE_REQUIRED") {
         return "Title is required";
       }
@@ -56,7 +56,7 @@ export const useAlbumFormCoverInput = () => {
   const value = data.cover;
 
   const errorMessage = validation.reduce<string | undefined>(
-    (acc, validity: TAlbumFormValidity) => {
+    (acc, validity: AlbumFormValidity) => {
       switch (validity.type) {
         case "COVER_REQUIRED":
           return missingCoverValidationText;
@@ -88,7 +88,7 @@ export const useAlbumFormArtistValidity = (params: {
 }) => {
   const validation = useAlbumFormValidation();
 
-  return !validation.some((validity: TAlbumFormValidity) => {
+  return !validation.some((validity: AlbumFormValidity) => {
     return (
       validity.type === "EMPTY_TRACK_ARTISTS" &&
       validity.payload === params.trackId
@@ -114,7 +114,7 @@ export const useAlbumFormTrackTitleInput = (trackId: string) => {
   const { title: value } = track;
 
   const validationMessage = validation.reduce<string | undefined>(
-    (acc, validity: TAlbumFormValidity) => {
+    (acc, validity: AlbumFormValidity) => {
       if (
         validity.type === "EMPTY_TRACK_TITLE" &&
         validity.payload === trackId
@@ -132,7 +132,7 @@ export const useAlbumFormTrackTitleInput = (trackId: string) => {
 export const useAlbumFormTracklistValidity = () => {
   const validation = useAlbumFormValidation();
 
-  return !validation.some((validity: TAlbumFormValidity) => {
+  return !validation.some((validity: AlbumFormValidity) => {
     return validity.type === "EMPTY_TRACKLIST";
   });
 };

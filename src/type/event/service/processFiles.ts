@@ -1,4 +1,4 @@
-import { TAlbumFormData } from "type/state";
+import { AlbumFormData } from "type/state";
 
 type TPending = {
   type: "PROCESS_FILES_SERVICE__PENDING";
@@ -6,7 +6,7 @@ type TPending = {
 
 type TResolved = {
   type: "PROCESS_FILES_SERVICE__RESOLVED";
-  payload: TAlbumFormData;
+  payload: AlbumFormData;
 };
 
 type TRejected = {

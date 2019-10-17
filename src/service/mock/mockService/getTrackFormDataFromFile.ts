@@ -1,4 +1,4 @@
-import { TAlbumFormTrack, TAlbumFormArtist } from "type/state";
+import { AlbumFormTrack, AlbumFormArtist } from "type/state";
 
 import * as mm from "music-metadata-browser";
 
@@ -7,11 +7,11 @@ import { getRawAlbumFormArtistData } from "util/getRawAlbumFormArtistData";
 
 export const getTrackFormDataFromFile = (
   file: File
-): Promise<TAlbumFormTrack> => {
+): Promise<AlbumFormTrack> => {
   return mm.parseBlob(file, { skipCovers: true }).then(metadata => {
     const { title, artists: artistsOriginal } = metadata.common;
 
-    let artists: TAlbumFormArtist[] = [];
+    let artists: AlbumFormArtist[] = [];
 
     if (artistsOriginal) {
       artists = artistsOriginal.map((name: string) => ({

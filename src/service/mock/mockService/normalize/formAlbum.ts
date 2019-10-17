@@ -1,4 +1,4 @@
-import { TAlbumFormData, TAlbumFormTrack } from "type/state";
+import { AlbumFormData, AlbumFormTrack } from "type/state";
 import { getUniqueString } from "util/getUniqueString";
 import { TMockStorageAlbum } from "service/mock/type";
 
@@ -6,7 +6,7 @@ const formTrackToServiceTrack = ({
   title,
   artists,
   audio
-}: TAlbumFormTrack) => ({
+}: AlbumFormTrack) => ({
   title,
   // TODO: figure out how to avoid empty names to be submited
   artists: artists.filter(artist => !!artist.name).map(artist => artist.name),
@@ -18,7 +18,7 @@ export const normalizeFormAlbum = {
     title,
     cover,
     tracklist
-  }: TAlbumFormData): TMockStorageAlbum {
+  }: AlbumFormData): TMockStorageAlbum {
     if (cover === null) {
       throw new Error("Cover is required");
     }

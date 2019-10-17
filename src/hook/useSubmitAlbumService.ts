@@ -3,7 +3,7 @@ import React from "react";
 import { useService } from "hook/useService";
 import { useAsync } from "hook/useAsync";
 import { useDispatch } from "hook/useDispatch";
-import { TAlbumFormData } from "type/state";
+import { AlbumFormData } from "type/state";
 
 export const useSubmitAlbumService = () => {
   // Submit service state and method to call.
@@ -38,7 +38,7 @@ export const useSubmitAlbumService = () => {
   const { submitAlbum: submitAlbumService } = useService();
 
   const submitAlbum = React.useCallback(
-    (albumData: TAlbumFormData) => {
+    (albumData: AlbumFormData) => {
       if (albumData) {
         injectSubmitPromise(submitAlbumService(albumData));
       }

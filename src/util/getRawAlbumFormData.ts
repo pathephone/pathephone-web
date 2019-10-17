@@ -1,6 +1,6 @@
-import { TAlbumFormData } from "type/state";
+import { AlbumFormData } from "type/state";
 
-export const getRawAlbumFormData = (): TAlbumFormData => ({
+export const getRawAlbumFormData = (): AlbumFormData => ({
   title: "",
   cover: null,
   tracklist: []
