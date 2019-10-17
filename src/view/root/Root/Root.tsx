@@ -1,22 +1,21 @@
-import { TServices } from "type/state";
-
 import * as React from "react";
 import { BrowserRouter as RouterProvider } from "react-router-dom";
 
-import { ServicesContext } from "context/ServicesContext";
+import { ServiceContext } from "context/ServiceContext";
 import { AppProvider } from "provider/AppProvider";
 import { App } from "view/root/App";
 import { ThemeProvider } from "view/root/ThemeProvider";
 import { RootFallback } from "view/root/RootFallback";
+import { Service } from "type/service";
 
 type TProps = {
-  services: TServices;
+  service: Service;
   routerBasename?: string;
 };
 
-export const Root = ({ services, routerBasename }: TProps) => (
+export const Root = ({ service, routerBasename }: TProps) => (
   <RouterProvider basename={routerBasename}>
-    <ServicesContext.Provider value={services}>
+    <ServiceContext.Provider value={service}>
       <ThemeProvider>
         <RootFallback>
           <AppProvider>
@@ -24,6 +23,6 @@ export const Root = ({ services, routerBasename }: TProps) => (
           </AppProvider>
         </RootFallback>
       </ThemeProvider>
-    </ServicesContext.Provider>
+    </ServiceContext.Provider>
   </RouterProvider>
 );

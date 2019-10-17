@@ -1,4 +1,4 @@
-import { TSearchAlbumsPageScreen } from "type/state";
+import { SearchAlbumsPageScreen } from "type/state";
 
 import * as React from "react";
 
@@ -8,7 +8,7 @@ import styles from "./SearchAlbumsPage.module.css";
 
 type TProps = {
   children: React.ReactNode;
-  screen: TSearchAlbumsPageScreen;
+  screen: SearchAlbumsPageScreen;
 };
 
 export const SearchAlbumsPageWrapper = ({ children, screen }: TProps) => {

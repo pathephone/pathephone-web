@@ -3,7 +3,7 @@ import * as React from "react";
 import { FeedAlbum } from "view/widget/FeedAlbum";
 import { testId } from "util/testId";
 import { AlbumPreview } from "type/model";
-import { TSearchAlbumsPageScreen } from "type/state";
+import { SearchAlbumsPageScreen } from "type/state";
 
 import { SearchAlbumsPageHero } from "./styled/SearchAlbumsPageHero";
 import { SearchAlbumsPageButton } from "./styled/SearchAlbumsPageButton";
@@ -15,7 +15,7 @@ import { SearchAlbumsPageTitle } from "./styled/SearchAlbumsPageTitle";
 import { SearchAlbumsPageSubTitle } from "./styled/SearchAlbumsPageSubTitle";
 
 type TProps = {
-  screen: TSearchAlbumsPageScreen;
+  screen: SearchAlbumsPageScreen;
   titleText: string;
   subTitleText: string;
   fallbackSubTitleText: string;

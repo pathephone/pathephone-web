@@ -2,7 +2,7 @@ import { TAlbumFormData, TAlbumFormTrack } from "type/state";
 import { getUniqueString } from "util/getUniqueString";
 import { TMockStorageAlbum } from "service/mock/type";
 
-const formTrackToServicesTrack = ({
+const formTrackToServiceTrack = ({
   title,
   artists,
   audio
@@ -26,7 +26,7 @@ export const normalizeFormAlbum = {
       id: getUniqueString(),
       title,
       coverSrc: URL.createObjectURL(cover),
-      tracklist: tracklist.map(formTrackToServicesTrack)
+      tracklist: tracklist.map(formTrackToServiceTrack)
     };
   }
 };

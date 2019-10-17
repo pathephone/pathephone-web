@@ -8,13 +8,13 @@ import {
 } from "@testing-library/react";
 
 import { testId } from "util/testId";
-import { mockServices } from "service/mock";
+import { mockService } from "service/mock";
 import { TestingProvider } from "util/react/TestingProvider";
 import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
-import { TServices } from "type/state";
 import { AlbumPreview } from "type/model";
 
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
+import { Service } from "type/service";
 
 type TParams = {
   firstPageResults?: AlbumPreview[];
@@ -24,8 +24,8 @@ type TParams = {
 const renderComponent = (params?: TParams) => {
   const { firstPageResults = [], secondPageResults = [] } = params || {};
 
-  const services: TServices = {
-    ...mockServices,
+  const service: Service = {
+    ...mockService,
     getLatestAlbums: jest
       .fn()
       .mockImplementationOnce(async () => ({
@@ -43,7 +43,7 @@ const renderComponent = (params?: TParams) => {
   };
 
   const mounted = render(
-    <TestingProvider services={services}>
+    <TestingProvider service={service}>
       <LatestAlbumsPage />
     </TestingProvider>
   );

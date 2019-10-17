@@ -1,5 +1,3 @@
-import { TAlbumFormData, TAlbumFormTrack, TAlbumFormArtist } from "type/state";
-
 import React from "react";
 import {
   waitForDomChange,
@@ -10,13 +8,14 @@ import {
 import { getAllByTestId, getByTestId, wait } from "@testing-library/dom";
 
 import { testId } from "util/testId";
-
-import { mockServices } from "service/mock/index";
+import { TAlbumFormData, TAlbumFormTrack, TAlbumFormArtist } from "type/state";
+import { mockService } from "service/mock/index";
 import { MissingAudioFilesError } from "util/error";
-
-import { ShareAlbumPage } from "./ShareAlbumPage";
 import { getUIDString } from "util/uid";
 import { TestingProvider } from "util/react/TestingProvider";
+
+import { ShareAlbumPage } from "./ShareAlbumPage";
+import { Service } from "type/service";
 
 const createObjectURLOrig = window.URL.createObjectURL;
 const revokeObjectURLOrig = window.URL.revokeObjectURL;
@@ -95,8 +94,8 @@ const renderComponent = (params?: TParams) => {
     albumFormTrackMock = getAlbumFormTrackMock()
   } = params || {};
 
-  const services = {
-    ...mockServices,
+  const service: Service = {
+    ...mockService,
     getAlbumFormDataFromFiles: jest.fn().mockImplementation(async () => {
       if (simulateMissingAudioFilesError) {
         throw new MissingAudioFilesError();
@@ -113,7 +112,7 @@ const renderComponent = (params?: TParams) => {
   };
 
   const mounted = render(
-    <TestingProvider services={services}>
+    <TestingProvider service={service}>
       <ShareAlbumPage />
     </TestingProvider>
   );

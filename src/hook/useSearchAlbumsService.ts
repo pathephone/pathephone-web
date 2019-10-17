@@ -1,13 +1,13 @@
 import React from "react";
 
 import { useAsync } from "hook/useAsync";
-import { useServices } from "hook/useServices";
+import { useService } from "hook/useService";
 import { useDispatch } from "hook/useDispatch";
 import { AlbumPreview } from "type/model";
 
 export const useSearchAlbumsService = () => {
   // Import service to get albums by query.
-  const { getAlbumsByQuery: searchAlbumsService } = useServices();
+  const { getAlbumsByQuery: searchAlbumsService } = useService();
 
   // Create service promise state.
   const [servicePromiseState, injectServicePromise] = useAsync<AlbumPreview[]>({

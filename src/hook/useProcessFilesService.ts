@@ -1,13 +1,13 @@
 import React from "react";
 
-import { useServices } from "hook/useServices";
+import { useService } from "hook/useService";
 import { useAsync } from "hook/useAsync";
 import { MissingAudioFilesError } from "util/error";
 import { useDispatch } from "hook/useDispatch";
 import { TAlbumFormData } from "type/state";
 
 export const useProcessFilesService = () => {
-  const { getAlbumFormDataFromFiles: processFilesService } = useServices();
+  const { getAlbumFormDataFromFiles: processFilesService } = useService();
 
   const [processPromiseState, injectProcessPromise] = useAsync<TAlbumFormData>({
     errorsToKeep: [MissingAudioFilesError]

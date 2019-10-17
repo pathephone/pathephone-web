@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useServices } from "hook/useServices";
+import { useService } from "hook/useService";
 import { useAsync } from "hook/useAsync";
 import { useDispatch } from "hook/useDispatch";
 import { TAlbumFormData } from "type/state";
@@ -35,7 +35,7 @@ export const useSubmitAlbumService = () => {
     }
   }, [dispatch, submitPromiseState]);
 
-  const { submitAlbum: submitAlbumService } = useServices();
+  const { submitAlbum: submitAlbumService } = useService();
 
   const submitAlbum = React.useCallback(
     (albumData: TAlbumFormData) => {

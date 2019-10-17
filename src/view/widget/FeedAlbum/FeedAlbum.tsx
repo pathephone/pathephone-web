@@ -9,7 +9,7 @@ import { FeedAlbumInfo } from "./styled/FeedAlbumInfo";
 import { FeedAlbumTitle } from "./styled/FeedAlbumTitle";
 import { FeedAlbumArtist } from "./styled/FeedAlbumArtist";
 import { useDispatch } from "hook/useDispatch";
-import { useServices } from "hook/useServices";
+import { useService } from "hook/useService";
 
 type TProps = {
   data: AlbumPreview;
@@ -20,7 +20,7 @@ export const FeedAlbum = (props: TProps) => {
 
   const dispatch = useDispatch();
 
-  const { getPlaylistTracksByAlbumId } = useServices();
+  const { getPlaylistTracksByAlbumId } = useService();
 
   const { title, artistName, coverSrc, id } = data;
 

@@ -1,4 +1,4 @@
-import { TSearchAlbumsPageScreen } from "type/state";
+import { SearchAlbumsPageScreen } from "type/state";
 
 import React from "react";
 
@@ -70,7 +70,7 @@ export const SearchAlbumsPageContainer = (props: TProps) => {
 
   const feedItems = albums;
 
-  const screen = React.useMemo<TSearchAlbumsPageScreen>(() => {
+  const screen = React.useMemo<SearchAlbumsPageScreen>(() => {
     if (!failed && albums.length > 0) {
       if (newAlbums.length > 0) {
         return "HAS_NEW_RESULTS";
