@@ -1,7 +1,7 @@
-import { TLatestAlbumsPageState } from "type/state";
+import { LatestAlbumsPageState } from "type/state";
 import { TEvent } from "type/event";
 
-export const initialLatestAlbumsState: TLatestAlbumsPageState = {
+export const initialLatestAlbumsState: LatestAlbumsPageState = {
   latestPage: 1,
   loading: false,
   albums: [],
@@ -9,9 +9,9 @@ export const initialLatestAlbumsState: TLatestAlbumsPageState = {
 };
 
 export const latestAlbumsPageReducer = (
-  state: TLatestAlbumsPageState,
+  state: LatestAlbumsPageState,
   event: TEvent
-): TLatestAlbumsPageState => {
+): LatestAlbumsPageState => {
   switch (event.type) {
     case "LATEST_ALBUMS_PAGE__LOAD_MORE":
       return {

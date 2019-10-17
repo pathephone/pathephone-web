@@ -1,6 +1,6 @@
 import { AlbumPreview } from "type/model";
 
-export type TLatestAlbumsPageState = {
+export type LatestAlbumsPageState = {
   latestPage: number;
   loading: boolean;
   albums: AlbumPreview[];
