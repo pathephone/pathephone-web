@@ -1,7 +1,7 @@
 import React from "react";
 
-import { TLatestAlbumsPageState } from "type/state";
+import { LatestAlbumsPageState } from "type/state";
 
-export const LatestAlbumsPageContext = React.createContext<null | TLatestAlbumsPageState>(
+export const LatestAlbumsPageContext = React.createContext<null | LatestAlbumsPageState>(
   null
 );
