@@ -1,3 +1,3 @@
-import * as mockServices from "service/mock/mockServices";
+import * as mockService from "service/mock/mockService";
 
-export { mockServices };
+export { mockService };

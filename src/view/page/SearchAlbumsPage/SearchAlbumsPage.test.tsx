@@ -9,12 +9,12 @@ import {
 } from "@testing-library/react";
 
 import { testId } from "util/testId";
-import { mockServices } from "service/mock";
+import { mockService } from "service/mock";
 import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
 import { TestingProvider } from "util/react/TestingProvider";
 import { routes } from "util/route";
 import { AlbumPreview } from "type/model";
-import { TServices } from "type/state";
+import { Service } from "type/service";
 
 import { SearchAlbumsPage } from "./SearchAlbumsPage";
 
@@ -39,17 +39,17 @@ const renderComponent = (params?: TParams) => {
     simulateServiceError = false
   } = params || {};
 
-  const services: TServices = (() => {
+  const service: Service = (() => {
     if (simulateServiceError) {
       return {
-        ...mockServices,
+        ...mockService,
         getAlbumsByQuery: jest.fn().mockImplementation(async () => {
           throw new Error();
         })
       };
     } else {
       return {
-        ...mockServices,
+        ...mockService,
         getAlbumsByQuery: jest
           .fn()
           .mockImplementationOnce(async () => results)
@@ -65,7 +65,7 @@ const renderComponent = (params?: TParams) => {
 
   const mounted = render(
     <TestingProvider
-      services={services}
+      service={service}
       history={history}
       path={routes.searchAlbumsPattern}
     >

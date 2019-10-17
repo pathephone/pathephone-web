@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { useServices } from "hook/useServices";
+import { useService } from "hook/useService";
 import { useAsync } from "hook/useAsync";
 
 import { useDispatch } from "./useDispatch";
 import { Intl } from "type/intl";
 
 export const useGetIntlService = () => {
-  const { getIntl } = useServices();
+  const { getIntl } = useService();
 
   const [intlPromiseState, injectIntlPromise] = useAsync<Intl>();
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useAsync } from "hook/useAsync";
-import { useServices } from "hook/useServices";
+import { useService } from "hook/useService";
 import { useDispatch } from "hook/useDispatch";
 import { AlbumPreview } from "type/model";
 
@@ -11,7 +11,7 @@ type TValue = {
 };
 
 export const useGetLatestAlbumsService = () => {
-  const { getLatestAlbums: getLatestAlbumsService } = useServices();
+  const { getLatestAlbums: getLatestAlbumsService } = useService();
 
   const [promiseState, injectPromise] = useAsync<TValue>();
 

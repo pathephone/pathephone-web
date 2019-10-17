@@ -1,16 +1,16 @@
-import { TSearchAlbumsPageState } from "type/state";
+import { SearchAlbumsPageState } from "type/state";
 import { TEvent } from "type/event";
 
-export const initialSearchAlbumsPageState: TSearchAlbumsPageState = {
+export const initialSearchAlbumsPageState: SearchAlbumsPageState = {
   failed: false,
   albums: [],
   newAlbums: []
 };
 
 export const searchAlbumsPageReducer = (
-  state: TSearchAlbumsPageState,
+  state: SearchAlbumsPageState,
   event: TEvent
-): TSearchAlbumsPageState => {
+): SearchAlbumsPageState => {
   switch (event.type) {
     case "GET_ALBUMS_BY_QUERY_SERVICE__RESOLVED": {
       if (state.albums.length === 0) {
