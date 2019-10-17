@@ -6,7 +6,7 @@ import { TestingProvider } from "util/react/TestingProvider";
 import { getAppStateMock } from "util/mock/getAppStateMock";
 
 import { App } from "./App";
-import { TAppState } from "type/state";
+import { AppState } from "type/state";
 
 type TParams = {
   simulateLoading?: boolean;
@@ -15,7 +15,7 @@ type TParams = {
 const renderComponent = (params?: TParams) => {
   const { simulateLoading = false } = params || {};
 
-  const appState: TAppState = {
+  const appState: AppState = {
     ...getAppStateMock(),
     activeScreen: simulateLoading ? "LOADING" : "PLAYER"
   };
