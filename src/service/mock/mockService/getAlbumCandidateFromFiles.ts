@@ -1,11 +1,10 @@
-import { AlbumFormData } from "type/state";
-
 import { MissingAudioFilesError } from "util/error";
 
 import { getAlbumMetadataFromAudioFiles } from "./util/getAlbumMetadataFromAudioFiles";
 import { getCustomFileFromFile } from "./util/getCustomFileFromFile";
 import { filterAudioFiles } from "./util/filterAudioFiles";
 import { filterImageFiles } from "./util/filterImageFiles";
+import { AlbumCandidate } from "type/model";
 
 const coverRegExp = /(front|cover)/g;
 
@@ -22,9 +21,9 @@ type TPicture = {
 
 */
 
-export const getAlbumFormDataFromFiles = async (
+export const getAlbumCandidateFromFiles = async (
   originalFiles: File[]
-): Promise<AlbumFormData> => {
+): Promise<AlbumCandidate> => {
   const files = await Promise.all(originalFiles.map(getCustomFileFromFile));
 
   const audioFiles = filterAudioFiles(files);

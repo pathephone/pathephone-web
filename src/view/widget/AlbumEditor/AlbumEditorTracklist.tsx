@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useAlbumFormDataStrict } from "hook/useAlbumForm";
+import { useAlbumCandidateStrict } from "hook/useAlbumForm";
 
 import { AlbumEditorFieldset } from "./styled/AlbumEditorFieldset";
 import { AlbumEditorFieldsetTitle } from "./styled/AlbumEditorFieldsetTitle";
@@ -15,7 +15,7 @@ export const AlbumEditorTracklist = () => {
     albumEditor: { tracklistFieldsetTitleText }
   } = useIntlDictionary();
 
-  const { tracklist } = useAlbumFormDataStrict();
+  const { tracklist } = useAlbumCandidateStrict();
 
   const trackInputsNode = React.useMemo(
     () =>

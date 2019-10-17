@@ -1,8 +1,7 @@
 import * as mm from "music-metadata-browser";
 
-import { AlbumFormTrack, AlbumFormArtist } from "type/state";
-
 import { getUniqueString } from "util/getUniqueString";
+import { TrackCandidate, ArtistCandidate } from "type/model";
 
 /*
 
@@ -18,7 +17,7 @@ type TPicture = {
 */
 
 type TAudioMetadata = {
-  tracklist: AlbumFormTrack[];
+  tracklist: TrackCandidate[];
   title: string;
 };
 
@@ -31,9 +30,9 @@ export const getAlbumMetadataFromAudioFiles = async (
 
   const titles = audiosMetadata.map(({ common }) => common.album);
 
-  const tracklist: AlbumFormTrack[] = audiosMetadata.map(
+  const tracklist: TrackCandidate[] = audiosMetadata.map(
     ({ common }, index) => {
-      let artists: AlbumFormArtist[] = [];
+      let artists: ArtistCandidate[] = [];
 
       if (common.artists) {
         artists = common.artists.map((name: string) => ({

@@ -1,7 +1,8 @@
-import { AlbumFormData, AlbumFormValidity } from "type/state";
+import { AlbumFormValidity } from "type/state";
+import { AlbumCandidate } from "type/model";
 
-export const validateAlbumFormData = (
-  data: AlbumFormData
+export const validateAlbumCandidate = (
+  data: AlbumCandidate
 ): AlbumFormValidity[] => {
   const { title, cover, tracklist } = data;
 

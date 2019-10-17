@@ -1,17 +1,16 @@
-import { AlbumFormTrack, AlbumFormArtist } from "type/state";
-
 import * as mm from "music-metadata-browser";
 
 import { getUniqueString } from "util/getUniqueString";
-import { getRawAlbumFormArtistData } from "util/getRawAlbumFormArtistData";
+import { TrackCandidate, ArtistCandidate } from "type/model";
+import { getRawArtistCandidate } from "util/getRawArtistCandidate";
 
-export const getTrackFormDataFromFile = (
+export const getTrackCandidateFromFile = (
   file: File
-): Promise<AlbumFormTrack> => {
+): Promise<TrackCandidate> => {
   return mm.parseBlob(file, { skipCovers: true }).then(metadata => {
     const { title, artists: artistsOriginal } = metadata.common;
 
-    let artists: AlbumFormArtist[] = [];
+    let artists: ArtistCandidate[] = [];
 
     if (artistsOriginal) {
       artists = artistsOriginal.map((name: string) => ({
@@ -20,7 +19,7 @@ export const getTrackFormDataFromFile = (
       }));
     }
 
-    artists.push(getRawAlbumFormArtistData());
+    artists.push(getRawArtistCandidate());
 
     return {
       id: getUniqueString(),

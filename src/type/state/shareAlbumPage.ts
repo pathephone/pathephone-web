@@ -1,27 +1,9 @@
+import { AlbumCandidate } from "type/model";
+
 export type ShareAlbumPageScreen =
   | "SELECTING_FILES"
   | "EDITING_ALBUM"
   | "LOADING";
-
-// Album form data types
-
-export type AlbumFormArtist = {
-  id: string;
-  name: string;
-};
-
-export type AlbumFormTrack = {
-  id: string;
-  title: string;
-  artists: AlbumFormArtist[];
-  audio: File;
-};
-
-export type AlbumFormData = {
-  title: string;
-  cover: File | null;
-  tracklist: AlbumFormTrack[];
-};
 
 // Album form validation types
 
@@ -62,7 +44,7 @@ export type ShareAlbumPageState = {
   files: null | File[];
   // Editable album candidate instance,
   // extracted from the selected files:
-  albumFormData: null | AlbumFormData;
+  albumFormData: null | AlbumCandidate;
   albumFormValidation: AlbumFormValidity[];
   // Flag that indicates success of the sharing process:
   didSucceed: boolean;
