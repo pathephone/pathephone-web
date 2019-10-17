@@ -1,8 +1,8 @@
 import { Intl } from "type/intl";
 
-export type TAppScreen = "LOADING" | "PLAYER";
+export type AppScreen = "LOADING" | "PLAYER";
 
-export type TAppState = {
+export type AppState = {
   intl: null | Intl;
-  activeScreen: TAppScreen;
+  activeScreen: AppScreen;
 };

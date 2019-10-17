@@ -1,4 +1,4 @@
-import { TServices, TAppState } from "type/state";
+import { TServices, AppState } from "type/state";
 import { History } from "history";
 
 import * as React from "react";
@@ -13,7 +13,7 @@ import { getAppStateMock } from "util/mock/getAppStateMock";
 type TProps = {
   children: React.ReactNode;
   services?: TServices;
-  appState?: TAppState;
+  appState?: AppState;
   history?: History;
   path?: string;
 };
