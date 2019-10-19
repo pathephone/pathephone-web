@@ -2,6 +2,7 @@
   "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
   "editor.tabSize": 2,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
