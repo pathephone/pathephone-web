@@ -167,7 +167,7 @@ export const shareAlbumPageReducer = (
         albumFormValidation: []
       };
     }
-    case "PROCESS_FILES_SERVICE__PENDING": {
+    case "GET_ALBUM_CANDIDATE_FROM_FILES__PENDING": {
       if (state.screen === "SELECTING_FILES") {
         return {
           ...state,
@@ -176,13 +176,13 @@ export const shareAlbumPageReducer = (
       }
       return state;
     }
-    case "SUBMIT_ALBUM_SERVICE__PENDING": {
+    case "SUBMIT_ALBUM_CANDIDATE__PENDING": {
       return {
         ...state,
         screen: "LOADING"
       };
     }
-    case "PROCESS_FILES_SERVICE__RESOLVED": {
+    case "GET_ALBUM_CANDIDATE_FROM_FILES__RESOLVED": {
       if (state.albumFormData) {
         const { albumFormData } = state;
 
@@ -217,7 +217,7 @@ export const shareAlbumPageReducer = (
         error: null
       };
     }
-    case "SUBMIT_ALBUM_SERVICE__RESOLVED": {
+    case "SUBMIT_ALBUM_CANDIDATE__RESOLVED": {
       return {
         ...state,
         screen: "SELECTING_FILES",
@@ -227,8 +227,8 @@ export const shareAlbumPageReducer = (
         submited: false
       };
     }
-    case "SUBMIT_ALBUM_SERVICE__REJECTED":
-    case "PROCESS_FILES_SERVICE__REJECTED": {
+    case "SUBMIT_ALBUM_CANDIDATE__REJECTED":
+    case "GET_ALBUM_CANDIDATE_FROM_FILES__REJECTED": {
       return {
         ...state,
         screen: "SELECTING_FILES",

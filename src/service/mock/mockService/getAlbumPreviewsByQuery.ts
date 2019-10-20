@@ -6,7 +6,7 @@ import { SERVICE_MOCK_DELAY } from "util/constant";
 import { albumModel } from "./model/albumModel";
 import { normalizeMockStorageAlbum } from "./normalize/mockStorageAlbum";
 
-export const getAlbumsByQuery = async (
+export const getAlbumPreviewsByQuery = async (
   query: string
 ): Promise<AlbumPreview[]> => {
   await setAsyncTimeout(SERVICE_MOCK_DELAY);

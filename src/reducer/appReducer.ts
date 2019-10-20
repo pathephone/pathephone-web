@@ -8,7 +8,7 @@ export const initialAppState: AppState = {
 
 export const appReducer = (state: AppState, event: TEvent): AppState => {
   switch (event.type) {
-    case "GET_INTL_SERVICE__RESOLVED":
+    case "GET_INTL__RESOLVED":
       return {
         intl: event.payload,
         activeScreen: "PLAYER"

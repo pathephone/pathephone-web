@@ -6,8 +6,8 @@ import { MissingAudioFilesError } from "util/error";
 import { useDispatch } from "hook/useDispatch";
 import { AlbumCandidate } from "type/model";
 
-export const useProcessFilesService = () => {
-  const { getAlbumCandidateFromFiles: processFilesService } = useService();
+export const useGetAlbumCandidateFromFilesService = () => {
+  const { getAlbumCandidateFromFiles } = useService();
 
   const [processPromiseState, injectProcessPromise] = useAsync<AlbumCandidate>({
     errorsToKeep: [MissingAudioFilesError]
@@ -21,20 +21,20 @@ export const useProcessFilesService = () => {
 
       if (pending) {
         dispatch({
-          type: "PROCESS_FILES_SERVICE__PENDING"
+          type: "GET_ALBUM_CANDIDATE_FROM_FILES__PENDING"
         });
       }
 
       if (value) {
         dispatch({
-          type: "PROCESS_FILES_SERVICE__RESOLVED",
+          type: "GET_ALBUM_CANDIDATE_FROM_FILES__RESOLVED",
           payload: value
         });
       }
 
       if (error) {
         dispatch({
-          type: "PROCESS_FILES_SERVICE__REJECTED",
+          type: "GET_ALBUM_CANDIDATE_FROM_FILES__REJECTED",
           payload: error
         });
       }
@@ -43,9 +43,9 @@ export const useProcessFilesService = () => {
 
   const processFiles = React.useCallback(
     (files: File[]) => {
-      injectProcessPromise(processFilesService(files));
+      injectProcessPromise(getAlbumCandidateFromFiles(files));
     },
-    [injectProcessPromise, processFilesService]
+    [injectProcessPromise, getAlbumCandidateFromFiles]
   );
 
   return processFiles;

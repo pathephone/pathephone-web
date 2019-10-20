@@ -11,7 +11,7 @@ type TValue = {
 };
 
 export const useGetLatestAlbumsService = () => {
-  const { getLatestAlbums: getLatestAlbumsService } = useService();
+  const { getAlbumPreviewsFeed: getAlbumPreviewsFeedService } = useService();
 
   const [promiseState, injectPromise] = useAsync<TValue>();
 
@@ -20,7 +20,7 @@ export const useGetLatestAlbumsService = () => {
   React.useEffect(() => {
     if (promiseState && promiseState.pending) {
       dispatch({
-        type: "GET_LATEST_ALBUMS_SERVICE__PENDING"
+        type: "GET_ALBUM_PREVIEWS_FEED__PENDING"
       });
     }
   }, [dispatch, promiseState]);
@@ -30,7 +30,7 @@ export const useGetLatestAlbumsService = () => {
       const { items: albums, lastPageFlag } = promiseState.value;
 
       dispatch({
-        type: "GET_LATEST_ALBUMS_SERVICE__RESOLVED",
+        type: "GET_ALBUM_PREVIEWS_FEED__RESOLVED",
         payload: {
           albums,
           lastPageFlag
@@ -42,7 +42,7 @@ export const useGetLatestAlbumsService = () => {
   React.useEffect(() => {
     if (promiseState && promiseState.error) {
       dispatch({
-        type: "GET_LATEST_ALBUMS_SERVICE__REJECTED",
+        type: "GET_ALBUM_PREVIEWS_FEED__REJECTED",
         payload: promiseState.error
       });
     }
@@ -50,8 +50,8 @@ export const useGetLatestAlbumsService = () => {
 
   return React.useCallback(
     (nextPage: number) => {
-      injectPromise(getLatestAlbumsService({ startPage: nextPage }));
+      injectPromise(getAlbumPreviewsFeedService({ startPage: nextPage }));
     },
-    [getLatestAlbumsService, injectPromise]
+    [getAlbumPreviewsFeedService, injectPromise]
   );
 };

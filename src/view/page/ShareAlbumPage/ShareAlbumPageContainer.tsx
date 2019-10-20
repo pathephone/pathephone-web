@@ -3,7 +3,7 @@ import * as React from "react";
 import { useShareAlbumPageState } from "hook/useShareAlbumPageState";
 import { useIntlDictionary } from "hook/useIntl";
 import { useSubmitAlbumService } from "hook/useSubmitAlbumService";
-import { useProcessFilesService } from "hook/useProcessFilesService";
+import { useGetAlbumCandidateFromFilesService } from "hook/useGetAlbumCandidateFromFilesService";
 import { Page } from "view/kit/Page";
 import { AlbumEditor } from "view/widget/AlbumEditor";
 import { DropZone } from "view/widget/DropZone";
@@ -20,21 +20,21 @@ export const ShareAlbumPageContainer = () => {
     submited
   } = useShareAlbumPageState();
 
-  const submitAlbum = useSubmitAlbumService();
+  const submitAlbumCandidate = useSubmitAlbumService();
 
   React.useEffect(() => {
     if (submited && albumFormData) {
-      submitAlbum(albumFormData);
+      submitAlbumCandidate(albumFormData);
     }
-  }, [albumFormData, submitAlbum, submited]);
+  }, [albumFormData, submitAlbumCandidate, submited]);
 
-  const processFiles = useProcessFilesService();
+  const getAlbumCandidate = useGetAlbumCandidateFromFilesService();
 
   React.useEffect(() => {
     if (files) {
-      processFiles(files);
+      getAlbumCandidate(files);
     }
-  }, [files, processFiles]);
+  }, [files, getAlbumCandidate]);
 
   const {
     shareAlbumPage: { didSucceedText }
