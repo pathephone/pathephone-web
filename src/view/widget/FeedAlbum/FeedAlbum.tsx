@@ -20,27 +20,27 @@ export const FeedAlbum = (props: TProps) => {
 
   const dispatch = useDispatch();
 
-  const { getPlaylistTracksByAlbumId } = useService();
+  const { getTrackPreviewsByAlbumId } = useService();
 
   const { title, artistName, coverSrc, id } = data;
 
   const handleAddAlbumToPlaylist = React.useCallback(() => {
-    getPlaylistTracksByAlbumId(id).then(tracks => {
+    getTrackPreviewsByAlbumId(id).then(tracks => {
       dispatch({
         type: "FEED_ALBUM__ADD_TO_PLAYLIST",
         payload: tracks
       });
     });
-  }, [dispatch, getPlaylistTracksByAlbumId, id]);
+  }, [dispatch, getTrackPreviewsByAlbumId, id]);
 
   const handlePlayAlbum = React.useCallback(() => {
-    getPlaylistTracksByAlbumId(id).then(tracks => {
+    getTrackPreviewsByAlbumId(id).then(tracks => {
       dispatch({
         type: "FEED_ALBUM__PLAY",
         payload: tracks
       });
     });
-  }, [dispatch, getPlaylistTracksByAlbumId, id]);
+  }, [dispatch, getTrackPreviewsByAlbumId, id]);
 
   return (
     <FeedAlbumWrapper>

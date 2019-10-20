@@ -18,19 +18,19 @@ export const latestAlbumsPageReducer = (
         ...state,
         latestPage: state.latestPage + 1
       };
-    case "GET_LATEST_ALBUMS_SERVICE__PENDING":
+    case "GET_ALBUM_PREVIEWS_FEED__PENDING":
       return {
         ...state,
         loading: true
       };
-    case "GET_LATEST_ALBUMS_SERVICE__RESOLVED":
+    case "GET_ALBUM_PREVIEWS_FEED__RESOLVED":
       return {
         ...state,
         loading: false,
         albums: [...state.albums, ...event.payload.albums],
         noMoreAlbums: event.payload.lastPageFlag
       };
-    case "GET_LATEST_ALBUMS_SERVICE__REJECTED":
+    case "GET_ALBUM_PREVIEWS_FEED__REJECTED":
       return {
         ...state,
         loading: false

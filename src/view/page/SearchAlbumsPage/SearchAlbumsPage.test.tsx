@@ -43,14 +43,14 @@ const renderComponent = (params?: TParams) => {
     if (simulateServiceError) {
       return {
         ...mockService,
-        getAlbumsByQuery: jest.fn().mockImplementation(async () => {
+        getAlbumPreviewsByQuery: jest.fn().mockImplementation(async () => {
           throw new Error();
         })
       };
     } else {
       return {
         ...mockService,
-        getAlbumsByQuery: jest
+        getAlbumPreviewsByQuery: jest
           .fn()
           .mockImplementationOnce(async () => results)
           .mockImplementationOnce(async () => nextResults)

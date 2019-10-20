@@ -18,33 +18,33 @@ export const useSubmitAlbumService = () => {
 
       if (pending) {
         dispatch({
-          type: "SUBMIT_ALBUM_SERVICE__PENDING"
+          type: "SUBMIT_ALBUM_CANDIDATE__PENDING"
         });
       }
       if (resolved) {
         dispatch({
-          type: "SUBMIT_ALBUM_SERVICE__RESOLVED"
+          type: "SUBMIT_ALBUM_CANDIDATE__RESOLVED"
         });
       }
       if (error) {
         dispatch({
-          type: "SUBMIT_ALBUM_SERVICE__REJECTED",
+          type: "SUBMIT_ALBUM_CANDIDATE__REJECTED",
           payload: error
         });
       }
     }
   }, [dispatch, submitPromiseState]);
 
-  const { submitAlbum: submitAlbumService } = useService();
+  const { submitAlbumCandidate: submitAlbumCandidateService } = useService();
 
-  const submitAlbum = React.useCallback(
+  const submitAlbumCandidate = React.useCallback(
     (albumData: AlbumCandidate) => {
       if (albumData) {
-        injectSubmitPromise(submitAlbumService(albumData));
+        injectSubmitPromise(submitAlbumCandidateService(albumData));
       }
     },
-    [injectSubmitPromise, submitAlbumService]
+    [injectSubmitPromise, submitAlbumCandidateService]
   );
 
-  return submitAlbum;
+  return submitAlbumCandidate;
 };

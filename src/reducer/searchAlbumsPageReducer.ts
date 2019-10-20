@@ -12,7 +12,7 @@ export const searchAlbumsPageReducer = (
   event: TEvent
 ): SearchAlbumsPageState => {
   switch (event.type) {
-    case "GET_ALBUMS_BY_QUERY_SERVICE__RESOLVED": {
+    case "GET_ALBUM_PREVIEWS_BY_QUERY__RESOLVED": {
       if (state.albums.length === 0) {
         return {
           ...state,
@@ -29,7 +29,7 @@ export const searchAlbumsPageReducer = (
         newAlbums: [...state.newAlbums, ...newAlbums]
       };
     }
-    case "GET_ALBUMS_BY_QUERY_SERVICE__REJECTED": {
+    case "GET_ALBUM_PREVIEWS_BY_QUERY__REJECTED": {
       return {
         ...initialSearchAlbumsPageState,
         failed: true

@@ -1,12 +1,12 @@
-import { TSubmitAlbumServiceEvent } from "./submitAlbum";
-import { TProcessFilesServiceEvent } from "./processFiles";
-import { TGetIntlServiceEvent } from "./getIntl";
-import { TGetLatestAlbumsServiceEvent } from "./getLatestAlbumsService";
-import { TGetAlbumsByQueryServiceEvent } from "./getAlbumsByQuery";
+import { SubmitAlbumCandidateEvent } from "./submitAlbumCandidate";
+import { GetAlbumCandidateFromFilesEvent } from "./getAlbumCandidateFromFiles";
+import { GetIntlEvent } from "./getIntl";
+import { GetAlbumPreviewsFeedEvent } from "./getAlbumPreviewsFeed";
+import { GetAlbumPreviewsByQueryEvent } from "./getAlbumPreviewsByQuery";
 
 export type TServiceEvent =
-  | TSubmitAlbumServiceEvent
-  | TProcessFilesServiceEvent
-  | TGetIntlServiceEvent
-  | TGetLatestAlbumsServiceEvent
-  | TGetAlbumsByQueryServiceEvent;
+  | SubmitAlbumCandidateEvent
+  | GetAlbumCandidateFromFilesEvent
+  | GetIntlEvent
+  | GetAlbumPreviewsFeedEvent
+  | GetAlbumPreviewsByQueryEvent;

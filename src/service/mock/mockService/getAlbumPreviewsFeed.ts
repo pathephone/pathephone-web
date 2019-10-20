@@ -16,7 +16,9 @@ type TParams = {
   pagesCount?: number;
 };
 
-export const getLatestAlbums = async (params: TParams): Promise<TOutput> => {
+export const getAlbumPreviewsFeed = async (
+  params: TParams
+): Promise<TOutput> => {
   await setAsyncTimeout(SERVICE_MOCK_DELAY);
 
   const { startPage, pagesCount = 1 } = params;

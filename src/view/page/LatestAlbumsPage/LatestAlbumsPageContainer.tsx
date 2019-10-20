@@ -10,7 +10,7 @@ import { LatestAlbumsPageView } from "./LatestAlbumsPageView";
 type TProps = {};
 
 export const LatestAlbumsPageContainer = (props: TProps) => {
-  const getLatestAlbums = useGetLatestAlbumsService();
+  const getAlbumPreviewsFeed = useGetLatestAlbumsService();
 
   const {
     latestAlbumsPage: { fallbackText, loadMoreButtonText }
@@ -28,9 +28,9 @@ export const LatestAlbumsPageContainer = (props: TProps) => {
   // Load list on initial render and once page changes
   React.useEffect(() => {
     if (latestPage !== null) {
-      getLatestAlbums(latestPage);
+      getAlbumPreviewsFeed(latestPage);
     }
-  }, [getLatestAlbums, latestPage]);
+  }, [getAlbumPreviewsFeed, latestPage]);
 
   const hasPageLoader = latestPage === 1 && loading;
 

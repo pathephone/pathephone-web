@@ -26,7 +26,7 @@ const renderComponent = (params?: TParams) => {
 
   const service: Service = {
     ...mockService,
-    getLatestAlbums: jest
+    getAlbumPreviewsFeed: jest
       .fn()
       .mockImplementationOnce(async () => ({
         items: firstPageResults,

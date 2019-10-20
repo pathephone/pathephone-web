@@ -27,7 +27,7 @@ const renderComponent = () => {
 
   const getOutsideContainerNode = () => mounted.getByTestId(OUTSIDE_CONTAINER);
 
-  const getLatestAlbumsLinkNode = () =>
+  const getAlbumPreviewsFeedLinkNode = () =>
     mounted.getByTestId(testId.PLAYER_NAVIGATION__LATEST_ALBUMS_LINK);
 
   const getShareAlbumLinkNode = () =>
@@ -38,7 +38,7 @@ const renderComponent = () => {
   const getOnCloseCallback = () => props.onClose;
 
   const clickLatestAlbumsLink = () =>
-    fireEvent.click(getLatestAlbumsLinkNode());
+    fireEvent.click(getAlbumPreviewsFeedLinkNode());
 
   const clickShareAlbumLink = () => fireEvent.click(getShareAlbumLinkNode());
 

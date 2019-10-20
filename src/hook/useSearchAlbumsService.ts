@@ -7,7 +7,7 @@ import { AlbumPreview } from "type/model";
 
 export const useSearchAlbumsService = () => {
   // Import service to get albums by query.
-  const { getAlbumsByQuery: searchAlbumsService } = useService();
+  const { getAlbumPreviewsByQuery: searchAlbumsService } = useService();
 
   // Create service promise state.
   const [servicePromiseState, injectServicePromise] = useAsync<AlbumPreview[]>({
@@ -24,20 +24,20 @@ export const useSearchAlbumsService = () => {
 
       if (pending) {
         dispatch({
-          type: "GET_ALBUMS_BY_QUERY_SERVICE__PENDING"
+          type: "GET_ALBUM_PREVIEWS_BY_QUERY__PENDING"
         });
       }
 
       if (value) {
         dispatch({
-          type: "GET_ALBUMS_BY_QUERY_SERVICE__RESOLVED",
+          type: "GET_ALBUM_PREVIEWS_BY_QUERY__RESOLVED",
           payload: value
         });
       }
 
       if (error) {
         dispatch({
-          type: "GET_ALBUMS_BY_QUERY_SERVICE__REJECTED",
+          type: "GET_ALBUM_PREVIEWS_BY_QUERY__REJECTED",
           payload: error
         });
       }
