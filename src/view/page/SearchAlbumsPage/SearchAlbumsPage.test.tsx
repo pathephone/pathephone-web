@@ -10,11 +10,11 @@ import {
 
 import { testId } from "util/testId";
 import { mockService } from "service/mock";
-import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
 import { TestingProvider } from "util/react/TestingProvider";
 import { routes } from "util/route";
 import { AlbumPreview } from "type/model";
 import { Service } from "type/service";
+import { getAlbumPreviewMocks } from "util/mock/albumPreviewMock";
 
 import { SearchAlbumsPage } from "./SearchAlbumsPage";
 
@@ -171,7 +171,7 @@ test("should display loader", async () => {
 describe("once first results recieved", () => {
   test("should not display fallback button", async () => {
     const { getFallbackButtonNode } = renderComponent({
-      results: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -182,7 +182,7 @@ describe("once first results recieved", () => {
   });
   test("should not display loader", async () => {
     const { getLoaderNode } = renderComponent({
-      results: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -193,7 +193,7 @@ describe("once first results recieved", () => {
   });
   test("should display feed", async () => {
     const { getFeedNode } = renderComponent({
-      results: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -206,7 +206,7 @@ describe("once first results recieved", () => {
     const itemsCount = 5;
 
     const { getFeedItemsCount } = renderComponent({
-      results: getFeedAlbumMocks(itemsCount)
+      results: getAlbumPreviewMocks(itemsCount)
     });
 
     await waitForDomChange();
@@ -217,7 +217,7 @@ describe("once first results recieved", () => {
   });
   test("should not display new results button", async () => {
     const { getNewResultsButtonNode } = renderComponent({
-      results: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -233,8 +233,8 @@ describe("once first results recieved", () => {
 describe("once new results recieved", () => {
   test("should not display fallback button", async () => {
     const { getFallbackButtonNode } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -247,8 +247,8 @@ describe("once new results recieved", () => {
   });
   test("should not display loader", async () => {
     const { getLoaderNode } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -261,8 +261,8 @@ describe("once new results recieved", () => {
   });
   test("should display feed", async () => {
     const { getFeedNode } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -277,8 +277,8 @@ describe("once new results recieved", () => {
     const initialItemsCount = 5;
 
     const { getFeedItemsCount } = renderComponent({
-      results: getFeedAlbumMocks(initialItemsCount),
-      nextResults: getFeedAlbumMocks(2)
+      results: getAlbumPreviewMocks(initialItemsCount),
+      nextResults: getAlbumPreviewMocks(2)
     });
 
     await waitForDomChange();
@@ -291,8 +291,8 @@ describe("once new results recieved", () => {
   });
   test("should display new results button", async () => {
     const { getNewResultsButtonNode } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -310,8 +310,8 @@ describe("once new results recieved", () => {
 describe("once new results button clicked", () => {
   test("should not display fallback button", async () => {
     const { getFallbackButtonNode, clickNewResultsButton } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -326,8 +326,8 @@ describe("once new results button clicked", () => {
   });
   test("should not display loader", async () => {
     const { getLoaderNode, clickNewResultsButton } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -342,8 +342,8 @@ describe("once new results button clicked", () => {
   });
   test("should display feed", async () => {
     const { getFeedNode, clickNewResultsButton } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -361,8 +361,8 @@ describe("once new results button clicked", () => {
     const nextItemsCount = 3;
 
     const { getFeedItemsCount, clickNewResultsButton } = renderComponent({
-      results: getFeedAlbumMocks(initialItemsCount),
-      nextResults: getFeedAlbumMocks(nextItemsCount)
+      results: getAlbumPreviewMocks(initialItemsCount),
+      nextResults: getAlbumPreviewMocks(nextItemsCount)
     });
 
     await waitForDomChange();
@@ -377,8 +377,8 @@ describe("once new results button clicked", () => {
   });
   test("should not display new results button", async () => {
     const { getNewResultsButtonNode, clickNewResultsButton } = renderComponent({
-      results: getFeedAlbumMocks(1),
-      nextResults: getFeedAlbumMocks(1)
+      results: getAlbumPreviewMocks(1),
+      nextResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();

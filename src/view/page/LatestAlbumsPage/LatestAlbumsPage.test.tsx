@@ -10,11 +10,11 @@ import {
 import { testId } from "util/testId";
 import { mockService } from "service/mock";
 import { TestingProvider } from "util/react/TestingProvider";
-import { getFeedAlbumMocks } from "util/mock/getFeedAlbumMock";
 import { AlbumPreview } from "type/model";
+import { Service } from "type/service";
+import { getAlbumPreviewMocks } from "util/mock/albumPreviewMock";
 
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
-import { Service } from "type/service";
 
 type TParams = {
   firstPageResults?: AlbumPreview[];
@@ -103,7 +103,7 @@ describe("no albums case", () => {
 describe("has albums case", () => {
   test("should display feed on next dom change", async () => {
     const { getFeedNode } = renderComponent({
-      firstPageResults: getFeedAlbumMocks(1)
+      firstPageResults: getAlbumPreviewMocks(1)
     });
 
     await waitForDomChange();
@@ -116,7 +116,7 @@ describe("has albums case", () => {
     const count = 5;
 
     const { getFeedItemsCount } = renderComponent({
-      firstPageResults: getFeedAlbumMocks(5)
+      firstPageResults: getAlbumPreviewMocks(5)
     });
 
     await waitForDomChange();
@@ -130,8 +130,8 @@ describe("has albums case", () => {
 describe("click load more button", () => {
   it("should display feed loader", async () => {
     const { getFeedLoader, clickLoadMoreButton } = renderComponent({
-      firstPageResults: getFeedAlbumMocks(5),
-      secondPageResults: getFeedAlbumMocks(5)
+      firstPageResults: getAlbumPreviewMocks(5),
+      secondPageResults: getAlbumPreviewMocks(5)
     });
 
     await waitForDomChange();
@@ -147,8 +147,8 @@ describe("click load more button", () => {
     const secondPageItemsCount = 5;
 
     const { getFeedItemsCount, clickLoadMoreButton } = renderComponent({
-      firstPageResults: getFeedAlbumMocks(firstPageItemsCount),
-      secondPageResults: getFeedAlbumMocks(secondPageItemsCount)
+      firstPageResults: getAlbumPreviewMocks(firstPageItemsCount),
+      secondPageResults: getAlbumPreviewMocks(secondPageItemsCount)
     });
 
     await waitForDomChange();

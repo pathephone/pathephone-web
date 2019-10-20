@@ -4,10 +4,10 @@ import { createMemoryHistory, History } from "history";
 
 import { AppState } from "type/state";
 import { ServiceContext } from "context/ServiceContext";
-import { mockService } from "service/mock/index";
+import { mockService } from "service/mock";
 import { AppContext } from "context/AppContext";
-import { getAppStateMock } from "util/mock/getAppStateMock";
 import { Service } from "type/service";
+import { getAppStateMock } from "util/mock/appStateMock";
 
 type TProps = {
   children: React.ReactNode;
