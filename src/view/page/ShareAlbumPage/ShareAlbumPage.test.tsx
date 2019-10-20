@@ -13,9 +13,11 @@ import { mockService } from "service/mock/index";
 import { MissingAudioFilesError } from "util/error";
 import { getUIDString } from "util/uid";
 import { TestingProvider } from "util/react/TestingProvider";
+import { Service } from "type/service";
+import { getAudioFileMock } from "util/mock/audioFileMock";
+import { getImageFileMock } from "util/mock/imageFileMock";
 
 import { ShareAlbumPage } from "./ShareAlbumPage";
-import { Service } from "type/service";
 
 const createObjectURLOrig = window.URL.createObjectURL;
 const revokeObjectURLOrig = window.URL.revokeObjectURL;
@@ -32,22 +34,6 @@ afterAll(() => {
 
   window.URL.revokeObjectURL = revokeObjectURLOrig;
 });
-
-const getAudioFileMock = (): File => {
-  const audioFileMock = new File(["(⌐□_□)"], "track.ogg", {
-    type: "audio/ogg"
-  });
-
-  return audioFileMock;
-};
-
-const getImageFileMock = (): File => {
-  const imageFileMock = new File(["(⌐□_□)"], "cover.png", {
-    type: "image/png"
-  });
-
-  return imageFileMock;
-};
 
 const getArtistCandidateMock = () => {
   const artistMock: ArtistCandidate = {

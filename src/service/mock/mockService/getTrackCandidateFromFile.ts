@@ -1,31 +1,12 @@
-import * as mm from "music-metadata-browser";
+import { TrackCandidate } from "type/model";
+import { setAsyncTimeout } from "util/setAsyncTimeout";
+import { SERVICE_MOCK_DELAY } from "util/constant";
+import { getTrackCandidateMock } from "util/mock/trackCandidateMock";
 
-import { getUniqueString } from "util/getUniqueString";
-import { TrackCandidate, ArtistCandidate } from "type/model";
-import { getRawArtistCandidate } from "util/getRawArtistCandidate";
-
-export const getTrackCandidateFromFile = (
+export const getTrackCandidateFromFile = async (
   file: File
 ): Promise<TrackCandidate> => {
-  return mm.parseBlob(file, { skipCovers: true }).then(metadata => {
-    const { title, artists: artistsOriginal } = metadata.common;
+  await setAsyncTimeout(SERVICE_MOCK_DELAY);
 
-    let artists: ArtistCandidate[] = [];
-
-    if (artistsOriginal) {
-      artists = artistsOriginal.map((name: string) => ({
-        name,
-        id: getUniqueString()
-      }));
-    }
-
-    artists.push(getRawArtistCandidate());
-
-    return {
-      id: getUniqueString(),
-      audio: file,
-      title: title || "",
-      artists
-    };
-  });
+  return getTrackCandidateMock();
 };

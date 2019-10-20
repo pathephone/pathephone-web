@@ -3,7 +3,7 @@ import { render, cleanup, waitForDomChange } from "@testing-library/react";
 
 import { testId } from "util/testId";
 import { TestingProvider } from "util/react/TestingProvider";
-import { getAppStateMock } from "util/mock/getAppStateMock";
+import { getAppStateMock } from "util/mock/appStateMock";
 
 import { App } from "./App";
 import { AppState } from "type/state";
