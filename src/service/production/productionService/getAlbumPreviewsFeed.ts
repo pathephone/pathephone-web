@@ -1,14 +1,9 @@
-import { AlbumPreview } from "type/model";
+import { AlbumPreview, Feed } from "type/model";
 
 import { ALBUMS_FEED_PER_PAGE_LIMIT } from "util/constant";
 
 import { albumModel } from "./model/albumModel";
 import { normalizeMockStorageAlbum } from "./normalize/mockStorageAlbum";
-
-type TOutput = {
-  items: AlbumPreview[];
-  lastPageFlag: boolean;
-};
 
 type TParams = {
   startPage: number;
@@ -17,7 +12,7 @@ type TParams = {
 
 export const getAlbumPreviewsFeed = async (
   params: TParams
-): Promise<TOutput> => {
+): Promise<Feed<AlbumPreview>> => {
   const { startPage, pagesCount = 1 } = params;
 
   const firstIndex = (startPage - 1) * ALBUMS_FEED_PER_PAGE_LIMIT;

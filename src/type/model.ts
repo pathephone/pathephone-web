@@ -30,3 +30,8 @@ export type AlbumCandidate = {
   cover: File | null;
   tracklist: TrackCandidate[];
 };
+
+export type Feed<ItemType> = {
+  items: ItemType[];
+  lastPageFlag: boolean;
+};
