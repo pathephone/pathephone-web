@@ -27,7 +27,7 @@ export const latestAlbumsPageReducer = (
       return {
         ...state,
         loading: false,
-        albums: [...state.albums, ...event.payload.albums],
+        albums: [...state.albums, ...event.payload.items],
         noMoreAlbums: event.payload.lastPageFlag
       };
     case "GET_ALBUM_PREVIEWS_FEED__REJECTED":

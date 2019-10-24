@@ -1,4 +1,4 @@
-import { AlbumPreview } from "type/model";
+import { AlbumPreview, Feed } from "type/model";
 
 type TPending = {
   type: "GET_ALBUM_PREVIEWS_FEED__PENDING";
@@ -6,10 +6,7 @@ type TPending = {
 
 type TResolved = {
   type: "GET_ALBUM_PREVIEWS_FEED__RESOLVED";
-  payload: {
-    albums: AlbumPreview[];
-    lastPageFlag: boolean;
-  };
+  payload: Feed<AlbumPreview>;
 };
 
 type TRejected = {

@@ -32,7 +32,7 @@ export const useGetLatestAlbumsService = () => {
       dispatch({
         type: "GET_ALBUM_PREVIEWS_FEED__RESOLVED",
         payload: {
-          albums,
+          items: albums,
           lastPageFlag
         }
       });
