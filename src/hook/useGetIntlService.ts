@@ -23,13 +23,15 @@ export const useGetIntlService = () => {
 
       if (pending) {
         dispatch({
-          type: "GET_INTL__PENDING"
+          type: "GET_INTL",
+          status: "PENDING"
         });
       }
 
       if (value) {
         dispatch({
-          type: "GET_INTL__RESOLVED",
+          type: "GET_INTL",
+          status: "RESOLVED",
           payload: value
         });
       }

@@ -167,27 +167,36 @@ export const shareAlbumPageReducer = (
         albumFormValidation: []
       };
     }
-    case "GET_ALBUM_CANDIDATE_FROM_FILES__PENDING": {
-      if (state.screen === "SELECTING_FILES") {
-        return {
-          ...state,
-          screen: "LOADING"
-        };
+    case "GET_ALBUM_CANDIDATE_FROM_FILES": {
+      if (event.status === "PENDING") {
+        if (state.screen === "SELECTING_FILES") {
+          return {
+            ...state,
+            screen: "LOADING"
+          };
+        }
+        return state;
       }
-      return state;
-    }
-    case "SUBMIT_ALBUM_CANDIDATE__PENDING": {
-      return {
-        ...state,
-        screen: "LOADING"
-      };
-    }
-    case "GET_ALBUM_CANDIDATE_FROM_FILES__RESOLVED": {
-      if (state.albumFormData) {
-        const { albumFormData } = state;
+      if (event.status === "RESOLVED") {
+        if (state.albumFormData) {
+          const { albumFormData } = state;
 
-        let nextFormData = patchAlbumCandidate(albumFormData)
-          .addTracks(event.payload.tracklist)
+          let nextFormData = patchAlbumCandidate(albumFormData)
+            .addTracks(event.payload.tracklist)
+            .addRawArtists()
+            .done();
+
+          const nextFormValidation = validateAlbumCandidate(nextFormData);
+
+          return {
+            ...state,
+            files: null,
+            albumFormData: nextFormData,
+            albumFormValidation: nextFormValidation
+          };
+        }
+
+        const nextFormData = patchAlbumCandidate(event.payload)
           .addRawArtists()
           .done();
 
@@ -196,48 +205,55 @@ export const shareAlbumPageReducer = (
         return {
           ...state,
           files: null,
+          screen: "EDITING_ALBUM",
           albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
+          albumFormValidation: nextFormValidation,
+          didSucceed: false,
+          error: null
         };
       }
-
-      const nextFormData = patchAlbumCandidate(event.payload)
-        .addRawArtists()
-        .done();
-
-      const nextFormValidation = validateAlbumCandidate(nextFormData);
-
-      return {
-        ...state,
-        files: null,
-        screen: "EDITING_ALBUM",
-        albumFormData: nextFormData,
-        albumFormValidation: nextFormValidation,
-        didSucceed: false,
-        error: null
-      };
+      if (event.status === "REJECTED") {
+        return {
+          ...state,
+          screen: "SELECTING_FILES",
+          albumFormData: null,
+          albumFormValidation: [],
+          didSucceed: false,
+          submited: false,
+          error: event.payload
+        };
+      }
+      return state;
     }
-    case "SUBMIT_ALBUM_CANDIDATE__RESOLVED": {
-      return {
-        ...state,
-        screen: "SELECTING_FILES",
-        albumFormData: null,
-        albumFormValidation: [],
-        didSucceed: true,
-        submited: false
-      };
-    }
-    case "SUBMIT_ALBUM_CANDIDATE__REJECTED":
-    case "GET_ALBUM_CANDIDATE_FROM_FILES__REJECTED": {
-      return {
-        ...state,
-        screen: "SELECTING_FILES",
-        albumFormData: null,
-        albumFormValidation: [],
-        didSucceed: false,
-        submited: false,
-        error: event.payload
-      };
+    case "SUBMIT_ALBUM_CANDIDATE": {
+      if (event.status === "PENDING") {
+        return {
+          ...state,
+          screen: "LOADING"
+        };
+      }
+      if (event.status === "RESOLVED") {
+        return {
+          ...state,
+          screen: "SELECTING_FILES",
+          albumFormData: null,
+          albumFormValidation: [],
+          didSucceed: true,
+          submited: false
+        };
+      }
+      if (event.status === "REJECTED") {
+        return {
+          ...state,
+          screen: "SELECTING_FILES",
+          albumFormData: null,
+          albumFormValidation: [],
+          didSucceed: false,
+          submited: false,
+          error: event.payload
+        };
+      }
+      return state;
     }
     case "ALBUM_EDITOR__SUBMIT": {
       return {

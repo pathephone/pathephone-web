@@ -18,23 +18,28 @@ export const latestAlbumsPageReducer = (
         ...state,
         latestPage: state.latestPage + 1
       };
-    case "GET_ALBUM_PREVIEWS_FEED__PENDING":
-      return {
-        ...state,
-        loading: true
-      };
-    case "GET_ALBUM_PREVIEWS_FEED__RESOLVED":
-      return {
-        ...state,
-        loading: false,
-        albums: [...state.albums, ...event.payload.items],
-        noMoreAlbums: event.payload.lastPageFlag
-      };
-    case "GET_ALBUM_PREVIEWS_FEED__REJECTED":
-      return {
-        ...state,
-        loading: false
-      };
+    case "GET_ALBUM_PREVIEWS_FEED":
+      if (event.status === "PENDING") {
+        return {
+          ...state,
+          loading: true
+        };
+      }
+      if (event.status === "RESOLVED") {
+        return {
+          ...state,
+          loading: false,
+          albums: [...state.albums, ...event.payload.items],
+          noMoreAlbums: event.payload.lastPageFlag
+        };
+      }
+      if (event.status === "REJECTED") {
+        return {
+          ...state,
+          loading: false
+        };
+      }
+      return state;
     default:
       return state;
   }

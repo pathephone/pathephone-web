@@ -24,20 +24,23 @@ export const useSearchAlbumsService = () => {
 
       if (pending) {
         dispatch({
-          type: "GET_ALBUM_PREVIEWS_BY_QUERY__PENDING"
+          type: "GET_ALBUM_PREVIEWS_BY_QUERY",
+          status: "PENDING"
         });
       }
 
       if (value) {
         dispatch({
-          type: "GET_ALBUM_PREVIEWS_BY_QUERY__RESOLVED",
+          type: "GET_ALBUM_PREVIEWS_BY_QUERY",
+          status: "RESOLVED",
           payload: value
         });
       }
 
       if (error) {
         dispatch({
-          type: "GET_ALBUM_PREVIEWS_BY_QUERY__REJECTED",
+          type: "GET_ALBUM_PREVIEWS_BY_QUERY",
+          status: "REJECTED",
           payload: error
         });
       }

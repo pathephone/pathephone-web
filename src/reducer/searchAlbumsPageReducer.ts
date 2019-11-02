@@ -12,28 +12,32 @@ export const searchAlbumsPageReducer = (
   event: TEvent
 ): SearchAlbumsPageState => {
   switch (event.type) {
-    case "GET_ALBUM_PREVIEWS_BY_QUERY__RESOLVED": {
-      if (state.albums.length === 0) {
+    case "GET_ALBUM_PREVIEWS_BY_QUERY": {
+      if (event.status === "RESOLVED") {
+        if (state.albums.length === 0) {
+          return {
+            ...state,
+            albums: event.payload
+          };
+        }
+        const newAlbums = event.payload.filter(({ id }) =>
+          state.albums.some(album => album.id !== id)
+        );
+
         return {
           ...state,
-          albums: event.payload
+          newAlbums: [...state.newAlbums, ...newAlbums]
         };
       }
 
-      const newAlbums = event.payload.filter(({ id }) =>
-        state.albums.some(album => album.id !== id)
-      );
+      if (event.status === "REJECTED") {
+        return {
+          ...initialSearchAlbumsPageState,
+          failed: true
+        };
+      }
 
-      return {
-        ...state,
-        newAlbums: [...state.newAlbums, ...newAlbums]
-      };
-    }
-    case "GET_ALBUM_PREVIEWS_BY_QUERY__REJECTED": {
-      return {
-        ...initialSearchAlbumsPageState,
-        failed: true
-      };
+      return state;
     }
     case "SEARCH_ALBUMS_PAGE__RETRY":
       return {

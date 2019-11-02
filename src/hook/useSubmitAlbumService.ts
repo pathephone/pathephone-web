@@ -18,17 +18,21 @@ export const useSubmitAlbumService = () => {
 
       if (pending) {
         dispatch({
-          type: "SUBMIT_ALBUM_CANDIDATE__PENDING"
+          type: "SUBMIT_ALBUM_CANDIDATE",
+          status: "PENDING"
         });
       }
       if (resolved) {
         dispatch({
-          type: "SUBMIT_ALBUM_CANDIDATE__RESOLVED"
+          type: "SUBMIT_ALBUM_CANDIDATE",
+          status: "RESOLVED",
+          payload: null
         });
       }
       if (error) {
         dispatch({
-          type: "SUBMIT_ALBUM_CANDIDATE__REJECTED",
+          type: "SUBMIT_ALBUM_CANDIDATE",
+          status: "REJECTED",
           payload: error
         });
       }
