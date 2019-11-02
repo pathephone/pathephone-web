@@ -21,20 +21,23 @@ export const useGetAlbumCandidateFromFilesService = () => {
 
       if (pending) {
         dispatch({
-          type: "GET_ALBUM_CANDIDATE_FROM_FILES__PENDING"
+          type: "GET_ALBUM_CANDIDATE_FROM_FILES",
+          status: "PENDING"
         });
       }
 
       if (value) {
         dispatch({
-          type: "GET_ALBUM_CANDIDATE_FROM_FILES__RESOLVED",
+          type: "GET_ALBUM_CANDIDATE_FROM_FILES",
+          status: "RESOLVED",
           payload: value
         });
       }
 
       if (error) {
         dispatch({
-          type: "GET_ALBUM_CANDIDATE_FROM_FILES__REJECTED",
+          type: "GET_ALBUM_CANDIDATE_FROM_FILES",
+          status: "REJECTED",
           payload: error
         });
       }

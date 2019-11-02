@@ -20,7 +20,8 @@ export const useGetLatestAlbumsService = () => {
   React.useEffect(() => {
     if (promiseState && promiseState.pending) {
       dispatch({
-        type: "GET_ALBUM_PREVIEWS_FEED__PENDING"
+        type: "GET_ALBUM_PREVIEWS_FEED",
+        status: "PENDING"
       });
     }
   }, [dispatch, promiseState]);
@@ -30,7 +31,8 @@ export const useGetLatestAlbumsService = () => {
       const { items: albums, lastPageFlag } = promiseState.value;
 
       dispatch({
-        type: "GET_ALBUM_PREVIEWS_FEED__RESOLVED",
+        type: "GET_ALBUM_PREVIEWS_FEED",
+        status: "RESOLVED",
         payload: {
           items: albums,
           lastPageFlag
@@ -42,7 +44,8 @@ export const useGetLatestAlbumsService = () => {
   React.useEffect(() => {
     if (promiseState && promiseState.error) {
       dispatch({
-        type: "GET_ALBUM_PREVIEWS_FEED__REJECTED",
+        type: "GET_ALBUM_PREVIEWS_FEED",
+        status: "REJECTED",
         payload: promiseState.error
       });
     }
