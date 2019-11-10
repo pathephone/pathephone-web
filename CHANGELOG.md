@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/pathephone/pathephone-web/compare/v1.10.3...v1.11.0) (2019-11-10)
+
+
+### Features
+
+* **api:** implement ability to pass router basename ([c2c8e50](https://github.com/pathephone/pathephone-web/commit/c2c8e5042f670ca184e31ad17c86b9261d94bb86))
+
 ## [1.10.3](https://github.com/pathephone/pathephone-web/compare/v1.10.2...v1.10.3) (2019-10-13)
 
 
