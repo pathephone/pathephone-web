@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/pathephone-web/static/css/main.dfe1663f.chunk.css",
-    "main.js": "/pathephone-web/static/js/main.acbcedaa.chunk.js",
-    "main.js.map": "/pathephone-web/static/js/main.acbcedaa.chunk.js.map",
-    "runtime-main.js": "/pathephone-web/static/js/runtime-main.a2703cc9.js",
-    "runtime-main.js.map": "/pathephone-web/static/js/runtime-main.a2703cc9.js.map",
-    "static/js/2.f185b7ae.chunk.js": "/pathephone-web/static/js/2.f185b7ae.chunk.js",
-    "static/js/2.f185b7ae.chunk.js.map": "/pathephone-web/static/js/2.f185b7ae.chunk.js.map",
-    "static/js/3.0d08704f.chunk.js": "/pathephone-web/static/js/3.0d08704f.chunk.js",
-    "static/js/3.0d08704f.chunk.js.map": "/pathephone-web/static/js/3.0d08704f.chunk.js.map",
-    "static/js/4.cb1d1164.chunk.js": "/pathephone-web/static/js/4.cb1d1164.chunk.js",
-    "static/js/4.cb1d1164.chunk.js.map": "/pathephone-web/static/js/4.cb1d1164.chunk.js.map",
+    "main.css": "/pathephone-web/static/css/main.cfa15f92.chunk.css",
+    "main.js": "/pathephone-web/static/js/main.b0658a09.chunk.js",
+    "main.js.map": "/pathephone-web/static/js/main.b0658a09.chunk.js.map",
+    "runtime-main.js": "/pathephone-web/static/js/runtime-main.8c05862e.js",
+    "runtime-main.js.map": "/pathephone-web/static/js/runtime-main.8c05862e.js.map",
+    "static/js/2.9358b851.chunk.js": "/pathephone-web/static/js/2.9358b851.chunk.js",
+    "static/js/2.9358b851.chunk.js.map": "/pathephone-web/static/js/2.9358b851.chunk.js.map",
+    "static/js/3.7f6ecc27.chunk.js": "/pathephone-web/static/js/3.7f6ecc27.chunk.js",
+    "static/js/3.7f6ecc27.chunk.js.map": "/pathephone-web/static/js/3.7f6ecc27.chunk.js.map",
+    "static/js/4.4faa1762.chunk.js": "/pathephone-web/static/js/4.4faa1762.chunk.js",
+    "static/js/4.4faa1762.chunk.js.map": "/pathephone-web/static/js/4.4faa1762.chunk.js.map",
     "index.html": "/pathephone-web/index.html",
-    "precache-manifest.1a6adb7e0695f043d0af8094e516a52d.js": "/pathephone-web/precache-manifest.1a6adb7e0695f043d0af8094e516a52d.js",
+    "precache-manifest.929de6d0c04a25a53fc44a295080ff68.js": "/pathephone-web/precache-manifest.929de6d0c04a25a53fc44a295080ff68.js",
     "service-worker.js": "/pathephone-web/service-worker.js",
-    "static/css/main.dfe1663f.chunk.css.map": "/pathephone-web/static/css/main.dfe1663f.chunk.css.map",
+    "static/css/main.cfa15f92.chunk.css.map": "/pathephone-web/static/css/main.cfa15f92.chunk.css.map",
     "static/media/round-album-24px.d4230c04.svg": "/pathephone-web/static/media/round-album-24px.d4230c04.svg",
     "static/media/round-clear-24px.84e833e5.svg": "/pathephone-web/static/media/round-clear-24px.84e833e5.svg",
     "static/media/round-clear_all-24px.f4987d47.svg": "/pathephone-web/static/media/round-clear_all-24px.f4987d47.svg",
@@ -34,9 +34,9 @@
     "static/media/round-warning-24px.44d3b423.svg": "/pathephone-web/static/media/round-warning-24px.44d3b423.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a2703cc9.js",
-    "static/js/2.f185b7ae.chunk.js",
-    "static/css/main.dfe1663f.chunk.css",
-    "static/js/main.acbcedaa.chunk.js"
+    "static/js/runtime-main.8c05862e.js",
+    "static/js/2.9358b851.chunk.js",
+    "static/css/main.cfa15f92.chunk.css",
+    "static/js/main.b0658a09.chunk.js"
   ]
 }
