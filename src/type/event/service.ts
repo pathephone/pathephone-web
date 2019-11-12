@@ -1,5 +1,5 @@
 import { ServiceEventProto } from "type/util";
-import { AlbumCandidate } from "type/model";
+import { AlbumCandidate, TrackPreview } from "type/model";
 import { AlbumPreview } from "type/model";
 import { Intl } from "type/intl";
 import { Feed } from "type/model";
@@ -26,9 +26,15 @@ type SubmitAlbumCandidateEvent = ServiceEventProto<
   null
 >;
 
+type getTrackPreviewsByAlbumIds = ServiceEventProto<
+  "GET_TRACK_PREVIEWS_BY_ALBUM_IDS",
+  TrackPreview[]
+>;
+
 export type TServiceEvent =
   | SubmitAlbumCandidateEvent
   | GetAlbumCandidateFromFilesEvent
   | GetIntlEvent
   | GetAlbumPreviewsFeedEvent
-  | GetAlbumPreviewsByQueryEvent;
+  | GetAlbumPreviewsByQueryEvent
+  | getTrackPreviewsByAlbumIds;

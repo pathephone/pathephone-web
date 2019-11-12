@@ -5,6 +5,7 @@ export type AudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
 export type PlayerState = {
   primaryControls: "OVERVIEW" | "SEARCH";
   secondaryControls: "PLAYBACK" | "PLAYLIST";
+  wantedTracksAlbumIds: string[];
   playlist: TrackPreview[];
   playingTrackId: null | string;
   audioStatus: AudioStatus;

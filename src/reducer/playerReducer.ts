@@ -8,6 +8,7 @@ import { getPreviousPlayingTrackId } from "util/getPreviousPlayingTrackId";
 export const initialPlayerState: PlayerState = {
   primaryControls: "OVERVIEW",
   secondaryControls: "PLAYBACK",
+  wantedTracksAlbumIds: [],
   playlist: [],
   playingTrackId: null,
   audioStatus: "PAUSED"
@@ -18,30 +19,40 @@ export const playerReducer = (
   event: TEvent
 ): PlayerState => {
   switch (event.type) {
-    case "FEED_ALBUM__ADD_TO_PLAYLIST": {
-      // Handle case when ampty array was dispatched
-      if (event.payload.length === 0) {
-        return state;
-      }
-      return {
-        ...state,
-        playlist: [...state.playlist, ...event.payload],
-        playingTrackId:
+    case "GET_TRACK_PREVIEWS_BY_ALBUM_IDS": {
+      if (event.status === "RESOLVED") {
+        if (event.payload.length === 0) {
+          return state;
+        }
+
+        const playingTrackId =
           state.playingTrackId === null
             ? event.payload[0].id
-            : state.playingTrackId
-      };
+            : state.playingTrackId;
+
+        return {
+          ...state,
+          playlist: [...state.playlist, ...event.payload],
+          playingTrackId
+        };
+      }
+      return state;
     }
 
     case "FEED_ALBUM__PLAY": {
-      if (event.payload.length === 0) {
-        return state;
-      }
       return {
         ...state,
-        playlist: [...event.payload],
-        playingTrackId: event.payload[0].id,
-        audioStatus: "PENDING"
+        wantedTracksAlbumIds: [...state.wantedTracksAlbumIds, event.payload],
+        playlist: [],
+        playingTrackId: null,
+        audioStatus: "PLAYING"
+      };
+    }
+
+    case "FEED_ALBUM__ADD_TO_PLAYLIST": {
+      return {
+        ...state,
+        wantedTracksAlbumIds: [...state.wantedTracksAlbumIds, event.payload]
       };
     }
 

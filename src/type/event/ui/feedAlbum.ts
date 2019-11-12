@@ -1,13 +1,11 @@
-import { TrackPreview } from "type/model";
-
 type TAddToPlaylist = {
   type: "FEED_ALBUM__ADD_TO_PLAYLIST";
-  payload: TrackPreview[];
+  payload: string;
 };
 
 type TPlay = {
   type: "FEED_ALBUM__PLAY";
-  payload: TrackPreview[];
+  payload: string;
 };
 
 export type AlbumPreviewEvent = TAddToPlaylist | TPlay;

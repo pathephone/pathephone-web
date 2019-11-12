@@ -9,8 +9,11 @@ import { PlaybackControls } from "view/widget/PlaybackControls";
 import { usePlayerContext } from "hook/usePlayerContext";
 import { useAudio } from "hook/useAudio";
 import { usePlayingTrackURL } from "hook/usePlayingTrackURL";
+import { usePlaylistService } from "hook/usePlaylistService";
 
 export const PlayerScreen = () => {
+  usePlaylistService();
+
   const { play, stop } = useAudio();
 
   const trackURL = usePlayingTrackURL();

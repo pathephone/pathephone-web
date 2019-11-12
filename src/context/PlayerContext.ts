@@ -5,6 +5,7 @@ import { PlayerState } from "type/state";
 const fallbackValue: PlayerState = {
   primaryControls: "OVERVIEW",
   secondaryControls: "PLAYBACK",
+  wantedTracksAlbumIds: [],
   playlist: [],
   playingTrackId: null,
   audioStatus: "PAUSED"
