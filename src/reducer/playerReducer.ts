@@ -98,11 +98,15 @@ export const playerReducer = (
 
     case "PLAYLIST_CONTROLS__PLAY_NEXT": {
       const nextTrackId = getNextPlayingTrackId(state);
-      const fallbackTrackId = state.playlist[0].id;
-      return {
-        ...state,
-        playingTrackId: nextTrackId !== null ? nextTrackId : fallbackTrackId
-      };
+
+      if (nextTrackId) {
+        return {
+          ...state,
+          playingTrackId: nextTrackId
+        };
+      }
+
+      return state;
     }
 
     case "PLAYLIST_CONTROLS__PLAY_PREVIOUS": {
