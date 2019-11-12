@@ -3,7 +3,7 @@ import { TrackPreview } from "type/model";
 import { getUIDString } from "util/uid";
 
 const getAudioSrc = () => {
-  return "https://en.wikipedia.org/wiki/File:Wolfgang_Amadeus_Mozart_-_Symphony_40_g-moll_-_1._Molto_allegro.ogg";
+  return "https://upload.wikimedia.org/wikipedia/commons/9/99/Wolfgang_Amadeus_Mozart_-_Symphony_40_g-moll_-_1._Molto_allegro.ogg";
 };
 
 export const getTrackPreviewMock = (): TrackPreview => ({
