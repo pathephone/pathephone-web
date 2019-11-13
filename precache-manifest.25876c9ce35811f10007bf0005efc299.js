@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ebd63f5aaf505d0b96b22dec156957b3",
+    "revision": "54182fb0d2945852b610ee4007ec4b89",
     "url": "/pathephone-web/index.html"
   },
   {
-    "revision": "e51c51b0c0e1e3b71c78",
-    "url": "/pathephone-web/static/css/main.cfa15f92.chunk.css"
+    "revision": "8642f74c04c247512dee",
+    "url": "/pathephone-web/static/css/main.7fc0c404.chunk.css"
   },
   {
-    "revision": "598f29057b4590449b66",
-    "url": "/pathephone-web/static/js/2.9358b851.chunk.js"
+    "revision": "797a1ed124feabdb654a",
+    "url": "/pathephone-web/static/js/2.c4a290ef.chunk.js"
   },
   {
     "revision": "3de7b54292dfff61e3f8",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pathephone-web/static/js/4.4faa1762.chunk.js"
   },
   {
-    "revision": "e51c51b0c0e1e3b71c78",
-    "url": "/pathephone-web/static/js/main.b0658a09.chunk.js"
+    "revision": "8642f74c04c247512dee",
+    "url": "/pathephone-web/static/js/main.9d44e41a.chunk.js"
   },
   {
     "revision": "58930349edf865dfc12d",
