@@ -1,3 +1,11 @@
+## [1.11.1](https://github.com/pathephone/pathephone-web/compare/v1.11.0...v1.11.1) (2019-11-13)
+
+
+### Bug Fixes
+
+* implments correct "skip next" action behaviour ([c17679f](https://github.com/pathephone/pathephone-web/commit/c17679fe8109ba4f3b97c60c84cbf2aad0dcf653))
+* resolves some page scrolling issues ([5d841cd](https://github.com/pathephone/pathephone-web/commit/5d841cd8772f9d818d0fda9024e565765ad317b3))
+
 # [1.11.0](https://github.com/pathephone/pathephone-web/compare/v1.10.3...v1.11.0) (2019-11-10)
 
 
