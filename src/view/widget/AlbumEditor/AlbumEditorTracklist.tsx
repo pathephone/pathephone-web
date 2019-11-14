@@ -8,7 +8,7 @@ import { AlbumEditorAboutFieldsetBody } from "./styled/AlbumEditorFieldsetBody";
 
 import { AlbumTrackEditor } from "view/widget/AlbumTrackEditor";
 import { AlbumAudioEditor } from "view/widget/AlbumAudioEditor";
-import { useIntlDictionary } from "hook/useIntl";
+import { useIntlDictionary } from "hook/useIntlDictionary";
 
 export const AlbumEditorTracklist = () => {
   const {

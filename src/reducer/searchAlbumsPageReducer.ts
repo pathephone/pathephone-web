@@ -1,15 +1,10 @@
 import { SearchAlbumsPageState } from "type/state";
-import { TEvent } from "type/event";
-
-export const initialSearchAlbumsPageState: SearchAlbumsPageState = {
-  failed: false,
-  albums: [],
-  newAlbums: []
-};
+import { AppEvent } from "type/event";
+import { createSearchAlbumsPageState } from "util/createSearchAlbumsPageState";
 
 export const searchAlbumsPageReducer = (
   state: SearchAlbumsPageState,
-  event: TEvent
+  event: AppEvent
 ): SearchAlbumsPageState => {
   switch (event.type) {
     case "GET_ALBUM_PREVIEWS_BY_QUERY": {
@@ -32,7 +27,7 @@ export const searchAlbumsPageReducer = (
 
       if (event.status === "REJECTED") {
         return {
-          ...initialSearchAlbumsPageState,
+          ...createSearchAlbumsPageState(),
           failed: true
         };
       }
@@ -52,7 +47,7 @@ export const searchAlbumsPageReducer = (
       };
     case "SEARCH_ALBUMS_PAGE__NEW_QUERY":
       return {
-        ...initialSearchAlbumsPageState
+        ...createSearchAlbumsPageState()
       };
     default:
       return state;

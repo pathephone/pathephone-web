@@ -1,32 +1,34 @@
-import { TPlaylistPopupEvent } from "./playlistPopup";
-import { TPlaylistTrackEvent } from "./playlistTrack";
-import { TPlaylistControlsEvent } from "./playlistControls";
-import { TPlaybackControlsEvent } from "./playbackControls";
-import { TSearchControlsEvent } from "./searchControls";
-import { TOverviewControlsEvent } from "./overviewControls";
+import { PlaylistPopupEvent } from "./playlistPopup";
+import { PlaylistTrackEvent } from "./playlistTrack";
+import { PlaylistControlsEvent } from "./playlistControls";
+import { PlaybackControlsEvent } from "./playbackControls";
+import { SearchControlsEvent } from "./searchControls";
+import { OverviewControlsEvent } from "./overviewControls";
 import { AlbumPreviewEvent } from "./feedAlbum";
-import { TAudioEvent } from "./audio";
-import { TAlbumAudioEditorEvent } from "./albumAudioEditor";
-import { TAlbumCoverEditorEvent } from "./albumCoverEditor";
-import { TAlbumTrackEditorEvent } from "./albumTrackEditor";
-import { TAlbumEditorEvent } from "./albumEditor";
-import { TDropZoneEvent } from "./dropZone";
-import { TLatestAlbumsPageEvent } from "./latestAlbumsPage";
-import { TSearchAlbumsPageEvent } from "./searchAlbumsPage";
+import { AudioEvent } from "./audio";
+import { AlbumAudioEditorEvent } from "./albumAudioEditor";
+import { AlbumCoverEditorEvent } from "./albumCoverEditor";
+import { AlbumTrackEditorEvent } from "./albumTrackEditor";
+import { AlbumEditorEvent } from "./albumEditor";
+import { DropZoneEvent } from "./dropZone";
+import { LatestAlbumsPageEvent } from "./latestAlbumsPage";
+import { SearchAlbumsPageEvent } from "./searchAlbumsPage";
+import { ShareAlbumPageEvent } from "./shareAlbumPage";
 
-export type TUiEvent =
-  | TPlaylistPopupEvent
-  | TPlaylistTrackEvent
-  | TPlaylistControlsEvent
-  | TPlaybackControlsEvent
-  | TSearchControlsEvent
-  | TOverviewControlsEvent
+export type UIEvent =
+  | PlaylistPopupEvent
+  | PlaylistTrackEvent
+  | PlaylistControlsEvent
+  | PlaybackControlsEvent
+  | SearchControlsEvent
+  | OverviewControlsEvent
   | AlbumPreviewEvent
-  | TAudioEvent
-  | TAlbumAudioEditorEvent
-  | TAlbumCoverEditorEvent
-  | TAlbumTrackEditorEvent
-  | TAlbumEditorEvent
-  | TDropZoneEvent
-  | TLatestAlbumsPageEvent
-  | TSearchAlbumsPageEvent;
+  | AudioEvent
+  | AlbumAudioEditorEvent
+  | AlbumCoverEditorEvent
+  | AlbumTrackEditorEvent
+  | AlbumEditorEvent
+  | DropZoneEvent
+  | LatestAlbumsPageEvent
+  | SearchAlbumsPageEvent
+  | ShareAlbumPageEvent;

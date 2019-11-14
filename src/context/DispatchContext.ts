@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { TEvent } from "type/event";
+import { AppEvent } from "type/event";
 
-export const DispatchContext = React.createContext<(event: TEvent) => void>(
+export const DispatchContext = React.createContext<(event: AppEvent) => void>(
   event => {
     if (process.env.NODE_ENV === "development") {
       console.log(event);

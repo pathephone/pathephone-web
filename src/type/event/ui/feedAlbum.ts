@@ -1,11 +1,11 @@
-type TAddToPlaylist = {
+type AddToPlaylist = {
   type: "FEED_ALBUM__ADD_TO_PLAYLIST";
   payload: string;
 };
 
-type TPlay = {
+type Play = {
   type: "FEED_ALBUM__PLAY";
   payload: string;
 };
 
-export type AlbumPreviewEvent = TAddToPlaylist | TPlay;
+export type AlbumPreviewEvent = AddToPlaylist | Play;

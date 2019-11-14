@@ -1,13 +1,13 @@
-type TPlayNext = {
+type PlayNext = {
   type: "PLAYLIST_CONTROLS__PLAY_NEXT";
 };
 
-type TPlayPrevious = {
+type PlayPrevious = {
   type: "PLAYLIST_CONTROLS__PLAY_PREVIOUS";
 };
 
-type TClose = {
+type Close = {
   type: "PLAYLIST_CONTROLS__CLOSE";
 };
 
-export type TPlaylistControlsEvent = TPlayNext | TPlayPrevious | TClose;
+export type PlaylistControlsEvent = PlayNext | PlayPrevious | Close;

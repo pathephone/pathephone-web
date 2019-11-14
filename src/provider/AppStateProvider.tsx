@@ -2,16 +2,21 @@ import * as React from "react";
 
 import { EventBoundary } from "util/react/EventBoundary";
 import { AppContext } from "context/AppContext";
-import { appReducer, initialAppState } from "reducer/appReducer";
+import { appStateReducer } from "reducer/appStateReducer";
+import { createAppState } from "util/createAppState";
 
 type TProps = {
   children: React.ReactNode;
 };
 
-export const AppProvider = (props: TProps) => {
+export const AppStateProvider = (props: TProps) => {
   const { children } = props;
 
-  const [state, dispatch] = React.useReducer(appReducer, initialAppState);
+  const [state, dispatch] = React.useReducer(
+    appStateReducer,
+    null,
+    createAppState
+  );
 
   return (
     <EventBoundary handler={dispatch}>

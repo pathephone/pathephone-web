@@ -1,5 +1,5 @@
-type TClear = {
+type Clear = {
   type: "PLAYLIST_POPUP__CLEAR";
 };
 
-export type TPlaylistPopupEvent = TClear;
+export type PlaylistPopupEvent = Clear;

@@ -10,13 +10,11 @@ import {
 
 import { testId } from "util/testId";
 import { mockService } from "service/mock";
-import { TestingProvider } from "util/react/TestingProvider";
 import { routes } from "util/route";
 import { AlbumPreview } from "type/model";
 import { Service } from "type/service";
 import { getAlbumPreviewMocks } from "util/mock/albumPreviewMock";
-
-import { SearchAlbumsPage } from "./SearchAlbumsPage";
+import { Root } from "view/root/Root";
 
 type TParams = {
   searchValue?: string;
@@ -31,7 +29,7 @@ const defaultNewResults: AlbumPreview[] = [];
 
 const defaultSearchValue = "default search value";
 
-const renderComponent = (params?: TParams) => {
+const renderComponent = async (params?: TParams) => {
   const {
     searchValue = defaultSearchValue,
     results = defaultResults,
@@ -59,19 +57,13 @@ const renderComponent = (params?: TParams) => {
     }
   })();
 
-  const history = createMemoryHistory({
-    initialEntries: [routes.searchAlbumsRoute(searchValue)]
-  });
+  const history = createMemoryHistory();
 
-  const mounted = render(
-    <TestingProvider
-      service={service}
-      history={history}
-      path={routes.searchAlbumsPattern}
-    >
-      <SearchAlbumsPage searchInterval={100} />
-    </TestingProvider>
-  );
+  history.push(routes.searchAlbumsRoute(searchValue));
+
+  const mounted = render(<Root service={service} history={history} />);
+
+  await waitForDomChange();
 
   const getLoaderNode = () =>
     mounted.getByTestId(testId.SEARCH_ALBUMS_PAGE__LOADER);
@@ -129,7 +121,7 @@ const renderComponent = (params?: TParams) => {
 afterEach(cleanup);
 
 test("should not display fallback button", async () => {
-  const { getFallbackButtonNode } = renderComponent();
+  const { getFallbackButtonNode } = await renderComponent();
 
   expect(() => getFallbackButtonNode()).toThrow();
 
@@ -139,17 +131,17 @@ test("should not display fallback button", async () => {
 test("should display correct title", async () => {
   const searchValue = "custom search value";
 
-  const { getTitleText } = renderComponent({
+  const { getTitleText } = await renderComponent({
     searchValue
   });
 
-  expect(getTitleText).not.toThrow(searchValue);
+  expect(getTitleText()).toEqual(searchValue);
 
   await wait();
 });
 
 test("should display correct sub title", async () => {
-  const { getSubTitleText } = renderComponent();
+  const { getSubTitleText } = await renderComponent();
 
   expect(getSubTitleText()).toEqual(
     "The search continues while the page is open"
@@ -159,7 +151,7 @@ test("should display correct sub title", async () => {
 });
 
 test("should display loader", async () => {
-  const { getLoaderNode } = renderComponent();
+  const { getLoaderNode } = await renderComponent();
 
   expect(getLoaderNode).not.toThrow();
 
@@ -170,33 +162,27 @@ test("should display loader", async () => {
 
 describe("once first results recieved", () => {
   test("should not display fallback button", async () => {
-    const { getFallbackButtonNode } = renderComponent({
+    const { getFallbackButtonNode } = await renderComponent({
       results: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     expect(getFallbackButtonNode).toThrow();
 
     await wait();
   });
   test("should not display loader", async () => {
-    const { getLoaderNode } = renderComponent({
+    const { getLoaderNode } = await renderComponent({
       results: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     expect(getLoaderNode).toThrow();
 
     await wait();
   });
   test("should display feed", async () => {
-    const { getFeedNode } = renderComponent({
+    const { getFeedNode } = await renderComponent({
       results: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
 
@@ -205,22 +191,18 @@ describe("once first results recieved", () => {
   test("expected feed items count should match", async () => {
     const itemsCount = 5;
 
-    const { getFeedItemsCount } = renderComponent({
+    const { getFeedItemsCount } = await renderComponent({
       results: getAlbumPreviewMocks(itemsCount)
     });
-
-    await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(itemsCount);
 
     await wait();
   });
   test("should not display new results button", async () => {
-    const { getNewResultsButtonNode } = renderComponent({
+    const { getNewResultsButtonNode } = await renderComponent({
       results: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     expect(getNewResultsButtonNode).toThrow();
 
@@ -232,12 +214,10 @@ describe("once first results recieved", () => {
 
 describe("once new results recieved", () => {
   test("should not display fallback button", async () => {
-    const { getFallbackButtonNode } = renderComponent({
+    const { getFallbackButtonNode } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -246,12 +226,10 @@ describe("once new results recieved", () => {
     await wait();
   });
   test("should not display loader", async () => {
-    const { getLoaderNode } = renderComponent({
+    const { getLoaderNode } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -260,12 +238,10 @@ describe("once new results recieved", () => {
     await wait();
   });
   test("should display feed", async () => {
-    const { getFeedNode } = renderComponent({
+    const { getFeedNode } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -276,12 +252,10 @@ describe("once new results recieved", () => {
   test("expected feed items count should match", async () => {
     const initialItemsCount = 5;
 
-    const { getFeedItemsCount } = renderComponent({
+    const { getFeedItemsCount } = await renderComponent({
       results: getAlbumPreviewMocks(initialItemsCount),
       nextResults: getAlbumPreviewMocks(2)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -290,12 +264,10 @@ describe("once new results recieved", () => {
     await wait();
   });
   test("should display new results button", async () => {
-    const { getNewResultsButtonNode } = renderComponent({
+    const { getNewResultsButtonNode } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -309,12 +281,13 @@ describe("once new results recieved", () => {
 
 describe("once new results button clicked", () => {
   test("should not display fallback button", async () => {
-    const { getFallbackButtonNode, clickNewResultsButton } = renderComponent({
+    const {
+      getFallbackButtonNode,
+      clickNewResultsButton
+    } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -325,12 +298,10 @@ describe("once new results button clicked", () => {
     await wait();
   });
   test("should not display loader", async () => {
-    const { getLoaderNode, clickNewResultsButton } = renderComponent({
+    const { getLoaderNode, clickNewResultsButton } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -341,12 +312,10 @@ describe("once new results button clicked", () => {
     await wait();
   });
   test("should display feed", async () => {
-    const { getFeedNode, clickNewResultsButton } = renderComponent({
+    const { getFeedNode, clickNewResultsButton } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -360,12 +329,10 @@ describe("once new results button clicked", () => {
     const initialItemsCount = 5;
     const nextItemsCount = 3;
 
-    const { getFeedItemsCount, clickNewResultsButton } = renderComponent({
+    const { getFeedItemsCount, clickNewResultsButton } = await renderComponent({
       results: getAlbumPreviewMocks(initialItemsCount),
       nextResults: getAlbumPreviewMocks(nextItemsCount)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -376,12 +343,13 @@ describe("once new results button clicked", () => {
     await wait();
   });
   test("should not display new results button", async () => {
-    const { getNewResultsButtonNode, clickNewResultsButton } = renderComponent({
+    const {
+      getNewResultsButtonNode,
+      clickNewResultsButton
+    } = await renderComponent({
       results: getAlbumPreviewMocks(1),
       nextResults: getAlbumPreviewMocks(1)
     });
-
-    await waitForDomChange();
 
     await waitForDomChange();
 
@@ -397,55 +365,45 @@ describe("once new results button clicked", () => {
 
 describe("once service call failed", () => {
   test("should display correct sub title", async () => {
-    const { getSubTitleText } = renderComponent({
+    const { getSubTitleText } = await renderComponent({
       simulateServiceError: true
     });
-
-    await waitForDomChange();
 
     expect(getSubTitleText()).toEqual("Something went wrong");
 
     await wait();
   });
   test("should display fallback button", async () => {
-    const { getFallbackButtonNode } = renderComponent({
+    const { getFallbackButtonNode } = await renderComponent({
       simulateServiceError: true
     });
-
-    await waitForDomChange();
 
     expect(getFallbackButtonNode).not.toThrow();
 
     await wait();
   });
   test("should not display loader", async () => {
-    const { getLoaderNode } = renderComponent({
+    const { getLoaderNode } = await renderComponent({
       simulateServiceError: true
     });
-
-    await waitForDomChange();
 
     expect(getLoaderNode).toThrow();
 
     await wait();
   });
   test("should not display feed", async () => {
-    const { getFeedNode } = renderComponent({
+    const { getFeedNode } = await renderComponent({
       simulateServiceError: true
     });
-
-    await waitForDomChange();
 
     expect(getFeedNode).toThrow();
 
     await wait();
   });
   test("should not display new results button", async () => {
-    const { getNewResultsButtonNode } = renderComponent({
+    const { getNewResultsButtonNode } = await renderComponent({
       simulateServiceError: true
     });
-
-    await waitForDomChange();
 
     expect(getNewResultsButtonNode).toThrow();
 

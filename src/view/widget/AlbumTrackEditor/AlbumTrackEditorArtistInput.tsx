@@ -4,7 +4,7 @@ import { FloatingLabelInput } from "view/kit/FloatingLabelInput";
 import { useDispatch } from "hook/useDispatch";
 import { useArtistCandidateValidity } from "hook/useAlbumForm";
 import { testId } from "util/testId";
-import { useIntlDictionary } from "hook/useIntl";
+import { useIntlDictionary } from "hook/useIntlDictionary";
 import { ArtistCandidate } from "type/model";
 
 type TProps = {

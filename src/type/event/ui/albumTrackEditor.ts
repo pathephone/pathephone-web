@@ -1,19 +1,19 @@
-type TMoveUp = {
+type MoveUp = {
   type: "ALBUM_TRACK_EDITOR__MOVE_UP";
   payload: string;
 };
 
-type TMoveDown = {
+type MoveDown = {
   type: "ALBUM_TRACK_EDITOR__MOVE_DOWN";
   payload: string;
 };
 
-type TRemove = {
+type Remove = {
   type: "ALBUM_TRACK_EDITOR__REMOVE";
   payload: string;
 };
 
-type TTitleChange = {
+type TitleChange = {
   type: "ALBUM_TRACK_EDITOR__TITLE_CHANGE";
   payload: {
     trackId: string;
@@ -21,7 +21,7 @@ type TTitleChange = {
   };
 };
 
-type TArtistsChange = {
+type ArtistsChange = {
   type: "ALBUM_TRACK_EDITOR__ARTIST_CHANGE";
   payload: {
     trackId: string;
@@ -30,9 +30,9 @@ type TArtistsChange = {
   };
 };
 
-export type TAlbumTrackEditorEvent =
-  | TMoveUp
-  | TMoveDown
-  | TRemove
-  | TTitleChange
-  | TArtistsChange;
+export type AlbumTrackEditorEvent =
+  | MoveUp
+  | MoveDown
+  | Remove
+  | TitleChange
+  | ArtistsChange;

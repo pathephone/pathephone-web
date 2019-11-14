@@ -1,6 +1,7 @@
-import { useContextStrict } from "hook/useContextStrict";
-import { SearchAlbumsPageContext } from "context/SearchAlbumsPageContext";
+import { useAppState } from "hook/useAppState";
 
 export const useSearchAlbumsPageState = () => {
-  return useContextStrict(SearchAlbumsPageContext);
+  const { searchAlbumsPageState } = useAppState();
+
+  return searchAlbumsPageState;
 };

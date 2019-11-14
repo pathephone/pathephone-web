@@ -1,13 +1,13 @@
-type TPlay = {
+type Play = {
   type: "PLAYBACK_CONTROLS__PLAY";
 };
 
-type TPause = {
+type Pause = {
   type: "PLAYBACK_CONTROLS__PAUSE";
 };
 
-type TOpenPlaylist = {
+type OpenPlaylist = {
   type: "PLAYBACK_CONTROLS__OPEN_PLAYLIST";
 };
 
-export type TPlaybackControlsEvent = TPlay | TPause | TOpenPlaylist;
+export type PlaybackControlsEvent = Play | Pause | OpenPlaylist;

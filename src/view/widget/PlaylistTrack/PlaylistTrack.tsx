@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { useDispatch } from "hook/useDispatch";
-import { usePlayerContext } from "hook/usePlayerContext";
 import { TrackPreview } from "type/model";
+import { usePlayerState } from "hook/usePlayerState";
 
 import { PlaylistTrackView } from "./PlaylistTrackView";
 
@@ -13,7 +13,7 @@ type TProps = {
 export const PlaylistTrack = ({ track }: TProps) => {
   const { id, artistName, title } = track;
 
-  const { playingTrackId } = usePlayerContext();
+  const { playingTrackId } = usePlayerState();
 
   const playing = playingTrackId === id;
 

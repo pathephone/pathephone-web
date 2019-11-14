@@ -1,7 +1,7 @@
-import { usePlayerContext } from "hook/usePlayerContext";
+import { usePlayerState } from "hook/usePlayerState";
 
 export const useAudioPausedFlag = () => {
-  const { audioStatus } = usePlayerContext();
+  const { audioStatus } = usePlayerState();
 
   return audioStatus === "PAUSED";
 };

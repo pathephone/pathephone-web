@@ -1,23 +1,18 @@
 import { ShareAlbumPageState } from "type/state";
-import { TEvent } from "type/event";
+import { AppEvent } from "type/event";
 import { validateAlbumCandidate } from "util/validateAlbumCandidate";
 import { patchAlbumCandidate } from "util/patchAlbumFormData";
-
-export const initialShareAlbumPageState: ShareAlbumPageState = {
-  screen: "SELECTING_FILES",
-  files: null,
-  albumFormData: null,
-  albumFormValidation: [],
-  didSucceed: false,
-  submited: false,
-  error: null
-};
+import { patchShareAlbumPageState } from "util/patchShareAlbumPageState";
+import { createShareAlbumPageState } from "util/createShareAlbumPageState";
 
 export const shareAlbumPageReducer = (
   state: ShareAlbumPageState,
-  event: TEvent
+  event: AppEvent
 ): ShareAlbumPageState => {
   switch (event.type) {
+    case "SHARE_ALBUM_PAGE__WILL_UNMOUNT": {
+      return createShareAlbumPageState();
+    }
     case "ALBUM_EDITOR__TITLE_CHANGE": {
       if (state.albumFormData) {
         const nextFormData = {
@@ -27,11 +22,10 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
@@ -44,11 +38,10 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
@@ -63,11 +56,10 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
@@ -82,11 +74,10 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
@@ -100,11 +91,10 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
@@ -135,11 +125,10 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
@@ -151,32 +140,20 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .done();
       }
       return state;
     }
     case "ALBUM_EDITOR__CANCEL": {
-      return {
-        ...state,
-        screen: "SELECTING_FILES",
-        albumFormData: null,
-        albumFormValidation: []
-      };
+      return patchShareAlbumPageState(state)
+        .setAlbumFormData(null)
+        .setAlbumFormValidation([])
+        .done();
     }
     case "GET_ALBUM_CANDIDATE_FROM_FILES": {
-      if (event.status === "PENDING") {
-        if (state.screen === "SELECTING_FILES") {
-          return {
-            ...state,
-            screen: "LOADING"
-          };
-        }
-        return state;
-      }
       if (event.status === "RESOLVED") {
         if (state.albumFormData) {
           const { albumFormData } = state;
@@ -188,12 +165,10 @@ export const shareAlbumPageReducer = (
 
           const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-          return {
-            ...state,
-            files: null,
-            albumFormData: nextFormData,
-            albumFormValidation: nextFormValidation
-          };
+          return patchShareAlbumPageState(state)
+            .setAlbumFormData(nextFormData)
+            .setAlbumFormValidation(nextFormValidation)
+            .done();
         }
 
         const nextFormData = patchAlbumCandidate(event.payload)
@@ -202,71 +177,56 @@ export const shareAlbumPageReducer = (
 
         const nextFormValidation = validateAlbumCandidate(nextFormData);
 
-        return {
-          ...state,
-          files: null,
-          screen: "EDITING_ALBUM",
-          albumFormData: nextFormData,
-          albumFormValidation: nextFormValidation,
-          didSucceed: false,
-          error: null
-        };
+        return patchShareAlbumPageState(state)
+          .setFiles(null)
+          .setAlbumFormData(nextFormData)
+          .setAlbumFormValidation(nextFormValidation)
+          .setDidSucceed(false)
+          .done();
       }
       if (event.status === "REJECTED") {
-        return {
-          ...state,
-          screen: "SELECTING_FILES",
-          albumFormData: null,
-          albumFormValidation: [],
-          didSucceed: false,
-          submited: false,
-          error: event.payload
-        };
+        return patchShareAlbumPageState(state)
+          .setFiles(null)
+          .setAlbumFormData(null)
+          .setAlbumFormValidation([])
+          .setDidSucceed(false)
+          .setSubmited(false)
+          .setError(event.payload)
+          .done();
       }
       return state;
     }
     case "SUBMIT_ALBUM_CANDIDATE": {
-      if (event.status === "PENDING") {
-        return {
-          ...state,
-          screen: "LOADING"
-        };
-      }
       if (event.status === "RESOLVED") {
-        return {
-          ...state,
-          screen: "SELECTING_FILES",
-          albumFormData: null,
-          albumFormValidation: [],
-          didSucceed: true,
-          submited: false
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(null)
+          .setAlbumFormValidation([])
+          .setDidSucceed(true)
+          .setSubmited(false)
+          .done();
       }
       if (event.status === "REJECTED") {
-        return {
-          ...state,
-          screen: "SELECTING_FILES",
-          albumFormData: null,
-          albumFormValidation: [],
-          didSucceed: false,
-          submited: false,
-          error: event.payload
-        };
+        return patchShareAlbumPageState(state)
+          .setAlbumFormData(null)
+          .setAlbumFormValidation([])
+          .setDidSucceed(false)
+          .setSubmited(false)
+          .setError(event.payload)
+          .done();
       }
+
       return state;
     }
     case "ALBUM_EDITOR__SUBMIT": {
-      return {
-        ...state,
-        submited: true
-      };
+      return patchShareAlbumPageState(state)
+        .setSubmited(true)
+        .done();
     }
     case "DROP_ZONE__FILES_RECIEVED":
     case "ALBUM_AUDIO_EDITOR__TRACKS_RECIEVED": {
-      return {
-        ...state,
-        files: event.payload
-      };
+      return patchShareAlbumPageState(state)
+        .setFiles(event.payload)
+        .done();
     }
     default:
       return state;

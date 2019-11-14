@@ -7,7 +7,6 @@ type TProps = {
   children: React.ReactNode;
   hasCompactView?: boolean;
   centered?: boolean;
-  testId?: string;
 };
 
 export const PageWrapper = ({ children, centered, hasCompactView }: TProps) => (

@@ -1,3 +1,3 @@
-import * as productionService from "service/mock/mockService";
+import * as productionService from "service/production/productionService";
 
 export { productionService };

@@ -3,8 +3,8 @@ import { AudioStatus, PlaybackControlsScreen } from "type/state";
 import * as React from "react";
 
 import { useDispatch } from "hook/useDispatch";
-import { useAudioStatus } from "hook/usePlayerContext";
-import { usePlayingTrack } from "hook/usePlayingTrack";
+import { usePlayingTrackStrict } from "hook/usePlayingTrack";
+import { useAudioStatus } from "hook/useAudioStatus";
 import { UnreachableError } from "util/error";
 
 import { PlaybackControlsView } from "./PlaybackControlsView";
@@ -12,7 +12,7 @@ import { PlaybackControlsView } from "./PlaybackControlsView";
 export const PlaybackControls = () => {
   const dispatch = useDispatch();
 
-  const { title, artistName } = usePlayingTrack();
+  const { title, artistName } = usePlayingTrackStrict();
 
   const audioStatus: AudioStatus = useAudioStatus();
 

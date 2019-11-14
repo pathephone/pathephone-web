@@ -1,10 +1,10 @@
-type TOpenNavigation = {
+type OpenNavigation = {
   type: "OVERVIEW_CONTROLS__OPEN_NAVIGATION";
   payload: string;
 };
 
-type TOpenSearch = {
+type OpenSearch = {
   type: "OVERVIEW_CONTROLS__OPEN_SEARCH";
 };
 
-export type TOverviewControlsEvent = TOpenNavigation | TOpenSearch;
+export type OverviewControlsEvent = OpenNavigation | OpenSearch;

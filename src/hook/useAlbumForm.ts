@@ -3,7 +3,7 @@ import { StrictHookError } from "util/error";
 import { AlbumFormValidity } from "type/state";
 
 import { useShareAlbumPageState } from "./useShareAlbumPageState";
-import { useIntlDictionary } from "./useIntl";
+import { useIntlDictionary } from "./useIntlDictionary";
 
 export const useAlbumCandidate = () => {
   const { albumFormData } = useShareAlbumPageState();

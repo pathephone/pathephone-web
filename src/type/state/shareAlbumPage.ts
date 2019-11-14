@@ -39,7 +39,6 @@ export type AlbumFormValidity =
 // Share album page data
 
 export type ShareAlbumPageState = {
-  screen: ShareAlbumPageScreen;
   // Files selected by user:
   files: null | File[];
   // Editable album candidate instance,

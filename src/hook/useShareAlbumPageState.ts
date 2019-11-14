@@ -1,6 +1,7 @@
-import { ShareAlbumPageContext } from "context/ShareAlbumPageContext";
-import { useContextStrict } from "hook/useContextStrict";
+import { useAppState } from "hook/useAppState";
 
 export const useShareAlbumPageState = () => {
-  return useContextStrict(ShareAlbumPageContext);
+  const { shareAlbumPageState } = useAppState();
+
+  return shareAlbumPageState;
 };

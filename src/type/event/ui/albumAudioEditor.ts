@@ -1,6 +1,6 @@
-type TTracksRecieved = {
+type TracksRecieved = {
   type: "ALBUM_AUDIO_EDITOR__TRACKS_RECIEVED";
   payload: File[];
 };
 
-export type TAlbumAudioEditorEvent = TTracksRecieved;
+export type AlbumAudioEditorEvent = TracksRecieved;
