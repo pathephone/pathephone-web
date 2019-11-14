@@ -1,22 +1,13 @@
-import { TEvent } from "type/event";
+import { AppEvent } from "type/event";
 import { PlayerState } from "type/state";
-import { TrackPreview } from "type/model";
 
 import { getNextPlayingTrackId } from "util/getNextPlayingTrackId";
 import { getPreviousPlayingTrackId } from "util/getPreviousPlayingTrackId";
-
-export const initialPlayerState: PlayerState = {
-  primaryControls: "OVERVIEW",
-  secondaryControls: "PLAYBACK",
-  wantedTracksAlbumIds: [],
-  playlist: [],
-  playingTrackId: null,
-  audioStatus: "PAUSED"
-};
+import { createPlayerState } from "util/createPlayerState";
 
 export const playerReducer = (
   state: PlayerState,
-  event: TEvent
+  event: AppEvent
 ): PlayerState => {
   switch (event.type) {
     case "GET_TRACK_PREVIEWS_BY_ALBUM_IDS": {
@@ -25,6 +16,8 @@ export const playerReducer = (
           return state;
         }
 
+        const newPlaylistTrackIds = event.payload.map(item => item.id);
+
         const playingTrackId =
           state.playingTrackId === null
             ? event.payload[0].id
@@ -32,7 +25,7 @@ export const playerReducer = (
 
         return {
           ...state,
-          playlist: [...state.playlist, ...event.payload],
+          playlistTrackIds: [...state.playlistTrackIds, ...newPlaylistTrackIds],
           playingTrackId
         };
       }
@@ -43,7 +36,7 @@ export const playerReducer = (
       return {
         ...state,
         wantedTracksAlbumIds: [...state.wantedTracksAlbumIds, event.payload],
-        playlist: [],
+        playlistTrackIds: [],
         playingTrackId: null,
         audioStatus: "PLAYING"
       };
@@ -81,7 +74,9 @@ export const playerReducer = (
 
     case "AUDIO__ENDED": {
       const nextTrackId = getNextPlayingTrackId(state);
-      const fallbackTrackId = state.playlist[0].id;
+
+      const fallbackTrackId = state.playlistTrackIds[0];
+
       return {
         ...state,
         playingTrackId: nextTrackId !== null ? nextTrackId : fallbackTrackId,
@@ -111,7 +106,9 @@ export const playerReducer = (
 
     case "PLAYLIST_CONTROLS__PLAY_PREVIOUS": {
       const prevTrackId = getPreviousPlayingTrackId(state);
-      const fallbackTrackId = state.playlist[0].id;
+
+      const fallbackTrackId = state.playlistTrackIds[0];
+
       return {
         ...state,
         playingTrackId: prevTrackId !== null ? prevTrackId : fallbackTrackId
@@ -128,14 +125,14 @@ export const playerReducer = (
 
     case "PLAYLIST_TRACK__REMOVE": {
       // Create next playlist without removed track
-      const nextPlaylist = state.playlist.filter(
-        (track: TrackPreview) => track.id !== event.payload
+      const nextPlaylistTrackIds = state.playlistTrackIds.filter(
+        (trackId: string) => trackId !== event.payload
       );
 
       // Handle case when last track was removed.
-      if (nextPlaylist.length === 0) {
+      if (nextPlaylistTrackIds.length === 0) {
         return {
-          ...initialPlayerState
+          ...createPlayerState()
         };
       }
 
@@ -143,20 +140,20 @@ export const playerReducer = (
       if (state.playingTrackId === event.payload) {
         return {
           ...state,
-          playlist: nextPlaylist,
+          playlistTrackIds: nextPlaylistTrackIds,
           playingTrackId: getNextPlayingTrackId(state)
         };
       }
 
       return {
         ...state,
-        playlist: nextPlaylist
+        playlistTrackIds: nextPlaylistTrackIds
       };
     }
 
     case "PLAYLIST_POPUP__CLEAR": {
       return {
-        ...initialPlayerState
+        ...createPlayerState()
       };
     }
 

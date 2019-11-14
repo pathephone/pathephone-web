@@ -11,6 +11,8 @@ type TValue = {
 };
 
 export const useGetLatestAlbumsService = () => {
+  const actualPageRef = React.useRef<null | number>(null);
+
   const { getAlbumPreviewsFeed: getAlbumPreviewsFeedService } = useService();
 
   const [promiseState, injectPromise] = useAsync<TValue>();
@@ -18,16 +20,21 @@ export const useGetLatestAlbumsService = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (promiseState && promiseState.pending) {
+    const { current: actualPage } = actualPageRef;
+
+    if (promiseState && promiseState.pending && actualPage !== null) {
       dispatch({
         type: "GET_ALBUM_PREVIEWS_FEED",
-        status: "PENDING"
+        status: "PENDING",
+        meta: actualPage
       });
     }
   }, [dispatch, promiseState]);
 
   React.useEffect(() => {
-    if (promiseState && promiseState.value) {
+    const { current: actualPage } = actualPageRef;
+
+    if (promiseState && promiseState.value && actualPage !== null) {
       const { items: albums, lastPageFlag } = promiseState.value;
 
       dispatch({
@@ -36,23 +43,32 @@ export const useGetLatestAlbumsService = () => {
         payload: {
           items: albums,
           lastPageFlag
-        }
+        },
+        meta: actualPage
       });
+
+      actualPageRef.current = null;
     }
   }, [dispatch, promiseState]);
 
   React.useEffect(() => {
-    if (promiseState && promiseState.error) {
+    const { current: actualPage } = actualPageRef;
+
+    if (promiseState && promiseState.error && actualPage !== null) {
       dispatch({
         type: "GET_ALBUM_PREVIEWS_FEED",
         status: "REJECTED",
-        payload: promiseState.error
+        payload: promiseState.error,
+        meta: actualPage
       });
+
+      actualPageRef.current = null;
     }
   }, [dispatch, promiseState]);
 
   return React.useCallback(
     (nextPage: number) => {
+      actualPageRef.current = nextPage;
       injectPromise(getAlbumPreviewsFeedService({ startPage: nextPage }));
     },
     [getAlbumPreviewsFeedService, injectPromise]

@@ -1,6 +1,6 @@
-type TFilesRecieved = {
+type FilesRecieved = {
   type: "DROP_ZONE__FILES_RECIEVED";
   payload: File[];
 };
 
-export type TDropZoneEvent = TFilesRecieved;
+export type DropZoneEvent = FilesRecieved;

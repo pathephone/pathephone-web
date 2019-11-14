@@ -1,10 +1,10 @@
-type TSubmit = {
+type Submit = {
   type: "SEARCH_CONTROLS__SUBMIT";
   payload: string;
 };
 
-type TCancel = {
+type Cancel = {
   type: "SEARCH_CONTROLS__CANCEL";
 };
 
-export type TSearchControlsEvent = TCancel | TSubmit;
+export type SearchControlsEvent = Cancel | Submit;

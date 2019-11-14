@@ -1,40 +1,41 @@
-import { ServiceEventProto } from "type/util";
+import { AsyncEventProto } from "type/util";
 import { AlbumCandidate, TrackPreview } from "type/model";
 import { AlbumPreview } from "type/model";
 import { Intl } from "type/intl";
 import { Feed } from "type/model";
 
-type GetAlbumPreviewsFeedEvent = ServiceEventProto<
+type GetAlbumPreviewsFeedEvent = AsyncEventProto<
   "GET_ALBUM_PREVIEWS_FEED",
-  Feed<AlbumPreview>
+  Feed<AlbumPreview>,
+  number
 >;
 
-type GetIntlEvent = ServiceEventProto<"GET_INTL", Intl>;
+type GetIntlEvent = AsyncEventProto<"GET_INTL", Intl>;
 
-type GetAlbumPreviewsByQueryEvent = ServiceEventProto<
+type GetAlbumPreviewsByQueryEvent = AsyncEventProto<
   "GET_ALBUM_PREVIEWS_BY_QUERY",
   AlbumPreview[]
 >;
 
-type GetAlbumCandidateFromFilesEvent = ServiceEventProto<
+type GetAlbumCandidateFromFilesEvent = AsyncEventProto<
   "GET_ALBUM_CANDIDATE_FROM_FILES",
   AlbumCandidate
 >;
 
-type SubmitAlbumCandidateEvent = ServiceEventProto<
+type SubmitAlbumCandidateEvent = AsyncEventProto<
   "SUBMIT_ALBUM_CANDIDATE",
   null
 >;
 
-type getTrackPreviewsByAlbumIds = ServiceEventProto<
+type GetTrackPreviewsByAlbumIdsEvent = AsyncEventProto<
   "GET_TRACK_PREVIEWS_BY_ALBUM_IDS",
   TrackPreview[]
 >;
 
-export type TServiceEvent =
+export type ServiceEvent =
   | SubmitAlbumCandidateEvent
   | GetAlbumCandidateFromFilesEvent
   | GetIntlEvent
   | GetAlbumPreviewsFeedEvent
   | GetAlbumPreviewsByQueryEvent
-  | getTrackPreviewsByAlbumIds;
+  | GetTrackPreviewsByAlbumIdsEvent;

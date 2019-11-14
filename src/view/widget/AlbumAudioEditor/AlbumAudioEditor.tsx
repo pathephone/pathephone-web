@@ -3,7 +3,7 @@ import * as React from "react";
 import { useTrackCandidatelistValidity } from "hook/useAlbumForm";
 import { useDispatch } from "hook/useDispatch";
 import { testId } from "util/testId";
-import { useIntlDictionary } from "hook/useIntl";
+import { useIntlDictionary } from "hook/useIntlDictionary";
 
 import { AlbumAudioEditorInput } from "./styled/AlbumAudioEditorInput";
 import { AlbumAudioEditorWrapper } from "./styled/AlbumAudioEditorWrapper";

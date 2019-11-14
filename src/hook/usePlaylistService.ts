@@ -2,16 +2,16 @@ import React from "react";
 import { usePromise } from "@draftup/react-use-promise";
 
 import { useService } from "hook/useService";
-import { usePlayerContext } from "hook/usePlayerContext";
 import { useDispatch } from "hook/useDispatch";
 import { TrackPreview } from "type/model";
+import { usePlayerState } from "hook/usePlayerState";
 
 export const usePlaylistService = () => {
   const dispatch = useDispatch();
 
   const { getTrackPreviewsByAlbumIds } = useService();
 
-  const { wantedTracksAlbumIds } = usePlayerContext();
+  const { wantedTracksAlbumIds } = usePlayerState();
 
   const [promiseState, injectPromise] = usePromise<TrackPreview[]>();
 

@@ -1,23 +1,20 @@
 import React from "react";
-import {
-  waitForDomChange,
-  render,
-  fireEvent,
-  cleanup
-} from "@testing-library/react";
-import { getAllByTestId, getByTestId, wait } from "@testing-library/dom";
+import { render, fireEvent, cleanup } from "@testing-library/react";
+import { getAllByTestId, getByTestId } from "@testing-library/dom";
 
 import { testId } from "util/testId";
 import { AlbumCandidate, TrackCandidate, ArtistCandidate } from "type/model";
-import { mockService } from "service/mock/index";
 import { MissingAudioFilesError } from "util/error";
 import { getUIDString } from "util/uid";
 import { TestingProvider } from "util/react/TestingProvider";
-import { Service } from "type/service";
 import { getAudioFileMock } from "util/mock/audioFileMock";
 import { getImageFileMock } from "util/mock/imageFileMock";
 
 import { ShareAlbumPage } from "./ShareAlbumPage";
+import { patchShareAlbumPageState } from "util/patchShareAlbumPageState";
+import { getAppStateMock } from "util/mock/appStateMock";
+import { EventBoundary } from "util/react/EventBoundary";
+import { AppEvent } from "type/event";
 
 const createObjectURLOrig = window.URL.createObjectURL;
 const revokeObjectURLOrig = window.URL.revokeObjectURL;
@@ -68,6 +65,8 @@ const getAlbumCandidateMock = () => {
 type TParams = {
   simulateMissingAudioFilesError?: boolean;
   simulateNoCover?: boolean;
+  simulateFilesSelected?: boolean;
+  simulateAlbumCandidateRecieved?: boolean;
   albumFormDataMock?: AlbumCandidate;
   albumFormTrackMock?: TrackCandidate;
 };
@@ -76,31 +75,46 @@ const renderComponent = (params?: TParams) => {
   const {
     simulateMissingAudioFilesError = false,
     simulateNoCover = false,
+    simulateFilesSelected = false,
+    simulateAlbumCandidateRecieved = false,
     albumFormDataMock = getAlbumCandidateMock(),
     albumFormTrackMock = getTrackCandidateMock()
   } = params || {};
 
-  const service: Service = {
-    ...mockService,
-    getAlbumCandidateFromFiles: jest.fn().mockImplementation(async () => {
-      if (simulateMissingAudioFilesError) {
-        throw new MissingAudioFilesError();
-      }
-      if (simulateNoCover) {
-        return {
-          ...albumFormDataMock,
-          cover: null
-        };
-      }
-      return albumFormDataMock;
-    }),
-    getTrackCandidateFromFile: jest.fn().mockResolvedValue(albumFormTrackMock)
-  };
+  const appState = getAppStateMock();
+
+  if (simulateFilesSelected) {
+    appState.shareAlbumPageState = patchShareAlbumPageState(
+      appState.shareAlbumPageState
+    )
+      .setFiles([getAudioFileMock()])
+      .done();
+  }
+
+  if (simulateAlbumCandidateRecieved) {
+    appState.shareAlbumPageState = patchShareAlbumPageState(
+      appState.shareAlbumPageState
+    )
+      .setAlbumFormData(albumFormDataMock)
+      .done();
+  }
+
+  if (simulateMissingAudioFilesError) {
+    appState.shareAlbumPageState = patchShareAlbumPageState(
+      appState.shareAlbumPageState
+    )
+      .setError(new MissingAudioFilesError())
+      .done();
+  }
+
+  const eventHandler = jest.fn();
 
   const mounted = render(
-    <TestingProvider service={service}>
-      <ShareAlbumPage />
-    </TestingProvider>
+    <EventBoundary handler={eventHandler}>
+      <TestingProvider appState={appState}>
+        <ShareAlbumPage />
+      </TestingProvider>
+    </EventBoundary>
   );
 
   const getDropZoneInputNode = () => {
@@ -293,6 +307,8 @@ const renderComponent = (params?: TParams) => {
   const getCancelButtonNode = () =>
     mounted.getByTestId(testId.ALBUM_EDITOR__CANCEL_BUTTON);
 
+  const getEventHandler = () => eventHandler;
+
   const removeTrack = (trackIdex: number) => {
     const buttonNode = getRemoveTrackButton(trackIdex);
 
@@ -330,6 +346,7 @@ const renderComponent = (params?: TParams) => {
     setAlbumTrackTitleInputValue,
     getAlbumTrackTitleValidation,
     getAlbumTracklistValidation,
+    getEventHandler,
     removeTrack,
     clickSubmitButton,
     clickCancelButton
@@ -338,95 +355,102 @@ const renderComponent = (params?: TParams) => {
 
 afterEach(cleanup);
 
-test("should display drop-zone by default", async () => {
-  const { getDropZoneInputNode } = renderComponent();
+describe("once no files was selected", () => {
+  test("should NOT display loader", async () => {
+    const { getLoaderNode } = renderComponent();
 
-  expect(() => getDropZoneInputNode()).not.toThrow();
+    expect(getLoaderNode).toThrow();
+  });
 
-  await wait();
+  test("should NOT display album editor", async () => {
+    const { getAlbumEditorNode } = renderComponent();
+
+    expect(getAlbumEditorNode).toThrow();
+  });
+
+  test("should display drop-zone", async () => {
+    const { getDropZoneInputNode } = renderComponent();
+
+    expect(getDropZoneInputNode).not.toThrow();
+  });
 });
 
-describe("on correct filelist selected", () => {
-  test("drop-zone should disappear", async () => {
-    const { getDropZoneInputNode, selectDropZoneFiles } = renderComponent();
+describe("once files selected", () => {
+  test("should NOT display drop-zone", async () => {
+    const { getDropZoneInputNode } = renderComponent({
+      simulateFilesSelected: true
+    });
 
-    selectDropZoneFiles();
-
-    expect(() => getDropZoneInputNode()).toThrow();
-
-    await wait();
+    expect(getDropZoneInputNode).toThrow();
   });
 
-  test("loader should appear", async () => {
-    const { getLoaderNode, selectDropZoneFiles } = renderComponent();
+  test("should NOT display album editor", async () => {
+    const { getAlbumEditorNode } = renderComponent({
+      simulateFilesSelected: true
+    });
 
-    selectDropZoneFiles();
+    expect(getAlbumEditorNode).toThrow();
+  });
+  test("should display loader", async () => {
+    const { getLoaderNode } = renderComponent({
+      simulateFilesSelected: true
+    });
 
-    expect(() => getLoaderNode()).not.toThrow();
+    expect(getLoaderNode).not.toThrow();
+  });
+});
 
-    await wait();
+describe("once album candidate recieved", () => {
+  test("should NOT display drop-zone", async () => {
+    const { getDropZoneInputNode } = renderComponent({
+      simulateAlbumCandidateRecieved: true
+    });
+
+    expect(getDropZoneInputNode).toThrow();
   });
 
-  test("loader should disappear on next render", async () => {
-    const { getLoaderNode, selectDropZoneFiles } = renderComponent();
+  test("should NOT display loader", async () => {
+    const { getLoaderNode } = renderComponent({
+      simulateAlbumCandidateRecieved: true
+    });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    expect(() => getLoaderNode()).toThrow();
-
-    await wait();
+    expect(getLoaderNode).toThrow();
   });
 
-  test("album editor should appear on next render", async () => {
-    const { getAlbumEditorNode, selectDropZoneFiles } = renderComponent();
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
+  test("should display album editor", async () => {
+    const { getAlbumEditorNode } = renderComponent({
+      simulateAlbumCandidateRecieved: true
+    });
 
     expect(() => getAlbumEditorNode()).not.toThrow();
-
-    await wait();
   });
 
-  test("correct album title should be set", async () => {
+  test("should set correct album title input value", async () => {
     const value = "album title";
 
-    const { getAlbumTitleInputValue, selectDropZoneFiles } = renderComponent({
+    const { getAlbumTitleInputValue } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock: {
         ...getAlbumCandidateMock(),
         title: value
       }
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     expect(getAlbumTitleInputValue()).toEqual(value);
-
-    await wait();
   });
 
   test("number of track editors should match", async () => {
     const tracklist = [getTrackCandidateMock(), getTrackCandidateMock()];
 
-    const { getAlbumTrackEditorsCount, selectDropZoneFiles } = renderComponent({
+    const { getAlbumTrackEditorsCount } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock: {
         ...getAlbumCandidateMock(),
         tracklist
       }
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     expect(getAlbumTrackEditorsCount()).toEqual(tracklist.length);
-
-    await wait();
   });
 
   test("correct track titles should be set", async () => {
@@ -441,63 +465,41 @@ describe("on correct filelist selected", () => {
       }
     ];
 
-    const {
-      getAlbumTrackTitleInputValue,
-      selectDropZoneFiles
-    } = renderComponent({
+    const { getAlbumTrackTitleInputValue } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock: {
         ...getAlbumCandidateMock(),
         tracklist
       }
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     tracklist.forEach((track, index) => {
       expect(getAlbumTrackTitleInputValue(index)).toEqual(track.title);
     });
-
-    await wait();
   });
 
   test("number of track artist name inputs should match", async () => {
     const albumFormDataMock = getAlbumCandidateMock();
 
-    const {
-      getAlbumArtistNameInputsCount,
-      selectDropZoneFiles
-    } = renderComponent({
+    const { getAlbumArtistNameInputsCount } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     albumFormDataMock.tracklist.forEach((track, trackIndex) => {
       expect(getAlbumArtistNameInputsCount(trackIndex)).toEqual(
-        track.artists.length + 1
+        track.artists.length
       );
     });
-
-    await wait();
   });
 
   test("correct track artist name should be set", async () => {
     const albumFormDataMock = getAlbumCandidateMock();
 
-    const {
-      getAlbumArtistNameInputValue,
-      selectDropZoneFiles
-    } = renderComponent({
+    const { getAlbumArtistNameInputValue } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock
     });
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
 
     albumFormDataMock.tracklist.forEach((track, trackIndex) => {
       track.artists.forEach((artist, artistIndex) => {
@@ -506,308 +508,125 @@ describe("on correct filelist selected", () => {
         ).toEqual(artist.name);
       });
     });
-
-    await wait();
-  });
-
-  test("each track editor should have empty artist name input", async () => {
-    const albumFormDataMock = getAlbumCandidateMock();
-
-    const {
-      getAlbumArtistNameInputValue,
-      selectDropZoneFiles
-    } = renderComponent({
-      albumFormDataMock
-    });
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    albumFormDataMock.tracklist.forEach((track, trackIndex) => {
-      const lastArtistIndex = track.artists.length - 1;
-
-      const emptyArtistNameInputIndex = lastArtistIndex + 1;
-
-      expect(
-        getAlbumArtistNameInputValue({
-          trackIndex,
-          artistIndex: emptyArtistNameInputIndex
-        })
-      ).toEqual("");
-    });
-
-    await wait();
   });
 });
 
-describe("on no audio files selected", () => {
-  test("correct drop zone text message should appear", async () => {
-    const { getDropZoneTextMessage, selectDropZoneFiles } = renderComponent({
+describe("on no audio files selected error", () => {
+  test("should set correct drop zone text message ", async () => {
+    const { getDropZoneTextMessage } = renderComponent({
       simulateMissingAudioFilesError: true
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     expect(typeof getDropZoneTextMessage()).toEqual("string");
-
-    await wait();
   });
 });
 
 describe("on album title change", () => {
-  test("input value should change", async () => {
-    const {
-      selectDropZoneFiles,
-      changeAlbumTitleInputValue,
-      getAlbumTitleInputValue
-    } = renderComponent({
+  test("should dispatch correct event", async () => {
+    const { changeAlbumTitleInputValue, getEventHandler } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock: {
         ...getAlbumCandidateMock(),
         title: "initial value"
       }
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     const value = "next value";
 
     changeAlbumTitleInputValue(value);
 
-    expect(getAlbumTitleInputValue()).toEqual(value);
-
-    await wait();
+    expect(getEventHandler()).toBeCalledWith({
+      type: "ALBUM_EDITOR__TITLE_CHANGE",
+      payload: value
+    });
   });
 });
 
-describe("on empty artist name input change", () => {
-  test("new empty artist name should appear", async () => {
-    const albumFormDataMock = {
-      ...getAlbumCandidateMock(),
-      tracklist: [
-        {
-          ...getTrackCandidateMock(),
-          artists: [getArtistCandidateMock()]
-        }
-      ]
+describe("on artist name input change", () => {
+  test("should dispatch correct event", async () => {
+    const artistCandidateMock = getArtistCandidateMock();
+
+    const trackCandidateMock = {
+      ...getTrackCandidateMock(),
+      artists: [artistCandidateMock]
     };
 
-    const {
-      setAlbumArtistNameInputValue,
-      getAlbumArtistNameInputsCount,
-      selectDropZoneFiles
-    } = renderComponent({
+    const albumFormDataMock = {
+      ...getAlbumCandidateMock(),
+      tracklist: [trackCandidateMock]
+    };
+
+    const { setAlbumArtistNameInputValue, getEventHandler } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    const trackIndex = 0;
-
-    setAlbumArtistNameInputValue({
-      trackIndex,
-      artistIndex: 1,
-      value: "next value"
-    });
-
-    const expectedArtistNameInputsCount = 3;
-
-    expect(getAlbumArtistNameInputsCount(trackIndex)).toEqual(
-      expectedArtistNameInputsCount
-    );
-
-    await wait();
-  });
-});
-
-describe("on track title input get cleared", () => {
-  test("validation message should appear", async () => {
-    const albumFormDataMock = {
-      ...getAlbumCandidateMock(),
-      tracklist: [
-        {
-          ...getTrackCandidateMock(),
-          artists: [getArtistCandidateMock()]
-        }
-      ]
-    };
-
-    const {
-      setAlbumTrackTitleInputValue,
-      getAlbumTrackTitleValidation,
-      selectDropZoneFiles
-    } = renderComponent({
-      albumFormDataMock
-    });
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    setAlbumTrackTitleInputValue({
-      trackIndex: 0,
-      value: ""
-    });
-
-    expect(getAlbumTrackTitleValidation(0)).not.toEqual("");
-
-    await wait();
-  });
-});
-
-describe("on last empty artist name input get cleared", () => {
-  test("validation message should appear", async () => {
-    const albumFormDataMock = {
-      ...getAlbumCandidateMock(),
-      tracklist: [
-        {
-          ...getTrackCandidateMock(),
-          artists: [getArtistCandidateMock()]
-        }
-      ]
-    };
-
-    const {
-      setAlbumArtistNameInputValue,
-      getAlbumArtistNameValidation,
-      selectDropZoneFiles
-    } = renderComponent({
-      albumFormDataMock
-    });
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
+    const nextValue = "next value";
 
     setAlbumArtistNameInputValue({
       trackIndex: 0,
       artistIndex: 0,
-      value: ""
+      value: nextValue
     });
 
-    expect(
-      getAlbumArtistNameValidation({ trackIndex: 0, artistIndex: 0 })
-    ).not.toEqual("");
-
-    await wait();
-  });
-});
-
-describe("on empty tracklist", () => {
-  test("should show validation message", async () => {
-    const albumFormDataMock = {
-      ...getAlbumCandidateMock(),
-      tracklist: []
-    };
-
-    const {
-      getAlbumTracklistValidation,
-      selectDropZoneFiles
-    } = renderComponent({
-      albumFormDataMock
-    });
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    expect(getAlbumTracklistValidation()).not.toEqual("");
-
-    await wait();
+    expect(getEventHandler()).toBeCalledWith({
+      type: "ALBUM_TRACK_EDITOR__ARTIST_CHANGE",
+      payload: {
+        trackId: trackCandidateMock.id,
+        artistId: artistCandidateMock.id,
+        value: nextValue
+      }
+    } as AppEvent);
   });
 });
 
 describe("on remove track", () => {
-  test("track editors count should decrese", async () => {
+  test("should dispatch correct event", async () => {
+    const trackCandidateMock = getTrackCandidateMock();
+
     const albumFormDataMock = {
       ...getAlbumCandidateMock(),
-      tracklist: [getTrackCandidateMock(), getTrackCandidateMock()]
+      tracklist: [trackCandidateMock]
     };
 
-    const {
-      getAlbumTrackEditorsCount,
-      selectDropZoneFiles,
-      removeTrack
-    } = renderComponent({
+    const { getEventHandler, removeTrack } = renderComponent({
+      simulateAlbumCandidateRecieved: true,
       albumFormDataMock
     });
 
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
     removeTrack(0);
 
-    expect(getAlbumTrackEditorsCount()).toEqual(1);
-
-    await wait();
+    expect(getEventHandler()).toBeCalledWith({
+      type: "ALBUM_TRACK_EDITOR__REMOVE",
+      payload: trackCandidateMock.id
+    } as AppEvent);
   });
 });
 
 describe("on form cancel", () => {
-  test("should show drop zone again", async () => {
-    const {
-      selectDropZoneFiles,
-      clickCancelButton,
-      getDropZoneInputNode
-    } = renderComponent();
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
+  test("should dispatch correct event", async () => {
+    const { clickCancelButton, getEventHandler } = renderComponent({
+      simulateAlbumCandidateRecieved: true
+    });
 
     clickCancelButton();
 
-    expect(getDropZoneInputNode).not.toThrow();
+    expect(getEventHandler()).toBeCalledWith({
+      type: "ALBUM_EDITOR__CANCEL"
+    } as AppEvent);
   });
 });
 
-describe("on valid form submit", () => {
-  test("should show loader", async () => {
-    const {
-      selectDropZoneFiles,
-      clickSubmitButton,
-      getLoaderNode
-    } = renderComponent();
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
+describe("on form submit", () => {
+  test("should dispatch correct event", async () => {
+    const { clickSubmitButton, getEventHandler } = renderComponent({
+      simulateAlbumCandidateRecieved: true
+    });
 
     clickSubmitButton();
 
-    expect(getLoaderNode).not.toThrow();
-
-    await wait();
-  });
-});
-
-describe("on second files select", () => {
-  test("should show editor again", async () => {
-    const {
-      selectDropZoneFiles,
-      clickSubmitButton,
-      getAlbumEditorNode
-    } = renderComponent();
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    clickSubmitButton();
-
-    await waitForDomChange();
-
-    selectDropZoneFiles();
-
-    await waitForDomChange();
-
-    expect(getAlbumEditorNode).not.toThrow();
+    expect(getEventHandler()).toBeCalledWith({
+      type: "ALBUM_EDITOR__SUBMIT"
+    } as AppEvent);
   });
 });

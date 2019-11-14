@@ -1,11 +1,11 @@
-type TPlay = {
+type Play = {
   type: "PLAYLIST_TRACK__PLAY";
   payload: string;
 };
 
-type TRemove = {
+type Remove = {
   type: "PLAYLIST_TRACK__REMOVE";
   payload: string;
 };
 
-export type TPlaylistTrackEvent = TPlay | TRemove;
+export type PlaylistTrackEvent = Play | Remove;

@@ -4,9 +4,9 @@ import { render, cleanup, waitForDomChange } from "@testing-library/react";
 import { testId } from "util/testId";
 import { TestingProvider } from "util/react/TestingProvider";
 import { getAppStateMock } from "util/mock/appStateMock";
+import { AppState } from "type/state";
 
 import { App } from "./App";
-import { AppState } from "type/state";
 
 type TParams = {
   simulateLoading?: boolean;
@@ -17,7 +17,10 @@ const renderComponent = (params?: TParams) => {
 
   const appState: AppState = {
     ...getAppStateMock(),
-    activeScreen: simulateLoading ? "LOADING" : "PLAYER"
+    viewState: {
+      activeScreen: simulateLoading ? "LOADING" : "PLAYER",
+      currentIntlCode: null
+    }
   };
 
   const mounted = render(
@@ -46,13 +49,4 @@ test("should display loader", () => {
   const { getLoaderNode } = renderComponent({ simulateLoading: true });
 
   expect(getLoaderNode).not.toThrow();
-});
-
-test("should display player screen on second change", async () => {
-  const { getPageNode, getHeaderNode, waitForNextChange } = renderComponent();
-
-  await waitForNextChange();
-
-  expect(getPageNode).not.toThrow();
-  expect(getHeaderNode).not.toThrow();
 });

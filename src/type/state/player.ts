@@ -1,12 +1,10 @@
-import { TrackPreview } from "type/model";
-
 export type AudioStatus = "PAUSED" | "PLAYING" | "PENDING" | "FAILED";
 
 export type PlayerState = {
   primaryControls: "OVERVIEW" | "SEARCH";
   secondaryControls: "PLAYBACK" | "PLAYLIST";
   wantedTracksAlbumIds: string[];
-  playlist: TrackPreview[];
+  playlistTrackIds: string[];
   playingTrackId: null | string;
   audioStatus: AudioStatus;
   // isShuffle: boolean,

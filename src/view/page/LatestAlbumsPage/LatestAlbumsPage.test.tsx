@@ -1,51 +1,83 @@
 import React from "react";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  waitForDomChange,
-  wait
-} from "@testing-library/react";
+import { render, cleanup, fireEvent, wait } from "@testing-library/react";
 
 import { testId } from "util/testId";
 import { mockService } from "service/mock";
 import { TestingProvider } from "util/react/TestingProvider";
-import { AlbumPreview } from "type/model";
 import { Service } from "type/service";
 import { getAlbumPreviewMocks } from "util/mock/albumPreviewMock";
 
 import { LatestAlbumsPage } from "./LatestAlbumsPage";
+import { getAppStateMock } from "util/mock/appStateMock";
+import { EventBoundary } from "util/react/EventBoundary";
 
 type TParams = {
-  firstPageResults?: AlbumPreview[];
-  secondPageResults?: AlbumPreview[];
+  preloadingCase?: boolean;
+  loadingCase?: boolean;
+  hasRecentlyPlayedAlbumsCase?: boolean;
+  noRecentlyPlayedAlbumsCase?: boolean;
+  noMoreRecentlyPlayedAlbumsCase?: boolean;
+  recentlyPlayedAlbumsCount?: number;
 };
 
 const renderComponent = (params?: TParams) => {
-  const { firstPageResults = [], secondPageResults = [] } = params || {};
+  const {
+    preloadingCase = false,
+    loadingCase = false,
+    hasRecentlyPlayedAlbumsCase = false,
+    noRecentlyPlayedAlbumsCase = false,
+    noMoreRecentlyPlayedAlbumsCase = false,
+    recentlyPlayedAlbumsCount = 0
+  } = params || {};
+
+  const albumPreviewMocks = getAlbumPreviewMocks(recentlyPlayedAlbumsCount);
+  const albumPreviewMockIds = albumPreviewMocks.map(item => item.id);
+
+  const appState = getAppStateMock();
+
+  if (preloadingCase) {
+    appState.lists.recentlyPlayedAlbumIdList.wantedPages.push(1);
+  } else if (loadingCase) {
+    appState.lists.recentlyPlayedAlbumIdList.itemsByPage.set(
+      1,
+      albumPreviewMockIds
+    );
+    appState.lists.recentlyPlayedAlbumIdList.wantedPages.push(2);
+  } else if (noRecentlyPlayedAlbumsCase) {
+    appState.lists.recentlyPlayedAlbumIdList.itemsByPage.set(1, []);
+    appState.lists.recentlyPlayedAlbumIdList.ended = true;
+  } else if (noMoreRecentlyPlayedAlbumsCase) {
+    appState.lists.recentlyPlayedAlbumIdList.itemsByPage.set(
+      1,
+      albumPreviewMockIds
+    );
+    appState.lists.recentlyPlayedAlbumIdList.ended = true;
+  } else if (hasRecentlyPlayedAlbumsCase) {
+    appState.lists.recentlyPlayedAlbumIdList.itemsByPage.set(
+      1,
+      albumPreviewMockIds
+    );
+  }
+
+  albumPreviewMocks.forEach(item => {
+    appState.collections.albumPreviewCollection.byId.set(item.id, item);
+  });
 
   const service: Service = {
     ...mockService,
     getAlbumPreviewsFeed: jest
       .fn()
-      .mockImplementationOnce(async () => ({
-        items: firstPageResults,
-        lastPageFlag: secondPageResults.length === 0
-      }))
-      .mockImplementationOnce(async () => ({
-        items: secondPageResults,
-        lastPageFlag: true
-      }))
-      .mockImplementation(async () => ({
-        items: [],
-        lastPageFlag: false
-      }))
+      .mockResolvedValue(getAlbumPreviewMocks(recentlyPlayedAlbumsCount))
   };
 
+  const handleAppEvent = jest.fn();
+
   const mounted = render(
-    <TestingProvider service={service}>
-      <LatestAlbumsPage />
-    </TestingProvider>
+    <EventBoundary handler={handleAppEvent}>
+      <TestingProvider service={service} appState={appState}>
+        <LatestAlbumsPage />
+      </TestingProvider>
+    </EventBoundary>
   );
 
   const getPageLoaderNode = () => mounted.getByTestId(testId.PAGE_LOADER);
@@ -65,6 +97,8 @@ const renderComponent = (params?: TParams) => {
   const getFeedLoader = () =>
     mounted.getByTestId(testId.LATEST_LABUMS_PAGE__FEED_LOADER);
 
+  const getAppEventHandler = () => handleAppEvent;
+
   const clickLoadMoreButton = () => fireEvent.click(getLoadMoreButtonNode());
 
   return {
@@ -74,25 +108,43 @@ const renderComponent = (params?: TParams) => {
     getFeedItemsCount,
     getLoadMoreButtonNode,
     getFeedLoader,
+    getAppEventHandler,
     clickLoadMoreButton
   };
 };
 
 afterEach(cleanup);
 
-test("should display page loader", async () => {
-  const { getPageLoaderNode } = renderComponent();
+describe("preloading case ", () => {
+  test("should display page loader", async () => {
+    const { getPageLoaderNode } = renderComponent({
+      preloadingCase: true
+    });
 
-  expect(getPageLoaderNode).not.toThrow();
+    expect(getPageLoaderNode).not.toThrow();
 
-  await wait();
+    await wait();
+  });
 });
 
-describe("no albums case", () => {
-  test("should display fallback on next dom change", async () => {
-    const { getFallbackNode } = renderComponent();
+describe("loading case", () => {
+  test("should display feed loader", async () => {
+    const { getFeedLoader } = renderComponent({
+      loadingCase: true,
+      recentlyPlayedAlbumsCount: 5
+    });
 
-    await waitForDomChange();
+    expect(getFeedLoader).not.toThrow();
+
+    await wait();
+  });
+});
+
+describe("no recently played albums case", () => {
+  test("should display fallback", async () => {
+    const { getFallbackNode } = renderComponent({
+      noRecentlyPlayedAlbumsCase: true
+    });
 
     expect(getFallbackNode).not.toThrow();
 
@@ -100,13 +152,12 @@ describe("no albums case", () => {
   });
 });
 
-describe("has albums case", () => {
-  test("should display feed on next dom change", async () => {
+describe("has recently played albums case", () => {
+  test("should display feed", async () => {
     const { getFeedNode } = renderComponent({
-      firstPageResults: getAlbumPreviewMocks(1)
+      recentlyPlayedAlbumsCount: 1,
+      hasRecentlyPlayedAlbumsCase: true
     });
-
-    await waitForDomChange();
 
     expect(getFeedNode).not.toThrow();
 
@@ -116,10 +167,9 @@ describe("has albums case", () => {
     const count = 5;
 
     const { getFeedItemsCount } = renderComponent({
-      firstPageResults: getAlbumPreviewMocks(5)
+      recentlyPlayedAlbumsCount: count,
+      hasRecentlyPlayedAlbumsCase: true
     });
-
-    await waitForDomChange();
 
     expect(getFeedItemsCount()).toEqual(count);
 
@@ -128,38 +178,17 @@ describe("has albums case", () => {
 });
 
 describe("click load more button", () => {
-  it("should display feed loader", async () => {
-    const { getFeedLoader, clickLoadMoreButton } = renderComponent({
-      firstPageResults: getAlbumPreviewMocks(5),
-      secondPageResults: getAlbumPreviewMocks(5)
+  test("should display feed loader", async () => {
+    const { clickLoadMoreButton, getAppEventHandler } = renderComponent({
+      recentlyPlayedAlbumsCount: 1,
+      hasRecentlyPlayedAlbumsCase: true
     });
-
-    await waitForDomChange();
 
     clickLoadMoreButton();
 
-    expect(getFeedLoader).not.toThrow();
-
-    await wait();
-  });
-  it("should display feed loader", async () => {
-    const firstPageItemsCount = 5;
-    const secondPageItemsCount = 5;
-
-    const { getFeedItemsCount, clickLoadMoreButton } = renderComponent({
-      firstPageResults: getAlbumPreviewMocks(firstPageItemsCount),
-      secondPageResults: getAlbumPreviewMocks(secondPageItemsCount)
+    expect(getAppEventHandler()).toBeCalledWith({
+      type: "LATEST_ALBUMS_PAGE__LOAD_MORE"
     });
-
-    await waitForDomChange();
-
-    clickLoadMoreButton();
-
-    await waitForDomChange();
-
-    expect(getFeedItemsCount()).toEqual(
-      firstPageItemsCount + secondPageItemsCount
-    );
 
     await wait();
   });

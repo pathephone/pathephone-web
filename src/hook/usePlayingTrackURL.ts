@@ -1,9 +1,7 @@
-import { usePlayerContext } from "hook/usePlayerContext";
+import { usePlayingTrack } from "hook/usePlayingTrack";
 
-export const usePlayingTrackURL = () => {
-  const { playlist, playingTrackId } = usePlayerContext();
-
-  const playingTrack = playlist.find(track => track.id === playingTrackId);
+export const usePlayingTrackURL = (): null | string => {
+  const playingTrack = usePlayingTrack();
 
   if (!playingTrack) {
     return null;

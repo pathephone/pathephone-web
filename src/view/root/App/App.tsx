@@ -1,28 +1,23 @@
 import * as React from "react";
 
-import { PlayerProvider } from "provider/PlayerProvider";
 import { useGetIntlService } from "hook/useGetIntlService";
 import { PlayerScreen } from "view/root/PlayerScreen";
-import { useAppState } from "hook/useAppState";
 
 import { AppWrapper } from "./styled/AppWrapper";
 import { AppLoader } from "./styled/AppLoader";
+import { useViewState } from "hook/useViewState";
 
 type TProps = {};
 
 export const App = (props: TProps) => {
   useGetIntlService();
 
-  const { activeScreen } = useAppState();
+  const { activeScreen } = useViewState();
 
   return (
     <AppWrapper>
       {activeScreen === "LOADING" && <AppLoader />}
-      {activeScreen === "PLAYER" && (
-        <PlayerProvider>
-          <PlayerScreen />
-        </PlayerProvider>
-      )}
+      {activeScreen === "PLAYER" && <PlayerScreen />}
     </AppWrapper>
   );
 };

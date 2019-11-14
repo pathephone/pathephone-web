@@ -3,7 +3,7 @@ import * as React from "react";
 import { routes } from "util/route";
 
 import { testId } from "util/testId";
-import { useIntlDictionary } from "hook/useIntl";
+import { useIntlDictionary } from "hook/useIntlDictionary";
 
 import { PlayerNavigationPopup } from "./styled/PlayerNavigationPopup";
 import { PlayerNavigationLink } from "./styled/PlayerNavigationLink";

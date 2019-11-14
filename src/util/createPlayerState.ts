@@ -1,14 +1,10 @@
-import * as React from "react";
-
 import { PlayerState } from "type/state";
 
-const fallbackValue: PlayerState = {
+export const createPlayerState = (): PlayerState => ({
   primaryControls: "OVERVIEW",
   secondaryControls: "PLAYBACK",
   wantedTracksAlbumIds: [],
-  playlist: [],
+  playlistTrackIds: [],
   playingTrackId: null,
   audioStatus: "PAUSED"
-};
-
-export const PlayerContext = React.createContext<PlayerState>(fallbackValue);
+});

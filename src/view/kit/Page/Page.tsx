@@ -3,7 +3,7 @@ import * as React from "react";
 import { PageWrapper } from "./styled/PageWrapper";
 import { PageLoader } from "./styled/PageLoader";
 
-import { usePlayerContext } from "hook/usePlayerContext";
+import { usePlayerState } from "hook/usePlayerState";
 
 type TProps = {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ type TProps = {
 export const Page = (props: TProps) => {
   const { children, centered, hasLoader } = props;
 
-  const { playingTrackId } = usePlayerContext();
+  const { playingTrackId } = usePlayerState();
 
   const hasCompactView = playingTrackId !== null;
 

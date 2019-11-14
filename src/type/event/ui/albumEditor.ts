@@ -1,14 +1,14 @@
-type TTitleChange = {
+type TitleChange = {
   type: "ALBUM_EDITOR__TITLE_CHANGE";
   payload: string;
 };
 
-type TSubmit = {
+type Submit = {
   type: "ALBUM_EDITOR__SUBMIT";
 };
 
-type TCancel = {
+type Cancel = {
   type: "ALBUM_EDITOR__CANCEL";
 };
 
-export type TAlbumEditorEvent = TTitleChange | TSubmit | TCancel;
+export type AlbumEditorEvent = TitleChange | Submit | Cancel;

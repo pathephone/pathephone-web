@@ -1,22 +1,22 @@
-type TPaused = {
+type Paused = {
   type: "AUDIO__PAUSED";
 };
 
-type TPlayed = {
+type Played = {
   type: "AUDIO__PLAYING";
 };
 
-type TWaiting = {
+type Waiting = {
   type: "AUDIO__WAITING";
 };
 
-type TEnded = {
+type Ended = {
   type: "AUDIO__ENDED";
 };
 
-type TFailed = {
+type Failed = {
   type: "AUDIO__FAILED";
   payload: null | MediaError;
 };
 
-export type TAudioEvent = TPaused | TPlayed | TWaiting | TEnded | TFailed;
+export type AudioEvent = Paused | Played | Waiting | Ended | Failed;
