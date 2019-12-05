@@ -27,13 +27,13 @@
     "husky": "2.4.1",
     "lint-staged": "8.2.1",
     "music-metadata-browser": "0.7.1",
-    "prettier": "1.16.4",
+    "prettier": "1.19.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-event-boundary": "1.0.7",
     "react-router-dom": "5.1.2",
-    "react-scripts": "3.2.0",
-    "typescript": "3.7.2"
+    "react-scripts": "3.3.0",
+    "typescript": "3.7.3"
   },
   "scripts": {
     "start": "react-scripts start",
