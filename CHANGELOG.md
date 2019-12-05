@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/pathephone/pathephone-web/compare/v1.11.1...v1.11.2) (2019-12-05)
+
+
+### Bug Fixes
+
+* npm audit fix ([3950e90](https://github.com/pathephone/pathephone-web/commit/3950e907723001f1f905df182bce2215923ef251))
+
 ## [1.11.1](https://github.com/pathephone/pathephone-web/compare/v1.11.0...v1.11.1) (2019-11-13)
 
 
